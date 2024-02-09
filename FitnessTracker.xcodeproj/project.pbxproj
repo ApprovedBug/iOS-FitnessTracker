@@ -10,9 +10,14 @@
 		0404E2162AE59C240013CF1F /* FitnessTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404E2152AE59C240013CF1F /* FitnessTrackerApp.swift */; };
 		0404E21C2AE59C250013CF1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0404E21B2AE59C250013CF1F /* Assets.xcassets */; };
 		0404E2202AE59C250013CF1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0404E21F2AE59C250013CF1F /* Preview Assets.xcassets */; };
-		0404E22A2AE59C250013CF1F /* FitnessTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404E2292AE59C250013CF1F /* FitnessTrackerTests.swift */; };
 		0404E2342AE59C250013CF1F /* FitnessTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404E2332AE59C250013CF1F /* FitnessTrackerUITests.swift */; };
 		0404E2362AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404E2352AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift */; };
+		0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECA2B22591D00B9B03B /* WelcomeView.swift */; };
+		0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */; };
+		046B1F792AF024A900F15EAB /* DiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B1F782AF024A900F15EAB /* DiaryEntry.swift */; };
+		046B1F7B2AF025ED00F15EAB /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B1F7A2AF025ED00F15EAB /* FoodItem.swift */; };
+		046B1F7E2AF026D800F15EAB /* DairyFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B1F7D2AF026D800F15EAB /* DairyFetching.swift */; };
+		046B1F812AF0330300F15EAB /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B1F802AF0330300F15EAB /* Meal.swift */; };
 		0474A66D2AE5B10A0036FC9E /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A66C2AE5B10A0036FC9E /* AccountView.swift */; };
 		0474A66F2AE5B1130036FC9E /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */; };
 		0474A6712AE5B1240036FC9E /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6702AE5B1240036FC9E /* DiaryView.swift */; };
@@ -29,6 +34,19 @@
 		049CD8942AE5BC5600812BAE /* MealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8932AE5BC5600812BAE /* MealsViewModel.swift */; };
 		049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8952AE5BC7900812BAE /* WaterView.swift */; };
 		049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8972AE5BC8200812BAE /* WaterViewModel.swift */; };
+		04BCDFC52AF96AE400346AD6 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFC42AF96AE400346AD6 /* CircularProgressView.swift */; };
+		04BCDFCC2B08140400346AD6 /* MealItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCB2B08140400346AD6 /* MealItemView.swift */; };
+		04BCDFCE2B08140F00346AD6 /* MealItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCD2B08140F00346AD6 /* MealItemViewModel.swift */; };
+		04BCDFD02B082A0700346AD6 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCF2B082A0700346AD6 /* CardView.swift */; };
+		04BCDFD32B0BE25D00346AD6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */; };
+		04BCDFD52B0BE26800346AD6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFD42B0BE26800346AD6 /* OnboardingViewModel.swift */; };
+		04BCDFDA2B0BECD300346AD6 /* AppConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFD92B0BECD300346AD6 /* AppConfigurationManager.swift */; };
+		04BCDFDE2B0BED4C00346AD6 /* AppConfigurationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFDD2B0BED4C00346AD6 /* AppConfigurationManagerTests.swift */; };
+		04BCDFE02B0BED8D00346AD6 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFDF2B0BED8D00346AD6 /* MockUserDefaults.swift */; };
+		04BCDFE22B0BF2CA00346AD6 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFE12B0BF2CA00346AD6 /* DependencyContainer.swift */; };
+		04BCDFE42B0BF48000346AD6 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFE32B0BF48000346AD6 /* DependencyContainer.swift */; };
+		04BCDFE62B0C344600346AD6 /* PeristanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFE52B0C344600346AD6 /* PeristanceManager.swift */; };
+		04BCDFE92B0D6A0100346AD6 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFE82B0D6A0100346AD6 /* AppTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,10 +73,15 @@
 		0404E21D2AE59C250013CF1F /* FitnessTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitnessTracker.entitlements; sourceTree = "<group>"; };
 		0404E21F2AE59C250013CF1F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0404E2252AE59C250013CF1F /* FitnessTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitnessTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0404E2292AE59C250013CF1F /* FitnessTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerTests.swift; sourceTree = "<group>"; };
 		0404E22F2AE59C250013CF1F /* FitnessTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitnessTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0404E2332AE59C250013CF1F /* FitnessTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITests.swift; sourceTree = "<group>"; };
 		0404E2352AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0424CECA2B22591D00B9B03B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		046B1F782AF024A900F15EAB /* DiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntry.swift; sourceTree = "<group>"; };
+		046B1F7A2AF025ED00F15EAB /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
+		046B1F7D2AF026D800F15EAB /* DairyFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyFetching.swift; sourceTree = "<group>"; };
+		046B1F802AF0330300F15EAB /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		0474A66C2AE5B10A0036FC9E /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		0474A6702AE5B1240036FC9E /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
@@ -75,6 +98,19 @@
 		049CD8932AE5BC5600812BAE /* MealsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsViewModel.swift; sourceTree = "<group>"; };
 		049CD8952AE5BC7900812BAE /* WaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
 		049CD8972AE5BC8200812BAE /* WaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewModel.swift; sourceTree = "<group>"; };
+		04BCDFC42AF96AE400346AD6 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		04BCDFCB2B08140400346AD6 /* MealItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemView.swift; sourceTree = "<group>"; };
+		04BCDFCD2B08140F00346AD6 /* MealItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemViewModel.swift; sourceTree = "<group>"; };
+		04BCDFCF2B082A0700346AD6 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		04BCDFD42B0BE26800346AD6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		04BCDFD92B0BECD300346AD6 /* AppConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationManager.swift; sourceTree = "<group>"; };
+		04BCDFDD2B0BED4C00346AD6 /* AppConfigurationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationManagerTests.swift; sourceTree = "<group>"; };
+		04BCDFDF2B0BED8D00346AD6 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
+		04BCDFE12B0BF2CA00346AD6 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		04BCDFE32B0BF48000346AD6 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		04BCDFE52B0C344600346AD6 /* PeristanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeristanceManager.swift; sourceTree = "<group>"; };
+		04BCDFE82B0D6A0100346AD6 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,12 +161,11 @@
 		0404E2142AE59C240013CF1F /* FitnessTracker */ = {
 			isa = PBXGroup;
 			children = (
-				0474A66B2AE5B0B80036FC9E /* Account */,
+				04BCDFD82B0BECB100346AD6 /* Managers */,
+				04BCDFD72B0BEC9400346AD6 /* UI */,
+				04BCDFCA2B0813D100346AD6 /* Components */,
 				0474A6672AE5AFE30036FC9E /* App */,
-				0474A6682AE5B09E0036FC9E /* Diary */,
-				0474A6692AE5B0A50036FC9E /* Exercise */,
 				0404E21E2AE59C250013CF1F /* Preview Content */,
-				0474A66A2AE5B0B00036FC9E /* Weight */,
 			);
 			path = FitnessTracker;
 			sourceTree = "<group>";
@@ -146,7 +181,8 @@
 		0404E2282AE59C250013CF1F /* FitnessTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				0404E2292AE59C250013CF1F /* FitnessTrackerTests.swift */,
+				04BCDFDC2B0BED1500346AD6 /* Mocks */,
+				04BCDFDB2B0BED1100346AD6 /* Tests */,
 			);
 			path = FitnessTrackerTests;
 			sourceTree = "<group>";
@@ -158,6 +194,54 @@
 				0404E2352AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift */,
 			);
 			path = FitnessTrackerUITests;
+			sourceTree = "<group>";
+		};
+		046B1F742AF0241200F15EAB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFC92B0813C100346AD6 /* Water */,
+				04BCDFC82B0813B500346AD6 /* Meals */,
+				04BCDFC72B0813A900346AD6 /* DatePicker */,
+				04BCDFC62B08139A00346AD6 /* Summary */,
+				0474A6702AE5B1240036FC9E /* DiaryView.swift */,
+				0474A6722AE5B1300036FC9E /* DiaryViewModel.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		046B1F762AF0245E00F15EAB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				046B1F7F2AF032F800F15EAB /* Enums */,
+				046B1F7C2AF026C100F15EAB /* Repository */,
+				046B1F772AF0246700F15EAB /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		046B1F772AF0246700F15EAB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				046B1F782AF024A900F15EAB /* DiaryEntry.swift */,
+				046B1F7A2AF025ED00F15EAB /* FoodItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		046B1F7C2AF026C100F15EAB /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				046B1F7D2AF026D800F15EAB /* DairyFetching.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		046B1F7F2AF032F800F15EAB /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				046B1F802AF0330300F15EAB /* Meal.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		0474A6672AE5AFE30036FC9E /* App */ = {
@@ -173,16 +257,8 @@
 		0474A6682AE5B09E0036FC9E /* Diary */ = {
 			isa = PBXGroup;
 			children = (
-				0474A6702AE5B1240036FC9E /* DiaryView.swift */,
-				0474A6722AE5B1300036FC9E /* DiaryViewModel.swift */,
-				049CD8892AE5BB9300812BAE /* SummaryView.swift */,
-				049CD88B2AE5BBB700812BAE /* SummaryViewModel.swift */,
-				049CD88D2AE5BBEE00812BAE /* DatePickerView.swift */,
-				049CD88F2AE5BC1400812BAE /* DatePickerViewModel.swift */,
-				049CD8912AE5BC3A00812BAE /* MealsView.swift */,
-				049CD8932AE5BC5600812BAE /* MealsViewModel.swift */,
-				049CD8952AE5BC7900812BAE /* WaterView.swift */,
-				049CD8972AE5BC8200812BAE /* WaterViewModel.swift */,
+				046B1F762AF0245E00F15EAB /* Data */,
+				046B1F742AF0241200F15EAB /* UI */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
@@ -212,6 +288,120 @@
 				0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		04BCDFC62B08139A00346AD6 /* Summary */ = {
+			isa = PBXGroup;
+			children = (
+				049CD8892AE5BB9300812BAE /* SummaryView.swift */,
+				049CD88B2AE5BBB700812BAE /* SummaryViewModel.swift */,
+			);
+			path = Summary;
+			sourceTree = "<group>";
+		};
+		04BCDFC72B0813A900346AD6 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				049CD88D2AE5BBEE00812BAE /* DatePickerView.swift */,
+				049CD88F2AE5BC1400812BAE /* DatePickerViewModel.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
+		04BCDFC82B0813B500346AD6 /* Meals */ = {
+			isa = PBXGroup;
+			children = (
+				049CD8912AE5BC3A00812BAE /* MealsView.swift */,
+				049CD8932AE5BC5600812BAE /* MealsViewModel.swift */,
+				04BCDFCB2B08140400346AD6 /* MealItemView.swift */,
+				04BCDFCD2B08140F00346AD6 /* MealItemViewModel.swift */,
+			);
+			path = Meals;
+			sourceTree = "<group>";
+		};
+		04BCDFC92B0813C100346AD6 /* Water */ = {
+			isa = PBXGroup;
+			children = (
+				049CD8952AE5BC7900812BAE /* WaterView.swift */,
+				049CD8972AE5BC8200812BAE /* WaterViewModel.swift */,
+			);
+			path = Water;
+			sourceTree = "<group>";
+		};
+		04BCDFCA2B0813D100346AD6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFC42AF96AE400346AD6 /* CircularProgressView.swift */,
+				04BCDFCF2B082A0700346AD6 /* CardView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		04BCDFD12B0BE24B00346AD6 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */,
+				04BCDFD42B0BE26800346AD6 /* OnboardingViewModel.swift */,
+				0424CECA2B22591D00B9B03B /* WelcomeView.swift */,
+				0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		04BCDFD62B0BEC5100346AD6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFDD2B0BED4C00346AD6 /* AppConfigurationManagerTests.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		04BCDFD72B0BEC9400346AD6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFE72B0D690C00346AD6 /* AppTab */,
+				04BCDFD12B0BE24B00346AD6 /* Onboarding */,
+				0474A66B2AE5B0B80036FC9E /* Account */,
+				0474A6682AE5B09E0036FC9E /* Diary */,
+				0474A6692AE5B0A50036FC9E /* Exercise */,
+				0474A66A2AE5B0B00036FC9E /* Weight */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		04BCDFD82B0BECB100346AD6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFD92B0BECD300346AD6 /* AppConfigurationManager.swift */,
+				04BCDFE12B0BF2CA00346AD6 /* DependencyContainer.swift */,
+				04BCDFE52B0C344600346AD6 /* PeristanceManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		04BCDFDB2B0BED1100346AD6 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFD62B0BEC5100346AD6 /* Managers */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		04BCDFDC2B0BED1500346AD6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFDF2B0BED8D00346AD6 /* MockUserDefaults.swift */,
+				04BCDFE32B0BF48000346AD6 /* DependencyContainer.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		04BCDFE72B0D690C00346AD6 /* AppTab */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFE82B0D6A0100346AD6 /* AppTabView.swift */,
+			);
+			path = AppTab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +475,7 @@
 					};
 					0404E2242AE59C250013CF1F = {
 						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1500;
 						TestTargetID = 0404E2112AE59C240013CF1F;
 					};
 					0404E22E2AE59C250013CF1F = {
@@ -344,22 +535,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04BCDFE22B0BF2CA00346AD6 /* DependencyContainer.swift in Sources */,
 				049CD88C2AE5BBB700812BAE /* SummaryViewModel.swift in Sources */,
 				049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */,
 				0474A6752AE5B13D0036FC9E /* ExerciseView.swift in Sources */,
+				046B1F7B2AF025ED00F15EAB /* FoodItem.swift in Sources */,
+				04BCDFD52B0BE26800346AD6 /* OnboardingViewModel.swift in Sources */,
+				04BCDFCE2B08140F00346AD6 /* MealItemViewModel.swift in Sources */,
 				0474A66D2AE5B10A0036FC9E /* AccountView.swift in Sources */,
 				0474A67B2AE5B1620036FC9E /* WeightViewModel.swift in Sources */,
 				0474A66F2AE5B1130036FC9E /* AccountViewModel.swift in Sources */,
 				0474A6712AE5B1240036FC9E /* DiaryView.swift in Sources */,
+				04BCDFE92B0D6A0100346AD6 /* AppTabView.swift in Sources */,
 				049CD88E2AE5BBEE00812BAE /* DatePickerView.swift in Sources */,
 				0474A6732AE5B1300036FC9E /* DiaryViewModel.swift in Sources */,
+				04BCDFDA2B0BECD300346AD6 /* AppConfigurationManager.swift in Sources */,
+				04BCDFD32B0BE25D00346AD6 /* OnboardingView.swift in Sources */,
+				04BCDFE62B0C344600346AD6 /* PeristanceManager.swift in Sources */,
+				04BCDFC52AF96AE400346AD6 /* CircularProgressView.swift in Sources */,
+				04BCDFCC2B08140400346AD6 /* MealItemView.swift in Sources */,
+				0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */,
 				049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */,
+				04BCDFD02B082A0700346AD6 /* CardView.swift in Sources */,
 				049CD8942AE5BC5600812BAE /* MealsViewModel.swift in Sources */,
 				0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */,
 				049CD88A2AE5BB9300812BAE /* SummaryView.swift in Sources */,
 				0474A6792AE5B1550036FC9E /* WeightView.swift in Sources */,
+				046B1F7E2AF026D800F15EAB /* DairyFetching.swift in Sources */,
+				046B1F812AF0330300F15EAB /* Meal.swift in Sources */,
+				0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */,
 				049CD8922AE5BC3A00812BAE /* MealsView.swift in Sources */,
 				049CD8902AE5BC1400812BAE /* DatePickerViewModel.swift in Sources */,
+				046B1F792AF024A900F15EAB /* DiaryEntry.swift in Sources */,
 				0404E2162AE59C240013CF1F /* FitnessTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,7 +575,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0404E22A2AE59C250013CF1F /* FitnessTrackerTests.swift in Sources */,
+				04BCDFE02B0BED8D00346AD6 /* MockUserDefaults.swift in Sources */,
+				04BCDFE42B0BF48000346AD6 /* DependencyContainer.swift in Sources */,
+				04BCDFDE2B0BED4C00346AD6 /* AppConfigurationManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +801,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4N87CRMB5W;
@@ -604,6 +814,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FitnessTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FitnessTracker";
@@ -615,6 +826,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4N87CRMB5W;
