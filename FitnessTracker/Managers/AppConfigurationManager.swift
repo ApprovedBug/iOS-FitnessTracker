@@ -14,19 +14,28 @@ protocol UserDefaultsProtocol {
 
 extension UserDefaults: UserDefaultsProtocol {}
 
-class AppConfigurationManager {
+enum AppConfigurationKey: String {
+    case onboardingComplete = "OnboardingCompleted"
+}
 
+protocol AppConfigurationManaging {
+    
+    func getValue(for key: AppConfigurationKey) -> Bool
+    func setValue(value: Bool, key: AppConfigurationKey)
+}
+
+class AppConfigurationManager: AppConfigurationManaging {
+    
     @Inject
     var userDefaults: UserDefaultsProtocol
 
     init() { }
 
-    var onboardingCompleted: Bool {
-        get {
-            userDefaults.bool(forKey: "OnboardingCompleted")
-        }
-        set {
-            userDefaults.set(newValue, forKey: "OnboardingCompleted")
-        }
+    func getValue(for key: AppConfigurationKey) -> Bool {
+        userDefaults.bool(forKey: key.rawValue)
+    }
+    
+    func setValue(value: Bool, key: AppConfigurationKey) {
+        userDefaults.set(value, forKey: key.rawValue)
     }
 }

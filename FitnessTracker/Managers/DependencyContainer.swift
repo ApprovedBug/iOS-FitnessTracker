@@ -30,6 +30,10 @@ class DependencyContainer {
         register(DiaryFetching.self) {
             MockDiaryRepository()
         }
+        
+        register(AppConfigurationManaging.self) {
+            AppConfigurationManager()
+        }
     }
 
     private var registrations: [String: Any] = [:]

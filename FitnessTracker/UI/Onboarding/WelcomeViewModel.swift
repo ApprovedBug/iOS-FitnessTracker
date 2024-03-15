@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+@Observable
+class WelcomeViewModel {
+    
+    var showOnboardingView = false
+    
+    func continueTapped() {
+        showOnboardingView = true
+    }
+}

@@ -16,10 +16,14 @@ struct FitnessTrackerApp: App {
     }
 
     var body: some Scene {
+        
+        @Inject
+        var appConfigurationManager: AppConfigurationManaging
+        
         WindowGroup {
             
-            if !AppConfigurationManager().onboardingCompleted {
-                OnboardingView(viewModel: OnboardingViewModel())
+            if !appConfigurationManager.getValue(for: .onboardingComplete) {
+                WelcomeView(viewModel: WelcomeViewModel())
             } else {
                 AppTabView()
             }

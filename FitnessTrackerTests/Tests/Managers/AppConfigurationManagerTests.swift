@@ -18,7 +18,7 @@ class AppConfigurationManagerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockUserDefaults = MockUserDefaults()
-        settingsManager = AppConfigurationManager(userDefaults: mockUserDefaults)
+        settingsManager = AppConfigurationManager()
     }
 
     override func tearDown() {

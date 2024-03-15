@@ -72,12 +72,17 @@ class OnboardingViewModel {
     var resultText: String = ""
     var showDiaryView = false
     
+    @ObservationIgnored
+    @Inject
+    var appConfigurationManager: AppConfigurationManaging
+    
     func continueTapped() {
         calculate()
     }
     
     func skipTapped() {
         showDiaryView = true
+        appConfigurationManager.setValue(value: true, key: .onboardingComplete)
     }
     
     func calculate() {
@@ -105,7 +110,9 @@ class OnboardingViewModel {
         Carbs: \(macronutrients.carbs) grams
         Fat: \(macronutrients.fat) grams
         """
+        
         showDiaryView = true
+        appConfigurationManager.setValue(value: true, key: .onboardingComplete)
     }
     
     func calculateCaloricIntakeForWeightLoss(gender: Gender, age: Double, weight: Double, height: Double, activityLevel: Double) -> Int {
