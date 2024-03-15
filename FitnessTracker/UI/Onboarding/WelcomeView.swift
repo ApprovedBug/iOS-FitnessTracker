@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FitnessUI
 import SwiftUI
 
 struct WelcomeView: View {

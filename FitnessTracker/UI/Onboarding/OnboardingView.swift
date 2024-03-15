@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FitnessUI
 import SwiftUI
 
 struct OnboardingView: View {
@@ -69,30 +70,6 @@ struct OnboardingView: View {
             }
             .navigationBarTitle("Calorie Calculator")
         }
-    }
-}
-
-// Custom Button Style
-struct RoundedButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        ZStack {
-            Color.blue
-                .frame(height: 40)
-            
-            configuration.label
-                .padding([.top, .bottom], 8) // Add padding
-                .foregroundColor(.white) // Text color
-        }
-        .cornerRadius(10)
-    }
-}
-
-// Custom Button Style
-struct TertiaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding() // Add padding
-            .foregroundColor(.blue)
     }
 }
 

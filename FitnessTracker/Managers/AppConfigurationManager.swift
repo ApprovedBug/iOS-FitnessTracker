@@ -27,7 +27,7 @@ protocol AppConfigurationManaging {
 class AppConfigurationManager: AppConfigurationManaging {
     
     @Inject
-    var userDefaults: UserDefaultsProtocol
+    private var userDefaults: UserDefaultsProtocol
 
     init() { }
 
