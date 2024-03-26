@@ -11,9 +11,9 @@ import SwiftData
 @Model
 public class DiaryEntry {
     
-    var timestamp: Date
-    var foodItem: FoodItem
-    var meal: Meal
+    public var timestamp: Date
+    public var foodItem: FoodItem
+    public var meal: Meal
 
     init(timestamp: Date, foodItem: FoodItem, meal: Meal) {
         self.timestamp = timestamp

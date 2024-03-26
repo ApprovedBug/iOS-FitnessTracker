@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Meal: Codable {
+public enum Meal: Codable {
     case breakfast
     case lunch
     case dinner

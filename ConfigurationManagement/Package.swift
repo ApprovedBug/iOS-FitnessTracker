@@ -4,21 +4,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "DebugTools",
-    platforms: [.iOS(.v17)],
+    name: "ConfigurationManagement",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "DebugTools",
-            targets: ["DebugTools"]),
+            name: "ConfigurationManagement",
+            targets: ["ConfigurationManagement"]),
+    ],
+    dependencies: [
+        .package(path: "../DependencyManagement")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "DebugTools"),
+            name: "ConfigurationManagement",
+            dependencies: ["DependencyManagement"]
+        ),
         .testTarget(
-            name: "DebugToolsTests",
-            dependencies: ["DebugTools"]),
+            name: "ConfigurationManagementTests",
+            dependencies: ["ConfigurationManagement"]),
     ]
 )

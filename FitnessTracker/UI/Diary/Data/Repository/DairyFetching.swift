@@ -6,6 +6,8 @@
 //
 
 import Combine
+import DependencyManagement
+import FitnessPersistence
 import Foundation
 import SwiftData
 

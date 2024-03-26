@@ -11,11 +11,11 @@ import SwiftData
 @Model
 public class FoodItem {
     
-    let name: String
-    let kcal: Double
-    let carbs: Double
-    let protein: Double
-    let fats: Double
+    public let name: String
+    public let kcal: Double
+    public let carbs: Double
+    public let protein: Double
+    public let fats: Double
     
     init(name: String, kcal: Double, carbs: Double, protein: Double, fats: Double) {
         self.name = name

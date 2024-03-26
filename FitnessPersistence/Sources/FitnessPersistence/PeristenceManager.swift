@@ -8,16 +8,16 @@
 import Foundation
 import SwiftData
 
-protocol ContextProviding {
+public protocol ContextProviding {
     
     var sharedModelContainer: ModelContainer { get }
 }
 
-struct PersistanceManager: ContextProviding {
+public struct PersistenceManager: ContextProviding {
     
-    init() {}
+    public init() { }
     
-    var sharedModelContainer: ModelContainer = {
+    public var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             DiaryEntry.self,
             FoodItem.self

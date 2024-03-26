@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 22/10/2023.
 //
 
+import FitnessPersistence
 import Foundation
 
 @Observable
