@@ -53,9 +53,9 @@ private struct ContentView: View {
             .padding([.bottom], 32)
             
             HStack {
-                MacrosView(consumed: data.carbsConsumed, target: "250", progress: 0.6, title: "Carbs")
-                MacrosView(consumed: data.proteinsConsumed, target: "100", progress: 0.4, title: "Proteins")
-                MacrosView(consumed: data.fatsConsumed, target: "50", progress: 0.2, title: "Fats")
+                MacrosView(consumed: data.carbsConsumed, target: "250", progress: 0.0, title: "Carbs")
+                MacrosView(consumed: data.proteinsConsumed, target: "100", progress: 0.0, title: "Proteins")
+                MacrosView(consumed: data.fatsConsumed, target: "50", progress: 0.0, title: "Fats")
             }
         }
         .padding()

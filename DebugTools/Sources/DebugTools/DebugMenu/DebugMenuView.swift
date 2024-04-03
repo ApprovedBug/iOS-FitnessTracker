@@ -5,6 +5,8 @@
 //  Created by Jack Moseley on 21/03/2024.
 //
 
+import ConfigurationManagement
+import DependencyManagement
 import Foundation
 import SwiftUI
 
@@ -35,20 +37,29 @@ public struct DebugMenuView: View {
 public class DebugMenuOptionViewModel: Identifiable {
     
     @ObservationIgnored
+    @Inject
+    var appConfigurationManager: AppConfigurationManaging
+    
+    @ObservationIgnored
     private let option: DebugMenuOption
     
     var title: String
-    var isOn: Bool = false
+    var isOn: Bool = false {
+        didSet {
+            appConfigurationManager.setValue(value: isOn, key: option.appConfigurationKey)
+        }
+    }
     
     init(option: DebugMenuOption) {
         self.option = option
         self.title = option.title
+        self.isOn = appConfigurationManager.getValue(for: option.appConfigurationKey)
     }
 }
 
 public protocol DebugMenuOption {
     
-    var name: String { get }
+    var appConfigurationKey: AppConfigurationKey { get }
     var title: String { get }
 }
 
@@ -91,7 +102,7 @@ struct DebugMenuViewModifier: ViewModifier {
                 DebugMenuView(viewModel: DebugMenuViewModel(options: options))
             }
             .onShake {
-                #if targetEnvironment(simulator)
+                #if DEBUG
                 isDebugMenuPresented = true
                 #endif
             }

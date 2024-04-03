@@ -17,24 +17,11 @@ import UIKit
 @main
 struct FitnessTrackerApp: App {
     
-    enum Keys: String, AppConfigurationKey, DebugMenuOption, CaseIterable {
-        
-        case alwaysShowOnboarding
-        
-        var name: String {
-            return rawValue
-        }
-        
-        var title: String {
-            return rawValue.localizedLowercase
-        }
-    }
-    
     init() {
         registerDependencies()
     }
     
-
+    
     func registerDependencies() {
         // Register your dependencies here
         DependencyContainer.register(ContextProviding.self) {
@@ -53,12 +40,12 @@ struct FitnessTrackerApp: App {
             AppConfigurationManager()
         }
     }
-
+    
     var body: some Scene {
         
         WindowGroup {
             content
-                .attachDebugMenu(options: Keys.allCases)
+                .attachDebugMenu(options: DebugMenuOptions.allCases)
         }
     }
     
@@ -67,10 +54,14 @@ struct FitnessTrackerApp: App {
         @Inject
         var appConfigurationManager: AppConfigurationManaging
         
-        if !appConfigurationManager.getValue(for: Keys.alwaysShowOnboarding) {
+        guard !appConfigurationManager.getValue(for: DebugCongigurationKeys.alwaysShowOnboarding) else {
             return AnyView(WelcomeView(viewModel: WelcomeViewModel()))
-        } else {
-            return AnyView(AppTabView())
         }
+        
+        guard appConfigurationManager.getValue(for: Keys.onboardingCompleted) else {
+            return AnyView(WelcomeView(viewModel: WelcomeViewModel()))
+        }
+        
+        return AnyView(AppTabView())
     }
 }

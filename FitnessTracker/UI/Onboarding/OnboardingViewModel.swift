@@ -84,7 +84,7 @@ class OnboardingViewModel {
     
     func skipTapped() {
         showDiaryView = true
-//        appConfigurationManager.setValue(value: true, key: .onboardingComplete)
+        appConfigurationManager.setValue(value: true, key: Keys.onboardingCompleted)
     }
     
     func calculate() {
@@ -114,7 +114,7 @@ class OnboardingViewModel {
         """
         
         showDiaryView = true
-//        appConfigurationManager.setValue(value: true, key: .onboardingComplete)
+        appConfigurationManager.setValue(value: true, key: Keys.onboardingCompleted)
     }
     
     func calculateCaloricIntakeForWeightLoss(gender: Gender, age: Double, weight: Double, height: Double, activityLevel: Double) -> Int {

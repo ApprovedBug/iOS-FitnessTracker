@@ -56,7 +56,7 @@ class SummaryViewModel {
         state = .ready(
             .init(
                 kcalConsumed: String(Int(kcalConsumed)),
-                kcalBurned: "300",
+                kcalBurned: "0",
                 kcalProgress: 0.64,
                 kcalRemaining: "900",
                 proteinsConsumed: String(Int(proteinsConsumed)),

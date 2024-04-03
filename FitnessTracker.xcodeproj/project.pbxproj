@@ -15,6 +15,7 @@
 		0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECA2B22591D00B9B03B /* WelcomeView.swift */; };
 		0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */; };
 		042D01B62BACDE490053ED0D /* DebugTools in Frameworks */ = {isa = PBXBuildFile; productRef = 042D01B52BACDE490053ED0D /* DebugTools */; };
+		045F9DCB2BBDD56F007FECDA /* AppConfigurationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F9DCA2BBDD56F007FECDA /* AppConfigurationKeys.swift */; };
 		046B1F7E2AF026D800F15EAB /* DairyFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B1F7D2AF026D800F15EAB /* DairyFetching.swift */; };
 		0474A66D2AE5B10A0036FC9E /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A66C2AE5B10A0036FC9E /* AccountView.swift */; };
 		0474A66F2AE5B1130036FC9E /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */; };
@@ -92,6 +93,7 @@
 		0404E2352AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0424CECA2B22591D00B9B03B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		045F9DCA2BBDD56F007FECDA /* AppConfigurationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationKeys.swift; sourceTree = "<group>"; };
 		046B1F7D2AF026D800F15EAB /* DairyFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyFetching.swift; sourceTree = "<group>"; };
 		0474A66C2AE5B10A0036FC9E /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				0404E2152AE59C240013CF1F /* FitnessTrackerApp.swift */,
 				0404E21B2AE59C250013CF1F /* Assets.xcassets */,
 				0404E21D2AE59C250013CF1F /* FitnessTracker.entitlements */,
+				045F9DCA2BBDD56F007FECDA /* AppConfigurationKeys.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */,
 				049CD88A2AE5BB9300812BAE /* SummaryView.swift in Sources */,
 				0474A6792AE5B1550036FC9E /* WeightView.swift in Sources */,
+				045F9DCB2BBDD56F007FECDA /* AppConfigurationKeys.swift in Sources */,
 				046B1F7E2AF026D800F15EAB /* DairyFetching.swift in Sources */,
 				0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */,
 				049CD8922AE5BC3A00812BAE /* MealsView.swift in Sources */,
