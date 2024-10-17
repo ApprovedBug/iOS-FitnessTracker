@@ -7,9 +7,11 @@
 
 import Foundation
 
-public enum Meal: Codable {
+public enum Meal: Codable, CaseIterable {
     case breakfast
     case lunch
     case dinner
     case snack
 }
+
+

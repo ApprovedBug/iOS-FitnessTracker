@@ -7,6 +7,7 @@
 
 import ConfigurationManagement
 import DependencyManagement
+import FitnessPersistence
 import Foundation
 import SwiftUI
 
@@ -76,6 +77,10 @@ class OnboardingViewModel {
     
     @ObservationIgnored
     @Inject
+    var goalsRepository: GoalsRepository
+    
+    @ObservationIgnored
+    @Inject
     var appConfigurationManager: AppConfigurationManaging
     
     func continueTapped() {
@@ -113,6 +118,13 @@ class OnboardingViewModel {
         Fat: \(macronutrients.fat) grams
         """
         
+        let goals = Goals(
+            kcal: caloricIntakeForWeightLoss,
+            carbs: macronutrients.carbs,
+            protein: macronutrients.protein,
+            fats: macronutrients.fat
+        )
+        goalsRepository.saveGoals(goals: goals, for: "something")
         showDiaryView = true
         appConfigurationManager.setValue(value: true, key: Keys.onboardingCompleted)
     }
@@ -151,7 +163,7 @@ class OnboardingViewModel {
         }
     }
 
-    func calculateMacronutrients(caloricIntake: Int) -> (protein: Int, carbs: Int, fat: Int) {
+    func calculateMacronutrients(caloricIntake: Int) -> (protein: Double, carbs: Double, fat: Double) {
         // Calculate macronutrients based on percentage ranges
         let proteinPercentage = 0.20
         let carbsPercentage = 0.45
@@ -161,6 +173,6 @@ class OnboardingViewModel {
         let carbs = carbsPercentage * Double(caloricIntake) / 4.0 // 1 gram of carbs = 4 calories
         let fat = fatPercentage * Double(caloricIntake) / 9.0 // 1 gram of fat = 9 calories
         
-        return (Int(protein), Int(carbs), Int(fat))
+        return (protein, carbs, fat)
     }
 }

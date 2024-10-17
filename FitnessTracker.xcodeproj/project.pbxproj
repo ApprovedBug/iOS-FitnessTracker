@@ -15,8 +15,12 @@
 		0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECA2B22591D00B9B03B /* WelcomeView.swift */; };
 		0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */; };
 		042D01B62BACDE490053ED0D /* DebugTools in Frameworks */ = {isa = PBXBuildFile; productRef = 042D01B52BACDE490053ED0D /* DebugTools */; };
+		045864112BC1A7220067B9B0 /* GoalsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864102BC1A7220067B9B0 /* GoalsRepository.swift */; };
+		045864162BC1B1B80067B9B0 /* MacrosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864152BC1B1B80067B9B0 /* MacrosView.swift */; };
+		045864182BC1B1CB0067B9B0 /* MacrosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864172BC1B1CB0067B9B0 /* MacrosViewModel.swift */; };
 		045F9DCB2BBDD56F007FECDA /* AppConfigurationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F9DCA2BBDD56F007FECDA /* AppConfigurationKeys.swift */; };
-		046B1F7E2AF026D800F15EAB /* DairyFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B1F7D2AF026D800F15EAB /* DairyFetching.swift */; };
+		0466916D2C92ECCB006E3327 /* FoodItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466916C2C92ECCB006E3327 /* FoodItemRepository.swift */; };
+		046B1F7E2AF026D800F15EAB /* DairyResository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B1F7D2AF026D800F15EAB /* DairyResository.swift */; };
 		0474A66D2AE5B10A0036FC9E /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A66C2AE5B10A0036FC9E /* AccountView.swift */; };
 		0474A66F2AE5B1130036FC9E /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */; };
 		0474A6712AE5B1240036FC9E /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6702AE5B1240036FC9E /* DiaryView.swift */; };
@@ -34,10 +38,8 @@
 		049CD8942AE5BC5600812BAE /* MealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8932AE5BC5600812BAE /* MealsViewModel.swift */; };
 		049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8952AE5BC7900812BAE /* WaterView.swift */; };
 		049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8972AE5BC8200812BAE /* WaterViewModel.swift */; };
-		04BCDFC52AF96AE400346AD6 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFC42AF96AE400346AD6 /* CircularProgressView.swift */; };
 		04BCDFCC2B08140400346AD6 /* MealItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCB2B08140400346AD6 /* MealItemView.swift */; };
 		04BCDFCE2B08140F00346AD6 /* MealItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCD2B08140F00346AD6 /* MealItemViewModel.swift */; };
-		04BCDFD02B082A0700346AD6 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCF2B082A0700346AD6 /* CardView.swift */; };
 		04BCDFD32B0BE25D00346AD6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */; };
 		04BCDFD52B0BE26800346AD6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFD42B0BE26800346AD6 /* OnboardingViewModel.swift */; };
 		04BCDFDE2B0BED4C00346AD6 /* AppConfigurationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFDD2B0BED4C00346AD6 /* AppConfigurationManagerTests.swift */; };
@@ -49,6 +51,11 @@
 		04D786BF2BB34FA000EC68BC /* DependencyManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 04D786BE2BB34FA000EC68BC /* DependencyManagement */; };
 		04D786C42BB352F300EC68BC /* ConfigurationManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 04D786C32BB352F300EC68BC /* ConfigurationManagement */; };
 		04D786C72BB354CA00EC68BC /* DependencyManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 04D786C62BB354CA00EC68BC /* DependencyManagement */; };
+		04F0955C2C5D34A400EA3D94 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 04F0955B2C5D34A400EA3D94 /* Localizable.xcstrings */; };
+		04F0955F2C5D377900EA3D94 /* AddDiaryEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0955E2C5D377900EA3D94 /* AddDiaryEntryView.swift */; };
+		04F095612C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F095602C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift */; };
+		04F095642C5D3D6600EA3D94 /* AddFoodItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F095632C5D3D6600EA3D94 /* AddFoodItemView.swift */; };
+		04F095662C5D3D7000EA3D94 /* AddFoodItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F095652C5D3D7000EA3D94 /* AddFoodItemViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,8 +100,12 @@
 		0404E2352AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0424CECA2B22591D00B9B03B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		045864102BC1A7220067B9B0 /* GoalsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsRepository.swift; sourceTree = "<group>"; };
+		045864152BC1B1B80067B9B0 /* MacrosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosView.swift; sourceTree = "<group>"; };
+		045864172BC1B1CB0067B9B0 /* MacrosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosViewModel.swift; sourceTree = "<group>"; };
 		045F9DCA2BBDD56F007FECDA /* AppConfigurationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationKeys.swift; sourceTree = "<group>"; };
-		046B1F7D2AF026D800F15EAB /* DairyFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyFetching.swift; sourceTree = "<group>"; };
+		0466916C2C92ECCB006E3327 /* FoodItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemRepository.swift; sourceTree = "<group>"; };
+		046B1F7D2AF026D800F15EAB /* DairyResository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyResository.swift; sourceTree = "<group>"; };
 		0474A66C2AE5B10A0036FC9E /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		0474A6702AE5B1240036FC9E /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
@@ -113,10 +124,8 @@
 		049CD8932AE5BC5600812BAE /* MealsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsViewModel.swift; sourceTree = "<group>"; };
 		049CD8952AE5BC7900812BAE /* WaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
 		049CD8972AE5BC8200812BAE /* WaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewModel.swift; sourceTree = "<group>"; };
-		04BCDFC42AF96AE400346AD6 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		04BCDFCB2B08140400346AD6 /* MealItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemView.swift; sourceTree = "<group>"; };
 		04BCDFCD2B08140F00346AD6 /* MealItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemViewModel.swift; sourceTree = "<group>"; };
-		04BCDFCF2B082A0700346AD6 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		04BCDFD42B0BE26800346AD6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		04BCDFDD2B0BED4C00346AD6 /* AppConfigurationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationManagerTests.swift; sourceTree = "<group>"; };
@@ -126,6 +135,11 @@
 		04D786B62BB34C6D00EC68BC /* FitnessPersistence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FitnessPersistence; sourceTree = "<group>"; };
 		04D786BC2BB34D7700EC68BC /* DependencyManagement */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DependencyManagement; sourceTree = "<group>"; };
 		04D786C02BB34FE600EC68BC /* ConfigurationManagement */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ConfigurationManagement; sourceTree = "<group>"; };
+		04F0955B2C5D34A400EA3D94 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		04F0955E2C5D377900EA3D94 /* AddDiaryEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryEntryView.swift; sourceTree = "<group>"; };
+		04F095602C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDiaryEntryViewModel.swift; sourceTree = "<group>"; };
+		04F095632C5D3D6600EA3D94 /* AddFoodItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodItemView.swift; sourceTree = "<group>"; };
+		04F095652C5D3D7000EA3D94 /* AddFoodItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodItemViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				04BCDFD72B0BEC9400346AD6 /* UI */,
-				04BCDFCA2B0813D100346AD6 /* Components */,
 				0474A6672AE5AFE30036FC9E /* App */,
 				0404E21E2AE59C250013CF1F /* Preview Content */,
 			);
@@ -223,6 +236,80 @@
 			path = FitnessTrackerUITests;
 			sourceTree = "<group>";
 		};
+		04118FE72BBDF49E00DBDC59 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		04118FE82BBDF4A300DBDC59 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				045864142BC1AD780067B9B0 /* Confirmation */,
+				045864132BC1ABAD0067B9B0 /* Onboarding */,
+				045864122BC1ABA60067B9B0 /* Welcome */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		0458640E2BC1A6DA0067B9B0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0458640F2BC1A6F90067B9B0 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0458640F2BC1A6F90067B9B0 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				045864102BC1A7220067B9B0 /* GoalsRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		045864122BC1ABA60067B9B0 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				0424CECA2B22591D00B9B03B /* WelcomeView.swift */,
+				0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		045864132BC1ABAD0067B9B0 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */,
+				04BCDFD42B0BE26800346AD6 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		045864142BC1AD780067B9B0 /* Confirmation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Confirmation;
+			sourceTree = "<group>";
+		};
+		046691692C92ECA2006E3327 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0466916A2C92ECA8006E3327 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0466916A2C92ECA8006E3327 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				0466916C2C92ECCB006E3327 /* FoodItemRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		046B1F742AF0241200F15EAB /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,7 +334,7 @@
 		046B1F7C2AF026C100F15EAB /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				046B1F7D2AF026D800F15EAB /* DairyFetching.swift */,
+				046B1F7D2AF026D800F15EAB /* DairyResository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -259,6 +346,7 @@
 				0404E21B2AE59C250013CF1F /* Assets.xcassets */,
 				0404E21D2AE59C250013CF1F /* FitnessTracker.entitlements */,
 				045F9DCA2BBDD56F007FECDA /* AppConfigurationKeys.swift */,
+				04F0955B2C5D34A400EA3D94 /* Localizable.xcstrings */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -311,6 +399,8 @@
 			children = (
 				049CD8892AE5BB9300812BAE /* SummaryView.swift */,
 				049CD88B2AE5BBB700812BAE /* SummaryViewModel.swift */,
+				045864152BC1B1B80067B9B0 /* MacrosView.swift */,
+				045864172BC1B1CB0067B9B0 /* MacrosViewModel.swift */,
 			);
 			path = Summary;
 			sourceTree = "<group>";
@@ -344,22 +434,12 @@
 			path = Water;
 			sourceTree = "<group>";
 		};
-		04BCDFCA2B0813D100346AD6 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				04BCDFC42AF96AE400346AD6 /* CircularProgressView.swift */,
-				04BCDFCF2B082A0700346AD6 /* CardView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		04BCDFD12B0BE24B00346AD6 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */,
-				04BCDFD42B0BE26800346AD6 /* OnboardingViewModel.swift */,
-				0424CECA2B22591D00B9B03B /* WelcomeView.swift */,
-				0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */,
+				0458640E2BC1A6DA0067B9B0 /* Data */,
+				04118FE82BBDF4A300DBDC59 /* UI */,
+				04118FE72BBDF49E00DBDC59 /* Data */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -375,6 +455,8 @@
 		04BCDFD72B0BEC9400346AD6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				04F095622C5D3D4E00EA3D94 /* AddFoodItem */,
+				04F0955D2C5D376B00EA3D94 /* AddDiaryEntry */,
 				04BCDFE72B0D690C00346AD6 /* AppTab */,
 				04BCDFD12B0BE24B00346AD6 /* Onboarding */,
 				0474A66B2AE5B0B80036FC9E /* Account */,
@@ -408,6 +490,25 @@
 				04BCDFE82B0D6A0100346AD6 /* AppTabView.swift */,
 			);
 			path = AppTab;
+			sourceTree = "<group>";
+		};
+		04F0955D2C5D376B00EA3D94 /* AddDiaryEntry */ = {
+			isa = PBXGroup;
+			children = (
+				046691692C92ECA2006E3327 /* Data */,
+				04F0955E2C5D377900EA3D94 /* AddDiaryEntryView.swift */,
+				04F095602C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift */,
+			);
+			path = AddDiaryEntry;
+			sourceTree = "<group>";
+		};
+		04F095622C5D3D4E00EA3D94 /* AddFoodItem */ = {
+			isa = PBXGroup;
+			children = (
+				04F095632C5D3D6600EA3D94 /* AddFoodItemView.swift */,
+				04F095652C5D3D7000EA3D94 /* AddFoodItemViewModel.swift */,
+			);
+			path = AddFoodItem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,6 +608,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 0404E2092AE59C240013CF1F;
 			packageReferences = (
@@ -531,6 +633,7 @@
 			files = (
 				0404E2202AE59C250013CF1F /* Preview Assets.xcassets in Resources */,
 				0404E21C2AE59C250013CF1F /* Assets.xcassets in Resources */,
+				04F0955C2C5D34A400EA3D94 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,24 +665,30 @@
 				04BCDFCE2B08140F00346AD6 /* MealItemViewModel.swift in Sources */,
 				0474A66D2AE5B10A0036FC9E /* AccountView.swift in Sources */,
 				0474A67B2AE5B1620036FC9E /* WeightViewModel.swift in Sources */,
+				045864162BC1B1B80067B9B0 /* MacrosView.swift in Sources */,
 				0474A66F2AE5B1130036FC9E /* AccountViewModel.swift in Sources */,
 				0474A6712AE5B1240036FC9E /* DiaryView.swift in Sources */,
 				04BCDFE92B0D6A0100346AD6 /* AppTabView.swift in Sources */,
+				04F095642C5D3D6600EA3D94 /* AddFoodItemView.swift in Sources */,
 				049CD88E2AE5BBEE00812BAE /* DatePickerView.swift in Sources */,
 				0474A6732AE5B1300036FC9E /* DiaryViewModel.swift in Sources */,
 				04BCDFD32B0BE25D00346AD6 /* OnboardingView.swift in Sources */,
-				04BCDFC52AF96AE400346AD6 /* CircularProgressView.swift in Sources */,
 				04BCDFCC2B08140400346AD6 /* MealItemView.swift in Sources */,
+				0466916D2C92ECCB006E3327 /* FoodItemRepository.swift in Sources */,
+				045864112BC1A7220067B9B0 /* GoalsRepository.swift in Sources */,
 				0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */,
 				049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */,
-				04BCDFD02B082A0700346AD6 /* CardView.swift in Sources */,
 				049CD8942AE5BC5600812BAE /* MealsViewModel.swift in Sources */,
 				0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */,
 				049CD88A2AE5BB9300812BAE /* SummaryView.swift in Sources */,
 				0474A6792AE5B1550036FC9E /* WeightView.swift in Sources */,
 				045F9DCB2BBDD56F007FECDA /* AppConfigurationKeys.swift in Sources */,
-				046B1F7E2AF026D800F15EAB /* DairyFetching.swift in Sources */,
+				04F095662C5D3D7000EA3D94 /* AddFoodItemViewModel.swift in Sources */,
+				045864182BC1B1CB0067B9B0 /* MacrosViewModel.swift in Sources */,
+				046B1F7E2AF026D800F15EAB /* DairyResository.swift in Sources */,
+				04F0955F2C5D377900EA3D94 /* AddDiaryEntryView.swift in Sources */,
 				0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */,
+				04F095612C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift in Sources */,
 				049CD8922AE5BC3A00812BAE /* MealsView.swift in Sources */,
 				049CD8902AE5BC1400812BAE /* DatePickerViewModel.swift in Sources */,
 				0404E2162AE59C240013CF1F /* FitnessTrackerApp.swift in Sources */,

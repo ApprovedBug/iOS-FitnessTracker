@@ -25,7 +25,7 @@ class DiaryViewModel {
     // MARK: Injected dependencies
     @ObservationIgnored
     @Inject
-    var diaryFetching: DiaryFetching
+    var diaryFetching: DiaryRepository
     
     // MARK: Published properties
     private(set) var state: State = .idle

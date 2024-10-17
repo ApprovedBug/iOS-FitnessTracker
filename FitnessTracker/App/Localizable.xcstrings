@@ -1,0 +1,173 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@kcal" : {
+
+    },
+    "Account View" : {
+
+    },
+    "Activity Level" : {
+
+    },
+    "Age" : {
+
+    },
+    "Calorie Calculator" : {
+
+    },
+    "Calories" : {
+
+    },
+    "Carbs" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Create new food item" : {
+
+    },
+    "Date Picker View" : {
+
+    },
+    "Description" : {
+
+    },
+    "Diary" : {
+
+    },
+    "Exercise View" : {
+
+    },
+    "Fat" : {
+
+    },
+    "Food Description" : {
+
+    },
+    "Gender" : {
+
+    },
+    "Height (cm)" : {
+
+    },
+    "meal_(meal)" : {
+      "comment" : "Meal title"
+    },
+    "meal_breakfast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frühstück"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breakfast"
+          }
+        }
+      }
+    },
+    "meal_dinner" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abendessen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dinner"
+          }
+        }
+      }
+    },
+    "meal_lunch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mittagessen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lunch"
+          }
+        }
+      }
+    },
+    "meal_snack" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imbiss"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snacks"
+          }
+        }
+      }
+    },
+    "New Food Item" : {
+
+    },
+    "Nutritional Information" : {
+
+    },
+    "Protein" : {
+
+    },
+    "Remaining" : {
+
+    },
+    "Save" : {
+
+    },
+    "Skip" : {
+
+    },
+    "Tell us about yourself" : {
+
+    },
+    "There was an error loading your diary" : {
+
+    },
+    "To get started we'd love to know a little bit about you so we can help you as best we can" : {
+
+    },
+    "Water View" : {
+
+    },
+    "We are here to help you keep track of your diet and achieve your goals" : {
+
+    },
+    "Weight (kg)" : {
+
+    },
+    "Weight Goal" : {
+
+    },
+    "Weight View" : {
+
+    },
+    "Welcome" : {
+
+    }
+  },
+  "version" : "1.0"
+}

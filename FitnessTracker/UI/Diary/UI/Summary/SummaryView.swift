@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 22/10/2023.
 //
 
+import FitnessUI
 import Foundation
 import SwiftUI
 
@@ -32,7 +33,7 @@ private struct ContentView: View {
             
             HStack {
                 
-                VStack {
+                VStack(alignment: .leading) {
                     KcalSummaryItemView(
                         title: "Consumed",
                         icon: Image(systemName: "apple.logo"),
@@ -53,9 +54,9 @@ private struct ContentView: View {
             .padding([.bottom], 32)
             
             HStack {
-                MacrosView(consumed: data.carbsConsumed, target: "250", progress: 0.0, title: "Carbs")
-                MacrosView(consumed: data.proteinsConsumed, target: "100", progress: 0.0, title: "Proteins")
-                MacrosView(consumed: data.fatsConsumed, target: "50", progress: 0.0, title: "Fats")
+                MacrosView(viewModel: data.carbsViewModel)
+                MacrosView(viewModel: data.proteinViewModel)
+                MacrosView(viewModel: data.fatsViewModel)
             }
         }
         .padding()
@@ -97,25 +98,6 @@ private struct KcalRemainingView: View {
                 Text(kcalRemaining)
                 Text("Remaining")
             }
-        }
-    }
-}
-
-private struct MacrosView: View {
-    
-    let consumed: String
-    let target: String
-    let progress: Double
-    let title: String
-    
-    var body: some View {
-        
-        VStack(alignment: .leading) {
-            Text("\(consumed)/\(target)")
-            
-            ProgressView(value: progress)
-            
-            Text(title)
         }
     }
 }

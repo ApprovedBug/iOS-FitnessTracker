@@ -21,7 +21,6 @@ struct FitnessTrackerApp: App {
         registerDependencies()
     }
     
-    
     func registerDependencies() {
         // Register your dependencies here
         DependencyContainer.register(ContextProviding.self) {
@@ -32,8 +31,16 @@ struct FitnessTrackerApp: App {
             UserDefaults.standard
         }
         
-        DependencyContainer.register(DiaryFetching.self) {
-            MockDiaryRepository()
+        DependencyContainer.register(GoalsRepository.self) {
+            LocalGoalsRepository()
+        }
+        
+        DependencyContainer.register(DiaryRepository.self) {
+            LocalDiaryRepository()
+        }
+        
+        DependencyContainer.register(FoodItemRepository.self) {
+            LocalFoodItemRepository()
         }
         
         DependencyContainer.register(AppConfigurationManaging.self) {

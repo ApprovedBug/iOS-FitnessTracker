@@ -15,12 +15,12 @@ enum DiaryError: Error {
     case fetchError
 }
 
-protocol DiaryFetching {
+protocol DiaryRepository {
     
     func diaryEntries(for day: Date) -> AnyPublisher<[DiaryEntry], DiaryError>
 }
 
-struct MockDiaryRepository: DiaryFetching {
+struct LocalDiaryRepository: DiaryRepository {
     
     @Inject var contextProvider: ContextProviding
     

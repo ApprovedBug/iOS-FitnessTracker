@@ -12,12 +12,12 @@ import SwiftData
 public class FoodItem {
     
     public let name: String
-    public let kcal: Double
+    public let kcal: Int
     public let carbs: Double
     public let protein: Double
     public let fats: Double
     
-    init(name: String, kcal: Double, carbs: Double, protein: Double, fats: Double) {
+    public init(name: String, kcal: Int, carbs: Double, protein: Double, fats: Double) {
         self.name = name
         self.kcal = kcal
         self.carbs = carbs

@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 17/11/2023.
 //
 
+import FitnessUI
 import Foundation
 import SwiftUI
 
@@ -19,7 +20,7 @@ struct MealItemView: View {
                 EmptyView()
             case .ready(let data):
                 CardView {
-                    ContentView(data: data)
+                    ContentView(viewModel: viewModel, data: data)
                 }
         }
     }
@@ -27,6 +28,7 @@ struct MealItemView: View {
 
 private struct ContentView: View {
     
+    @Bindable var viewModel: MealItemViewModel
     let data: MealItemViewModel.Data
     
     var body: some View {
@@ -40,36 +42,43 @@ private struct ContentView: View {
                 
                 Spacer()
                 
-                Image(systemName: "plus.circle")
-                    .font(.headline)
-                    .foregroundColor(.blue)
+                Button {
+                    viewModel.addEntryTapped()
+                } label: {
+                    Image(systemName: "plus.circle")
+                        .font(.headline)
+                        .foregroundColor(.blue)
+                }
             }
             
             HStack {
                 
-                MacrosView(amount: data.kcalConsumed, macro: "kcal")
+                MealItemMacrosView(amount: data.kcalConsumed, macro: "kcal")
                     .frame(maxWidth: .infinity)
                 
                 Divider()
                 
-                MacrosView(amount: data.carbsConsumed, macro: "Carbs")
+                MealItemMacrosView(amount: data.carbsConsumed, macro: "Carbs")
                     .frame(maxWidth: .infinity)
                 
                 Divider()
                 
-                MacrosView(amount: data.proteinsConsumed, macro: "Proteins")
+                MealItemMacrosView(amount: data.proteinsConsumed, macro: "Proteins")
                     .frame(maxWidth: .infinity)
                 
                 Divider()
                 
-                MacrosView(amount: data.fatsConsumed, macro: "Fats")
+                MealItemMacrosView(amount: data.fatsConsumed, macro: "Fats")
                     .frame(maxWidth: .infinity)
             }
+        }
+        .sheet(isPresented: $viewModel.isAddDiaryEntryOpen) {
+            AddDiaryEntryView(viewModel: AddDiaryEntryViewModel())
         }
     }
 }
 
-private struct MacrosView: View {
+private struct MealItemMacrosView: View {
     
     let amount: String
     let macro: String

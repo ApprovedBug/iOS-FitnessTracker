@@ -25,10 +25,12 @@ class MealItemViewModel: Identifiable {
     }
     
     var state: State = .idle
+    var isAddDiaryEntryOpen: Bool = false
     
     private var entries: [DiaryEntry] = []
     
     let meal: Meal
+    
     
     // MARK: Initialisers
     
@@ -48,11 +50,15 @@ class MealItemViewModel: Identifiable {
         populateUI()
     }
     
+    func addEntryTapped() {
+        isAddDiaryEntryOpen = true
+    }
+    
     // MARK: Private functions
     
     private func populateUI() {
         
-        var kcalConsumed: Double = 0
+        var kcalConsumed: Int = 0
         var proteinsConsumed: Double = 0
         var fatsConsumed: Double = 0
         var carbsConsumed: Double = 0
@@ -66,7 +72,7 @@ class MealItemViewModel: Identifiable {
         
         state = .ready(
             .init(
-                mealTitle: "Add \(meal)",
+                mealTitle: NSLocalizedString("meal_\(meal)", comment: "Meal title"),
                 kcalConsumed: String(Int(kcalConsumed)),
                 proteinsConsumed: String(Int(proteinsConsumed)),
                 fatsConsumed: String(Int(fatsConsumed)),

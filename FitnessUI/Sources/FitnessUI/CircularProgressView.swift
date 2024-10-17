@@ -8,10 +8,14 @@
 import Foundation
 import SwiftUI
 
-struct CircularProgressView: View {
+public struct CircularProgressView: View {
     let progress: Double
     
-    var body: some View {
+    public init(progress: Double) {
+        self.progress = progress
+    }
+    
+    public var body: some View {
         ZStack {
             Circle()
                 .stroke(
