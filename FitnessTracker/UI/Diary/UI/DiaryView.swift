@@ -14,19 +14,16 @@ struct DiaryView: View {
     var viewModel: DiaryViewModel
     
     var body: some View {
-        
-        NavigationStack {
-            switch viewModel.state {
-                case .idle, .loading:
-                    ProgressView().onAppear(perform: {
-                        viewModel.loadData()
-                    })
-                case .error:
-                    Text("There was an error loading your diary")
-                case .ready(let entries):
-                    ContentView(entries: entries)
-                        .navigationTitle("Diary")
-                }
+            
+        switch viewModel.state {
+        case .idle, .loading:
+            ProgressView().onAppear(perform: {
+                viewModel.loadData()
+            })
+        case .error:
+            Text("There was an error loading your diary")
+        case .ready(let entries):
+            ContentView(entries: entries)
         }
     }
 }

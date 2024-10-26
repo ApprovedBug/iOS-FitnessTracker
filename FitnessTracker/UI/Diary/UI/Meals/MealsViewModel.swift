@@ -31,7 +31,7 @@ class MealsViewModel {
     
     private func populateUI(entries: [DiaryEntry]) {
         
-        var meals: [MealItemViewModel] = Meal.allCases.map { MealItemViewModel(meal: $0, entries: [] )}
+        let meals: [MealItemViewModel] = Meal.allCases.map { MealItemViewModel(meal: $0, entries: [] )}
         
         for entry in entries {
             

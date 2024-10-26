@@ -12,9 +12,12 @@
 		0404E2202AE59C250013CF1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0404E21F2AE59C250013CF1F /* Preview Assets.xcassets */; };
 		0404E2342AE59C250013CF1F /* FitnessTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404E2332AE59C250013CF1F /* FitnessTrackerUITests.swift */; };
 		0404E2362AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404E2352AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift */; };
+		040D88CC2CCD323700FDD4D6 /* DebugTools in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88CB2CCD323700FDD4D6 /* DebugTools */; };
+		040D88CF2CCD324700FDD4D6 /* DependencyManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88CE2CCD324700FDD4D6 /* DependencyManagement */; };
+		040D88D22CCD325200FDD4D6 /* FitnessPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88D12CCD325200FDD4D6 /* FitnessPersistence */; };
+		040D88D52CCD326000FDD4D6 /* FitnessUI in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88D42CCD326000FDD4D6 /* FitnessUI */; };
 		0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECA2B22591D00B9B03B /* WelcomeView.swift */; };
 		0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */; };
-		042D01B62BACDE490053ED0D /* DebugTools in Frameworks */ = {isa = PBXBuildFile; productRef = 042D01B52BACDE490053ED0D /* DebugTools */; };
 		045864112BC1A7220067B9B0 /* GoalsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864102BC1A7220067B9B0 /* GoalsRepository.swift */; };
 		045864162BC1B1B80067B9B0 /* MacrosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864152BC1B1B80067B9B0 /* MacrosView.swift */; };
 		045864182BC1B1CB0067B9B0 /* MacrosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864172BC1B1CB0067B9B0 /* MacrosViewModel.swift */; };
@@ -29,7 +32,6 @@
 		0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6762AE5B14C0036FC9E /* ExerciseViewModel.swift */; };
 		0474A6792AE5B1550036FC9E /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6782AE5B1550036FC9E /* WeightView.swift */; };
 		0474A67B2AE5B1620036FC9E /* WeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A67A2AE5B1620036FC9E /* WeightViewModel.swift */; };
-		049C70352BA4206E0006287F /* FitnessUI in Frameworks */ = {isa = PBXBuildFile; productRef = 049C70342BA4206E0006287F /* FitnessUI */; };
 		049CD88A2AE5BB9300812BAE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8892AE5BB9300812BAE /* SummaryView.swift */; };
 		049CD88C2AE5BBB700812BAE /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD88B2AE5BBB700812BAE /* SummaryViewModel.swift */; };
 		049CD88E2AE5BBEE00812BAE /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD88D2AE5BBEE00812BAE /* DatePickerView.swift */; };
@@ -46,11 +48,6 @@
 		04BCDFE02B0BED8D00346AD6 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFDF2B0BED8D00346AD6 /* MockUserDefaults.swift */; };
 		04BCDFE42B0BF48000346AD6 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFE32B0BF48000346AD6 /* DependencyContainer.swift */; };
 		04BCDFE92B0D6A0100346AD6 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFE82B0D6A0100346AD6 /* AppTabView.swift */; };
-		04D786B82BB34CAF00EC68BC /* FitnessPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = 04D786B72BB34CAF00EC68BC /* FitnessPersistence */; };
-		04D786BB2BB34D0300EC68BC /* FitnessPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = 04D786BA2BB34D0300EC68BC /* FitnessPersistence */; };
-		04D786BF2BB34FA000EC68BC /* DependencyManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 04D786BE2BB34FA000EC68BC /* DependencyManagement */; };
-		04D786C42BB352F300EC68BC /* ConfigurationManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 04D786C32BB352F300EC68BC /* ConfigurationManagement */; };
-		04D786C72BB354CA00EC68BC /* DependencyManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 04D786C62BB354CA00EC68BC /* DependencyManagement */; };
 		04F0955C2C5D34A400EA3D94 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 04F0955B2C5D34A400EA3D94 /* Localizable.xcstrings */; };
 		04F0955F2C5D377900EA3D94 /* AddDiaryEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0955E2C5D377900EA3D94 /* AddDiaryEntryView.swift */; };
 		04F095612C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F095602C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift */; };
@@ -147,13 +144,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04D786C72BB354CA00EC68BC /* DependencyManagement in Frameworks */,
-				04D786BF2BB34FA000EC68BC /* DependencyManagement in Frameworks */,
-				04D786B82BB34CAF00EC68BC /* FitnessPersistence in Frameworks */,
-				042D01B62BACDE490053ED0D /* DebugTools in Frameworks */,
-				049C70352BA4206E0006287F /* FitnessUI in Frameworks */,
-				04D786C42BB352F300EC68BC /* ConfigurationManagement in Frameworks */,
-				04D786BB2BB34D0300EC68BC /* FitnessPersistence in Frameworks */,
+				040D88CC2CCD323700FDD4D6 /* DebugTools in Frameworks */,
+				040D88CF2CCD324700FDD4D6 /* DependencyManagement in Frameworks */,
+				040D88D52CCD326000FDD4D6 /* FitnessUI in Frameworks */,
+				040D88D22CCD325200FDD4D6 /* FitnessPersistence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,13 +523,11 @@
 			);
 			name = FitnessTracker;
 			packageProductDependencies = (
-				049C70342BA4206E0006287F /* FitnessUI */,
-				042D01B52BACDE490053ED0D /* DebugTools */,
-				04D786B72BB34CAF00EC68BC /* FitnessPersistence */,
-				04D786BA2BB34D0300EC68BC /* FitnessPersistence */,
-				04D786BE2BB34FA000EC68BC /* DependencyManagement */,
-				04D786C32BB352F300EC68BC /* ConfigurationManagement */,
-				04D786C62BB354CA00EC68BC /* DependencyManagement */,
+				040D88CB2CCD323700FDD4D6 /* DebugTools */,
+				040D88CE2CCD324700FDD4D6 /* DependencyManagement */,
+				040D88D12CCD325200FDD4D6 /* FitnessPersistence */,
+				040D88D42CCD326000FDD4D6 /* FitnessUI */,
+				040D88D72CCD349000FDD4D6 /* ConfigurationManagement */,
 			);
 			productName = FitnessTracker;
 			productReference = 0404E2122AE59C240013CF1F /* FitnessTracker.app */;
@@ -585,7 +577,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					0404E2112AE59C240013CF1F = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -612,8 +604,11 @@
 			);
 			mainGroup = 0404E2092AE59C240013CF1F;
 			packageReferences = (
-				04D786B92BB34D0300EC68BC /* XCLocalSwiftPackageReference "FitnessPersistence" */,
-				04D786C52BB354CA00EC68BC /* XCLocalSwiftPackageReference "DependencyManagement" */,
+				040D88CA2CCD323700FDD4D6 /* XCLocalSwiftPackageReference "DebugTools" */,
+				040D88CD2CCD324700FDD4D6 /* XCLocalSwiftPackageReference "DependencyManagement" */,
+				040D88D02CCD325200FDD4D6 /* XCLocalSwiftPackageReference "FitnessPersistence" */,
+				040D88D32CCD326000FDD4D6 /* XCLocalSwiftPackageReference "FitnessUI" */,
+				049577AC2CCD3532001C0CEC /* XCLocalSwiftPackageReference "ConfigurationManagement" */,
 			);
 			productRefGroup = 0404E2132AE59C240013CF1F /* Products */;
 			projectDirPath = "";
@@ -735,6 +730,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -764,6 +760,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -796,6 +793,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -825,6 +823,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -852,6 +851,7 @@
 				CODE_SIGN_ENTITLEMENTS = FitnessTracker/App/FitnessTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"FitnessTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N87CRMB5W;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -867,7 +867,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -877,7 +877,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -890,6 +890,7 @@
 				CODE_SIGN_ENTITLEMENTS = FitnessTracker/App/FitnessTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"FitnessTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 4N87CRMB5W;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -905,7 +906,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -915,7 +916,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -923,11 +924,11 @@
 		0404E23D2AE59C250013CF1F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 4N87CRMB5W;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -948,11 +949,11 @@
 		0404E23E2AE59C250013CF1F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 4N87CRMB5W;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -972,9 +973,9 @@
 		0404E2402AE59C250013CF1F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 4N87CRMB5W;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -994,9 +995,9 @@
 		0404E2412AE59C250013CF1F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 4N87CRMB5W;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1055,44 +1056,48 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		04D786B92BB34D0300EC68BC /* XCLocalSwiftPackageReference "FitnessPersistence" */ = {
+		040D88CA2CCD323700FDD4D6 /* XCLocalSwiftPackageReference "DebugTools" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = DebugTools;
+		};
+		040D88CD2CCD324700FDD4D6 /* XCLocalSwiftPackageReference "DependencyManagement" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = DependencyManagement;
+		};
+		040D88D02CCD325200FDD4D6 /* XCLocalSwiftPackageReference "FitnessPersistence" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = FitnessPersistence;
 		};
-		04D786C52BB354CA00EC68BC /* XCLocalSwiftPackageReference "DependencyManagement" */ = {
+		040D88D32CCD326000FDD4D6 /* XCLocalSwiftPackageReference "FitnessUI" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = DependencyManagement;
+			relativePath = FitnessUI;
+		};
+		049577AC2CCD3532001C0CEC /* XCLocalSwiftPackageReference "ConfigurationManagement" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ConfigurationManagement;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		042D01B52BACDE490053ED0D /* DebugTools */ = {
+		040D88CB2CCD323700FDD4D6 /* DebugTools */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DebugTools;
 		};
-		049C70342BA4206E0006287F /* FitnessUI */ = {
+		040D88CE2CCD324700FDD4D6 /* DependencyManagement */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DependencyManagement;
+		};
+		040D88D12CCD325200FDD4D6 /* FitnessPersistence */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FitnessPersistence;
+		};
+		040D88D42CCD326000FDD4D6 /* FitnessUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FitnessUI;
 		};
-		04D786B72BB34CAF00EC68BC /* FitnessPersistence */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FitnessPersistence;
-		};
-		04D786BA2BB34D0300EC68BC /* FitnessPersistence */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FitnessPersistence;
-		};
-		04D786BE2BB34FA000EC68BC /* DependencyManagement */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DependencyManagement;
-		};
-		04D786C32BB352F300EC68BC /* ConfigurationManagement */ = {
+		040D88D72CCD349000FDD4D6 /* ConfigurationManagement */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ConfigurationManagement;
-		};
-		04D786C62BB354CA00EC68BC /* DependencyManagement */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DependencyManagement;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

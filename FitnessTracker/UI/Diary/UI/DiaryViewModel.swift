@@ -10,6 +10,7 @@ import DependencyManagement
 import FitnessPersistence
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Observable
 class DiaryViewModel {
@@ -58,7 +59,6 @@ class DiaryViewModel {
     
     // MARK: Private functions
     private func processEntries(entries: [DiaryEntry]) {
-        
         state = .ready(entries: entries)
     }
 }

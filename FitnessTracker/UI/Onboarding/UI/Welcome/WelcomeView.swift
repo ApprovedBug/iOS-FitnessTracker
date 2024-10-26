@@ -36,7 +36,7 @@ struct WelcomeView: View {
                     viewModel.continueTapped()
                 }
                 .navigationDestination(isPresented: $viewModel.showOnboardingView) {
-                    OnboardingView(viewModel: OnboardingViewModel())
+                    OnboardingView(viewModel: OnboardingViewModel()).navigationBarBackButtonHidden(true)
                 }
                 .buttonStyle(RoundedButtonStyle())
                 .opacity(animationStarted ? 1 : 0)
@@ -47,7 +47,7 @@ struct WelcomeView: View {
                     animationStarted = true
                 }
             }
-            .navigationBarTitle("Welcome")
+            .navigationTitle("Welcome")
             .padding()
         }
     }

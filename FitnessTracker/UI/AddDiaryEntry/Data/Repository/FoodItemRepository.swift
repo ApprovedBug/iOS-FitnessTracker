@@ -5,7 +5,7 @@
 //  Created by Jack Moseley on 12/09/2024.
 //
 
-import Combine
+@preconcurrency import Combine
 import SwiftData
 import DependencyManagement
 import FitnessPersistence
@@ -17,7 +17,7 @@ enum FoodItemError: Error {
 
 protocol FoodItemRepository {
     
-    func foodItems(for day: Date) -> AnyPublisher<[FoodItem], FoodItemError>
+    func foodItems(for day: Date) async -> AnyPublisher<[FoodItem], FoodItemError>
 }
 
 struct LocalFoodItemRepository: FoodItemRepository {

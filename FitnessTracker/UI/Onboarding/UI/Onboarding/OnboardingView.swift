@@ -55,7 +55,7 @@ struct OnboardingView: View {
                     viewModel.continueTapped()
                 }
                 .navigationDestination(isPresented: $viewModel.showDiaryView) {
-                    AppTabView()
+                    AppTabView().navigationBarBackButtonHidden()
                 }
                 .padding()
                 .buttonStyle(RoundedButtonStyle())
@@ -68,7 +68,7 @@ struct OnboardingView: View {
                 .buttonStyle(TertiaryButtonStyle())
                 .listRowSeparator(.hidden)
             }
-            .navigationBarTitle("Calorie Calculator")
+            .navigationTitle("Calorie Calculator")
         }
     }
 }

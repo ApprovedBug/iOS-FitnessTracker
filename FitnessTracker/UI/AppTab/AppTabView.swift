@@ -9,29 +9,46 @@ import Foundation
 import SwiftUI
 
 struct AppTabView: View {
+    // Define a state variable to keep track of the selected tab
+    @State private var selectedTab = 0
     
     var body: some View {
         
-        TabView {
-            DiaryView(viewModel: DiaryViewModel())
-                .tabItem {
-                    Image(systemName: "list.bullet.clipboard")
+        NavigationStack {
+            TabView(selection: $selectedTab) {
+                
+                Tab("Diary", systemImage: "list.bullet.clipboard", value: 0) {
+                    DiaryView(viewModel: DiaryViewModel())
                 }
-            
-            ExerciseView()
-                .tabItem {
-                    Image(systemName: "dumbbell")
+                
+                Tab("Exercise", systemImage: "ldumbbell", value: 1) {
+                    ExerciseView()
                 }
-            
-            WeightView()
-                .tabItem {
-                    Image(systemName: "chart.xyaxis.line")
+                
+                Tab("Weight", systemImage: "chart.xyaxis.line", value: 2) {
+                    WeightView()
                 }
-            
-            AccountView()
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
+                
+                Tab("Account", systemImage: "person.crop.circle", value: 3) {
+                    AccountView()
                 }
+            }
+        }
+    }
+    
+    // Function to return the title based on the selected tab index
+    private func tabTitle(for index: Int) -> String {
+        switch index {
+        case 0:
+            return "Diary"
+        case 1:
+            return "Exercise"
+        case 2:
+            return "Weight"
+        case 3:
+            return "Account"
+        default:
+            return "Diary" // Default case
         }
     }
 }
