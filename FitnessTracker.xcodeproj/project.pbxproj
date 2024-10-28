@@ -40,6 +40,8 @@
 		049CD8942AE5BC5600812BAE /* MealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8932AE5BC5600812BAE /* MealsViewModel.swift */; };
 		049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8952AE5BC7900812BAE /* WaterView.swift */; };
 		049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8972AE5BC8200812BAE /* WaterViewModel.swift */; };
+		04A1E4222CCFFF4F00EC7D4A /* ConfigurationManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88D72CCD349000FDD4D6 /* ConfigurationManagement */; };
+		04A1E4242CD0083900EC7D4A /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1E4232CD0083900EC7D4A /* AppViewModel.swift */; };
 		04BCDFCC2B08140400346AD6 /* MealItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCB2B08140400346AD6 /* MealItemView.swift */; };
 		04BCDFCE2B08140F00346AD6 /* MealItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCD2B08140F00346AD6 /* MealItemViewModel.swift */; };
 		04BCDFD32B0BE25D00346AD6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */; };
@@ -121,6 +123,7 @@
 		049CD8932AE5BC5600812BAE /* MealsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsViewModel.swift; sourceTree = "<group>"; };
 		049CD8952AE5BC7900812BAE /* WaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
 		049CD8972AE5BC8200812BAE /* WaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewModel.swift; sourceTree = "<group>"; };
+		04A1E4232CD0083900EC7D4A /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		04BCDFCB2B08140400346AD6 /* MealItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemView.swift; sourceTree = "<group>"; };
 		04BCDFCD2B08140F00346AD6 /* MealItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemViewModel.swift; sourceTree = "<group>"; };
 		04BCDFD22B0BE25D00346AD6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -144,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A1E4222CCFFF4F00EC7D4A /* ConfigurationManagement in Frameworks */,
 				040D88CC2CCD323700FDD4D6 /* DebugTools in Frameworks */,
 				040D88CF2CCD324700FDD4D6 /* DependencyManagement in Frameworks */,
 				040D88D52CCD326000FDD4D6 /* FitnessUI in Frameworks */,
@@ -341,6 +345,7 @@
 				0404E21D2AE59C250013CF1F /* FitnessTracker.entitlements */,
 				045F9DCA2BBDD56F007FECDA /* AppConfigurationKeys.swift */,
 				04F0955B2C5D34A400EA3D94 /* Localizable.xcstrings */,
+				04A1E4232CD0083900EC7D4A /* AppViewModel.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -663,6 +668,7 @@
 				045864162BC1B1B80067B9B0 /* MacrosView.swift in Sources */,
 				0474A66F2AE5B1130036FC9E /* AccountViewModel.swift in Sources */,
 				0474A6712AE5B1240036FC9E /* DiaryView.swift in Sources */,
+				04A1E4242CD0083900EC7D4A /* AppViewModel.swift in Sources */,
 				04BCDFE92B0D6A0100346AD6 /* AppTabView.swift in Sources */,
 				04F095642C5D3D6600EA3D94 /* AddFoodItemView.swift in Sources */,
 				049CD88E2AE5BBEE00812BAE /* DatePickerView.swift in Sources */,

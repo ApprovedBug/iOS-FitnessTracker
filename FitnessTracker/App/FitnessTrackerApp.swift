@@ -48,27 +48,29 @@ struct FitnessTrackerApp: App {
         }
     }
     
+    @StateObject private var viewModel = AppViewModel()
+    
     var body: some Scene {
         
         WindowGroup {
             content
+                .onAppear(perform: {
+//                    viewModel.setInitialRoot()
+                })
                 .attachDebugMenu(options: DebugMenuOptions.allCases)
+                .environmentObject(viewModel)
         }
     }
     
     private var content: some View {
         
-        @Inject
-        var appConfigurationManager: AppConfigurationManaging
-        
-        guard !appConfigurationManager.getValue(for: DebugCongigurationKeys.alwaysShowOnboarding) else {
-            return AnyView(WelcomeView(viewModel: WelcomeViewModel()))
+        switch viewModel.root {
+            case .splash:
+                AnyView(Text("Loading..."))
+            case .welcome:
+                AnyView(WelcomeView(viewModel: WelcomeViewModel()))
+            case .dashboard:
+                AnyView(AppTabView())
         }
-        
-        guard appConfigurationManager.getValue(for: Keys.onboardingCompleted) else {
-            return AnyView(WelcomeView(viewModel: WelcomeViewModel()))
-        }
-        
-        return AnyView(AppTabView())
     }
 }

@@ -4,6 +4,9 @@
     "%@kcal" : {
 
     },
+    "Account" : {
+
+    },
     "Account View" : {
 
     },
@@ -37,6 +40,9 @@
     "Diary" : {
 
     },
+    "Exercise" : {
+
+    },
     "Exercise View" : {
 
     },
@@ -50,6 +56,9 @@
 
     },
     "Height (cm)" : {
+
+    },
+    "Loading..." : {
 
     },
     "meal_breakfast" : {
@@ -151,6 +160,9 @@
 
     },
     "We are here to help you keep track of your diet and achieve your goals" : {
+
+    },
+    "Weight" : {
 
     },
     "Weight (kg)" : {

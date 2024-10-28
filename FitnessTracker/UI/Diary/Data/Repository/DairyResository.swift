@@ -20,7 +20,7 @@ protocol DiaryRepository {
     func diaryEntries(for day: Date) -> AnyPublisher<[DiaryEntry], DiaryError>
 }
 
-struct LocalDiaryRepository: DiaryRepository {
+struct LocalDiaryRepository: @preconcurrency DiaryRepository {
     
     @Inject var contextProvider: ContextProviding
     

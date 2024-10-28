@@ -21,7 +21,7 @@ protocol GoalsRepository {
     func saveGoals(goals: Goals, for user: String)
 }
 
-struct LocalGoalsRepository: GoalsRepository {
+struct LocalGoalsRepository: @preconcurrency GoalsRepository {
     
     @Inject var contextProvider: ContextProviding
     
@@ -39,5 +39,6 @@ struct LocalGoalsRepository: GoalsRepository {
     
     @MainActor func saveGoals(goals: Goals, for user: String) {
         contextProvider.sharedModelContainer.mainContext.insert(goals)
+        try? contextProvider.sharedModelContainer.mainContext.save()
     }
 }

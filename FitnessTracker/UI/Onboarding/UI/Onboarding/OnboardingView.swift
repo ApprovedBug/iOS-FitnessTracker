@@ -12,6 +12,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @Bindable var viewModel: OnboardingViewModel
+    @EnvironmentObject private var appRootManaging: AppViewModel
     
     var body: some View {
         NavigationStack {
@@ -54,9 +55,9 @@ struct OnboardingView: View {
                 Button("Continue") {
                     viewModel.continueTapped()
                 }
-                .navigationDestination(isPresented: $viewModel.showDiaryView) {
-                    AppTabView().navigationBarBackButtonHidden()
-                }
+                .onChange(of: viewModel.showDiaryView, {
+                    appRootManaging.switchRoot(to: .dashboard)
+                })
                 .padding()
                 .buttonStyle(RoundedButtonStyle())
                 .listRowSeparator(.hidden)

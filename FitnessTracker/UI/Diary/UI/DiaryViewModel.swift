@@ -10,7 +10,6 @@ import DependencyManagement
 import FitnessPersistence
 import Foundation
 import SwiftData
-import SwiftUI
 
 @Observable
 class DiaryViewModel {
@@ -29,13 +28,15 @@ class DiaryViewModel {
     var diaryFetching: DiaryRepository
     
     // MARK: Published properties
-    private(set) var state: State = .idle
+    private(set) var state: State
     
     // MARK: Private properties
     private var disposables = [AnyCancellable]()
     
     // MARK: Initializers
-    init() { }
+    init() {
+        state = .idle
+    }
     
     // MARK: Internal functions
     func loadData() {
