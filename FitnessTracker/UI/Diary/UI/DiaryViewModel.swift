@@ -40,21 +40,6 @@ class DiaryViewModel {
     // MARK: Internal functions
     func loadData() {
         
-        diaryFetching.diaryEntries(for: Date())
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                guard let self = self else { return }
-                switch completion {
-                case .failure(_):
-                    self.state = .error
-                case .finished:
-                    break
-                }
-            }) { [weak self] entries in
-                guard let self = self else { return }
-                self.processEntries(entries: entries)
-            }
-            .store(in: &disposables)
     }
     
     // MARK: Private functions

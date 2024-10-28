@@ -21,7 +21,7 @@ struct AppTabView: View {
                     DiaryView(viewModel: DiaryViewModel())
                 }
                 
-                Tab("Exercise", systemImage: "ldumbbell", value: 1) {
+                Tab("Exercise", systemImage: "dumbbell", value: 1) {
                     ExerciseView()
                 }
                 
@@ -33,6 +33,7 @@ struct AppTabView: View {
                     AccountView()
                 }
             }
+            .navigationTitle(tabTitle(for: selectedTab))
         }
     }
     

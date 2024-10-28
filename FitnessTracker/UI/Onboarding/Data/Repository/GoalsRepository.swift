@@ -5,7 +5,6 @@
 //  Created by Jack Moseley on 06/04/2024.
 //
 
-import Combine
 import DependencyManagement
 import FitnessPersistence
 import Foundation
@@ -17,27 +16,33 @@ enum GoalsError: Error {
 
 protocol GoalsRepository {
     
-    func goalsForUser(userId: String) -> AnyPublisher<Goals, GoalsError>
-    func saveGoals(goals: Goals, for user: String)
+    func goalsForUser(userId: String) async throws -> GoalsDTO
+    func saveGoals(goalsDto: GoalsDTO, for user: String) async
 }
 
-struct LocalGoalsRepository: GoalsRepository {
+@ModelActor
+actor LocalGoalsRepository: GoalsRepository {
     
-    @Inject var contextProvider: ContextProviding
-    
-    @MainActor func goalsForUser(userId: String) -> AnyPublisher<Goals, GoalsError> {
-        do {
-            let descriptor = FetchDescriptor<Goals>()
-            guard let entry = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor).first else {
-                return Fail(error: .fetchError).eraseToAnyPublisher()
-            }
-            return Just(entry).setFailureType(to: GoalsError.self).eraseToAnyPublisher()
-        } catch {
-            return Fail(error: .fetchError).eraseToAnyPublisher()
+    func goalsForUser(userId: String) async throws -> GoalsDTO {
+        let descriptor = FetchDescriptor<Goals>()
+        guard let goals = try modelContext.fetch(descriptor).first else {
+            fatalError("Could not featch goals")
         }
+        let goalsDto = GoalsDTO(goals: goals)
+        
+        return goalsDto
     }
     
-    @MainActor func saveGoals(goals: Goals, for user: String) {
-        contextProvider.sharedModelContainer.mainContext.insert(goals)
+    func saveGoals(goalsDto: GoalsDTO, for user: String) async {
+        
+        let goals = Goals(
+            kcal: goalsDto.kcal,
+            carbs: goalsDto.carbs,
+            protein: goalsDto.protein,
+            fats: goalsDto.fats
+        )
+        
+        modelContext.insert(goals)
+        try? modelContext.save()
     }
 }

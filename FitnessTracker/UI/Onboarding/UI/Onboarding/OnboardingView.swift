@@ -52,7 +52,9 @@ struct OnboardingView: View {
                 Spacer()
                 
                 Button("Continue") {
-                    viewModel.continueTapped()
+                    Task {
+                        await viewModel.continueTapped()
+                    }
                 }
                 .navigationDestination(isPresented: $viewModel.showDiaryView) {
                     AppTabView().navigationBarBackButtonHidden()

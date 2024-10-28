@@ -5,34 +5,29 @@
 //  Created by Jack Moseley on 12/09/2024.
 //
 
-@preconcurrency import Combine
 import SwiftData
 import DependencyManagement
 import FitnessPersistence
 import Foundation
 
-enum FoodItemError: Error {
-    case fetchError
-}
-
 protocol FoodItemRepository {
     
-    func foodItems(for day: Date) async -> AnyPublisher<[FoodItem], FoodItemError>
+    func foodItems(for day: Date) async throws -> [FoodItemDTO]
 }
 
-struct LocalFoodItemRepository: FoodItemRepository {
+@ModelActor
+actor LocalFoodItemRepository: FoodItemRepository, Sendable {
     
-    @Inject var contextProvider: ContextProviding
+    @Inject var contextProviding: ContextProviding
     
-    @MainActor func foodItems(for day: Date) -> AnyPublisher<[FoodItem], FoodItemError> {
+    private var context: ModelContext { modelExecutor.modelContext }
+    
+    func foodItems(for day: Date) async throws -> [FoodItemDTO] {
         
-        do {
-            let descriptor = FetchDescriptor<FoodItem>(sortBy: [SortDescriptor(\.name)])
-            let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
-            return Just(entries).setFailureType(to: FoodItemError.self).eraseToAnyPublisher()
-        } catch {
-            print("Fetch failed")
-            return Fail(error: .fetchError).eraseToAnyPublisher()
-        }
+        let descriptor = FetchDescriptor<FoodItem>(sortBy: [SortDescriptor(\.name)])
+        let items = try context.fetch(descriptor)
+        let itemDtos = items.map { FoodItemDTO(foodItem: $0) }
+        
+        return itemDtos
     }
 }

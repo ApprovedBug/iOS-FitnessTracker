@@ -52,40 +52,40 @@ class SummaryViewModel {
     // MARK: - Private functions
 
     private func populateUI(entries: [DiaryEntry]) {
-        goalsRepository.goalsForUser(userId: "something")
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    print(error)
-                case .finished:
-                    print("Success")
-                }
-            } receiveValue: { [weak self] goals in
-                guard let self = self else { return }
-                
-                // Calculate consumed values based on entries
-                let (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed) = self.calculateConsumedValues(from: entries)
-                
-                // Create the view models
-                let carbsViewModel = self.createMacrosViewModel(consumed: carbsConsumed, target: goals.carbs, title: "Carbs")
-                let proteinsViewModel = self.createMacrosViewModel(consumed: proteinsConsumed, target: goals.protein, title: "Protein")
-                let fatsViewModel = self.createMacrosViewModel(consumed: fatsConsumed, target: goals.fats, title: "Fat")
-                
-                // Update the state
-                self.state = .ready(
-                    .init(
-                        kcalConsumed: String(kcalConsumed),
-                        kcalBurned: "0",
-                        kcalProgress: Double(kcalConsumed) / Double(goals.kcal),
-                        kcalRemaining: String(format: "%.0f", Double(goals.kcal) - Double(kcalConsumed)),
-                        carbsViewModel: carbsViewModel,
-                        proteinViewModel: proteinsViewModel,
-                        fatsViewModel: fatsViewModel
-                    )
-                )
-            }
-            .store(in: &cancellables)
+//        goalsRepository.goalsForUser(userId: "something")
+//            .receive(on: DispatchQueue.main)
+//            .sink { completion in
+//                switch completion {
+//                case .failure(let error):
+//                    print(error)
+//                case .finished:
+//                    print("Success")
+//                }
+//            } receiveValue: { [weak self] goals in
+//                guard let self = self else { return }
+//                
+//                // Calculate consumed values based on entries
+//                let (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed) = self.calculateConsumedValues(from: entries)
+//                
+//                // Create the view models
+//                let carbsViewModel = self.createMacrosViewModel(consumed: carbsConsumed, target: goals.carbs, title: "Carbs")
+//                let proteinsViewModel = self.createMacrosViewModel(consumed: proteinsConsumed, target: goals.protein, title: "Protein")
+//                let fatsViewModel = self.createMacrosViewModel(consumed: fatsConsumed, target: goals.fats, title: "Fat")
+//                
+//                // Update the state
+//                self.state = .ready(
+//                    .init(
+//                        kcalConsumed: String(kcalConsumed),
+//                        kcalBurned: "0",
+//                        kcalProgress: Double(kcalConsumed) / Double(goals.kcal),
+//                        kcalRemaining: String(format: "%.0f", Double(goals.kcal) - Double(kcalConsumed)),
+//                        carbsViewModel: carbsViewModel,
+//                        proteinViewModel: proteinsViewModel,
+//                        fatsViewModel: fatsViewModel
+//                    )
+//                )
+//            }
+//            .store(in: &cancellables)
     }
 
     // MARK: - Helper functions

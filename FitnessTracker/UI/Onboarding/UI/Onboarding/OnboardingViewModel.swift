@@ -83,8 +83,8 @@ class OnboardingViewModel {
     @Inject
     var appConfigurationManager: AppConfigurationManaging
     
-    func continueTapped() {
-        calculate()
+    func continueTapped() async {
+        await calculate()
     }
     
     func skipTapped() {
@@ -92,7 +92,7 @@ class OnboardingViewModel {
         appConfigurationManager.setValue(value: true, key: Keys.onboardingCompleted)
     }
     
-    func calculate() {
+    func calculate() async {
         guard let age = Double(age),
               let weight = Double(weight),
               let height = Double(height) else {
@@ -118,13 +118,13 @@ class OnboardingViewModel {
         Fat: \(macronutrients.fat) grams
         """
         
-        let goals = Goals(
+        let goals = GoalsDTO(
             kcal: caloricIntakeForWeightLoss,
             carbs: macronutrients.carbs,
             protein: macronutrients.protein,
             fats: macronutrients.fat
         )
-        goalsRepository.saveGoals(goals: goals, for: "something")
+        await goalsRepository.saveGoals(goalsDto: goals, for: "current")
         showDiaryView = true
         appConfigurationManager.setValue(value: true, key: Keys.onboardingCompleted)
     }

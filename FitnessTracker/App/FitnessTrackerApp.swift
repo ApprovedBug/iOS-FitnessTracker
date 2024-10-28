@@ -22,34 +22,26 @@ struct FitnessTrackerApp: App {
     }
     
     func registerDependencies() {
-        // Register your dependencies here
-        DependencyContainer.register(ContextProviding.self) {
-            PersistenceManager()
-        }
+        let persistenceManager = PersistenceManager()
         
-        DependencyContainer.register(UserDefaultsProtocol.self) {
-            UserDefaults.standard
-        }
+        // Register your dependencies here
+        DependencyContainer.register(ContextProviding.self) { persistenceManager }
+        DependencyContainer.register(UserDefaultsProtocol.self) { UserDefaults.standard }
         
         DependencyContainer.register(GoalsRepository.self) {
-            LocalGoalsRepository()
+            LocalGoalsRepository(modelContainer: persistenceManager.sharedModelContainer)
         }
-        
         DependencyContainer.register(DiaryRepository.self) {
-            LocalDiaryRepository()
+            LocalDiaryRepository(modelContainer: persistenceManager.sharedModelContainer)
         }
-        
         DependencyContainer.register(FoodItemRepository.self) {
-            LocalFoodItemRepository()
+            LocalFoodItemRepository(modelContainer: persistenceManager.sharedModelContainer)
         }
         
-        DependencyContainer.register(AppConfigurationManaging.self) {
-            AppConfigurationManager()
-        }
+        DependencyContainer.register(AppConfigurationManaging.self) { AppConfigurationManager() }
     }
     
     var body: some Scene {
-        
         WindowGroup {
             content
                 .attachDebugMenu(options: DebugMenuOptions.allCases)
