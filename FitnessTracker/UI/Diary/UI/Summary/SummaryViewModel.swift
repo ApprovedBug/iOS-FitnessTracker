@@ -59,7 +59,7 @@ class SummaryViewModel {
                 case .failure(let error):
                     print(error)
                 case .finished:
-                    print("Success")
+                    break
                 }
             } receiveValue: { [weak self] goals in
                 guard let self = self else { return }

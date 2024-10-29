@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 03/04/2024.
 //
 
+import DependencyManagement
 import Foundation
 import DebugTools
 import ConfigurationManagement
@@ -12,12 +13,15 @@ import ConfigurationManagement
 enum DebugCongigurationKeys: String, AppConfigurationKey {
     
     case alwaysShowOnboarding
+    case resetOnboardingStatus
     
     init(options: DebugMenuOptions) {
         
         switch options {
             case .alwaysShowOnboarding:
                 self = .alwaysShowOnboarding
+            case .resetOnboardingStatus:
+                self = .resetOnboardingStatus
         }
     }
     
@@ -28,7 +32,8 @@ enum DebugCongigurationKeys: String, AppConfigurationKey {
 
 enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
     
-    case alwaysShowOnboarding = "Always show onboarding"
+    case alwaysShowOnboarding = "Always Show Onboarding"
+    case resetOnboardingStatus = "Reset Onboarding Status"
     
     var appConfigurationKey: AppConfigurationKey {
         DebugCongigurationKeys(options: self)
@@ -36,6 +41,18 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
     
     var title: String {
         return rawValue
+    }
+    
+    var type: DebugTools.DebugMenuOptionType {
+        switch self {
+            case .alwaysShowOnboarding:
+                    .toggle
+            case .resetOnboardingStatus:
+                .button {
+                    let appConfigurationManager = DependencyContainer.resolve(AppConfigurationManaging.self)
+                    appConfigurationManager?.setValue(value: false, key: Keys.onboardingCompleted)
+                }
+        }
     }
 }
 

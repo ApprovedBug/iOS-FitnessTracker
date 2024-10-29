@@ -18,6 +18,10 @@ public class DependencyContainer {
         let key = String(describing: T.self)
         shared.registrations[key] = factory
     }
+    
+    public static func resolve<T>(_ type: T.Type) -> T? {
+        shared.resolve(T.self)
+    }
 
     func resolve<T>(_ type: T.Type) -> T? {
         let key = String(describing: T.self)

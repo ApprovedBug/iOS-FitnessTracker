@@ -26,7 +26,13 @@ public struct DebugMenuView: View {
                 .font(.largeTitle)
             
             ForEach(0..<viewModel.options.count, id: \.self) { index in
-                Toggle(viewModel.options[index].title, isOn: $viewModel.options[index].isOn)
+                
+                switch viewModel.options[index].type {
+                    case .toggle:
+                        Toggle(viewModel.options[index].title, isOn: $viewModel.options[index].isOn)
+                    case .button(let action):
+                        Button(viewModel.options[index].title) { action() }
+                }
             }
         }
         .listStyle(.plain)
@@ -44,6 +50,7 @@ public class DebugMenuOptionViewModel: Identifiable {
     private let option: DebugMenuOption
     
     var title: String
+    var type: DebugMenuOptionType
     var isOn: Bool = false {
         didSet {
             appConfigurationManager.setValue(value: isOn, key: option.appConfigurationKey)
@@ -53,14 +60,21 @@ public class DebugMenuOptionViewModel: Identifiable {
     init(option: DebugMenuOption) {
         self.option = option
         self.title = option.title
+        self.type = option.type
         self.isOn = appConfigurationManager.getValue(for: option.appConfigurationKey)
     }
+}
+
+public enum DebugMenuOptionType {
+    case toggle
+    case button(() -> ())
 }
 
 public protocol DebugMenuOption {
     
     var appConfigurationKey: AppConfigurationKey { get }
     var title: String { get }
+    var type: DebugMenuOptionType { get }
 }
 
 // The notification we'll send when a shake gesture happens.
