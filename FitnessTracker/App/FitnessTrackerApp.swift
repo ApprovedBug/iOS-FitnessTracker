@@ -53,24 +53,22 @@ struct FitnessTrackerApp: App {
     var body: some Scene {
         
         WindowGroup {
-            content
-                .onAppear(perform: {
-//                    viewModel.setInitialRoot()
-                })
+            content()
+                .animation(.default, value: viewModel.root)
                 .attachDebugMenu(options: DebugMenuOptions.allCases)
-                .environmentObject(viewModel)
         }
     }
     
-    private var content: some View {
+    @ViewBuilder
+    private func content() -> some View {
         
         switch viewModel.root {
             case .splash:
-                AnyView(Text("Loading..."))
+                SplashView()
             case .welcome:
-                AnyView(WelcomeView(viewModel: WelcomeViewModel()))
+                WelcomeView(viewModel: WelcomeViewModel(), appRootManaging: viewModel)
             case .dashboard:
-                AnyView(AppTabView())
+                AppTabView()
         }
     }
 }

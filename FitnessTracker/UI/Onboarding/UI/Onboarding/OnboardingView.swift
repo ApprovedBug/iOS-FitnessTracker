@@ -12,7 +12,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @Bindable var viewModel: OnboardingViewModel
-    @EnvironmentObject private var appRootManaging: AppViewModel
+    let appRootManaging: AppRootManaging
     
     var body: some View {
         NavigationStack {
@@ -76,5 +76,6 @@ struct OnboardingView: View {
 
 #Preview {
     let viewModel = OnboardingViewModel()
-    return OnboardingView(viewModel: viewModel)
+    let appViewModel = AppViewModel()
+    return OnboardingView(viewModel: viewModel, appRootManaging: appViewModel)
 }

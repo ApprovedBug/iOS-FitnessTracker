@@ -41,6 +41,7 @@ class AppViewModel: ObservableObject, AppRootManaging {
     }
     
     func switchRoot(to: AppRoot) {
+        
         self.root = to
     }
 }

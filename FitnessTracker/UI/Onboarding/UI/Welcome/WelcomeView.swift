@@ -13,6 +13,7 @@ struct WelcomeView: View {
     
     @State private var animationStarted = false
     @Bindable var viewModel: WelcomeViewModel
+    let appRootManaging: AppRootManaging
     
     var body: some View {
         NavigationStack {
@@ -36,7 +37,7 @@ struct WelcomeView: View {
                     viewModel.continueTapped()
                 }
                 .navigationDestination(isPresented: $viewModel.showOnboardingView) {
-                    OnboardingView(viewModel: OnboardingViewModel()).navigationBarBackButtonHidden(true)
+                    OnboardingView(viewModel: OnboardingViewModel(), appRootManaging: appRootManaging).navigationBarBackButtonHidden(true)
                 }
                 .buttonStyle(RoundedButtonStyle())
                 .opacity(animationStarted ? 1 : 0)
