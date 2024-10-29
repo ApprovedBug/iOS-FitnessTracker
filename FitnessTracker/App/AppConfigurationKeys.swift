@@ -10,10 +10,11 @@ import Foundation
 import DebugTools
 import ConfigurationManagement
 
-enum DebugCongigurationKeys: String, AppConfigurationKey {
+enum DebugConfigurationKeys: String, AppConfigurationKey {
     
     case alwaysShowOnboarding
     case resetOnboardingStatus
+    case resetGoals
     
     init(options: DebugMenuOptions) {
         
@@ -22,6 +23,8 @@ enum DebugCongigurationKeys: String, AppConfigurationKey {
                 self = .alwaysShowOnboarding
             case .resetOnboardingStatus:
                 self = .resetOnboardingStatus
+            case .resetGoals:
+                self = .resetGoals
         }
     }
     
@@ -34,9 +37,10 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
     
     case alwaysShowOnboarding = "Always Show Onboarding"
     case resetOnboardingStatus = "Reset Onboarding Status"
+    case resetGoals = "Reset Goals"
     
     var appConfigurationKey: AppConfigurationKey {
-        DebugCongigurationKeys(options: self)
+        DebugConfigurationKeys(options: self)
     }
     
     var title: String {
@@ -51,6 +55,11 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
                 .button {
                     let appConfigurationManager = DependencyContainer.resolve(AppConfigurationManaging.self)
                     appConfigurationManager?.setValue(value: false, key: Keys.onboardingCompleted)
+                }
+            case .resetGoals:
+                .button {
+                    let goalsRepository = DependencyContainer.resolve(GoalsRepository.self)
+                    goalsRepository?.deleteGoals(for: "current")
                 }
         }
     }

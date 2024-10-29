@@ -27,7 +27,7 @@ class AppViewModel: ObservableObject, AppRootManaging {
     
     func setInitialRoot() {
         
-        guard !appConfigurationManager.getValue(for: DebugCongigurationKeys.alwaysShowOnboarding) else {
+        guard !appConfigurationManager.getValue(for: DebugConfigurationKeys.alwaysShowOnboarding) else {
             self.root = .welcome
             return
         }
