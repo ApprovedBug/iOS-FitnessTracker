@@ -5,7 +5,7 @@
 //  Created by Jack Moseley on 12/09/2024.
 //
 
-@preconcurrency import Combine
+import Combine
 import SwiftData
 import DependencyManagement
 import FitnessPersistence
@@ -17,21 +17,20 @@ enum FoodItemError: Error {
 
 protocol FoodItemRepository {
     
-    func foodItems(for day: Date) async -> AnyPublisher<[FoodItem], FoodItemError>
+    func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError>
 }
 
-struct LocalFoodItemRepository: FoodItemRepository {
+struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
     
     @Inject var contextProvider: ContextProviding
     
-    @MainActor func foodItems(for day: Date) -> AnyPublisher<[FoodItem], FoodItemError> {
+    @MainActor func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError> {
         
         do {
             let descriptor = FetchDescriptor<FoodItem>(sortBy: [SortDescriptor(\.name)])
             let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
             return Just(entries).setFailureType(to: FoodItemError.self).eraseToAnyPublisher()
         } catch {
-            print("Fetch failed")
             return Fail(error: .fetchError).eraseToAnyPublisher()
         }
     }

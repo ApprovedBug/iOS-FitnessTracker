@@ -31,7 +31,8 @@ class DiaryViewModel {
     private(set) var state: State
     
     // MARK: Private properties
-    private var disposables = [AnyCancellable]()
+    @ObservationIgnored
+    private var cancellables = [AnyCancellable]()
     
     // MARK: Initializers
     init() {
@@ -55,7 +56,7 @@ class DiaryViewModel {
                 guard let self = self else { return }
                 self.processEntries(entries: entries)
             }
-            .store(in: &disposables)
+            .store(in: &cancellables)
     }
     
     // MARK: Private functions

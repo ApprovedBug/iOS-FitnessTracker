@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "%@kcal" : {
 
     },
@@ -26,9 +29,6 @@
 
     },
     "Continue" : {
-
-    },
-    "Create new food item" : {
 
     },
     "Date Picker View" : {
@@ -132,6 +132,9 @@
     "New Food Item" : {
 
     },
+    "No results found" : {
+
+    },
     "Nutritional Information" : {
 
     },
@@ -144,7 +147,13 @@
     "Save" : {
 
     },
+    "Search for your item" : {
+
+    },
     "Skip" : {
+
+    },
+    "Tap to add new food item" : {
 
     },
     "Tell us about yourself" : {
