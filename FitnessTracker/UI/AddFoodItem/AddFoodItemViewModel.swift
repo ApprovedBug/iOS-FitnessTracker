@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 02/08/2024.
 //
 
+import DependencyManagement
 import Foundation
 import FitnessPersistence
 
@@ -24,15 +25,19 @@ class AddFoodItemViewModel {
         Double(fat) != nil
     }
     
-    func createFoodItem() -> FoodItem? {
+    @ObservationIgnored
+    @Inject var foodItemRepository: FoodItemRepository
+    
+    func createFoodItem() {
         guard isValid,
               let kcal = Int(kcal),
               let carbs = Double(carbs),
               let protein = Double(protein),
               let fat = Double(fat) else {
-            return nil
+            return
         }
         
-        return FoodItem(name: name, kcal: kcal, carbs: carbs, protein: protein, fats: fat)
+        let foodItem = FoodItem(name: name, kcal: kcal, carbs: carbs, protein: protein, fats: fat)
+        foodItemRepository.saveFoodItem(foodItem)
     }
 }

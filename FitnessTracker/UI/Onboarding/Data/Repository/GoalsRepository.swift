@@ -40,11 +40,9 @@ struct LocalGoalsRepository: @preconcurrency GoalsRepository {
     
     @MainActor func saveGoals(goals: Goals, for user: String) {
         contextProvider.sharedModelContainer.mainContext.insert(goals)
-        try? contextProvider.sharedModelContainer.mainContext.save()
     }
     
     @MainActor func deleteGoals(for user: String) {
         try? contextProvider.sharedModelContainer.mainContext.delete(model: Goals.self)
-        try? contextProvider.sharedModelContainer.mainContext.save()
     }
 }

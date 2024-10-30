@@ -31,11 +31,8 @@ struct AddFoodItemView: View {
             }
             .navigationBarTitle("New Food Item", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
-                if let newFoodItem = viewModel.createFoodItem() {
-                    // Handle the new food item (e.g., add it to a list)
-                    print(newFoodItem)
-                    presentationMode.wrappedValue.dismiss()
-                }
+                viewModel.createFoodItem()
+                presentationMode.wrappedValue.dismiss()
             }.disabled(!viewModel.isValid))
         }
     }

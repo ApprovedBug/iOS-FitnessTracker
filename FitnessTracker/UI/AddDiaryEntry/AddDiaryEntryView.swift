@@ -43,12 +43,15 @@ struct AddDiaryEntryView: View {
     
     func emptyView() -> some View {
         
-        VStack {
+        VStack(spacing: 10) {
             Text("No results found")
             
             Button("Tap to add new food item") {
                 viewModel.createFoodItemTapped()
             }
+        }
+        .sheet(isPresented: $viewModel.isCreateFoodItemOpen) {
+            AddFoodItemView(viewModel: AddFoodItemViewModel())
         }
     }
 }

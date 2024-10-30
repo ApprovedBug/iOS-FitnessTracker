@@ -18,6 +18,7 @@ enum FoodItemError: Error {
 protocol FoodItemRepository {
     
     func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError>
+    func saveFoodItem(_ foodItem: FoodItem)
 }
 
 struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
@@ -33,5 +34,10 @@ struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
         } catch {
             return Fail(error: .fetchError).eraseToAnyPublisher()
         }
+    }
+    
+    @MainActor func saveFoodItem(_ foodItem: FoodItem) {
+        contextProvider.sharedModelContainer.mainContext.insert(foodItem)
+        try? contextProvider.sharedModelContainer.mainContext.save()
     }
 }
