@@ -13,13 +13,16 @@ let package = Package(
             targets: ["DebugTools"]),
     ],
     dependencies: [
-        .package(path: "../ConfigurationManagement")
+        .package(path: "../ConfigurationManagement"),
+        .package(path: "../DependencyMangagement")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "DebugTools"),
+            name: "DebugTools",
+            dependencies: ["ConfigurationManagement"]
+        ),
         .testTarget(
             name: "DebugToolsTests",
             dependencies: ["DebugTools"]),

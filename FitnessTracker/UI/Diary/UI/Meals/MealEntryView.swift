@@ -37,9 +37,11 @@ struct MealEntryView: View {
                             Text("Kcal")
                                 .font(.footnote)
                                 .padding([.trailing], 12)
+                                .padding([.bottom], 1)
                         }
                         
                         Image(systemName: viewModel.isExpanded ? "chevron.up" : "chevron.down")
+                            .padding([.bottom], 4)
                     }
                     if viewModel.isExpanded {
                         detailsView()
@@ -59,7 +61,7 @@ struct MealEntryView: View {
     func detailsView() -> some View {
         
         HStack {
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 Text("\(viewModel.kcal)")
                     .font(.body)
                 Text("Kcal")
@@ -67,7 +69,7 @@ struct MealEntryView: View {
             }
             .frame(maxWidth: .infinity)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 Text("\(viewModel.carbs)")
                     .font(.body)
                 Text("Carbs")
@@ -75,7 +77,7 @@ struct MealEntryView: View {
             }
             .frame(maxWidth: .infinity)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 Text("\(viewModel.protein)")
                     .font(.body)
                 Text("Protein")
@@ -83,7 +85,7 @@ struct MealEntryView: View {
             }
             .frame(maxWidth: .infinity)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 Text("\(viewModel.fat)")
                     .font(.body)
                 Text("Fats")

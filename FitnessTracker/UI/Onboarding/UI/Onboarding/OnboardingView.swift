@@ -31,7 +31,7 @@ struct OnboardingView: View {
                         TextField("Age", text: $viewModel.age)
                             .keyboardType(.numberPad)
                         TextField("Weight (kg)", text: $viewModel.weight)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                         TextField("Height (cm)", text: $viewModel.height)
                             .keyboardType(.numberPad)
                         

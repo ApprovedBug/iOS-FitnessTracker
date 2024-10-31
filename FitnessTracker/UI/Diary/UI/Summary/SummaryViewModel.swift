@@ -57,7 +57,7 @@ class SummaryViewModel {
             .sink { completion in
                 switch completion {
                 case .failure(let error):
-                    print(error)
+                    print("SummaryViewModel: \(error)")
                 case .finished:
                     break
                 }

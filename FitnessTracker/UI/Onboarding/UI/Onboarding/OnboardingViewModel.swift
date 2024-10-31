@@ -125,8 +125,8 @@ class OnboardingViewModel {
             fats: macronutrients.fat
         )
         goalsRepository.saveGoals(goals: goals, for: "something")
-        showDiaryView = true
         appConfigurationManager.setValue(value: true, key: Keys.onboardingCompleted)
+        showDiaryView = true
     }
     
     func calculateCaloricIntakeForWeightLoss(gender: Gender, age: Double, weight: Double, height: Double, activityLevel: Double) -> Int {
