@@ -16,6 +16,8 @@
 		040D88CF2CCD324700FDD4D6 /* DependencyManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88CE2CCD324700FDD4D6 /* DependencyManagement */; };
 		040D88D22CCD325200FDD4D6 /* FitnessPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88D12CCD325200FDD4D6 /* FitnessPersistence */; };
 		040D88D52CCD326000FDD4D6 /* FitnessUI in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88D42CCD326000FDD4D6 /* FitnessUI */; };
+		042152B12CD41A6C0089231D /* FoodItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042152B02CD41A6C0089231D /* FoodItemView.swift */; };
+		042152B32CD41A800089231D /* FoodItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042152B22CD41A800089231D /* FoodItemViewModel.swift */; };
 		0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECA2B22591D00B9B03B /* WelcomeView.swift */; };
 		0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */; };
 		045864112BC1A7220067B9B0 /* GoalsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864102BC1A7220067B9B0 /* GoalsRepository.swift */; };
@@ -97,6 +99,8 @@
 		0404E22F2AE59C250013CF1F /* FitnessTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitnessTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0404E2332AE59C250013CF1F /* FitnessTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITests.swift; sourceTree = "<group>"; };
 		0404E2352AE59C250013CF1F /* FitnessTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		042152B02CD41A6C0089231D /* FoodItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemView.swift; sourceTree = "<group>"; };
+		042152B22CD41A800089231D /* FoodItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemViewModel.swift; sourceTree = "<group>"; };
 		0424CECA2B22591D00B9B03B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		045864102BC1A7220067B9B0 /* GoalsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsRepository.swift; sourceTree = "<group>"; };
@@ -502,6 +506,8 @@
 				046691692C92ECA2006E3327 /* Data */,
 				04F0955E2C5D377900EA3D94 /* AddDiaryEntryView.swift */,
 				04F095602C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift */,
+				042152B02CD41A6C0089231D /* FoodItemView.swift */,
+				042152B22CD41A800089231D /* FoodItemViewModel.swift */,
 			);
 			path = AddDiaryEntry;
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 				049CD88C2AE5BBB700812BAE /* SummaryViewModel.swift in Sources */,
 				049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */,
 				0474A6752AE5B13D0036FC9E /* ExerciseView.swift in Sources */,
+				042152B32CD41A800089231D /* FoodItemViewModel.swift in Sources */,
 				04BCDFD52B0BE26800346AD6 /* OnboardingViewModel.swift in Sources */,
 				04BCDFCE2B08140F00346AD6 /* MealItemViewModel.swift in Sources */,
 				0474A66D2AE5B10A0036FC9E /* AccountView.swift in Sources */,
@@ -682,6 +689,7 @@
 				049CD88E2AE5BBEE00812BAE /* DatePickerView.swift in Sources */,
 				0474A6732AE5B1300036FC9E /* DiaryViewModel.swift in Sources */,
 				04BCDFD32B0BE25D00346AD6 /* OnboardingView.swift in Sources */,
+				042152B12CD41A6C0089231D /* FoodItemView.swift in Sources */,
 				04BCDFCC2B08140400346AD6 /* MealItemView.swift in Sources */,
 				0466916D2C92ECCB006E3327 /* FoodItemRepository.swift in Sources */,
 				045864112BC1A7220067B9B0 /* GoalsRepository.swift in Sources */,

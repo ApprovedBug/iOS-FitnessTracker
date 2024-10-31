@@ -15,7 +15,7 @@ public class DiaryEntry {
     public var foodItem: FoodItem
     public var meal: Meal
 
-    init(timestamp: Date, foodItem: FoodItem, meal: Meal) {
+    public init(timestamp: Date, foodItem: FoodItem, meal: Meal) {
         self.timestamp = timestamp
         self.foodItem = foodItem
         self.meal = meal

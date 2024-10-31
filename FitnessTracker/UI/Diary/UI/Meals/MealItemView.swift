@@ -73,7 +73,7 @@ private struct ContentView: View {
             }
         }
         .sheet(isPresented: $viewModel.isAddDiaryEntryOpen) {
-            AddDiaryEntryView(viewModel: AddDiaryEntryViewModel())
+            AddDiaryEntryView(viewModel: AddDiaryEntryViewModel(meal: viewModel.meal))
         }
     }
 }
@@ -92,4 +92,10 @@ private struct MealItemMacrosView: View {
                 .font(.footnote)
         }
     }
+}
+
+#Preview {
+    
+    let viewModel = MealItemViewModel(meal: .breakfast, entries: [])
+    MealItemView(viewModel: viewModel)
 }

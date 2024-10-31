@@ -18,6 +18,7 @@ enum DiaryError: Error {
 protocol DiaryRepository {
     
     func diaryEntries(for day: Date) -> AnyPublisher<[DiaryEntry], DiaryError>
+    func addDiaryEntry(foodItem: FoodItem, meal: Meal, day: Date)
 }
 
 struct LocalDiaryRepository: @preconcurrency DiaryRepository {
@@ -34,5 +35,11 @@ struct LocalDiaryRepository: @preconcurrency DiaryRepository {
             print("Fetch failed")
             return Fail(error: .fetchError).eraseToAnyPublisher()
         }
+    }
+    
+    @MainActor func addDiaryEntry(foodItem: FoodItem, meal: Meal, day: Date) {
+        let diaryEntry = DiaryEntry(timestamp: day, foodItem: foodItem, meal: meal)
+        contextProvider.sharedModelContainer.mainContext.insert(diaryEntry)
+        try? contextProvider.sharedModelContainer.mainContext.save()
     }
 }

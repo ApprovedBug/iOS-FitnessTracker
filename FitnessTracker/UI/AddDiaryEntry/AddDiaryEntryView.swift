@@ -12,6 +12,7 @@ import SwiftUI
 struct AddDiaryEntryView: View {
     
     @Bindable var viewModel: AddDiaryEntryViewModel
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         
@@ -34,10 +35,18 @@ struct AddDiaryEntryView: View {
         }
     }
     
-    func contentView(items: [FoodItem]) -> some View {
+    func contentView(items: [FoodItemViewModel]) -> some View {
         
-        ForEach(items) { item in
-            Text("\(item.name)")
+        ScrollView {
+            LazyVStack {
+                ForEach(items) { item in
+                    FoodItemView(viewModel: item)
+                        .onTapGesture {
+                            viewModel.addFoodItem(item.foodItem)
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                }
+            }
         }
     }
     

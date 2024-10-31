@@ -16,7 +16,7 @@ class AddDiaryEntryViewModel {
     enum State {
         case idle
         case loading
-        case success(items: [FoodItem])
+        case success(items: [FoodItemViewModel])
         case empty
     }
     
@@ -24,11 +24,20 @@ class AddDiaryEntryViewModel {
     var searchText: String = ""
     var state: State = .idle
     
+    let meal: Meal
+    
     @ObservationIgnored
-    @Inject var foodItemRepository: FoodItemRepository
+    @Inject private var foodItemRepository: FoodItemRepository
+    
+    @ObservationIgnored
+    @Inject private var diaryRepository: DiaryRepository
     
     @ObservationIgnored
     private var cancellables = [AnyCancellable]()
+    
+    init(meal: Meal) {
+        self.meal = meal
+    }
     
     func createFoodItemTapped() {
         isCreateFoodItemOpen = true
@@ -50,9 +59,14 @@ class AddDiaryEntryViewModel {
                 if items.isEmpty {
                     self?.state = .empty
                 } else {
-                    self?.state = .success(items: items)
+                    let viewModels = items.map { FoodItemViewModel(foodItem: $0) }
+                    self?.state = .success(items: viewModels)
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func addFoodItem(_ foodItem: FoodItem) {
+        diaryRepository.addDiaryEntry(foodItem: foodItem, meal: meal, day: Date.now)
     }
 }
