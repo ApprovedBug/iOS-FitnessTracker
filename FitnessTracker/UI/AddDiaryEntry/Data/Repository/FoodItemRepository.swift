@@ -28,7 +28,10 @@ struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
     @MainActor func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError> {
         
         do {
-            let descriptor = FetchDescriptor<FoodItem>(sortBy: [SortDescriptor(\.name)])
+            let namePredicate = #Predicate<FoodItem> { item in
+                item.name.localizedStandardContains(name)
+            }
+            let descriptor = FetchDescriptor<FoodItem>(predicate: namePredicate, sortBy: [SortDescriptor(\.name)])
             let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
             return Just(entries).setFailureType(to: FoodItemError.self).eraseToAnyPublisher()
         } catch {
