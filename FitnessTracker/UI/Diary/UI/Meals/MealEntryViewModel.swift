@@ -13,6 +13,8 @@ class MealEntryViewModel {
     
     private let diaryEntry: DiaryEntry
     
+    var isExpanded: Bool = false
+    
     var name: String {
         diaryEntry.foodItem.name
     }
@@ -35,5 +37,9 @@ class MealEntryViewModel {
     
     init(diaryEntry: DiaryEntry) {
         self.diaryEntry = diaryEntry
+    }
+    
+    func toggleExpanded() {
+        isExpanded.toggle()
     }
 }

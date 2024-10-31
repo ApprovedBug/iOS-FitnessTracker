@@ -33,11 +33,9 @@ private struct ContentView: View {
     
     var body: some View {
         
-        VStack(alignment: .center, spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             
             HStack {
-                Spacer()
-                
                 Text(data.mealTitle)
                 
                 Spacer()
