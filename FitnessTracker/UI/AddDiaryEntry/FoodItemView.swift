@@ -23,28 +23,28 @@ struct FoodItemView: View {
                 
                 HStack(alignment: .top) {
                     VStack(alignment: .leading) {
-                        Text("Kcal")
-                            .font(.footnote)
                         Text("\(viewModel.kcal)")
                             .font(.body)
+                        Text("Kcal")
+                            .font(.footnote)
                     }
                     VStack(alignment: .leading) {
-                        Text("Carbs")
-                            .font(.footnote)
                         Text("\(viewModel.carbs)")
                             .font(.body)
+                        Text("Carbs")
+                            .font(.footnote)
                     }
                     VStack(alignment: .leading) {
-                        Text("Protein")
-                            .font(.footnote)
                         Text("\(viewModel.protein)")
                             .font(.body)
+                        Text("Protein")
+                            .font(.footnote)
                     }
                     VStack(alignment: .leading) {
-                        Text("Fats")
-                            .font(.footnote)
                         Text("\(viewModel.fat)")
                             .font(.body)
+                        Text("Fats")
+                            .font(.footnote)
                     }
                 }
             }
