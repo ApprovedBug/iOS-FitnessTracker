@@ -41,7 +41,7 @@ private struct ContentView: View {
                 
 //                DatePickerView()
 //                
-                MealsView(viewModel: MealsViewModel(entries: entries))
+                MealListView(viewModel: MealListViewModel(entries: entries))
 //
 //                WaterView()
             }

@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct MealsView: View {
+struct MealListView: View {
     
-    var viewModel: MealsViewModel
+    var viewModel: MealListViewModel
     
     var body: some View {
         
@@ -25,13 +25,13 @@ struct MealsView: View {
 
 private struct ContentView: View {
     
-    let items: [MealItemViewModel]
+    let items: [MealListItemViewModel]
     
     var body: some View {
      
         ForEach(items) { item in
             
-            MealItemView(viewModel: item)
+            MealListItemView(viewModel: item)
         }
     }
 }

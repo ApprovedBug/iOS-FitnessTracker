@@ -9,7 +9,7 @@ import FitnessPersistence
 import Foundation
 
 @Observable
-class MealItemViewModel: Identifiable {
+class MealListItemViewModel: Identifiable {
     
     enum State {
         case idle
@@ -18,6 +18,7 @@ class MealItemViewModel: Identifiable {
     
     struct Data {
         let mealTitle: String
+        let entries: [DiaryEntry]
         let kcalConsumed: String
         let proteinsConsumed: String
         let fatsConsumed: String
@@ -73,6 +74,7 @@ class MealItemViewModel: Identifiable {
         state = .ready(
             .init(
                 mealTitle: NSLocalizedString("meal_\(meal)", comment: "Meal title"),
+                entries: entries,
                 kcalConsumed: String(Int(kcalConsumed)),
                 proteinsConsumed: String(Int(proteinsConsumed)),
                 fatsConsumed: String(Int(fatsConsumed)),

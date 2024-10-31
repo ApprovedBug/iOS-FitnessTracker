@@ -9,9 +9,9 @@ import FitnessUI
 import Foundation
 import SwiftUI
 
-struct MealItemView: View {
+struct MealListItemView: View {
     
-    var viewModel: MealItemViewModel
+    var viewModel: MealListItemViewModel
     
     var body: some View {
         
@@ -28,8 +28,8 @@ struct MealItemView: View {
 
 private struct ContentView: View {
     
-    @Bindable var viewModel: MealItemViewModel
-    let data: MealItemViewModel.Data
+    @Bindable var viewModel: MealListItemViewModel
+    let data: MealListItemViewModel.Data
     
     var body: some View {
         
@@ -71,6 +71,10 @@ private struct ContentView: View {
                 MealItemMacrosView(amount: data.fatsConsumed, macro: "Fats")
                     .frame(maxWidth: .infinity)
             }
+            
+            ForEach(data.entries) { entry in
+                MealEntryView(viewModel: MealEntryViewModel(diaryEntry: entry))
+            }
         }
         .sheet(isPresented: $viewModel.isAddDiaryEntryOpen) {
             AddDiaryEntryView(viewModel: AddDiaryEntryViewModel(meal: viewModel.meal))
@@ -96,6 +100,6 @@ private struct MealItemMacrosView: View {
 
 #Preview {
     
-    let viewModel = MealItemViewModel(meal: .breakfast, entries: [])
-    MealItemView(viewModel: viewModel)
+    let viewModel = MealListItemViewModel(meal: .breakfast, entries: [])
+    MealListItemView(viewModel: viewModel)
 }

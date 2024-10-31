@@ -9,11 +9,11 @@ import FitnessPersistence
 import Foundation
 
 @Observable
-class MealsViewModel {
+class MealListViewModel {
 
     enum State {
         case idle
-        case ready(items: [MealItemViewModel])
+        case ready(items: [MealListItemViewModel])
     }
     
     // MARK: Published properties
@@ -31,7 +31,7 @@ class MealsViewModel {
     
     private func populateUI(entries: [DiaryEntry]) {
         
-        let meals: [MealItemViewModel] = Meal.allCases.map { MealItemViewModel(meal: $0, entries: [] )}
+        let meals: [MealListItemViewModel] = Meal.allCases.map { MealListItemViewModel(meal: $0, entries: [] )}
         
         for entry in entries {
             
