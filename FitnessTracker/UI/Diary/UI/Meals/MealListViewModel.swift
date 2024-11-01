@@ -22,14 +22,11 @@ class MealListViewModel {
     
     // MARK: Initialisers
     
-    init(entries: [DiaryEntry]) {
-        
-        populateUI(entries: entries)
-    }
+    init() {}
     
-    // MARK: Private functions
+    // MARK: Public functions
     
-    private func populateUI(entries: [DiaryEntry]) {
+    func updateEntries(entries: [DiaryEntry]) {
         
         let meals: [MealListItemViewModel] = Meal.allCases.map { MealListItemViewModel(meal: $0, entries: [] )}
         

@@ -32,7 +32,7 @@ class SummaryViewModel {
     
     @ObservationIgnored
     @Inject
-    var goalsRepository: GoalsRepository
+    private var goalsRepository: GoalsRepository
     
     // MARK: Published properties
     
@@ -41,17 +41,20 @@ class SummaryViewModel {
     // MARK: Private properties
     
     @ObservationIgnored
-    var cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
+    
+    @ObservationIgnored
+    private var goals: Goals?
     
     // MARK: Initialisers
     
-    init(entries: [DiaryEntry]) {
-        populateUI(entries: entries)
+    init() {
+        loadGoals()
     }
 
     // MARK: - Private functions
 
-    private func populateUI(entries: [DiaryEntry]) {
+    private func loadGoals() {
         goalsRepository.goalsForUser(userId: "something")
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -62,33 +65,44 @@ class SummaryViewModel {
                     break
                 }
             } receiveValue: { [weak self] goals in
-                guard let self = self else { return }
-                
-                // Calculate consumed values based on entries
-                let (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed) = self.calculateConsumedValues(from: entries)
-                
-                // Create the view models
-                let carbsViewModel = self.createMacrosViewModel(consumed: carbsConsumed, target: goals.carbs, title: "Carbs")
-                let proteinsViewModel = self.createMacrosViewModel(consumed: proteinsConsumed, target: goals.protein, title: "Protein")
-                let fatsViewModel = self.createMacrosViewModel(consumed: fatsConsumed, target: goals.fats, title: "Fat")
-                
-                // Update the state
-                self.state = .ready(
-                    .init(
-                        kcalConsumed: String(kcalConsumed),
-                        kcalBurned: "0",
-                        kcalProgress: Double(kcalConsumed) / Double(goals.kcal),
-                        kcalRemaining: String(format: "%.0f", Double(goals.kcal) - Double(kcalConsumed)),
-                        carbsViewModel: carbsViewModel,
-                        proteinViewModel: proteinsViewModel,
-                        fatsViewModel: fatsViewModel
-                    )
-                )
+                guard let self else { return }
+                self.goals = goals
             }
             .store(in: &cancellables)
     }
+    
+    // MARK: - Public functions
+    
+    func updateEntries(with entries: [DiaryEntry]) {
+        guard let goals else { return }
+        process(goals: goals, entries: entries)
+    }
 
     // MARK: - Helper functions
+    
+    private func process(goals: Goals, entries: [DiaryEntry]) {
+        
+        // Calculate consumed values based on entries
+        let (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed) = self.calculateConsumedValues(from: entries)
+        
+        // Create the view models
+        let carbsViewModel = self.createMacrosViewModel(consumed: carbsConsumed, target: goals.carbs, title: "Carbs")
+        let proteinsViewModel = self.createMacrosViewModel(consumed: proteinsConsumed, target: goals.protein, title: "Protein")
+        let fatsViewModel = self.createMacrosViewModel(consumed: fatsConsumed, target: goals.fats, title: "Fat")
+        
+        // Update the state
+        self.state = .ready(
+            .init(
+                kcalConsumed: String(kcalConsumed),
+                kcalBurned: "0",
+                kcalProgress: Double(kcalConsumed) / Double(goals.kcal),
+                kcalRemaining: String(format: "%.0f", Double(goals.kcal) - Double(kcalConsumed)),
+                carbsViewModel: carbsViewModel,
+                proteinViewModel: proteinsViewModel,
+                fatsViewModel: fatsViewModel
+            )
+        )
+    }
 
     private func calculateConsumedValues(from entries: [DiaryEntry]) -> (Int, Double, Double, Double) {
         var kcalConsumed = 0

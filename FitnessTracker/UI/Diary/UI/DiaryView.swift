@@ -11,7 +11,7 @@ import SwiftUI
 
 struct DiaryView: View {
     
-    var viewModel: DiaryViewModel
+    @Bindable var viewModel: DiaryViewModel
     
     var body: some View {
             
@@ -22,28 +22,22 @@ struct DiaryView: View {
             })
         case .error:
             Text("There was an error loading your diary")
-        case .ready(let entries):
-            ContentView(entries: entries)
+        case .ready:
+            contentView()
         }
     }
-}
-
-private struct ContentView: View {
     
-    let entries: [DiaryEntry]
-    
-    var body: some View {
+    private func contentView() -> some View {
+        
         ScrollView {
-            
             VStack {
+                SummaryView(viewModel: viewModel.summaryViewModel)
                 
-                SummaryView(viewModel: SummaryViewModel(entries: entries))
+                DatePickerView(viewModel: viewModel.dateViewModel)
+
+                MealListView(viewModel: viewModel.mealListViewModel)
                 
-//                DatePickerView()
-//                
-                MealListView(viewModel: MealListViewModel(entries: entries))
-//
-//                WaterView()
+    //                WaterView()
             }
         }
     }

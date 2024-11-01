@@ -17,7 +17,7 @@ enum DiaryError: Error {
 
 protocol DiaryRepository {
     
-    func diaryEntries(for day: Date) -> AnyPublisher<[DiaryEntry], DiaryError>
+    func diaryEntries() -> AnyPublisher<[DiaryEntry], DiaryError>
     func addDiaryEntry(foodItem: FoodItem, meal: Meal, day: Date)
 }
 
@@ -25,7 +25,7 @@ struct LocalDiaryRepository: @preconcurrency DiaryRepository {
     
     @Inject var contextProvider: ContextProviding
     
-    @MainActor func diaryEntries(for day: Date) -> AnyPublisher<[DiaryEntry], DiaryError> {
+    @MainActor func diaryEntries() -> AnyPublisher<[DiaryEntry], DiaryError> {
         
         do {
             let descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp)])
