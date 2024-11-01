@@ -630,10 +630,10 @@
 			mainGroup = 0404E2092AE59C240013CF1F;
 			packageReferences = (
 				040D88CA2CCD323700FDD4D6 /* XCLocalSwiftPackageReference "DebugTools" */,
-				040D88CD2CCD324700FDD4D6 /* XCLocalSwiftPackageReference "DependencyManagement" */,
 				040D88D02CCD325200FDD4D6 /* XCLocalSwiftPackageReference "FitnessPersistence" */,
 				040D88D32CCD326000FDD4D6 /* XCLocalSwiftPackageReference "FitnessUI" */,
 				049577AC2CCD3532001C0CEC /* XCLocalSwiftPackageReference "ConfigurationManagement" */,
+				0412A1352CD56B05002F27C1 /* XCLocalSwiftPackageReference "DependencyManagement" */,
 			);
 			productRefGroup = 0404E2132AE59C240013CF1F /* Products */;
 			projectDirPath = "";
@@ -1090,10 +1090,6 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = DebugTools;
 		};
-		040D88CD2CCD324700FDD4D6 /* XCLocalSwiftPackageReference "DependencyManagement" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = DependencyManagement;
-		};
 		040D88D02CCD325200FDD4D6 /* XCLocalSwiftPackageReference "FitnessPersistence" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = FitnessPersistence;
@@ -1101,6 +1097,10 @@
 		040D88D32CCD326000FDD4D6 /* XCLocalSwiftPackageReference "FitnessUI" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = FitnessUI;
+		};
+		0412A1352CD56B05002F27C1 /* XCLocalSwiftPackageReference "DependencyManagement" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = DependencyManagement;
 		};
 		049577AC2CCD3532001C0CEC /* XCLocalSwiftPackageReference "ConfigurationManagement" */ = {
 			isa = XCLocalSwiftPackageReference;
