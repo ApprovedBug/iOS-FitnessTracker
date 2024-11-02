@@ -57,6 +57,10 @@ class MealEntryViewModel {
         isExpanded.toggle()
     }
     
+    func editDiaryEntryTapped() {
+        // TODO: Implement editing entries
+    }
+    
     func removeDiaryEntryTapped() {
         eventHandler.removeEntryTapped(diaryEntry)
     }

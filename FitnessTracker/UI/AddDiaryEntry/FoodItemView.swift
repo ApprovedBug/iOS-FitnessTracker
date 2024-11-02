@@ -16,54 +16,65 @@ struct FoodItemView: View {
     var body: some View {
         
         CardView {
-            VStack(alignment: .leading) {
+            VStack(alignment: .center, spacing: 16) {
                 Text(viewModel.name)
                     .font(.headline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 
                 HStack(alignment: .top) {
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .center) {
                         Text("\(viewModel.kcal)")
                             .font(.body)
                         Text("Kcal")
                             .font(.footnote)
                     }
-                    VStack(alignment: .leading) {
+                    .frame(maxWidth: .infinity)
+                    VStack(alignment: .center) {
                         Text("\(viewModel.carbs)")
                             .font(.body)
                         Text("Carbs")
                             .font(.footnote)
                     }
-                    VStack(alignment: .leading) {
+                    .frame(maxWidth: .infinity)
+                    VStack(alignment: .center) {
                         Text("\(viewModel.protein)")
                             .font(.body)
                         Text("Protein")
                             .font(.footnote)
                     }
-                    VStack(alignment: .leading) {
+                    .frame(maxWidth: .infinity)
+                    VStack(alignment: .center) {
                         Text("\(viewModel.fat)")
                             .font(.body)
                         Text("Fats")
                             .font(.footnote)
                     }
+                    .frame(maxWidth: .infinity)
+                    VStack(alignment: .center) {
+                        Text("\(viewModel.fat)")
+                            .font(.body)
+                        Text("Fats")
+                            .font(.footnote)
+                    }
+                    .frame(maxWidth: .infinity)
                 }
             }
-            .frame(maxWidth: .infinity)
         }
     }
 }
 
 #Preview {
     let foodItem = FoodItem(
-        name: "Cheese",
-        kcal: 100,
-        carbs: 10,
-        protein: 10,
-        fats: 20,
+        name: "Frozen Raspberries",
+        kcal: 8,
+        carbs: 1.1,
+        protein: 0,
+        fats: 0.1,
         measurementUnit: .grams,
-        quantity: 40
+        quantity: 25
     )
     let viewModel = FoodItemViewModel(foodItem: foodItem)
     
-    FoodItemView(viewModel: viewModel)
+    ScrollView {
+        FoodItemView(viewModel: viewModel)
+    }
 }

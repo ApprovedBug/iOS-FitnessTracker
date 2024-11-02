@@ -47,8 +47,10 @@ struct MealEntryView: View {
                         detailsView()
                             .padding([.top], 12)
                         
+                        Divider()
+                    
                         actionsView()
-                            .padding([.top], 12)
+                            .padding([.top], 4)
                     }
                 }
                 .padding([.top, .bottom], 12)
@@ -67,10 +69,12 @@ struct MealEntryView: View {
             VStack(alignment: .center) {
                 Text(viewModel.quantity)
                     .font(.body)
-                Text(viewModel.measurement.localizedCapitalized)
+                Text(viewModel.measurement)
                     .font(.footnote)
             }
             .frame(maxWidth: .infinity)
+            
+            Divider()
             
             VStack(alignment: .center) {
                 Text(viewModel.kcal)
@@ -80,6 +84,8 @@ struct MealEntryView: View {
             }
             .frame(maxWidth: .infinity)
             
+            Divider()
+            
             VStack(alignment: .center) {
                 Text(viewModel.carbs)
                     .font(.body)
@@ -88,13 +94,17 @@ struct MealEntryView: View {
             }
             .frame(maxWidth: .infinity)
             
+            Divider()
+            
             VStack(alignment: .center) {
                 Text(viewModel.protein)
                     .font(.body)
-                Text("Protein")
+                Text("Proteins")
                     .font(.footnote)
             }
             .frame(maxWidth: .infinity)
+            
+            Divider()
             
             VStack(alignment: .center) {
                 Text(viewModel.fat)
@@ -109,20 +119,52 @@ struct MealEntryView: View {
     func actionsView() -> some View {
         HStack {
             Spacer()
+            
+            Button(action: { viewModel.editDiaryEntryTapped() }) {
+                Image(systemName: "pencil")
+                    .tint(.blue)
+            }
+            
+            Spacer()
+            
+            Divider()
+            
+            Spacer()
+            
             Button(action: { viewModel.removeDiaryEntryTapped() }) {
                 Image(systemName: "trash")
                     .tint(.red)
             }
+            
+            Spacer()
         }
     }
 }
 
 #Preview {
-    let foodItem = FoodItem(name: "Apple", kcal: 100, carbs: 20, protein: 10, fats: 5, measurementUnit: .item, quantity: 1)
-    let diaryEntry = DiaryEntry(timestamp: .now, foodItem: foodItem, meal: .breakfast)
+    let foodItem = FoodItem(
+        name: "Fat Free Greek Yoghurt",
+        kcal: 66,
+        carbs: 6,
+        protein: 9.8,
+        fats: 0.3,
+        measurementUnit: .grams,
+        quantity: 100
+    )
+    
+    let diaryEntry = DiaryEntry(
+        timestamp: .now,
+        foodItem: foodItem,
+        meal: .breakfast
+    )
+    
     let viewModel = MealEntryViewModel(
         diaryEntry: diaryEntry,
         eventHandler: MealEntryViewModel.EventHandler(removeEntryTapped: { _ in })
     )
-    MealEntryView(viewModel: viewModel)
+    
+    ScrollView {
+        MealEntryView(viewModel: viewModel)
+            .padding()
+    }
 }

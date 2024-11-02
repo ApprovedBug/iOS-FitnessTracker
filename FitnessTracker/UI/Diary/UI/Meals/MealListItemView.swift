@@ -33,10 +33,13 @@ private struct ContentView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .center, spacing: 16) {
             
             HStack {
+                Spacer()
+                
                 Text(data.mealTitle)
+                    .padding([.leading], 20)
                 
                 Spacer()
                 
@@ -51,7 +54,7 @@ private struct ContentView: View {
             
             HStack {
                 
-                MealItemMacrosView(amount: data.kcalConsumed, macro: "kcal")
+                MealItemMacrosView(amount: data.kcalConsumed, macro: "Kcal")
                     .frame(maxWidth: .infinity)
                 
                 Divider()
@@ -100,5 +103,7 @@ private struct MealItemMacrosView: View {
 #Preview {
     
     let viewModel = MealListItemViewModel(meal: .breakfast, entries: [])
-    MealListItemView(viewModel: viewModel)
+    ScrollView {
+        MealListItemView(viewModel: viewModel)
+    }
 }

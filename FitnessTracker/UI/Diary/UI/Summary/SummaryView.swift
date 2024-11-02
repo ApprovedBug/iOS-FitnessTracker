@@ -78,7 +78,7 @@ private struct KcalSummaryItemView: View {
             HStack {
                 icon
                 
-                Text("\(value)kcal")
+                Text("\(value)Kcal")
             }
         }
     }

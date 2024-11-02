@@ -8,7 +8,7 @@
 import Foundation
 
 public enum MeasurementUnit: String, Codable, CaseIterable {
-    case millilitres
-    case grams
+    case millilitres = "ml"
+    case grams = "g"
     case item
 }
