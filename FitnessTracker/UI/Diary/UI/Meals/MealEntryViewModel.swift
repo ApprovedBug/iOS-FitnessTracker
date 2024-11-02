@@ -19,6 +19,14 @@ class MealEntryViewModel {
         diaryEntry.foodItem.name
     }
     
+    var quantity: String {
+        String(diaryEntry.foodItem.quantity)
+    }
+    
+    var measurement: String {
+        diaryEntry.foodItem.measurementUnit.rawValue
+    }
+    
     var kcal: String {
         String(diaryEntry.foodItem.kcal)
     }

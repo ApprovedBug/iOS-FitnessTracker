@@ -62,7 +62,15 @@ struct MealEntryView: View {
         
         HStack {
             VStack(alignment: .center) {
-                Text("\(viewModel.kcal)")
+                Text(viewModel.quantity)
+                    .font(.body)
+                Text(viewModel.measurement.localizedCapitalized)
+                    .font(.footnote)
+            }
+            .frame(maxWidth: .infinity)
+            
+            VStack(alignment: .center) {
+                Text(viewModel.kcal)
                     .font(.body)
                 Text("Kcal")
                     .font(.footnote)
@@ -70,7 +78,7 @@ struct MealEntryView: View {
             .frame(maxWidth: .infinity)
             
             VStack(alignment: .center) {
-                Text("\(viewModel.carbs)")
+                Text(viewModel.carbs)
                     .font(.body)
                 Text("Carbs")
                     .font(.footnote)
@@ -78,7 +86,7 @@ struct MealEntryView: View {
             .frame(maxWidth: .infinity)
             
             VStack(alignment: .center) {
-                Text("\(viewModel.protein)")
+                Text(viewModel.protein)
                     .font(.body)
                 Text("Protein")
                     .font(.footnote)
@@ -86,7 +94,7 @@ struct MealEntryView: View {
             .frame(maxWidth: .infinity)
             
             VStack(alignment: .center) {
-                Text("\(viewModel.fat)")
+                Text(viewModel.fat)
                     .font(.body)
                 Text("Fats")
                     .font(.footnote)
