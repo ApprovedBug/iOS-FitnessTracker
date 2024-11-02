@@ -11,6 +11,11 @@ import FitnessPersistence
 
 @Observable
 class AddFoodItemViewModel {
+    
+    struct EventHandler {
+        var didCreateFoodItem: (FoodItem) -> Void
+    }
+    
     var selectedUnit: MeasurementUnit = .grams
     var quantity: String = ""
     var name: String = ""
@@ -30,6 +35,13 @@ class AddFoodItemViewModel {
     
     @ObservationIgnored
     @Inject var foodItemRepository: FoodItemRepository
+    
+    @ObservationIgnored
+    var eventHandler: EventHandler
+    
+    init(eventHandler: EventHandler) {
+        self.eventHandler = eventHandler
+    }
     
     func createFoodItem() {
         guard isValid,
@@ -51,5 +63,6 @@ class AddFoodItemViewModel {
             quantity: quantity
         )
         foodItemRepository.saveFoodItem(foodItem)
+        eventHandler.didCreateFoodItem(foodItem)
     }
 }

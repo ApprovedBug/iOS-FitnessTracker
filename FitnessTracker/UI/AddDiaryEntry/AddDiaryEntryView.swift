@@ -44,7 +44,13 @@ struct AddDiaryEntryView: View {
             viewModel.search()
         }
         .sheet(isPresented: $viewModel.isCreateFoodItemOpen) {
-            AddFoodItemView(viewModel: AddFoodItemViewModel())
+            AddFoodItemView(
+                viewModel: AddFoodItemViewModel(
+                    eventHandler: AddFoodItemViewModel.EventHandler(
+                        didCreateFoodItem: { item in
+                            viewModel.addFoodItem(item)
+                            presentationMode.wrappedValue.dismiss()
+            })))
         }
     }
     
