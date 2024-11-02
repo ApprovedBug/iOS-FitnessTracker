@@ -20,37 +20,22 @@ struct AddDiaryEntryView: View {
         NavigationStack {
             
             VStack {
-                Button("Add new food item") {
-                    viewModel.createFoodItemTapped()
-                }
-                .padding()
-                .buttonStyle(RoundedButtonStyle())
+                
+                headerView()
                 
                 switch viewModel.state {
                     case .idle:
                         EmptyView()
                     case .recentItems(let items):
-                        VStack(alignment: .leading) {
-                            Text("Recent Items")
-                                .padding([.leading, .trailing, .bottom])
-                                .font(.title)
-                            
-                            foodItemList(items: items)
-                        }
+                        foodItemList(title: "Recent items", items: items)
                     case .noRecentItems:
-                        Text("Your recent items will appear here.")
+                        emptyRecentItemsView()
                     case .loading:
                         ProgressView()
                     case .success(let items):
-                        VStack(alignment: .leading) {
-                            Text("Results")
-                                .padding([.leading, .trailing, .bottom])
-                                .font(.title)
-                            
-                            foodItemList(items: items)
-                        }
+                        foodItemList(title: "Results", items: items)
                     case .empty:
-                        emptyView()
+                        emptyResultsView()
                 }
             }
         }
@@ -63,22 +48,47 @@ struct AddDiaryEntryView: View {
         }
     }
     
-    func foodItemList(items: [FoodItemViewModel]) -> some View {
+    func headerView() -> some View {
+        Button("Add new food item") {
+            viewModel.createFoodItemTapped()
+        }
+        .padding()
+        .buttonStyle(RoundedButtonStyle())
+    }
+    
+    func foodItemList(title: String, items: [FoodItemViewModel]) -> some View {
         
-        ScrollView {
-            LazyVStack {
-                ForEach(items) { item in
-                    FoodItemView(viewModel: item)
-                        .onTapGesture {
-                            viewModel.addFoodItem(item.foodItem)
-                            presentationMode.wrappedValue.dismiss()
-                        }
+        VStack(alignment: .leading) {
+            Text(title)
+                .padding([.leading, .trailing, .bottom])
+                .font(.title)
+            
+            ScrollView {
+                LazyVStack {
+                    ForEach(items) { item in
+                        FoodItemView(viewModel: item)
+                            .onTapGesture {
+                                viewModel.addFoodItem(item.foodItem)
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                    }
                 }
             }
         }
     }
     
-    func emptyView() -> some View {
+    func emptyRecentItemsView() -> some View {
+        
+        VStack(alignment: .center, spacing: 10) {
+            Spacer()
+            
+            Text("Your recent items will appear here.")
+            
+            Spacer()
+        }
+    }
+    
+    func emptyResultsView() -> some View {
         
         VStack(alignment: .center, spacing: 10) {
             Spacer()
