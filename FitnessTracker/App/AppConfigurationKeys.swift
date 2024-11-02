@@ -14,18 +14,14 @@ import Foundation
 enum DebugConfigurationKeys: String, AppConfigurationKey {
     
     case alwaysShowOnboarding
-    case resetOnboardingStatus
-    case resetGoals
     
-    init(options: DebugMenuOptions) {
+    init?(options: DebugMenuOptions) {
         
         switch options {
             case .alwaysShowOnboarding:
                 self = .alwaysShowOnboarding
-            case .resetOnboardingStatus:
-                self = .resetOnboardingStatus
-            case .resetGoals:
-                self = .resetGoals
+            default:
+                return nil
         }
     }
     
@@ -39,8 +35,9 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
     case alwaysShowOnboarding = "Always Show Onboarding"
     case resetOnboardingStatus = "Reset Onboarding Status"
     case resetGoals = "Reset Goals"
+    case purgeAllData = "Purge All Data"
     
-    var appConfigurationKey: AppConfigurationKey {
+    var appConfigurationKey: AppConfigurationKey? {
         DebugConfigurationKeys(options: self)
     }
     
@@ -53,16 +50,29 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
             case .alwaysShowOnboarding:
                     .toggle
             case .resetOnboardingStatus:
-                .button {
-                    let appConfigurationManager = DependencyContainer.resolve(AppConfigurationManaging.self)
-                    appConfigurationManager?.setValue(value: false, key: Keys.onboardingCompleted)
-                }
+                .button { resetOnboardingStatus() }
             case .resetGoals:
-                .button {
-                    let goalsRepository = DependencyContainer.resolve(GoalsRepository.self)
-                    goalsRepository?.deleteGoals(for: "current")
-                }
+                .button { resetGoals() }
+            case .purgeAllData:
+                .button { purgeAllData() }
         }
+    }
+    
+    func resetOnboardingStatus() {
+        let appConfigurationManager = DependencyContainer.resolve(AppConfigurationManaging.self)
+        appConfigurationManager?.setValue(value: false, key: Keys.onboardingCompleted)
+    }
+    
+    func resetGoals() {
+        let goalsRepository = DependencyContainer.resolve(GoalsRepository.self)
+        goalsRepository?.deleteGoals(for: "current")
+    }
+    
+    func purgeAllData() {
+        resetOnboardingStatus()
+        
+        let contextProvider = DependencyContainer.resolve(ContextProviding.self)
+        try? contextProvider?.sharedModelContainer.erase()
     }
 }
 

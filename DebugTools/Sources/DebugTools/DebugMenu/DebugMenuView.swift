@@ -53,7 +53,9 @@ public class DebugMenuOptionViewModel: Identifiable {
     var type: DebugMenuOptionType
     var isOn: Bool = false {
         didSet {
-            appConfigurationManager.setValue(value: isOn, key: option.appConfigurationKey)
+            if let appConfigurationKey = option.appConfigurationKey {
+                appConfigurationManager.setValue(value: isOn, key: appConfigurationKey)
+            }
         }
     }
     
@@ -61,7 +63,9 @@ public class DebugMenuOptionViewModel: Identifiable {
         self.option = option
         self.title = option.title
         self.type = option.type
-        self.isOn = appConfigurationManager.getValue(for: option.appConfigurationKey)
+        if let appConfigurationKey = option.appConfigurationKey {
+            self.isOn = appConfigurationManager.getValue(for: appConfigurationKey)
+        }
     }
 }
 
@@ -72,7 +76,7 @@ public enum DebugMenuOptionType {
 
 public protocol DebugMenuOption {
     
-    var appConfigurationKey: AppConfigurationKey { get }
+    var appConfigurationKey: AppConfigurationKey? { get }
     var title: String { get }
     var type: DebugMenuOptionType { get }
 }
