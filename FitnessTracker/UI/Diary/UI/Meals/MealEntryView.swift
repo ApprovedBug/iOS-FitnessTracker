@@ -97,7 +97,7 @@ struct MealEntryView: View {
 }
 
 #Preview {
-    let foodItem = FoodItem(name: "Apple", kcal: 100, carbs: 20, protein: 10, fats: 5)
+    let foodItem = FoodItem(name: "Apple", kcal: 100, carbs: 20, protein: 10, fats: 5, measurementUnit: .item, quantity: 1)
     let diaryEntry = DiaryEntry(timestamp: .now, foodItem: foodItem, meal: .breakfast)
     let viewModel = MealEntryViewModel(diaryEntry: diaryEntry)
     MealEntryView(viewModel: viewModel)

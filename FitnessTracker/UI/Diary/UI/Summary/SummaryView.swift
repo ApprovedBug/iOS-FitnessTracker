@@ -16,7 +16,7 @@ struct SummaryView: View {
     var body: some View {
         
         switch viewModel.state {
-            case.ready(let data):
+            case .ready(let data):
                 ContentView(data: data)
             default:
                 EmptyView()

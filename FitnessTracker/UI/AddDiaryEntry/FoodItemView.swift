@@ -59,7 +59,9 @@ struct FoodItemView: View {
         kcal: 100,
         carbs: 10,
         protein: 10,
-        fats: 20
+        fats: 20,
+        measurementUnit: .grams,
+        quantity: 40
     )
     let viewModel = FoodItemViewModel(foodItem: foodItem)
     

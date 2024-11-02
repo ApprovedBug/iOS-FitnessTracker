@@ -11,6 +11,8 @@ import FitnessPersistence
 
 @Observable
 class AddFoodItemViewModel {
+    var selectedUnit: MeasurementUnit = .grams
+    var quantity: String = ""
     var name: String = ""
     var kcal: String = ""
     var carbs: String = ""
@@ -22,7 +24,8 @@ class AddFoodItemViewModel {
         Double(kcal) != nil &&
         Double(carbs) != nil &&
         Double(protein) != nil &&
-        Double(fat) != nil
+        Double(fat) != nil &&
+        Double(quantity) != nil
     }
     
     @ObservationIgnored
@@ -33,11 +36,20 @@ class AddFoodItemViewModel {
               let kcal = Int(kcal),
               let carbs = Double(carbs),
               let protein = Double(protein),
-              let fat = Double(fat) else {
+              let fat = Double(fat),
+              let quantity = Double(quantity) else {
             return
         }
         
-        let foodItem = FoodItem(name: name, kcal: kcal, carbs: carbs, protein: protein, fats: fat)
+        let foodItem = FoodItem(
+            name: name,
+            kcal: kcal,
+            carbs: carbs,
+            protein: protein,
+            fats: fat,
+            measurementUnit: selectedUnit,
+            quantity: quantity
+        )
         foodItemRepository.saveFoodItem(foodItem)
     }
 }

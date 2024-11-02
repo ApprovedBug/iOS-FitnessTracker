@@ -86,9 +86,9 @@ class SummaryViewModel {
         let (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed) = self.calculateConsumedValues(from: entries)
         
         // Create the view models
-        let carbsViewModel = self.createMacrosViewModel(consumed: carbsConsumed, target: goals.carbs, title: "Carbs")
-        let proteinsViewModel = self.createMacrosViewModel(consumed: proteinsConsumed, target: goals.protein, title: "Protein")
-        let fatsViewModel = self.createMacrosViewModel(consumed: fatsConsumed, target: goals.fats, title: "Fat")
+        let carbsViewModel = createMacrosViewModel(consumed: carbsConsumed, target: goals.carbs, title: "Carbs")
+        let proteinsViewModel = createMacrosViewModel(consumed: proteinsConsumed, target: goals.protein, title: "Protein")
+        let fatsViewModel = createMacrosViewModel(consumed: fatsConsumed, target: goals.fats, title: "Fat")
         
         // Update the state
         self.state = .ready(
