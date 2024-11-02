@@ -46,6 +46,9 @@ struct MealEntryView: View {
                     if viewModel.isExpanded {
                         detailsView()
                             .padding([.top], 12)
+                        
+                        actionsView()
+                            .padding([.top], 12)
                     }
                 }
                 .padding([.top, .bottom], 12)
@@ -102,11 +105,24 @@ struct MealEntryView: View {
             .frame(maxWidth: .infinity)
         }
     }
+    
+    func actionsView() -> some View {
+        HStack {
+            Spacer()
+            Button(action: { viewModel.removeDiaryEntryTapped() }) {
+                Image(systemName: "trash")
+                    .tint(.red)
+            }
+        }
+    }
 }
 
 #Preview {
     let foodItem = FoodItem(name: "Apple", kcal: 100, carbs: 20, protein: 10, fats: 5, measurementUnit: .item, quantity: 1)
     let diaryEntry = DiaryEntry(timestamp: .now, foodItem: foodItem, meal: .breakfast)
-    let viewModel = MealEntryViewModel(diaryEntry: diaryEntry)
+    let viewModel = MealEntryViewModel(
+        diaryEntry: diaryEntry,
+        eventHandler: MealEntryViewModel.EventHandler(removeEntryTapped: { _ in })
+    )
     MealEntryView(viewModel: viewModel)
 }

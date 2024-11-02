@@ -18,6 +18,7 @@ public protocol DiaryRepository {
     
     func allDiaryEntries() -> AnyPublisher<[DiaryEntry], DiaryError>
     func addDiaryEntry(diaryEntry: DiaryEntry)
+    func removeDiaryEntry(diaryEntry: DiaryEntry)
 }
 
 public struct LocalDiaryRepository: @preconcurrency DiaryRepository {
@@ -40,6 +41,11 @@ public struct LocalDiaryRepository: @preconcurrency DiaryRepository {
     
     @MainActor public func addDiaryEntry(diaryEntry: DiaryEntry) {
         contextProvider.sharedModelContainer.mainContext.insert(diaryEntry)
+        try? contextProvider.sharedModelContainer.mainContext.save()
+    }
+    
+    @MainActor public func removeDiaryEntry(diaryEntry: DiaryEntry) {
+        contextProvider.sharedModelContainer.mainContext.delete(diaryEntry)
         try? contextProvider.sharedModelContainer.mainContext.save()
     }
 }

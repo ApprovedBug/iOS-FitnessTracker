@@ -13,6 +13,7 @@ class MealListViewModel {
     
     struct EventHandler {
         let diaryEntryAdded: (DiaryEntry) -> Void
+        let diaryEntryRemoved: (DiaryEntry) -> Void
     }
 
     enum State {
@@ -49,7 +50,8 @@ class MealListViewModel {
             eventHandler?.diaryEntryAdded(entry)
         }
         
-        let itemEventHandler = MealListItemViewModel.EventHandler { [weak self] meal in
+        let itemEventHandler = MealListItemViewModel.EventHandler(
+            addDiaryEntryTapped: { [weak self] meal in
             // add new entry opened
             guard let self else { return }
             addDiaryEntryViewModel = AddDiaryEntryViewModel(
@@ -58,7 +60,11 @@ class MealListViewModel {
                 eventHandler: addDiaryEntryEventHandler
             )
             isAddDiaryEntryOpen = true
-        }
+        }, diaryEntryRemoved: { [weak self] entry in
+            // entry removed
+            guard let self else { return }
+            eventHandler?.diaryEntryRemoved(entry)
+        })
         
         let meals: [MealListItemViewModel] = Meal.allCases.map {
             MealListItemViewModel(

@@ -11,7 +11,12 @@ import Foundation
 @Observable
 class MealEntryViewModel {
     
+    struct EventHandler {
+        let removeEntryTapped: (DiaryEntry) -> Void
+    }
+    
     private let diaryEntry: DiaryEntry
+    private let eventHandler: EventHandler
     
     var isExpanded: Bool = false
     
@@ -43,11 +48,16 @@ class MealEntryViewModel {
         String(diaryEntry.foodItem.fats)
     }
     
-    init(diaryEntry: DiaryEntry) {
+    init(diaryEntry: DiaryEntry, eventHandler: EventHandler) {
         self.diaryEntry = diaryEntry
+        self.eventHandler = eventHandler
     }
     
     func toggleExpanded() {
         isExpanded.toggle()
+    }
+    
+    func removeDiaryEntryTapped() {
+        eventHandler.removeEntryTapped(diaryEntry)
     }
 }

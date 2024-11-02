@@ -35,7 +35,6 @@ private struct ContentView: View {
     var body: some View {
      
         ForEach(items) { item in
-            
             MealListItemView(viewModel: item)
         }
     }

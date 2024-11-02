@@ -71,7 +71,11 @@ private struct ContentView: View {
             }
             
             ForEach(data.entries) { entry in
-                MealEntryView(viewModel: MealEntryViewModel(diaryEntry: entry))
+                MealEntryView(
+                    viewModel: MealEntryViewModel(
+                        diaryEntry: entry, eventHandler: MealEntryViewModel.EventHandler(removeEntryTapped: { entry in
+                            viewModel.removeEntry(diaryEntry: entry)
+                        })))
             }
         }
     }

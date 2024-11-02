@@ -74,12 +74,19 @@ class DiaryViewModel {
     // MARK: Private functions
     
     private func subscribeToEntryUpdates() {
-        let eventHandler = MealListViewModel.EventHandler { [weak self] diaryEntry in
-            guard let self else { return }
-            allEntries.append(diaryEntry)
-            let entries = allEntries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: dateViewModel.currentSelectedDate) }
-            summaryViewModel.updateEntries(with: entries)
-        }
+        let eventHandler = MealListViewModel.EventHandler(
+            diaryEntryAdded: { [weak self] diaryEntry in
+                guard let self else { return }
+                allEntries.append(diaryEntry)
+                let entries = allEntries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: dateViewModel.currentSelectedDate) }
+                summaryViewModel.updateEntries(with: entries)
+            }, diaryEntryRemoved: { [weak self] entry in
+                guard let self else { return }
+                allEntries.removeAll(where: { $0.id == entry.id })
+                let entries = allEntries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: dateViewModel.currentSelectedDate) }
+                summaryViewModel.updateEntries(with: entries)
+            }
+        )
         mealListViewModel.setEventHandler(eventHandler: eventHandler)
     }
     

@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 17/11/2023.
 //
 
+import DependencyManagement
 import FitnessPersistence
 import Foundation
 
@@ -13,6 +14,7 @@ class MealListItemViewModel: Identifiable {
 
     struct EventHandler {
         let addDiaryEntryTapped: (Meal) -> Void
+        let diaryEntryRemoved: (DiaryEntry) -> Void
     }
     
     enum State {
@@ -39,6 +41,10 @@ class MealListItemViewModel: Identifiable {
     @ObservationIgnored
     let eventHandler: EventHandler?
     
+    @ObservationIgnored
+    @Inject
+    var diaryRepository: DiaryRepository
+    
     // MARK: Initialisers
     
     init(
@@ -63,8 +69,14 @@ class MealListItemViewModel: Identifiable {
     }
     
     func addEntryTapped() {
-        
         eventHandler?.addDiaryEntryTapped(meal)
+    }
+    
+    func removeEntry(diaryEntry: DiaryEntry) {
+        diaryRepository.removeDiaryEntry(diaryEntry: diaryEntry)
+        eventHandler?.diaryEntryRemoved(diaryEntry)
+        entries.removeAll(where: { $0.id == diaryEntry.id })
+        populateUI()
     }
     
     // MARK: Private functions
