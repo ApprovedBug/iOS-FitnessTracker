@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MealListView: View {
     
-    var viewModel: MealListViewModel
+    @Bindable var viewModel: MealListViewModel
     
     var body: some View {
         
@@ -19,6 +19,11 @@ struct MealListView: View {
                 EmptyView()
             case .ready(let items):
                 ContentView(items: items)
+                    .sheet(isPresented: $viewModel.isAddDiaryEntryOpen) {
+                        if let addDiaryEntryViewModel = viewModel.addDiaryEntryViewModel {
+                            AddDiaryEntryView(viewModel: addDiaryEntryViewModel)
+                        }
+                    }
         }
     }
 }

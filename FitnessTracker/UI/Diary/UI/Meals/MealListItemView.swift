@@ -74,9 +74,6 @@ private struct ContentView: View {
                 MealEntryView(viewModel: MealEntryViewModel(diaryEntry: entry))
             }
         }
-        .sheet(isPresented: $viewModel.isAddDiaryEntryOpen) {
-            AddDiaryEntryView(viewModel: AddDiaryEntryViewModel(meal: viewModel.meal))
-        }
     }
 }
 

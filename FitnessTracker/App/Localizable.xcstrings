@@ -16,6 +16,9 @@
     "Activity Level" : {
 
     },
+    "Add new food item" : {
+
+    },
     "Age" : {
 
     },
@@ -144,13 +147,16 @@
     "Protein" : {
 
     },
+    "Recent Items" : {
+
+    },
     "Remaining" : {
 
     },
-    "Save" : {
+    "Results" : {
 
     },
-    "Search for your item" : {
+    "Save" : {
 
     },
     "Skip" : {
@@ -187,6 +193,9 @@
 
     },
     "Welcome" : {
+
+    },
+    "Your recent items will appear here." : {
 
     }
   },

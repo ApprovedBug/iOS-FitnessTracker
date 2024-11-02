@@ -10,6 +10,10 @@ import Foundation
 
 @Observable
 class MealListItemViewModel: Identifiable {
+
+    struct EventHandler {
+        let addDiaryEntryTapped: (Meal) -> Void
+    }
     
     enum State {
         case idle
@@ -26,19 +30,26 @@ class MealListItemViewModel: Identifiable {
     }
     
     var state: State = .idle
-    var isAddDiaryEntryOpen: Bool = false
-    
+
     private var entries: [DiaryEntry] = []
     
+    @ObservationIgnored
     let meal: Meal
     
+    @ObservationIgnored
+    let eventHandler: EventHandler?
     
     // MARK: Initialisers
     
-    init(meal: Meal, entries: [DiaryEntry]) {
+    init(
+        meal: Meal,
+        entries: [DiaryEntry],
+        eventHandler: MealListItemViewModel.EventHandler? = nil
+    ) {
         
         self.meal = meal
         self.entries = entries
+        self.eventHandler = eventHandler
         
         populateUI()
     }
@@ -52,7 +63,8 @@ class MealListItemViewModel: Identifiable {
     }
     
     func addEntryTapped() {
-        isAddDiaryEntryOpen = true
+        
+        eventHandler?.addDiaryEntryTapped(meal)
     }
     
     // MARK: Private functions

@@ -34,7 +34,7 @@ struct DiaryView: View {
                 SummaryView(viewModel: viewModel.summaryViewModel)
                 
                 DatePickerView(viewModel: viewModel.dateViewModel)
-
+                
                 MealListView(viewModel: viewModel.mealListViewModel)
                 
     //                WaterView()

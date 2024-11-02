@@ -8,24 +8,26 @@
 import Combine
 import SwiftData
 import DependencyManagement
-import FitnessPersistence
 import Foundation
 
-enum FoodItemError: Error {
+public enum FoodItemError: Error {
     case fetchError
 }
 
-protocol FoodItemRepository {
+public protocol FoodItemRepository {
     
     func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError>
+    func recentFoodItems() -> AnyPublisher<Set<FoodItem>, FoodItemError>
     func saveFoodItem(_ foodItem: FoodItem)
 }
 
-struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
+public struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
     
     @Inject var contextProvider: ContextProviding
     
-    @MainActor func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError> {
+    public init() {}
+    
+    @MainActor public func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError> {
         
         do {
             let namePredicate = #Predicate<FoodItem> { item in
@@ -39,7 +41,23 @@ struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
         }
     }
     
-    @MainActor func saveFoodItem(_ foodItem: FoodItem) {
+    @MainActor public func recentFoodItems() -> AnyPublisher<Set<FoodItem>, FoodItemError> {
+        
+        do {
+            var descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp)])
+            descriptor.fetchLimit = 30
+            let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
+            var items: Set<FoodItem> = []
+            for entry in entries {
+                items.insert(entry.foodItem)
+            }
+            return Just(items).setFailureType(to: FoodItemError.self).eraseToAnyPublisher()
+        } catch {
+            return Fail(error: .fetchError).eraseToAnyPublisher()
+        }
+    }
+    
+    @MainActor public func saveFoodItem(_ foodItem: FoodItem) {
         contextProvider.sharedModelContainer.mainContext.insert(foodItem)
         try? contextProvider.sharedModelContainer.mainContext.save()
     }

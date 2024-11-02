@@ -23,24 +23,29 @@ struct FitnessTrackerApp: App {
     
     func registerDependencies() {
         // Register your dependencies here
+        
+        let persistenceManager = PersistenceManager()
         DependencyContainer.register(ContextProviding.self) {
-            PersistenceManager()
+            persistenceManager
         }
         
         DependencyContainer.register(UserDefaultsProtocol.self) {
             UserDefaults.standard
         }
         
+        let goalsRepository = LocalGoalsRepository()
         DependencyContainer.register(GoalsRepository.self) {
-            LocalGoalsRepository()
+            goalsRepository
         }
         
+        let diaryRepository = LocalDiaryRepository()
         DependencyContainer.register(DiaryRepository.self) {
-            LocalDiaryRepository()
+            diaryRepository
         }
         
+        let foodItemsRepository = LocalFoodItemRepository()
         DependencyContainer.register(FoodItemRepository.self) {
-            LocalFoodItemRepository()
+            foodItemsRepository
         }
         
         DependencyContainer.register(AppConfigurationManaging.self) {

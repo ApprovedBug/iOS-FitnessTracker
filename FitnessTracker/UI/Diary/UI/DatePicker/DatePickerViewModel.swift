@@ -29,12 +29,12 @@ class DatePickerViewModel {
     
     func nextDay() {
         currentSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: currentSelectedDate)!
-        self.date.send(currentSelectedDate)
+        date.send(currentSelectedDate)
     }
     
     func previousDay() {
         currentSelectedDate = Calendar.current.date(byAdding: .day, value: -1, to: currentSelectedDate)!
-        self.date.send(currentSelectedDate)
+        date.send(currentSelectedDate)
     }
     
     func setTitle() {

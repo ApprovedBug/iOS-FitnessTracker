@@ -7,25 +7,26 @@
 
 import Combine
 import DependencyManagement
-import FitnessPersistence
 import Foundation
 import SwiftData
 
-enum DiaryError: Error {
+public enum DiaryError: Error {
     case fetchError
 }
 
-protocol DiaryRepository {
+public protocol DiaryRepository {
     
-    func diaryEntries() -> AnyPublisher<[DiaryEntry], DiaryError>
-    func addDiaryEntry(foodItem: FoodItem, meal: Meal, day: Date)
+    func allDiaryEntries() -> AnyPublisher<[DiaryEntry], DiaryError>
+    func addDiaryEntry(diaryEntry: DiaryEntry)
 }
 
-struct LocalDiaryRepository: @preconcurrency DiaryRepository {
+public struct LocalDiaryRepository: @preconcurrency DiaryRepository {
     
     @Inject var contextProvider: ContextProviding
     
-    @MainActor func diaryEntries() -> AnyPublisher<[DiaryEntry], DiaryError> {
+    public init() {}
+    
+    @MainActor public func allDiaryEntries() -> AnyPublisher<[DiaryEntry], DiaryError> {
         
         do {
             let descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp)])
@@ -37,8 +38,7 @@ struct LocalDiaryRepository: @preconcurrency DiaryRepository {
         }
     }
     
-    @MainActor func addDiaryEntry(foodItem: FoodItem, meal: Meal, day: Date) {
-        let diaryEntry = DiaryEntry(timestamp: day, foodItem: foodItem, meal: meal)
+    @MainActor public func addDiaryEntry(diaryEntry: DiaryEntry) {
         contextProvider.sharedModelContainer.mainContext.insert(diaryEntry)
         try? contextProvider.sharedModelContainer.mainContext.save()
     }

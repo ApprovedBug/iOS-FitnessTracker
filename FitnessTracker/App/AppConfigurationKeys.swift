@@ -5,10 +5,11 @@
 //  Created by Jack Moseley on 03/04/2024.
 //
 
-import DependencyManagement
-import Foundation
-import DebugTools
 import ConfigurationManagement
+import DependencyManagement
+import DebugTools
+import FitnessPersistence
+import Foundation
 
 enum DebugConfigurationKeys: String, AppConfigurationKey {
     

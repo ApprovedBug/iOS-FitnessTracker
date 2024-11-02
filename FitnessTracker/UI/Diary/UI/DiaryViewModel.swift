@@ -42,17 +42,18 @@ class DiaryViewModel {
     // MARK: Initializers
     init() {
         state = .idle
-        self.dateViewModel = DatePickerViewModel(date: Date.now)
-        self.summaryViewModel = SummaryViewModel()
-        self.mealListViewModel = MealListViewModel()
+        dateViewModel = DatePickerViewModel(date: Date.now)
+        summaryViewModel = SummaryViewModel()
+        mealListViewModel = MealListViewModel(currentlySelectedDate: Date.now)
         
+        subscribeToEntryUpdates()
         subscribeDateUpdates()
     }
     
     // MARK: Internal functions
     func loadData() {
         
-        diaryFetching.diaryEntries()
+        diaryFetching.allDiaryEntries()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
@@ -71,9 +72,23 @@ class DiaryViewModel {
     }
     
     // MARK: Private functions
+    
+    private func subscribeToEntryUpdates() {
+        let eventHandler = MealListViewModel.EventHandler { [weak self] diaryEntry in
+            guard let self else { return }
+            allEntries.append(diaryEntry)
+            let entries = allEntries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: dateViewModel.currentSelectedDate) }
+            summaryViewModel.updateEntries(with: entries)
+        }
+        mealListViewModel.setEventHandler(eventHandler: eventHandler)
+    }
+    
+    
     private func processEntries(entries: [DiaryEntry], date: Date) {
         let entries = entries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: date) }
+        
         state = .ready
+        
         summaryViewModel.updateEntries(with: entries)
         mealListViewModel.updateEntries(entries: entries)
     }
@@ -82,6 +97,7 @@ class DiaryViewModel {
         dateViewModel.date.sink { [weak self] date in
             guard let self else { return }
             
+            mealListViewModel.updateCurrentlySelectedDate(to: date)
             processEntries(entries: allEntries, date: date)
         }
         .store(in: &cancellables)

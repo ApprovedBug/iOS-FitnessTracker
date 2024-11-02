@@ -6,6 +6,7 @@
 //
 
 import FitnessPersistence
+import FitnessUI
 import Foundation
 import SwiftUI
 
@@ -18,24 +19,51 @@ struct AddDiaryEntryView: View {
         
         NavigationStack {
             
-            switch viewModel.state {
-                case .idle:
-                    Text("Search for your item")
-                case .loading:
-                    ProgressView()
-                case .success(let items):
-                    contentView(items: items)
-                case .empty:
-                    emptyView()
+            VStack {
+                Button("Add new food item") {
+                    viewModel.createFoodItemTapped()
+                }
+                .padding()
+                .buttonStyle(RoundedButtonStyle())
+                
+                switch viewModel.state {
+                    case .idle:
+                        EmptyView()
+                    case .recentItems(let items):
+                        VStack(alignment: .leading) {
+                            Text("Recent Items")
+                                .padding([.leading, .trailing, .bottom])
+                                .font(.title)
+                            
+                            foodItemList(items: items)
+                        }
+                    case .noRecentItems:
+                        Text("Your recent items will appear here.")
+                    case .loading:
+                        ProgressView()
+                    case .success(let items):
+                        VStack(alignment: .leading) {
+                            Text("Results")
+                                .padding([.leading, .trailing, .bottom])
+                                .font(.title)
+                            
+                            foodItemList(items: items)
+                        }
+                    case .empty:
+                        emptyView()
+                }
             }
         }
         .searchable(text: $viewModel.searchText)
         .onSubmit(of: .search) {
             viewModel.search()
         }
+        .sheet(isPresented: $viewModel.isCreateFoodItemOpen) {
+            AddFoodItemView(viewModel: AddFoodItemViewModel())
+        }
     }
     
-    func contentView(items: [FoodItemViewModel]) -> some View {
+    func foodItemList(items: [FoodItemViewModel]) -> some View {
         
         ScrollView {
             LazyVStack {
@@ -52,15 +80,17 @@ struct AddDiaryEntryView: View {
     
     func emptyView() -> some View {
         
-        VStack(spacing: 10) {
+        VStack(alignment: .center, spacing: 10) {
+            Spacer()
+            
             Text("No results found")
             
             Button("Tap to add new food item") {
                 viewModel.createFoodItemTapped()
             }
-        }
-        .sheet(isPresented: $viewModel.isCreateFoodItemOpen) {
-            AddFoodItemView(viewModel: AddFoodItemViewModel())
+            .buttonStyle(TertiaryButtonStyle())
+            
+            Spacer()
         }
     }
 }

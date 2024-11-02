@@ -12,13 +12,19 @@ let package = Package(
             name: "FitnessPersistence",
             targets: ["FitnessPersistence"]),
     ],
+    dependencies: [
+        .package(path: "../DependencyManagement")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "FitnessPersistence"),
+            name: "FitnessPersistence",
+            dependencies: ["DependencyManagement"]
+        ),
         .testTarget(
             name: "FitnessPersistenceTests",
-            dependencies: ["FitnessPersistence"]),
+            dependencies: ["FitnessPersistence"]
+        ),
     ]
 )
