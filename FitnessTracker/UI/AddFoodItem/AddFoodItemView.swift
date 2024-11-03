@@ -30,17 +30,22 @@ struct AddFoodItemView: View {
         NavigationView {
             Form {
                 Section(header: Text("Food Description")) {
-                    TextField("Description", text: $viewModel.name)
+                    TextField("Name", text: $viewModel.name)
                 }
-                Section(header: Text("Nutritional Information")) {
+                
+                Section(header: Text("Serving Info")) {
                     
                     Picker("Unit", selection: $viewModel.selectedUnit) {
                         ForEach(MeasurementUnit.allCases, id: \.self) { unit in
                             Text(unit.rawValue).tag(unit)
                         }
                     }
-                    TextField("Quantity", text: $viewModel.servingSize)
+                    TextField("Serving Size", text: $viewModel.servingSize)
                         .keyboardType(.decimalPad)
+                }
+                
+                Section(header: Text("Nutritional Information")) {
+                    
                     TextField("Calories", text: $viewModel.kcal)
                         .keyboardType(.decimalPad)
                     TextField("Carbs", text: $viewModel.carbs)
@@ -51,7 +56,7 @@ struct AddFoodItemView: View {
                         .keyboardType(.decimalPad)
                 }
             }
-            .navigationBarTitle("New Food Item", displayMode: .inline)
+            .navigationBarTitle("Create Food Item", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
                 viewModel.createFoodItem()
                 presentationMode.wrappedValue.dismiss()
@@ -61,58 +66,72 @@ struct AddFoodItemView: View {
     
     func editView() -> some View {
         
-        VStack(alignment: .leading, spacing: 12) {
-            Text(viewModel.name)
-            
-            Divider()
-            
-            HStack {
-                Text("Serving Size")
+        NavigationView {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(viewModel.name)
                 
-                Spacer()
+                Divider()
                 
-                Text("\(viewModel.servingSize)\(viewModel.selectedUnit.rawValue)")
-                    .font(.footnote)
+                HStack(spacing: 0) {
+                    Text("Serving Size")
+                    
+                    Spacer()
+                    
+                    Text("\(viewModel.servingSize)")
+                        .padding(.trailing, viewModel.selectedUnit == .item ? 2 : 0)
+                        .font(.footnote)
+                    
+                    Text("\(viewModel.selectedUnit.rawValue)")
+                        .font(.footnote)
+                }
+                
+                Divider()
+                
+                HStack {
+                    Text("Servings")
+                    
+                    Spacer()
+                    
+                    TextField("", text: $viewModel.servings)
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(.roundedBorder)
+                        .multilineTextAlignment(.trailing)
+                        .frame(maxWidth: 60)
+                        .onChange(of: viewModel.servings) { oldValue, newValue in
+                            viewModel.updateBasedOnServings(newValue)
+                        }
+                }
+                
+                Divider()
+                
+                HStack(alignment: .bottom) {
+                    Text("\(viewModel.kcal)kcal")
+                        .font(.footnote)
+                    
+                    Spacer()
+                    
+                    Text("\(viewModel.carbs)g carbs")
+                        .font(.footnote)
+                    
+                    Spacer()
+                    
+                    Text("\(viewModel.protein)g protein")
+                        .font(.footnote)
+                    
+                    Spacer()
+                    
+                    Text("\(viewModel.fat)g fat")
+                        .font(.footnote)
+                }
+                .frame(maxWidth: .infinity)
             }
-            
-            Divider()
-            
-            HStack {
-                Text("Servings")
-                
-                Spacer()
-                
-                TextField("Servings", text: $viewModel.servings)
-                    .keyboardType(.decimalPad)
-                    .textFieldStyle(.roundedBorder)
-                    .multilineTextAlignment(.trailing)
-                    .frame(maxWidth: 60)
-            }
-            
-            Divider()
-            
-            HStack(alignment: .bottom) {
-                Text("\(viewModel.kcal)kcal")
-                    .font(.footnote)
-                
-                Spacer()
-                
-                Text("\(viewModel.carbs)g carbs")
-                    .font(.footnote)
-                
-                Spacer()
-                
-                Text("\(viewModel.protein)g protein")
-                    .font(.footnote)
-                
-                Spacer()
-                
-                Text("\(viewModel.fat)g fat")
-                    .font(.footnote)
-            }
-            .frame(maxWidth: .infinity)
+            .navigationBarTitle("Add Item", displayMode: .inline)
+            .navigationBarItems(trailing: Button("Save") {
+                viewModel.saveEntry()
+                presentationMode.wrappedValue.dismiss()
+            }.disabled(!viewModel.isValid))
+            .padding()
         }
-        .padding()
     }
 }
 
@@ -121,10 +140,14 @@ struct AddFoodItemView: View {
         PersistenceManager()
     }
     
-    DependencyContainer.register(FoodItemRepository.self) { LocalFoodItemRepository()
+    DependencyContainer.register(FoodItemRepository.self) {
+        LocalFoodItemRepository()
     }
     
-    let eventHandler = AddFoodItemViewModel.EventHandler { item in }
+    let eventHandler = AddFoodItemViewModel.EventHandler(
+        didCreateFoodItem: { _ in },
+        saveEntry: { (_, _) in }
+    )
     
     let viewModel = AddFoodItemViewModel(eventHandler: eventHandler)
     
@@ -136,10 +159,14 @@ struct AddFoodItemView: View {
         PersistenceManager()
     }
     
-    DependencyContainer.register(FoodItemRepository.self) { LocalFoodItemRepository()
+    DependencyContainer.register(FoodItemRepository.self) {
+        LocalFoodItemRepository()
     }
     
-    let eventHandler = AddFoodItemViewModel.EventHandler { item in }
+    let eventHandler = AddFoodItemViewModel.EventHandler(
+        didCreateFoodItem: { _ in },
+        saveEntry: { (_, _) in }
+    )
     
     let foodItem = FoodItem(
         name: "Fat Free Greek Yoghurt",

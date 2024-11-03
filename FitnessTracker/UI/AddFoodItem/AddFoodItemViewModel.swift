@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 02/08/2024.
 //
 
+import Combine
 import DependencyManagement
 import Foundation
 import FitnessPersistence
@@ -14,6 +15,7 @@ class AddFoodItemViewModel: Identifiable {
     
     struct EventHandler {
         var didCreateFoodItem: (FoodItem) -> Void
+        var saveEntry: (FoodItem, Double) -> Void
     }
     
     enum State {
@@ -37,7 +39,8 @@ class AddFoodItemViewModel: Identifiable {
         Double(carbs) != nil &&
         Double(protein) != nil &&
         Double(fat) != nil &&
-        Double(servingSize) != nil
+        Int(servingSize) != nil &&
+        Double(servings) != nil
     }
     
     @ObservationIgnored
@@ -49,22 +52,29 @@ class AddFoodItemViewModel: Identifiable {
     @ObservationIgnored
     let foodItem: FoodItem?
     
-    init(eventHandler: EventHandler, foodItem: FoodItem? = nil) {
+    @ObservationIgnored
+    var cancellables: Set<AnyCancellable> = []
+    
+    init(
+        eventHandler: EventHandler,
+        foodItem: FoodItem? = nil,
+        servings: Double? = nil
+    ) {
         self.eventHandler = eventHandler
         self.foodItem = foodItem
         
         if let foodItem {
-            populate(with: foodItem)
+            populate(with: foodItem, servings: servings ?? 1)
             state = .edit
         }
     }
     
-    func populate(with foodItem: FoodItem) {
+    func populate(with foodItem: FoodItem, servings: Double) {
         self.name = foodItem.name
-        self.kcal = String(foodItem.kcal)
-        self.carbs = String(foodItem.carbs)
-        self.protein = String(foodItem.protein)
-        self.fat = String(foodItem.fats)
+        self.kcal = String(Int(Double(foodItem.kcal) * servings))
+        self.carbs = String(format: "%.1f", foodItem.carbs * servings)
+        self.protein = String(format: "%.1f", foodItem.protein * servings)
+        self.fat = String(format: "%.1f", foodItem.fats * servings)
         self.servingSize = String(foodItem.servingSize)
         self.selectedUnit = foodItem.measurementUnit
     }
@@ -90,5 +100,25 @@ class AddFoodItemViewModel: Identifiable {
         )
         foodItemRepository.saveFoodItem(foodItem)
         eventHandler.didCreateFoodItem(foodItem)
+    }
+    
+    func saveEntry() {
+        guard isValid,
+                let foodItem,
+                let servings = Double(servings) else {
+            return
+        }
+        eventHandler.saveEntry(foodItem, servings)
+    }
+    
+    func updateBasedOnServings(_ servings: String) {
+        
+        guard let foodItem else {
+            return
+        }
+        
+        let servings = Double(servings) ?? 0
+        
+        populate(with: foodItem, servings: servings)
     }
 }

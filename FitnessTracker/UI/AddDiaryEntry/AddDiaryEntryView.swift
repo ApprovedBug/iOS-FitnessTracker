@@ -63,7 +63,7 @@ struct AddDiaryEntryView: View {
     }
     
     func headerView() -> some View {
-        Button("Add new food item") {
+        Button("Create new food item") {
             viewModel.createFoodItemTapped()
         }
         .padding()
@@ -108,7 +108,7 @@ struct AddDiaryEntryView: View {
             
             Text("No results found")
             
-            Button("Tap to add new food item") {
+            Button("Tap to create a new food item") {
                 viewModel.createFoodItemTapped()
             }
             .buttonStyle(TertiaryButtonStyle())

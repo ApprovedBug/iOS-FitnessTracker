@@ -155,7 +155,7 @@ struct MealEntryView: View {
         timestamp: .now,
         foodItem: foodItem,
         meal: .breakfast,
-        servings: 1
+        servings: 2
     )
     
     let viewModel = MealEntryViewModel(

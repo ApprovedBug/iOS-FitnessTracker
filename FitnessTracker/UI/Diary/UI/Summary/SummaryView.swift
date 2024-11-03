@@ -100,3 +100,10 @@ private struct KcalRemainingView: View {
         }
     }
 }
+
+#Preview {
+    
+    let viewModel = SummaryViewModel()
+    
+    SummaryView(viewModel: viewModel)
+}

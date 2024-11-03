@@ -50,7 +50,7 @@ class AddDiaryEntryViewModel {
     @ObservationIgnored
     private lazy var itemEventHandler: FoodItemViewModel.EventHandler = {
         FoodItemViewModel.EventHandler { [weak self] foodItem in
-            self?.addFoodItem(foodItem)
+            self?.addDiaryEntry(foodItem)
         }
     }()
     
@@ -59,9 +59,11 @@ class AddDiaryEntryViewModel {
         AddFoodItemViewModel.EventHandler(
             didCreateFoodItem: { [weak self] item in
                 guard let self else { return }
-                addFoodItem(item)
+                addDiaryEntry(item)
                 shouldDismiss = true
-            })
+            }) { [weak self] foodItem, servings in
+                self?.addDiaryEntry(foodItem, servings: servings)
+            }
     }()
     
     init(date: Date, meal: Meal, eventHandler: EventHandler? = nil) {
@@ -133,8 +135,8 @@ class AddDiaryEntryViewModel {
             .store(in: &cancellables)
     }
     
-    func addFoodItem(_ foodItem: FoodItem) {
-        let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, meal: meal, servings: 1)
+    func addDiaryEntry(_ foodItem: FoodItem, servings: Double = 1) {
+        let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, meal: meal, servings: servings)
         diaryRepository.addDiaryEntry(diaryEntry: diaryEntry)
         eventHandler?.diaryEntryAdded(diaryEntry)
     }

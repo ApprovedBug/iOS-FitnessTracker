@@ -111,10 +111,10 @@ class SummaryViewModel {
         var fatsConsumed = 0.0
         
         entries.forEach { entry in
-            kcalConsumed += entry.foodItem.kcal
-            carbsConsumed += entry.foodItem.carbs
-            proteinsConsumed += entry.foodItem.protein
-            fatsConsumed += entry.foodItem.fats
+            kcalConsumed += entry.totalCalories
+            carbsConsumed += entry.totalCarbs
+            proteinsConsumed += entry.totalProteins
+            fatsConsumed += entry.totalFats
         }
         
         return (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed)

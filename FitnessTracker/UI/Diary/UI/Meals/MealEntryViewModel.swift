@@ -25,7 +25,7 @@ class MealEntryViewModel: Identifiable {
     }
     
     var servingSize: String {
-        String(diaryEntry.foodItem.servingSize)
+        String(Int(Double(diaryEntry.foodItem.servingSize) * diaryEntry.servings))
     }
     
     var measurement: String {
@@ -33,19 +33,19 @@ class MealEntryViewModel: Identifiable {
     }
     
     var kcal: String {
-        String(diaryEntry.foodItem.kcal)
+        String(diaryEntry.totalCalories)
     }
     
     var carbs: String {
-        String(diaryEntry.foodItem.carbs)
+        String(format: "%.1f", diaryEntry.totalCarbs)
     }
     
     var protein: String {
-        String(diaryEntry.foodItem.protein)
+        String(format: "%.1f", diaryEntry.totalProteins)
     }
     
     var fat: String {
-        String(diaryEntry.foodItem.fats)
+        String(format: "%.1f", diaryEntry.totalFats)
     }
     
     init(diaryEntry: DiaryEntry, eventHandler: EventHandler) {

@@ -110,7 +110,7 @@ private struct MealItemMacrosView: View {
         timestamp: .now,
         foodItem: foodItem,
         meal: .breakfast,
-        servings: 1
+        servings: 2
     )
     
     let viewModel = MealListItemViewModel(

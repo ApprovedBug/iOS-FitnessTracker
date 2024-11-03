@@ -23,3 +23,22 @@ public class DiaryEntry {
         self.servings = servings
     }
 }
+
+extension DiaryEntry {
+    
+    public var totalCalories: Int {
+        Int(Double(foodItem.kcal) * servings)
+    }
+    
+    public var totalCarbs: Double {
+        Double(foodItem.carbs) * servings
+    }
+    
+    public var totalProteins: Double {
+        Double(foodItem.protein) * servings
+    }
+    
+    public var totalFats: Double {
+        Double(foodItem.fats) * servings
+    }
+}

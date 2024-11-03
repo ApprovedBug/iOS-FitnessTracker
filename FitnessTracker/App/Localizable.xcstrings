@@ -41,7 +41,7 @@
     "Activity Level" : {
 
     },
-    "Add new food item" : {
+    "Add Item" : {
 
     },
     "Age" : {
@@ -59,7 +59,10 @@
     "Continue" : {
 
     },
-    "Description" : {
+    "Create Food Item" : {
+
+    },
+    "Create new food item" : {
 
     },
     "Diary" : {
@@ -160,7 +163,7 @@
         }
       }
     },
-    "New Food Item" : {
+    "Name" : {
 
     },
     "No results found" : {
@@ -175,9 +178,6 @@
     "Proteins" : {
 
     },
-    "Quantity" : {
-
-    },
     "Remaining" : {
 
     },
@@ -185,6 +185,9 @@
 
     },
     "Save" : {
+
+    },
+    "Serving Info" : {
 
     },
     "Serving Size" : {
@@ -196,7 +199,7 @@
     "Skip" : {
 
     },
-    "Tap to add new food item" : {
+    "Tap to create a new food item" : {
 
     },
     "Tell us about yourself" : {

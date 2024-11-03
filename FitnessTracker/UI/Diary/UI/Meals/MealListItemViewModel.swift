@@ -89,10 +89,10 @@ class MealListItemViewModel: Identifiable {
         var carbsConsumed: Double = 0
         
         for entry in entries {
-            kcalConsumed += entry.foodItem.kcal
-            proteinsConsumed += entry.foodItem.protein
-            fatsConsumed += entry.foodItem.fats
-            carbsConsumed += entry.foodItem.carbs
+            kcalConsumed += entry.totalCalories
+            proteinsConsumed += entry.totalProteins
+            fatsConsumed += entry.totalFats
+            carbsConsumed += entry.totalCarbs
         }
         
         let mealEntryViewModels: [MealEntryViewModel] = entries.map {
@@ -106,10 +106,10 @@ class MealListItemViewModel: Identifiable {
             .init(
                 mealTitle: NSLocalizedString("meal_\(meal)", comment: "Meal title"),
                 entries: mealEntryViewModels,
-                kcalConsumed: String(Int(kcalConsumed)),
-                proteinsConsumed: String(Int(proteinsConsumed)),
-                fatsConsumed: String(Int(fatsConsumed)),
-                carbsConsumed: String(Int(carbsConsumed))
+                kcalConsumed: String(kcalConsumed),
+                proteinsConsumed: String(format: "%.1f", proteinsConsumed),
+                fatsConsumed: String(format: "%.1f", fatsConsumed),
+                carbsConsumed: String(format: "%.1f", carbsConsumed)
             )
         )
     }
