@@ -119,7 +119,7 @@ struct AddDiaryEntryView: View {
 }
 
 extension PresentationDetent {
-    static let small = Self.fraction(0.30)
+    static let small = Self.fraction(0.35)
 }
 
 #Preview {
