@@ -9,6 +9,7 @@ import Combine
 import DependencyManagement
 import FitnessPersistence
 import Foundation
+import SwiftUI
 
 @Observable
 class AddDiaryEntryViewModel {
@@ -26,9 +27,12 @@ class AddDiaryEntryViewModel {
         case empty
     }
     
-    var isCreateFoodItemOpen: Bool = false
+    var isShowingCreateNewFoodItem: Bool = false
+    var isShowingAddExistingItem: Bool = false
+    var shouldDismiss: Bool = false
     var searchText: String = ""
     var state: State = .idle
+    var addFoodItemViewModel: AddFoodItemViewModel?
     
     let date: Date
     let meal: Meal
@@ -50,6 +54,16 @@ class AddDiaryEntryViewModel {
         }
     }()
     
+    @ObservationIgnored
+    private lazy var createItemEventHandler: AddFoodItemViewModel.EventHandler = {
+        AddFoodItemViewModel.EventHandler(
+            didCreateFoodItem: { [weak self] item in
+                guard let self else { return }
+                addFoodItem(item)
+                shouldDismiss = true
+            })
+    }()
+    
     init(date: Date, meal: Meal, eventHandler: EventHandler? = nil) {
         self.date = date
         self.meal = meal
@@ -59,7 +73,15 @@ class AddDiaryEntryViewModel {
     }
     
     func createFoodItemTapped() {
-        isCreateFoodItemOpen = true
+        let viewModel = AddFoodItemViewModel(eventHandler: createItemEventHandler)
+        addFoodItemViewModel = viewModel
+        isShowingCreateNewFoodItem = true
+    }
+    
+    func addFoodItemTapped(_ foodItem: FoodItem) {
+        let viewModel = AddFoodItemViewModel(eventHandler: createItemEventHandler, foodItem: foodItem)
+        addFoodItemViewModel = viewModel
+        isShowingAddExistingItem = true
     }
     
     func loadRecentItems() {
@@ -112,7 +134,7 @@ class AddDiaryEntryViewModel {
     }
     
     func addFoodItem(_ foodItem: FoodItem) {
-        let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, meal: meal)
+        let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, meal: meal, servings: 1)
         diaryRepository.addDiaryEntry(diaryEntry: diaryEntry)
         eventHandler?.diaryEntryAdded(diaryEntry)
     }

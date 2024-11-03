@@ -146,6 +146,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0483DA0A2CD191FC00EBF669 /* Splash */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Splash; sourceTree = "<group>"; };
+		04B90DA92CD7D5BC0077957D /* DebugMenu */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DebugMenu; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,6 +405,7 @@
 		04BCDFD72B0BEC9400346AD6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				04B90DA92CD7D5BC0077957D /* DebugMenu */,
 				0483DA0A2CD191FC00EBF669 /* Splash */,
 				04F095622C5D3D4E00EA3D94 /* AddFoodItem */,
 				04F0955D2C5D376B00EA3D94 /* AddDiaryEntry */,
@@ -480,6 +482,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				0483DA0A2CD191FC00EBF669 /* Splash */,
+				04B90DA92CD7D5BC0077957D /* DebugMenu */,
 			);
 			name = FitnessTracker;
 			packageProductDependencies = (

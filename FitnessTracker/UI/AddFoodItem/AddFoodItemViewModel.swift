@@ -10,19 +10,26 @@ import Foundation
 import FitnessPersistence
 
 @Observable
-class AddFoodItemViewModel {
+class AddFoodItemViewModel: Identifiable {
     
     struct EventHandler {
         var didCreateFoodItem: (FoodItem) -> Void
     }
     
+    enum State {
+        case edit
+        case create
+    }
+    
     var selectedUnit: MeasurementUnit = .grams
-    var quantity: String = ""
+    var servingSize: String = ""
     var name: String = ""
     var kcal: String = ""
     var carbs: String = ""
     var protein: String = ""
     var fat: String = ""
+    var state: State = .create
+    var servings: String = "1"
     
     var isValid: Bool {
         !name.isEmpty &&
@@ -30,17 +37,36 @@ class AddFoodItemViewModel {
         Double(carbs) != nil &&
         Double(protein) != nil &&
         Double(fat) != nil &&
-        Double(quantity) != nil
+        Double(servingSize) != nil
     }
     
     @ObservationIgnored
     @Inject var foodItemRepository: FoodItemRepository
     
     @ObservationIgnored
-    var eventHandler: EventHandler
+    let eventHandler: EventHandler
     
-    init(eventHandler: EventHandler) {
+    @ObservationIgnored
+    let foodItem: FoodItem?
+    
+    init(eventHandler: EventHandler, foodItem: FoodItem? = nil) {
         self.eventHandler = eventHandler
+        self.foodItem = foodItem
+        
+        if let foodItem {
+            populate(with: foodItem)
+            state = .edit
+        }
+    }
+    
+    func populate(with foodItem: FoodItem) {
+        self.name = foodItem.name
+        self.kcal = String(foodItem.kcal)
+        self.carbs = String(foodItem.carbs)
+        self.protein = String(foodItem.protein)
+        self.fat = String(foodItem.fats)
+        self.servingSize = String(foodItem.servingSize)
+        self.selectedUnit = foodItem.measurementUnit
     }
     
     func createFoodItem() {
@@ -49,7 +75,7 @@ class AddFoodItemViewModel {
               let carbs = Double(carbs),
               let protein = Double(protein),
               let fat = Double(fat),
-              let quantity = Double(quantity) else {
+              let servingSize = Int(servingSize) else {
             return
         }
         
@@ -60,7 +86,7 @@ class AddFoodItemViewModel {
             protein: protein,
             fats: fat,
             measurementUnit: selectedUnit,
-            quantity: quantity
+            servingSize: servingSize
         )
         foodItemRepository.saveFoodItem(foodItem)
         eventHandler.didCreateFoodItem(foodItem)

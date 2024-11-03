@@ -22,7 +22,7 @@ struct FoodItemView: View {
                         Text(viewModel.name)
                             .font(.headline)
                         
-                        Text("\(viewModel.quantity)\(viewModel.measurementUnit)")
+                        Text("\(viewModel.servingSize)\(viewModel.measurementUnit)")
                             .font(.footnote)
                             .padding([.bottom], 1)
                         
@@ -68,7 +68,7 @@ struct FoodItemView: View {
         protein: 0,
         fats: 0.1,
         measurementUnit: .grams,
-        quantity: 25
+        servingSize: 25
     )
     
     let eventHandler = FoodItemViewModel.EventHandler { item in

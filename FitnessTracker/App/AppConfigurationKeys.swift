@@ -30,52 +30,6 @@ enum DebugConfigurationKeys: String, AppConfigurationKey {
     }
 }
 
-enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
-    
-    case alwaysShowOnboarding = "Always Show Onboarding"
-    case resetOnboardingStatus = "Reset Onboarding Status"
-    case resetGoals = "Reset Goals"
-    case purgeAllData = "Purge All Data"
-    
-    var appConfigurationKey: AppConfigurationKey? {
-        DebugConfigurationKeys(options: self)
-    }
-    
-    var title: String {
-        return rawValue
-    }
-    
-    var type: DebugTools.DebugMenuOptionType {
-        switch self {
-            case .alwaysShowOnboarding:
-                    .toggle
-            case .resetOnboardingStatus:
-                .button { resetOnboardingStatus() }
-            case .resetGoals:
-                .button { resetGoals() }
-            case .purgeAllData:
-                .button { purgeAllData() }
-        }
-    }
-    
-    func resetOnboardingStatus() {
-        let appConfigurationManager = DependencyContainer.resolve(AppConfigurationManaging.self)
-        appConfigurationManager?.setValue(value: false, key: Keys.onboardingCompleted)
-    }
-    
-    func resetGoals() {
-        let goalsRepository = DependencyContainer.resolve(GoalsRepository.self)
-        goalsRepository?.deleteGoals(for: "current")
-    }
-    
-    func purgeAllData() {
-        resetOnboardingStatus()
-        
-        let contextProvider = DependencyContainer.resolve(ContextProviding.self)
-        try? contextProvider?.sharedModelContainer.erase()
-    }
-}
-
 enum Keys: String, AppConfigurationKey {
     
     case onboardingCompleted

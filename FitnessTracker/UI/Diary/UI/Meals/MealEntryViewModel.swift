@@ -24,8 +24,8 @@ class MealEntryViewModel: Identifiable {
         diaryEntry.foodItem.name
     }
     
-    var quantity: String {
-        String(diaryEntry.foodItem.quantity)
+    var servingSize: String {
+        String(diaryEntry.foodItem.servingSize)
     }
     
     var measurement: String {

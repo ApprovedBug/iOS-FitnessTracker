@@ -45,15 +45,21 @@ struct AddDiaryEntryView: View {
         .onSubmit(of: .search) {
             viewModel.search()
         }
-        .sheet(isPresented: $viewModel.isCreateFoodItemOpen) {
-            AddFoodItemView(
-                viewModel: AddFoodItemViewModel(
-                    eventHandler: AddFoodItemViewModel.EventHandler(
-                        didCreateFoodItem: { item in
-                            viewModel.addFoodItem(item)
-                            presentationMode.wrappedValue.dismiss()
-            })))
-        }
+        .sheet(isPresented: $viewModel.isShowingCreateNewFoodItem, content: {
+            if let addFoodItemViewModel = viewModel.addFoodItemViewModel {
+                AddFoodItemView(viewModel: addFoodItemViewModel)
+                    .presentationDetents([.large])
+            }
+        })
+        .sheet(isPresented: $viewModel.isShowingAddExistingItem, content: {
+            if let addFoodItemViewModel = viewModel.addFoodItemViewModel {
+                AddFoodItemView(viewModel: addFoodItemViewModel)
+                    .presentationDetents([.small])
+            }
+        })
+        .onChange(of: viewModel.shouldDismiss, {
+            presentationMode.wrappedValue.dismiss()
+        })
     }
     
     func headerView() -> some View {
@@ -76,7 +82,7 @@ struct AddDiaryEntryView: View {
                     ForEach(items) { item in
                         FoodItemView(viewModel: item)
                             .onTapGesture {
-                                
+                                viewModel.addFoodItemTapped(item.foodItem)
                             }
                     }
                 }
@@ -110,6 +116,10 @@ struct AddDiaryEntryView: View {
             Spacer()
         }
     }
+}
+
+extension PresentationDetent {
+    static let small = Self.fraction(0.30)
 }
 
 #Preview {

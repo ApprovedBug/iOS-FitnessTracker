@@ -66,7 +66,7 @@ struct MealEntryView: View {
         
         HStack {
             VStack(alignment: .center) {
-                Text(viewModel.quantity)
+                Text(viewModel.servingSize)
                     .font(.body)
                 Text(viewModel.measurement)
                     .font(.footnote)
@@ -148,13 +148,14 @@ struct MealEntryView: View {
         protein: 9.8,
         fats: 0.3,
         measurementUnit: .grams,
-        quantity: 100
+        servingSize: 100
     )
     
     let diaryEntry = DiaryEntry(
         timestamp: .now,
         foodItem: foodItem,
-        meal: .breakfast
+        meal: .breakfast,
+        servings: 1
     )
     
     let viewModel = MealEntryViewModel(

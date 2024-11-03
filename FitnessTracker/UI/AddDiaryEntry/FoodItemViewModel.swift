@@ -38,7 +38,7 @@ class FoodItemViewModel: Identifiable {
         String(foodItem.fats)
     }
     
-    var quantity: String
+    var servingSize: String
     
     var measurementUnit: String {
         String(foodItem.measurementUnit.rawValue)
@@ -47,7 +47,7 @@ class FoodItemViewModel: Identifiable {
     init(foodItem: FoodItem, eventHandler: EventHandler) {
         self.foodItem = foodItem
         self.eventHandler = eventHandler
-        quantity = String(Int(foodItem.quantity))
+        servingSize = String(foodItem.servingSize)
     }
     
     func addItemTapped() {
