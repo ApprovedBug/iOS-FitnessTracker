@@ -15,6 +15,7 @@ class MealListItemViewModel: Identifiable {
     struct EventHandler {
         let addDiaryEntryTapped: (Meal) -> Void
         let diaryEntryRemoved: (DiaryEntry) -> Void
+        let diaryEntryUpdated: (DiaryEntry) -> Void
     }
     
     enum State {
@@ -79,6 +80,12 @@ class MealListItemViewModel: Identifiable {
         populateUI()
     }
     
+    func updateEntry(diaryEntry: DiaryEntry, servings: Double) {
+        diaryEntry.servings = servings
+        eventHandler?.diaryEntryUpdated(diaryEntry)
+        populateUI()
+    }
+    
     // MARK: Private functions
     
     private func populateUI() {
@@ -98,7 +105,10 @@ class MealListItemViewModel: Identifiable {
         let mealEntryViewModels: [MealEntryViewModel] = entries.map {
             let eventHandler = MealEntryViewModel.EventHandler { [weak self] entry in
                 self?.removeEntry(diaryEntry: entry)
+            } updateEntry: { [weak self] entry, servings in
+                self?.updateEntry(diaryEntry: entry, servings: servings)
             }
+
             return MealEntryViewModel(diaryEntry: $0, eventHandler: eventHandler)
         }
         

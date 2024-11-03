@@ -13,12 +13,15 @@ class MealEntryViewModel: Identifiable {
     
     struct EventHandler {
         let removeEntryTapped: (DiaryEntry) -> Void
+        let updateEntry: (DiaryEntry, Double) -> Void
     }
     
     private let diaryEntry: DiaryEntry
     private let eventHandler: EventHandler
     
     var isExpanded: Bool = false
+    var isShowingEditItem: Bool = false
+    var addFoodItemViewModel: AddFoodItemViewModel?
     
     var name: String {
         diaryEntry.foodItem.name
@@ -48,6 +51,16 @@ class MealEntryViewModel: Identifiable {
         String(format: "%.1f", diaryEntry.totalFats)
     }
     
+    @ObservationIgnored
+    private lazy var createItemEventHandler: AddFoodItemViewModel.EventHandler = {
+        AddFoodItemViewModel.EventHandler { _ in
+            // TODO: this is unused, move edit to separate veiw
+        } saveEntry: { [weak self] foodItem, servings in
+            guard let self else { return }
+            eventHandler.updateEntry(diaryEntry, servings)
+        }
+    }()
+    
     init(diaryEntry: DiaryEntry, eventHandler: EventHandler) {
         self.diaryEntry = diaryEntry
         self.eventHandler = eventHandler
@@ -58,7 +71,13 @@ class MealEntryViewModel: Identifiable {
     }
     
     func editDiaryEntryTapped() {
-        // TODO: Implement editing entries
+        let viewModel = AddFoodItemViewModel(
+            eventHandler: createItemEventHandler,
+            foodItem: diaryEntry.foodItem,
+            servings: diaryEntry.servings
+        )
+        addFoodItemViewModel = viewModel
+        isShowingEditItem = true
     }
     
     func removeDiaryEntryTapped() {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MealEntryView: View {
     
-    let viewModel: MealEntryViewModel
+    @Bindable var viewModel: MealEntryViewModel
     
     var body: some View {
         ZStack {
@@ -137,6 +137,12 @@ struct MealEntryView: View {
             
             Spacer()
         }
+        .sheet(isPresented: $viewModel.isShowingEditItem, content: {
+            if let addFoodItemViewModel = viewModel.addFoodItemViewModel {
+                AddFoodItemView(viewModel: addFoodItemViewModel)
+                    .presentationDetents([.small])
+            }
+        })
     }
 }
 
@@ -160,7 +166,8 @@ struct MealEntryView: View {
     
     let viewModel = MealEntryViewModel(
         diaryEntry: diaryEntry,
-        eventHandler: MealEntryViewModel.EventHandler(removeEntryTapped: { _ in })
+        eventHandler: MealEntryViewModel.EventHandler(
+            removeEntryTapped: { _ in }, updateEntry: { _, _ in })
     )
     
     ScrollView {

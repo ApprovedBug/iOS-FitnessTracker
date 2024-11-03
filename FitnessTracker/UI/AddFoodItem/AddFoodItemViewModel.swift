@@ -64,7 +64,9 @@ class AddFoodItemViewModel: Identifiable {
         self.foodItem = foodItem
         
         if let foodItem {
-            populate(with: foodItem, servings: servings ?? 1)
+            let defaultServings = servings ?? 1
+            self.servings = String(format: "%.1f", defaultServings)
+            populate(with: foodItem, servings: defaultServings)
             state = .edit
         }
     }

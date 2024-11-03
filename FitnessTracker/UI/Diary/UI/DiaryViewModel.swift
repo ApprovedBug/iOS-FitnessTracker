@@ -85,6 +85,10 @@ class DiaryViewModel {
                 allEntries.removeAll(where: { $0.id == entry.id })
                 let entries = allEntries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: dateViewModel.currentSelectedDate) }
                 summaryViewModel.updateEntries(with: entries)
+            }, diaryEntryUpdated: { [weak self] entry in
+                guard let self else { return }
+                let entries = allEntries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: dateViewModel.currentSelectedDate) }
+                summaryViewModel.updateEntries(with: entries)
             }
         )
         mealListViewModel.setEventHandler(eventHandler: eventHandler)
@@ -93,6 +97,10 @@ class DiaryViewModel {
     
     private func processEntries(entries: [DiaryEntry], date: Date) {
         let entries = entries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: date) }
+        
+        entries.forEach { entry in
+            print("Entry: Name - \(entry.foodItem.name), Id: \(entry.id)")
+        }
         
         state = .ready
         
