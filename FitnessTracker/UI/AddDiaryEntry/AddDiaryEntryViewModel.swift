@@ -22,7 +22,7 @@ class AddDiaryEntryViewModel {
         case recentItems(items: [FoodItemViewModel])
         case noRecentItems
         case loading
-        case success(items: [FoodItemViewModel])
+        case searchResults(items: [FoodItemViewModel])
         case empty
     }
     
@@ -42,6 +42,13 @@ class AddDiaryEntryViewModel {
     
     @ObservationIgnored
     private var cancellables = [AnyCancellable]()
+    
+    @ObservationIgnored
+    private lazy var itemEventHandler: FoodItemViewModel.EventHandler = {
+        FoodItemViewModel.EventHandler { [weak self] foodItem in
+            self?.addFoodItem(foodItem)
+        }
+    }()
     
     init(date: Date, meal: Meal, eventHandler: EventHandler? = nil) {
         self.date = date
@@ -69,11 +76,12 @@ class AddDiaryEntryViewModel {
                         self?.state = .noRecentItems
                 }
             } receiveValue: { [weak self] items in
+                guard let self else { return }
                 if items.isEmpty {
-                    self?.state = .noRecentItems
+                    state = .noRecentItems
                 } else {
-                    let viewModels = items.map { FoodItemViewModel(foodItem: $0) }
-                    self?.state = .recentItems(items: viewModels)
+                    let viewModels = items.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
+                    state = .recentItems(items: viewModels)
                 }
             }
             .store(in: &cancellables)
@@ -92,11 +100,12 @@ class AddDiaryEntryViewModel {
                         self?.state = .empty
                 }
             } receiveValue: { [weak self] items in
+                guard let self else { return }
                 if items.isEmpty {
-                    self?.state = .empty
+                    state = .empty
                 } else {
-                    let viewModels = items.map { FoodItemViewModel(foodItem: $0) }
-                    self?.state = .success(items: viewModels)
+                    let viewModels = items.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
+                    state = .searchResults(items: viewModels)
                 }
             }
             .store(in: &cancellables)

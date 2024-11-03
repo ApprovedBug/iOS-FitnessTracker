@@ -9,7 +9,7 @@ import FitnessPersistence
 import Foundation
 
 @Observable
-class MealEntryViewModel {
+class MealEntryViewModel: Identifiable {
     
     struct EventHandler {
         let removeEntryTapped: (DiaryEntry) -> Void

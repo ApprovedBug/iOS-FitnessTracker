@@ -1,7 +1,32 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "%@" : {
+
+    },
+    "%@%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@"
+          }
+        }
+      }
+    },
+    "%@g carbs" : {
+
+    },
+    "%@g fat" : {
+
+    },
+    "%@g protein" : {
+
+    },
+    "%@kcal" : {
 
     },
     "%@Kcal" : {

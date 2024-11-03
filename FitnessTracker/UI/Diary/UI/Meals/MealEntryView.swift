@@ -50,13 +50,12 @@ struct MealEntryView: View {
                         Divider()
                     
                         actionsView()
-                            .padding([.top], 4)
+                            .padding([.top], 12)
                     }
                 }
                 .padding([.top, .bottom], 12)
             }
             .frame(maxWidth: .infinity)
-            .animation(.easeOut(duration: 0.2), value: viewModel.isExpanded)
         }
         .onTapGesture {
             viewModel.toggleExpanded()

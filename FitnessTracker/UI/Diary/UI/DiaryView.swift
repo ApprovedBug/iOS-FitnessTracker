@@ -32,10 +32,13 @@ struct DiaryView: View {
         ScrollView {
             VStack {
                 SummaryView(viewModel: viewModel.summaryViewModel)
+                    .padding()
                 
                 DatePickerView(viewModel: viewModel.dateViewModel)
+                    .padding()
                 
                 MealListView(viewModel: viewModel.mealListViewModel)
+                    .padding([.leading, .trailing])
                 
     //                WaterView()
             }

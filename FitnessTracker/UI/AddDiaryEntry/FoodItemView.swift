@@ -16,46 +16,44 @@ struct FoodItemView: View {
     var body: some View {
         
         CardView {
-            VStack(alignment: .center, spacing: 16) {
-                Text(viewModel.name)
-                    .font(.headline)
+            HStack {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(alignment: .bottom) {
+                        Text(viewModel.name)
+                            .font(.headline)
+                        
+                        Text("\(viewModel.quantity)\(viewModel.measurementUnit)")
+                            .font(.footnote)
+                            .padding([.bottom], 1)
+                        
+                        Spacer()
+                    }
+                    
+                    HStack(alignment: .bottom) {
+                        Text("\(viewModel.kcal)kcal")
+                            .font(.footnote)
+                            .padding([.trailing], 12)
+                        
+                        Text("\(viewModel.carbs)g carbs")
+                            .font(.footnote)
+                            .padding([.trailing], 12)
+                        
+                        Text("\(viewModel.proteins)g protein")
+                            .font(.footnote)
+                            .padding([.trailing], 12)
+                        
+                        Text("\(viewModel.fats)g fat")
+                            .font(.footnote)
+                            .padding([.trailing], 12)
+                    }
+                }
                 
-                HStack(alignment: .top) {
-                    VStack(alignment: .center) {
-                        Text("\(viewModel.kcal)")
-                            .font(.body)
-                        Text("Kcal")
-                            .font(.footnote)
-                    }
-                    .frame(maxWidth: .infinity)
-                    VStack(alignment: .center) {
-                        Text("\(viewModel.carbs)")
-                            .font(.body)
-                        Text("Carbs")
-                            .font(.footnote)
-                    }
-                    .frame(maxWidth: .infinity)
-                    VStack(alignment: .center) {
-                        Text("\(viewModel.protein)")
-                            .font(.body)
-                        Text("Protein")
-                            .font(.footnote)
-                    }
-                    .frame(maxWidth: .infinity)
-                    VStack(alignment: .center) {
-                        Text("\(viewModel.fat)")
-                            .font(.body)
-                        Text("Fats")
-                            .font(.footnote)
-                    }
-                    .frame(maxWidth: .infinity)
-                    VStack(alignment: .center) {
-                        Text("\(viewModel.fat)")
-                            .font(.body)
-                        Text("Fats")
-                            .font(.footnote)
-                    }
-                    .frame(maxWidth: .infinity)
+                Button {
+                    viewModel.addItemTapped()
+                } label: {
+                    Image(systemName: "plus.circle")
+                        .font(.headline)
+                        .foregroundColor(.blue)
                 }
             }
         }
@@ -72,7 +70,15 @@ struct FoodItemView: View {
         measurementUnit: .grams,
         quantity: 25
     )
-    let viewModel = FoodItemViewModel(foodItem: foodItem)
+    
+    let eventHandler = FoodItemViewModel.EventHandler { item in
+        print(item)
+    }
+    
+    let viewModel = FoodItemViewModel(
+        foodItem: foodItem,
+        eventHandler: eventHandler
+    )
     
     ScrollView {
         FoodItemView(viewModel: viewModel)

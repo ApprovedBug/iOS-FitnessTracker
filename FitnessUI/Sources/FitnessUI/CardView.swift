@@ -20,16 +20,13 @@ public struct CardView<Content: View>: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .fill(Color("CardBackground", bundle: .module))
-                .shadow(
-                    color: Color(UIColor.label).opacity(0.1),
-                    radius: 3,
-                    x: 0, y: 0
-                )
+            
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .strokeBorder(Color("CardBorder", bundle: .module), lineWidth: 1)
             
             viewBuilder()
                 .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding([.leading, .trailing, .bottom])
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

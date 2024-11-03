@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 17/11/2023.
 //
 
+import FitnessPersistence
 import FitnessUI
 import Foundation
 import SwiftUI
@@ -20,18 +21,13 @@ struct MealListItemView: View {
                 EmptyView()
             case .ready(let data):
                 CardView {
-                    ContentView(viewModel: viewModel, data: data)
+                    contentView(data: data)
                 }
+                .animation(.easeOut(duration: 0.15))
         }
     }
-}
-
-private struct ContentView: View {
     
-    @Bindable var viewModel: MealListItemViewModel
-    let data: MealListItemViewModel.Data
-    
-    var body: some View {
+    func contentView(data: MealListItemViewModel.Data) -> some View {
         
         VStack(alignment: .center, spacing: 16) {
             
@@ -74,15 +70,13 @@ private struct ContentView: View {
             }
             
             ForEach(data.entries) { entry in
-                MealEntryView(
-                    viewModel: MealEntryViewModel(
-                        diaryEntry: entry, eventHandler: MealEntryViewModel.EventHandler(removeEntryTapped: { entry in
-                            viewModel.removeEntry(diaryEntry: entry)
-                        })))
+                MealEntryView(viewModel: entry)
             }
         }
     }
 }
+
+
 
 private struct MealItemMacrosView: View {
     
@@ -102,7 +96,27 @@ private struct MealItemMacrosView: View {
 
 #Preview {
     
-    let viewModel = MealListItemViewModel(meal: .breakfast, entries: [])
+    let foodItem = FoodItem(
+        name: "Fat Free Greek Yoghurt",
+        kcal: 66,
+        carbs: 6,
+        protein: 9.8,
+        fats: 0.3,
+        measurementUnit: .grams,
+        quantity: 100
+    )
+    
+    let diaryEntry = DiaryEntry(
+        timestamp: .now,
+        foodItem: foodItem,
+        meal: .breakfast
+    )
+    
+    let viewModel = MealListItemViewModel(
+        meal: .breakfast,
+        entries: [diaryEntry]
+    )
+    
     ScrollView {
         MealListItemView(viewModel: viewModel)
     }

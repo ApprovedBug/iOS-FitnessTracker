@@ -24,7 +24,7 @@ class MealListItemViewModel: Identifiable {
     
     struct Data {
         let mealTitle: String
-        let entries: [DiaryEntry]
+        let entries: [MealEntryViewModel]
         let kcalConsumed: String
         let proteinsConsumed: String
         let fatsConsumed: String
@@ -95,10 +95,17 @@ class MealListItemViewModel: Identifiable {
             carbsConsumed += entry.foodItem.carbs
         }
         
+        let mealEntryViewModels: [MealEntryViewModel] = entries.map {
+            let eventHandler = MealEntryViewModel.EventHandler { [weak self] entry in
+                self?.removeEntry(diaryEntry: entry)
+            }
+            return MealEntryViewModel(diaryEntry: $0, eventHandler: eventHandler)
+        }
+        
         state = .ready(
             .init(
                 mealTitle: NSLocalizedString("meal_\(meal)", comment: "Meal title"),
-                entries: entries,
+                entries: mealEntryViewModels,
                 kcalConsumed: String(Int(kcalConsumed)),
                 proteinsConsumed: String(Int(proteinsConsumed)),
                 fatsConsumed: String(Int(fatsConsumed)),

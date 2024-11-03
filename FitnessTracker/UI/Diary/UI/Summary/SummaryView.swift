@@ -59,7 +59,6 @@ private struct ContentView: View {
                 MacrosView(viewModel: data.fatsViewModel)
             }
         }
-        .padding()
     }
 }
 

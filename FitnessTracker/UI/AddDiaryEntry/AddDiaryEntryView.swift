@@ -28,12 +28,14 @@ struct AddDiaryEntryView: View {
                         EmptyView()
                     case .recentItems(let items):
                         foodItemList(title: "Recent items", items: items)
+                            .padding([.leading, .trailing])
                     case .noRecentItems:
                         emptyRecentItemsView()
                     case .loading:
                         ProgressView()
-                    case .success(let items):
+                    case .searchResults(let items):
                         foodItemList(title: "Results", items: items)
+                            .padding([.leading, .trailing])
                     case .empty:
                         emptyResultsView()
                 }
@@ -66,7 +68,7 @@ struct AddDiaryEntryView: View {
         
         VStack(alignment: .leading) {
             Text(title)
-                .padding([.leading, .trailing, .bottom])
+                .padding([.bottom])
                 .font(.title)
             
             ScrollView {
@@ -74,8 +76,7 @@ struct AddDiaryEntryView: View {
                     ForEach(items) { item in
                         FoodItemView(viewModel: item)
                             .onTapGesture {
-                                viewModel.addFoodItem(item.foodItem)
-                                presentationMode.wrappedValue.dismiss()
+                                
                             }
                     }
                 }
@@ -109,4 +110,10 @@ struct AddDiaryEntryView: View {
             Spacer()
         }
     }
+}
+
+#Preview {
+    
+    let viewModel = AddDiaryEntryViewModel(date: Date.now, meal: .breakfast)
+    AddDiaryEntryView(viewModel: viewModel)
 }

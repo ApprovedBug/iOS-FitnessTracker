@@ -11,7 +11,12 @@ import SwiftUI
 @Observable
 class FoodItemViewModel: Identifiable {
     
+    struct EventHandler {
+        let addItemTapped: (FoodItem) -> Void
+    }
+    
     let foodItem: FoodItem
+    let eventHandler: EventHandler
     
     var name: String {
         foodItem.name
@@ -25,16 +30,28 @@ class FoodItemViewModel: Identifiable {
         String(foodItem.carbs)
     }
     
-    var protein: String {
+    var proteins: String {
         String(foodItem.protein)
     }
     
-    var fat: String {
+    var fats: String {
         String(foodItem.fats)
     }
     
-    init(foodItem: FoodItem) {
+    var quantity: String
+    
+    var measurementUnit: String {
+        String(foodItem.measurementUnit.rawValue)
+    }
+    
+    init(foodItem: FoodItem, eventHandler: EventHandler) {
         self.foodItem = foodItem
+        self.eventHandler = eventHandler
+        quantity = String(Int(foodItem.quantity))
+    }
+    
+    func addItemTapped() {
+        eventHandler.addItemTapped(foodItem)
     }
 }
 
