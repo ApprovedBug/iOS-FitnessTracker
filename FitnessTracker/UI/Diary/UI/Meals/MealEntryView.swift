@@ -160,7 +160,7 @@ struct MealEntryView: View {
     let diaryEntry = DiaryEntry(
         timestamp: .now,
         foodItem: foodItem,
-        meal: .breakfast,
+        mealType: .breakfast,
         servings: 2
     )
     

@@ -124,6 +124,10 @@ extension PresentationDetent {
 
 #Preview {
     
-    let viewModel = AddDiaryEntryViewModel(date: Date.now, meal: .breakfast)
+    let viewModel = AddDiaryEntryViewModel(
+        date: Date.now,
+        mealType: .breakfast
+    )
+    
     AddDiaryEntryView(viewModel: viewModel)
 }

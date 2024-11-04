@@ -109,12 +109,12 @@ private struct MealItemMacrosView: View {
     let diaryEntry = DiaryEntry(
         timestamp: .now,
         foodItem: foodItem,
-        meal: .breakfast,
+        mealType: .breakfast,
         servings: 2
     )
     
     let viewModel = MealListItemViewModel(
-        meal: .breakfast,
+        mealType: .breakfast,
         entries: [diaryEntry]
     )
     

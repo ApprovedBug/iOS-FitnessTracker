@@ -97,11 +97,7 @@ class DiaryViewModel {
     
     private func processEntries(entries: [DiaryEntry], date: Date) {
         let entries = entries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: date) }
-        
-        entries.forEach { entry in
-            print("Entry: Name - \(entry.foodItem.name), Id: \(entry.id)")
-        }
-        
+
         state = .ready
         
         summaryViewModel.updateEntries(with: entries)

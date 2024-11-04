@@ -38,6 +38,24 @@ class DatePickerViewModel {
     }
     
     func setTitle() {
-        title = currentSelectedDate.formatted(date: .long, time: .omitted)
+        
+        if Calendar.current.isDateInYesterday(currentSelectedDate)
+            || Calendar.current.isDateInToday(currentSelectedDate)
+            || Calendar.current.isDateInTomorrow(currentSelectedDate) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeStyle = .none
+            dateFormatter.dateStyle = .medium
+            dateFormatter.doesRelativeDateFormatting = true
+            title = dateFormatter.string(from: currentSelectedDate)
+        } else {
+            
+            title = currentSelectedDate.formatted(
+                Date.FormatStyle()
+                    .year(.defaultDigits)
+                    .month(.abbreviated)
+                    .day(.twoDigits)
+                    .weekday(.abbreviated)
+            )
+        }
     }
 }

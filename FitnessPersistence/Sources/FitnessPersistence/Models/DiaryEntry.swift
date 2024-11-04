@@ -13,13 +13,13 @@ public class DiaryEntry {
     
     public var timestamp: Date
     public var foodItem: FoodItem
-    public var meal: Meal
+    public var mealType: MealType
     public var servings: Double
 
-    public init(timestamp: Date, foodItem: FoodItem, meal: Meal, servings: Double) {
+    public init(timestamp: Date, foodItem: FoodItem, mealType: MealType, servings: Double) {
         self.timestamp = timestamp
         self.foodItem = foodItem
-        self.meal = meal
+        self.mealType = mealType
         self.servings = servings
     }
 }

@@ -35,7 +35,7 @@ class AddDiaryEntryViewModel {
     var addFoodItemViewModel: AddFoodItemViewModel?
     
     let date: Date
-    let meal: Meal
+    let mealType: MealType
     let eventHandler: EventHandler?
     
     @ObservationIgnored
@@ -66,9 +66,9 @@ class AddDiaryEntryViewModel {
             }
     }()
     
-    init(date: Date, meal: Meal, eventHandler: EventHandler? = nil) {
+    init(date: Date, mealType: MealType, eventHandler: EventHandler? = nil) {
         self.date = date
-        self.meal = meal
+        self.mealType = mealType
         self.eventHandler = eventHandler
         
         loadRecentItems()
@@ -136,7 +136,7 @@ class AddDiaryEntryViewModel {
     }
     
     func addDiaryEntry(_ foodItem: FoodItem, servings: Double = 1) {
-        let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, meal: meal, servings: servings)
+        let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, mealType: mealType, servings: servings)
         diaryRepository.addDiaryEntry(diaryEntry: diaryEntry)
         eventHandler?.diaryEntryAdded(diaryEntry)
     }

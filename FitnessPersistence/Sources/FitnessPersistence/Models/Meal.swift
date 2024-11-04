@@ -1,17 +1,21 @@
 //
-//  Meal.swift
-//  FitnessTracker
+//  File.swift
+//  FitnessPersistence
 //
-//  Created by Jack Moseley on 30/10/2023.
+//  Created by Jack Moseley on 04/11/2024.
 //
 
 import Foundation
+import SwiftData
 
-public enum Meal: Codable, CaseIterable {
-    case breakfast
-    case lunch
-    case dinner
-    case snack
+@Model
+public class Meal {
+    
+    public var name: String
+    public var foodItems: [FoodItem]
+    
+    public init(name: String, foodItems: [FoodItem]) {
+        self.name = name
+        self.foodItems = foodItems
+    }
 }
-
-

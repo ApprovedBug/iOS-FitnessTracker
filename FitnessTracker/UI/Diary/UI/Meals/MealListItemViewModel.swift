@@ -13,7 +13,7 @@ import Foundation
 class MealListItemViewModel: Identifiable {
 
     struct EventHandler {
-        let addDiaryEntryTapped: (Meal) -> Void
+        let addDiaryEntryTapped: (MealType) -> Void
         let diaryEntryRemoved: (DiaryEntry) -> Void
         let diaryEntryUpdated: (DiaryEntry) -> Void
     }
@@ -37,7 +37,7 @@ class MealListItemViewModel: Identifiable {
     private var entries: [DiaryEntry] = []
     
     @ObservationIgnored
-    let meal: Meal
+    let mealType: MealType
     
     @ObservationIgnored
     let eventHandler: EventHandler?
@@ -49,12 +49,12 @@ class MealListItemViewModel: Identifiable {
     // MARK: Initialisers
     
     init(
-        meal: Meal,
+        mealType: MealType,
         entries: [DiaryEntry],
         eventHandler: MealListItemViewModel.EventHandler? = nil
     ) {
         
-        self.meal = meal
+        self.mealType = mealType
         self.entries = entries
         self.eventHandler = eventHandler
         
@@ -70,7 +70,7 @@ class MealListItemViewModel: Identifiable {
     }
     
     func addEntryTapped() {
-        eventHandler?.addDiaryEntryTapped(meal)
+        eventHandler?.addDiaryEntryTapped(mealType)
     }
     
     func removeEntry(diaryEntry: DiaryEntry) {
@@ -114,7 +114,7 @@ class MealListItemViewModel: Identifiable {
         
         state = .ready(
             .init(
-                mealTitle: NSLocalizedString("meal_\(meal)", comment: "Meal title"),
+                mealTitle: "meal_\(mealType)",
                 entries: mealEntryViewModels,
                 kcalConsumed: String(kcalConsumed),
                 proteinsConsumed: String(format: "%.1f", proteinsConsumed),

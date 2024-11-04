@@ -47,17 +47,17 @@ class MealListViewModel {
         let addDiaryEntryEventHandler = AddDiaryEntryViewModel.EventHandler { [weak self] entry in
             // new entry added
             guard let self else { return }
-            currentMeals.first(where: { $0.meal == entry.meal })?.addEntry(entry: entry)
+            currentMeals.first(where: { $0.mealType == entry.mealType })?.addEntry(entry: entry)
             eventHandler?.diaryEntryAdded(entry)
         }
         
         let itemEventHandler = MealListItemViewModel.EventHandler(
-            addDiaryEntryTapped: { [weak self] meal in
+            addDiaryEntryTapped: { [weak self] mealType in
             // add new entry opened
             guard let self else { return }
             addDiaryEntryViewModel = AddDiaryEntryViewModel(
                 date: currentlySelectedDate,
-                meal: meal,
+                mealType: mealType,
                 eventHandler: addDiaryEntryEventHandler
             )
             isAddDiaryEntryOpen = true
@@ -71,9 +71,9 @@ class MealListViewModel {
             eventHandler?.diaryEntryUpdated(entry)
         })
         
-        let meals: [MealListItemViewModel] = Meal.allCases.map {
+        let meals: [MealListItemViewModel] = MealType.allCases.map {
             MealListItemViewModel(
-                meal: $0,
+                mealType: $0,
                 entries: [],
                 eventHandler: itemEventHandler
             )
@@ -82,7 +82,7 @@ class MealListViewModel {
         for entry in entries {
             
             if let meal = meals.first(where: { vm in
-                vm.meal == entry.meal
+                vm.mealType == entry.mealType
             }) {
                 meal.addEntry(entry: entry)
             }

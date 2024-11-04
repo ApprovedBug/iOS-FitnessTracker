@@ -144,28 +144,28 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
         let diaryEntry1 = DiaryEntry(
             timestamp: Date.now,
             foodItem: foodItem1,
-            meal: .breakfast,
+            mealType: .breakfast,
             servings: 1
         )
         
         let diaryEntry2 = DiaryEntry(
             timestamp: Date.now,
             foodItem: foodItem2,
-            meal: .breakfast,
+            mealType: .breakfast,
             servings: 1
         )
         
         let diaryEntry3 = DiaryEntry(
             timestamp: Date.now,
             foodItem: foodItem4,
-            meal: .breakfast,
+            mealType: .breakfast,
             servings: 2.5
         )
         
         let diaryEntry4 = DiaryEntry(
             timestamp: Date.now,
             foodItem: foodItem5,
-            meal: .dinner,
+            mealType: .dinner,
             servings: 0.5
         )
         
