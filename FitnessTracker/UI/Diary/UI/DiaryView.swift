@@ -47,7 +47,7 @@ struct DiaryView: View {
 }
 
 
-//#Preview {
-//    
-//    DiaryView(viewModel: DiaryViewModel(diaryFetching: MockDiaryRepository()))
-//}
+#Preview {
+    
+    DiaryView(viewModel: DiaryViewModel())
+}

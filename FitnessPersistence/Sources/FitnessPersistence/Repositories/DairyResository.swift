@@ -34,7 +34,6 @@ public struct LocalDiaryRepository: @preconcurrency DiaryRepository {
             let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
             return Just(entries).setFailureType(to: DiaryError.self).eraseToAnyPublisher()
         } catch {
-            print("Fetch failed")
             return Fail(error: .fetchError).eraseToAnyPublisher()
         }
     }
