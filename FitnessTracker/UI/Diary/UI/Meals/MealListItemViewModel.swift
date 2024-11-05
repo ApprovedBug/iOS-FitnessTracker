@@ -33,6 +33,11 @@ class MealListItemViewModel: Identifiable {
     }
     
     var state: State = .idle
+    var isShowingSaveMealAlert: Bool = false
+    var mealName: String = ""
+    var mealNameValid: Bool {
+        !mealName.isEmpty
+    }
 
     private var entries: [DiaryEntry] = []
     
@@ -45,6 +50,10 @@ class MealListItemViewModel: Identifiable {
     @ObservationIgnored
     @Inject
     var diaryRepository: DiaryRepository
+    
+    @ObservationIgnored
+    @Inject
+    var mealsRepository: MealsRepository
     
     // MARK: Initialisers
     
@@ -86,6 +95,18 @@ class MealListItemViewModel: Identifiable {
         populateUI()
     }
     
+    func saveMealTapped() {
+        
+        guard isShowingSaveMealAlert else {
+            isShowingSaveMealAlert = true
+            return
+        }
+        let foodItems = entries.map { $0.foodItem }
+        let meal = Meal(name: mealName, foodItems: foodItems)
+        mealsRepository.saveMeal(meal)
+        isShowingSaveMealAlert = false
+    }
+    
     // MARK: Private functions
     
     private func populateUI() {
@@ -114,7 +135,7 @@ class MealListItemViewModel: Identifiable {
         
         state = .ready(
             .init(
-                mealTitle: "meal_\(mealType)",
+                mealTitle: NSLocalizedString("meal_\(mealType)", comment: "Meal title"),
                 entries: mealEntryViewModels,
                 kcalConsumed: String(kcalConsumed),
                 proteinsConsumed: String(format: "%.1f", proteinsConsumed),

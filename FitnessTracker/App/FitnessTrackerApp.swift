@@ -48,6 +48,11 @@ struct FitnessTrackerApp: App {
             foodItemsRepository
         }
         
+        let mealsRepository = LocalMealsRepository()
+        DependencyContainer.register(MealsRepository.self) {
+            mealsRepository
+        }
+        
         DependencyContainer.register(AppConfigurationManaging.self) {
             AppConfigurationManager()
         }

@@ -68,6 +68,9 @@
     "Diary" : {
 
     },
+    "Enter Meal Name i.e. Scrambled eggs on toast" : {
+
+    },
     "Exercise" : {
 
     },
@@ -185,6 +188,15 @@
 
     },
     "Save" : {
+
+    },
+    "Save meal" : {
+
+    },
+    "Save Meal" : {
+
+    },
+    "Saving meals makes it easier to add commonly tracked foods to your diary." : {
 
     },
     "Serving Info" : {

@@ -18,7 +18,7 @@ struct MealEntryView: View {
             Color.clear
                 .contentShape(Rectangle())
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
             
                 Divider()
                 
@@ -53,7 +53,7 @@ struct MealEntryView: View {
                             .padding([.top], 12)
                     }
                 }
-                .padding([.top, .bottom], 12)
+                .padding([.top], 12)
             }
             .frame(maxWidth: .infinity)
         }

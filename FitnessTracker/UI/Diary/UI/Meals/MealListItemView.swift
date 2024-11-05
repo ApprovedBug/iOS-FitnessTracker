@@ -12,7 +12,7 @@ import SwiftUI
 
 struct MealListItemView: View {
     
-    var viewModel: MealListItemViewModel
+    @Bindable var viewModel: MealListItemViewModel
     
     var body: some View {
         
@@ -29,7 +29,7 @@ struct MealListItemView: View {
     
     func contentView(data: MealListItemViewModel.Data) -> some View {
         
-        VStack(alignment: .center, spacing: 16) {
+        VStack(alignment: .center, spacing: 12) {
             
             HStack {
                 Spacer()
@@ -50,46 +50,74 @@ struct MealListItemView: View {
             
             HStack {
                 
-                MealItemMacrosView(amount: data.kcalConsumed, macro: "Kcal")
+                mealItemMacrosView(amount: data.kcalConsumed, macro: "Kcal")
                     .frame(maxWidth: .infinity)
                 
                 Divider()
                 
-                MealItemMacrosView(amount: data.carbsConsumed, macro: "Carbs")
+                mealItemMacrosView(amount: data.carbsConsumed, macro: "Carbs")
                     .frame(maxWidth: .infinity)
                 
                 Divider()
                 
-                MealItemMacrosView(amount: data.proteinsConsumed, macro: "Proteins")
+                mealItemMacrosView(amount: data.proteinsConsumed, macro: "Proteins")
                     .frame(maxWidth: .infinity)
                 
                 Divider()
                 
-                MealItemMacrosView(amount: data.fatsConsumed, macro: "Fats")
+                mealItemMacrosView(amount: data.fatsConsumed, macro: "Fats")
                     .frame(maxWidth: .infinity)
             }
             
             ForEach(data.entries) { entry in
                 MealEntryView(viewModel: entry)
             }
+            
+            if data.entries.count > 1 {
+                Divider()
+                
+                saveMealView()
+            }
         }
     }
-}
-
-
-
-private struct MealItemMacrosView: View {
     
-    let amount: String
-    let macro: String
-    
-    var body: some View {
-        
+    func mealItemMacrosView(
+        amount: String,
+        macro: String
+    ) -> some View {
         VStack {
             Text(amount)
                 .font(.body)
             Text(macro)
                 .font(.footnote)
+        }
+    }
+    
+    func saveMealView() -> some View {
+        Button("Save Meal") {
+            viewModel.saveMealTapped()
+        }
+        .buttonStyle(TertiaryButtonStyle())
+        .frame(height: 32)
+        .sheet(isPresented: $viewModel.isShowingSaveMealAlert) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("Save meal")
+                    .font(.title)
+                Text("Saving meals makes it easier to add commonly tracked foods to your diary.")
+                TextField("Enter Meal Name i.e. Scrambled eggs on toast", text: $viewModel.mealName)
+                    .textFieldStyle(.roundedBorder)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+                Button("Save Meal") {
+                    viewModel.saveMealTapped()
+                }
+                .buttonStyle(RoundedButtonStyle())
+                .disabled(!viewModel.mealNameValid)
+                
+            }
+            .padding()
+            .presentationDetents([.small])
         }
     }
 }
@@ -113,9 +141,16 @@ private struct MealItemMacrosView: View {
         servings: 2
     )
     
+    let diaryEntry2 = DiaryEntry(
+        timestamp: .now,
+        foodItem: foodItem,
+        mealType: .breakfast,
+        servings: 2
+    )
+    
     let viewModel = MealListItemViewModel(
         mealType: .breakfast,
-        entries: [diaryEntry]
+        entries: [diaryEntry, diaryEntry2]
     )
     
     ScrollView {
