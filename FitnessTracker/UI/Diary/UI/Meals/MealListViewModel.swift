@@ -44,15 +44,24 @@ class MealListViewModel {
     
     func updateEntries(entries: [DiaryEntry]) {
         
-        let addDiaryEntryEventHandler = AddDiaryEntryViewModel.EventHandler { [weak self] entry in
+        let addDiaryEntryEventHandler = AddDiaryEntryViewModel.EventHandler(
+            diaryEntryAdded: { [weak self] entry in
             // new entry added
             guard let self else { return }
             currentMeals.first(where: { $0.mealType == entry.mealType })?.addEntry(entry: entry)
             eventHandler?.diaryEntryAdded(entry)
-        }
+            }) { [weak self] entries in
+                // new meal added
+                guard let self else { return }
+                let meal = currentMeals.first(where: { $0.mealType == entries.first?.mealType })
+                entries.forEach { entry in
+                    meal?.addEntry(entry: entry)
+                    eventHandler?.diaryEntryAdded(entry)
+                }
+            }
         
         let itemEventHandler = MealListItemViewModel.EventHandler(
-            addDiaryEntryTapped: { [weak self] mealType in
+            openAddDiaryEntryTapped: { [weak self] mealType in
             // add new entry opened
             guard let self else { return }
             addDiaryEntryViewModel = AddDiaryEntryViewModel(

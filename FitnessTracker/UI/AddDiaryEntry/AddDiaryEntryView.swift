@@ -18,27 +18,15 @@ struct AddDiaryEntryView: View {
     var body: some View {
         
         NavigationStack {
-            
-            VStack {
-                
-                headerView()
-                
-                switch viewModel.state {
-                    case .idle:
-                        EmptyView()
-                    case .recentItems(let items):
-                        foodItemList(title: "Recent items", items: items)
-                            .padding([.leading, .trailing])
-                    case .noRecentItems:
-                        emptyRecentItemsView()
-                    case .loading:
-                        ProgressView()
-                    case .searchResults(let items):
-                        foodItemList(title: "Results", items: items)
-                            .padding([.leading, .trailing])
-                    case .empty:
-                        emptyResultsView()
-                }
+            switch viewModel.state {
+            case .idle:
+                EmptyView()
+            case .loading:
+                ProgressView()
+            case .searchResults(let items, let meals):
+                foodItemList(recentItems: items, meals: meals)
+            case .empty:
+                emptyResultsView()
             }
         }
         .searchable(text: $viewModel.searchText)
@@ -70,34 +58,37 @@ struct AddDiaryEntryView: View {
         .buttonStyle(RoundedButtonStyle())
     }
     
-    func foodItemList(title: String, items: [FoodItemViewModel]) -> some View {
+    func foodItemList(
+        recentItems: [FoodItemViewModel],
+        meals: [FoodItemViewModel]
+    ) -> some View {
         
-        VStack(alignment: .leading) {
-            Text(title)
-                .padding([.bottom])
-                .font(.title)
+        SlidingTabView(isScrollable: false) {
             
-            ScrollView {
-                LazyVStack {
-                    ForEach(items) { item in
-                        FoodItemView(viewModel: item)
-                            .onTapGesture {
-                                viewModel.addFoodItemTapped(item.foodItem)
-                            }
+            SlidingTabItem("All") {
+                ScrollView {
+                    LazyVStack {
+                        ForEach(recentItems) { item in
+                            FoodItemView(viewModel: item)
+                                .onTapGesture {
+                                    viewModel.addFoodItemTapped(item.foodItem)
+                                }
+                        }
                     }
+                    .padding([.leading, .trailing])
                 }
             }
-        }
-    }
-    
-    func emptyRecentItemsView() -> some View {
-        
-        VStack(alignment: .center, spacing: 10) {
-            Spacer()
             
-            Text("Your recent items will appear here.")
-            
-            Spacer()
+            SlidingTabItem("Meals") {
+                ScrollView {
+                    LazyVStack {
+                        ForEach(meals) { meal in
+                            FoodItemView(viewModel: meal)
+                        }
+                    }
+                    .padding([.leading, .trailing])
+                }
+            }
         }
     }
     
