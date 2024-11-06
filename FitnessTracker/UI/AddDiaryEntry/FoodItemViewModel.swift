@@ -18,24 +18,22 @@ class FoodItemViewModel: Identifiable {
     let foodItem: FoodItem
     let eventHandler: EventHandler
     
-    var name: String {
-        foodItem.name
-    }
+    var name: String
     
     var kcal: String {
         String(foodItem.kcal)
     }
     
     var carbs: String {
-        String(foodItem.carbs)
+        String(format: "%.1f", foodItem.carbs)
     }
     
     var proteins: String {
-        String(foodItem.protein)
+        String(format: "%.1f", foodItem.protein)
     }
     
     var fats: String {
-        String(foodItem.fats)
+        String(format: "%.1f", foodItem.fats)
     }
     
     var servingSize: String
@@ -47,7 +45,28 @@ class FoodItemViewModel: Identifiable {
     init(foodItem: FoodItem, eventHandler: EventHandler) {
         self.foodItem = foodItem
         self.eventHandler = eventHandler
+        self.name = foodItem.name
+        
         servingSize = String(foodItem.servingSize)
+    }
+    
+    convenience init(meal: Meal, eventHandler: EventHandler) {
+        
+        let totalCalories = meal.foodItems.reduce(0) { $0 + $1.kcal }
+        let totalCarbs = meal.foodItems.reduce(0) { $0 + $1.carbs }
+        let totalProteins = meal.foodItems.reduce(0) { $0 + $1.protein }
+        let totalFats = meal.foodItems.reduce(0) { $0 + $1.fats }
+        
+        let foodItem = FoodItem(
+            name: meal.name,
+            kcal: totalCalories,
+            carbs: totalCarbs,
+            protein: totalProteins,
+            fats: totalFats,
+            measurementUnit: .item,
+            servingSize: 1)
+        
+        self.init(foodItem: foodItem, eventHandler: eventHandler)
     }
     
     func addItemTapped() {

@@ -14,20 +14,20 @@ public protocol SlidingTab: View {
 
 // Define a result builder to handle multiple tabs
 @resultBuilder
-struct SlidingTabBuilder {
-    static func buildBlock<Content: SlidingTab>(_ components: Content...) -> [Content] {
+public struct SlidingTabBuilder {
+    public static func buildBlock<Content: SlidingTab>(_ components: Content...) -> [Content] {
         components
     }
 }
 
 // SlidingTabItem to represent each tab's content and title
-public struct SlidingTabItem<Content: View>: SlidingTab {
+public struct SlidingTabItem: SlidingTab {
     public let title: String
-    let content: Content
+    let content: AnyView
     
-    init(_ title: String, @ViewBuilder content: () -> Content) {
+    public init<Content: View>(_ title: String, @ViewBuilder content: () -> Content) {
         self.title = title
-        self.content = content()
+        self.content = AnyView(content())
     }
     
     public var body: some View {
@@ -41,10 +41,10 @@ public struct SlidingTabView<TabContent: SlidingTab>: View {
     private let tabItems: [TabContent]
     private var isScrollable: Bool = true
     
-    init(@SlidingTabBuilder content: () -> [TabContent]) {
+    public init(@SlidingTabBuilder content: () -> [TabContent]) {
         self.tabItems = content()
     }
-    init(
+    public init(
         isScrollable: Bool,
         @SlidingTabBuilder content: () -> [TabContent]
     ) {
@@ -53,7 +53,14 @@ public struct SlidingTabView<TabContent: SlidingTab>: View {
     }
     
     public var body: some View {
-        ZStack(alignment: .top) {
+        VStack(spacing: 16) {
+            TabBarView(
+                currentTab: $currentTab,
+                tabBarOptions: tabItems.map { $0.title },
+                isScrollable: isScrollable
+            )
+            .frame(height: 50)
+            
             TabView(selection: $currentTab) {
                 ForEach(0..<tabItems.count, id: \.self) { index in
                     tabItems[index]
@@ -61,13 +68,7 @@ public struct SlidingTabView<TabContent: SlidingTab>: View {
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .edgesIgnoringSafeArea(.all)
-            
-            TabBarView(
-                currentTab: $currentTab,
-                tabBarOptions: tabItems.map { $0.title },
-                isScrollable: isScrollable
-            )
+            .ignoresSafeArea(.all, edges: .bottom)
         }
     }
 }
@@ -81,21 +82,16 @@ private struct TabBarView: View {
     let isScrollable: Bool
     
     var body: some View {
-        Group {
-            if isScrollable {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    tabBarItems
-                }
-            } else {
-                HStack(spacing: 0) {
-                    tabBarItems
-                        .frame(maxWidth: .infinity)
-                }
+        if isScrollable {
+            ScrollView(.horizontal, showsIndicators: false) {
+                tabBarItems
+            }
+        } else {
+            HStack(spacing: 0) {
+                tabBarItems
+                    .frame(maxWidth: .infinity)
             }
         }
-        .background(Color.white)
-        .frame(height: 80)
-        .edgesIgnoringSafeArea(.all)
     }
     
     // Tab bar items extracted for clarity
@@ -127,19 +123,21 @@ private struct TabBarItem: View {
             self.currentTab = tab
         }) {
             VStack {
+                Color.clear
+                    .contentShape(Rectangle())
                 Spacer()
                 Text(tabBarItemName)
                     .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(currentTab == tab ? .black : .gray)
+                    .foregroundColor(currentTab == tab ? .primary : .secondary)
                 if currentTab == tab {
-                    Color.black
+                    Color.primary
                         .frame(height: 2)
                         .matchedGeometryEffect(id: "underline", in: namespace, properties: .frame)
                 } else {
                     Color.clear.frame(height: 2)
                 }
             }
-            .animation(.spring(), value: self.currentTab)
+            .animation(.bouncy(duration: 0.3), value: self.currentTab)
         }
         .buttonStyle(.plain)
     }
@@ -168,7 +166,9 @@ private struct TabBarItem: View {
             Text("First Tab Content")
         }
         SlidingTabItem("Second Tab") {
-            Text("Second Tab Content")
+            Button("Second Tab Content") {
+                
+            }
         }
         SlidingTabItem("Third Tab") {
             Text("Third Tab Content")

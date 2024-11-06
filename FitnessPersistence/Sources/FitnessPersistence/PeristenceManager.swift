@@ -21,7 +21,8 @@ public struct PersistenceManager: ContextProviding {
         let schema = Schema([
             DiaryEntry.self,
             FoodItem.self,
-            Goals.self
+            Goals.self,
+            Meal.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

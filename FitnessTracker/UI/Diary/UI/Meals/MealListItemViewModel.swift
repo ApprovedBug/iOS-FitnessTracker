@@ -13,7 +13,7 @@ import Foundation
 class MealListItemViewModel: Identifiable {
 
     struct EventHandler {
-        let addDiaryEntryTapped: (MealType) -> Void
+        let openAddDiaryEntryTapped: (MealType) -> Void
         let diaryEntryRemoved: (DiaryEntry) -> Void
         let diaryEntryUpdated: (DiaryEntry) -> Void
     }
@@ -79,7 +79,7 @@ class MealListItemViewModel: Identifiable {
     }
     
     func addEntryTapped() {
-        eventHandler?.addDiaryEntryTapped(mealType)
+        eventHandler?.openAddDiaryEntryTapped(mealType)
     }
     
     func removeEntry(diaryEntry: DiaryEntry) {
@@ -104,6 +104,7 @@ class MealListItemViewModel: Identifiable {
         let foodItems = entries.map { $0.foodItem }
         let meal = Meal(name: mealName, foodItems: foodItems)
         mealsRepository.saveMeal(meal)
+        print("MealTesting - MealListItemViewModel - saveMealTapped: \(meal.foodItems.count)")
         isShowingSaveMealAlert = false
     }
     

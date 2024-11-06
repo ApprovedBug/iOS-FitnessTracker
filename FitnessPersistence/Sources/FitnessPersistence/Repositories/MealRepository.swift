@@ -28,7 +28,7 @@ public struct LocalMealsRepository: @preconcurrency MealsRepository {
     @MainActor public func meals() -> AnyPublisher<[Meal], MealError> {
         
         do {
-            let fetchDescriptor = FetchDescriptor<Meal>()
+            let fetchDescriptor = FetchDescriptor<Meal>(sortBy: [SortDescriptor(\.name)])
             let meals = try contextProvider.sharedModelContainer.mainContext.fetch(fetchDescriptor)
             return Just(meals).setFailureType(to: MealError.self).eraseToAnyPublisher()
         } catch {

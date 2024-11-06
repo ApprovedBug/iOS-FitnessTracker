@@ -18,6 +18,7 @@ public protocol DiaryRepository {
     
     func allDiaryEntries() -> AnyPublisher<[DiaryEntry], DiaryError>
     func addDiaryEntry(diaryEntry: DiaryEntry)
+    func addDiaryEntries(diaryEntries: [DiaryEntry])
     func removeDiaryEntry(diaryEntry: DiaryEntry)
 }
 
@@ -40,6 +41,13 @@ public struct LocalDiaryRepository: @preconcurrency DiaryRepository {
     
     @MainActor public func addDiaryEntry(diaryEntry: DiaryEntry) {
         contextProvider.sharedModelContainer.mainContext.insert(diaryEntry)
+        try? contextProvider.sharedModelContainer.mainContext.save()
+    }
+    
+    @MainActor public func addDiaryEntries(diaryEntries: [DiaryEntry]) {
+        diaryEntries.forEach { entry in
+            contextProvider.sharedModelContainer.mainContext.insert(entry)
+        }
         try? contextProvider.sharedModelContainer.mainContext.save()
     }
     
