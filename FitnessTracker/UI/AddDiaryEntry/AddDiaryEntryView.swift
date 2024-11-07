@@ -24,14 +24,26 @@ struct AddDiaryEntryView: View {
             case .loading:
                 ProgressView()
             case .searchResults(let items, let meals):
-                foodItemList(recentItems: items, meals: meals)
+                FoodItemList(
+                    recentItems: items,
+                    meals: meals,
+                    addFoodItemTapped: viewModel.addFoodItemTapped,
+                    cancelSearch: viewModel.clearSearch
+                )
+                .searchable(text: $viewModel.searchText)
+                .onSubmit(of: .search) {
+                    viewModel.search()
+                }
             case .empty:
-                emptyResultsView()
+                EmptyResultsView(
+                    createFoodItemTapped: viewModel.createFoodItemTapped,
+                    cancelSearch: viewModel.clearSearch
+                )
+                .searchable(text: $viewModel.searchText)
+                .onSubmit(of: .search) {
+                    viewModel.search()
+                }
             }
-        }
-        .searchable(text: $viewModel.searchText)
-        .onSubmit(of: .search) {
-            viewModel.search()
         }
         .sheet(isPresented: $viewModel.isShowingCreateNewFoodItem, content: {
             if let addFoodItemViewModel = viewModel.addFoodItemViewModel {
@@ -58,53 +70,74 @@ struct AddDiaryEntryView: View {
         .buttonStyle(RoundedButtonStyle())
     }
     
-    func foodItemList(
-        recentItems: [FoodItemViewModel],
-        meals: [MealItemViewModel]
-    ) -> some View {
+    struct FoodItemList: View {
+        @Environment(\.isSearching) var isSearching
         
-        SlidingTabView(isScrollable: false) {
-            
-            SlidingTabItem("All") {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(recentItems) { item in
-                            FoodItemView(viewModel: item)
-                                .onTapGesture {
-                                    viewModel.addFoodItemTapped(item.foodItem)
-                                }
+        let recentItems: [FoodItemViewModel]
+        let meals: [MealItemViewModel]
+        let addFoodItemTapped: (FoodItem) -> Void
+        let cancelSearch: () -> Void
+        
+        var body: some View {
+            SlidingTabView(isScrollable: false) {
+                
+                SlidingTabItem("All") {
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(recentItems) { item in
+                                FoodItemView(viewModel: item)
+                                    .onTapGesture {
+                                        addFoodItemTapped(item.foodItem)
+                                    }
+                            }
                         }
+                        .padding([.leading, .trailing])
                     }
-                    .padding([.leading, .trailing])
+                }
+                
+                SlidingTabItem("Meals") {
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(meals) { viewModel in
+                                MealItemView(viewModel: viewModel)
+                            }
+                        }
+                        .padding([.leading, .trailing])
+                    }
                 }
             }
-            
-            SlidingTabItem("Meals") {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(meals) { viewModel in
-                            MealItemView(viewModel: viewModel)
-                        }
-                    }
-                    .padding([.leading, .trailing])
+            .onChange(of: isSearching) { oldValue, newValue in
+                if !newValue {
+                    cancelSearch()
                 }
             }
         }
     }
     
-    func emptyResultsView() -> some View {
+    struct EmptyResultsView: View {
+        @Environment(\.isSearching) var isSearching
         
-        VStack(alignment: .center, spacing: 10) {
-            Spacer()
-            
-            Text("No results found")
-            
-            Button("Tap to create a new food item") {
-                viewModel.createFoodItemTapped()
+        let createFoodItemTapped: () -> Void
+        let cancelSearch: () -> Void
+        
+        var body: some View {
+            VStack(alignment: .center, spacing: 10) {
+                Spacer()
+                
+                Text("No results found")
+                
+                Button("Tap to create a new food item") {
+                    createFoodItemTapped()
+                }
+                .buttonStyle(TertiaryButtonStyle())
+                
+                Spacer()
             }
-            .buttonStyle(TertiaryButtonStyle())
-            
-            Spacer()
+            .onChange(of: isSearching) { oldValue, newValue in
+                if !newValue {
+                    cancelSearch()
+                }
+            }
         }
     }
 }

@@ -151,6 +151,10 @@ class AddDiaryEntryViewModel {
             .store(in: &cancellables)
     }
     
+    func clearSearch() {
+        loadInitialState()
+    }
+    
     func addDiaryEntry(_ foodItem: FoodItem, servings: Double = 1) {
         let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, mealType: mealType, servings: servings)
         diaryRepository.addDiaryEntry(diaryEntry: diaryEntry)
