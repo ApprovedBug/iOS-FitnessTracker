@@ -41,6 +41,8 @@
 		049CD8942AE5BC5600812BAE /* MealListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8932AE5BC5600812BAE /* MealListViewModel.swift */; };
 		049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8952AE5BC7900812BAE /* WaterView.swift */; };
 		049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8972AE5BC8200812BAE /* WaterViewModel.swift */; };
+		049F83B62CDD6A820055C6E1 /* MealItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F83B52CDD6A820055C6E1 /* MealItemView.swift */; };
+		049F83B82CDD6A8B0055C6E1 /* MealItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F83B72CDD6A8B0055C6E1 /* MealItemViewModel.swift */; };
 		04A1E4222CCFFF4F00EC7D4A /* ConfigurationManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88D72CCD349000FDD4D6 /* ConfigurationManagement */; };
 		04A1E4242CD0083900EC7D4A /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1E4232CD0083900EC7D4A /* AppViewModel.swift */; };
 		04BCDFCC2B08140400346AD6 /* MealListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFCB2B08140400346AD6 /* MealListItemView.swift */; };
@@ -125,6 +127,8 @@
 		049CD8932AE5BC5600812BAE /* MealListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListViewModel.swift; sourceTree = "<group>"; };
 		049CD8952AE5BC7900812BAE /* WaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
 		049CD8972AE5BC8200812BAE /* WaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewModel.swift; sourceTree = "<group>"; };
+		049F83B52CDD6A820055C6E1 /* MealItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemView.swift; sourceTree = "<group>"; };
+		049F83B72CDD6A8B0055C6E1 /* MealItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemViewModel.swift; sourceTree = "<group>"; };
 		04A1E4232CD0083900EC7D4A /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		04BCDFCB2B08140400346AD6 /* MealListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListItemView.swift; sourceTree = "<group>"; };
 		04BCDFCD2B08140F00346AD6 /* MealListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListItemViewModel.swift; sourceTree = "<group>"; };
@@ -451,6 +455,8 @@
 				04F095602C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift */,
 				042152B02CD41A6C0089231D /* FoodItemView.swift */,
 				042152B22CD41A800089231D /* FoodItemViewModel.swift */,
+				049F83B52CDD6A820055C6E1 /* MealItemView.swift */,
+				049F83B72CDD6A8B0055C6E1 /* MealItemViewModel.swift */,
 			);
 			path = AddDiaryEntry;
 			sourceTree = "<group>";
@@ -641,6 +647,8 @@
 				049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */,
 				049CD8942AE5BC5600812BAE /* MealListViewModel.swift in Sources */,
 				0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */,
+				049F83B62CDD6A820055C6E1 /* MealItemView.swift in Sources */,
+				049F83B82CDD6A8B0055C6E1 /* MealItemViewModel.swift in Sources */,
 				049CD88A2AE5BB9300812BAE /* SummaryView.swift in Sources */,
 				0474A6792AE5B1550036FC9E /* WeightView.swift in Sources */,
 				045F9DCB2BBDD56F007FECDA /* AppConfigurationKeys.swift in Sources */,

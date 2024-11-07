@@ -22,7 +22,7 @@ class AddDiaryEntryViewModel {
     enum State {
         case idle
         case loading
-        case searchResults(items: [FoodItemViewModel], meals: [FoodItemViewModel])
+        case searchResults(items: [FoodItemViewModel], meals: [MealItemViewModel])
         case empty
     }
     
@@ -60,9 +60,9 @@ class AddDiaryEntryViewModel {
     }()
     
     @ObservationIgnored
-    private lazy var mealItemEventHandler: FoodItemViewModel.EventHandler = {
-        FoodItemViewModel.EventHandler { [weak self] foodItem in
-            self?.addMeal(foodItem)
+    private lazy var mealItemEventHandler: MealItemViewModel.EventHandler = {
+        MealItemViewModel.EventHandler { [weak self] meal in
+            self?.addMeal(meal)
         }
     }()
     
@@ -113,11 +113,7 @@ class AddDiaryEntryViewModel {
         }, receiveValue: { [weak self] results in
             guard let self else { return }
             let recentItems = results.0.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
-            meals = results.1
-            meals.forEach { meal in
-                print("MealTesting - AddDiaryEntryViewModel - loadInitialState: \(meal.foodItems.count)")
-            }
-            let mealsFoodItems = meals.map { FoodItemViewModel(meal: $0, eventHandler: mealItemEventHandler) }
+            let mealsFoodItems = results.1.map { MealItemViewModel(meal: $0, eventHandler: mealItemEventHandler) }
             state = .searchResults(items: recentItems, meals: mealsFoodItems)
         })
         .store(in: &cancellables)
@@ -161,31 +157,18 @@ class AddDiaryEntryViewModel {
         eventHandler?.diaryEntryAdded(diaryEntry)
     }
     
-    func addMeal(_ mealFoodItem: FoodItem) {
+    func addMeal(_ meal: Meal?) {
+        guard let meal else { return }
         
-        if case let .searchResults(_, foodItemViewModels) = state {
-            if let index = foodItemViewModels.firstIndex(where: { $0.foodItem.id == mealFoodItem.id }),
-                let meal = meals[safe: index] {
-                print("MealTesting - AddDiaryEntryViewModel - addMeal: \(meal.foodItems.count)")
-                let diaryEntries = meal.foodItems.map { foodItem in
-                    DiaryEntry(
-                        timestamp: date,
-                        foodItem: foodItem,
-                        mealType: mealType,
-                        servings: 1
-                    )
-                }
-                print("MealTesting - AddDiaryEntryViewModel - loadInitialState: \(diaryEntries)")
-                diaryRepository.addDiaryEntries(diaryEntries: diaryEntries)
-                eventHandler?.diaryEntriesAdded(diaryEntries)
-            }
+        let diaryEntries = meal.foodItems.map { mealFoodItem in
+            DiaryEntry(
+                timestamp: date,
+                foodItem: mealFoodItem.foodItem,
+                mealType: mealType,
+                servings: mealFoodItem.servings
+            )
         }
-    }
-}
-
-extension Collection {
-    // Returns the element at the specified index if it is within bounds, otherwise nil.
-    subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
+        diaryRepository.addDiaryEntries(diaryEntries: diaryEntries)
+        eventHandler?.diaryEntriesAdded(diaryEntries)
     }
 }
