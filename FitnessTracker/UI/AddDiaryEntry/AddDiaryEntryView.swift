@@ -60,7 +60,7 @@ struct AddDiaryEntryView: View {
     
     func foodItemList(
         recentItems: [FoodItemViewModel],
-        meals: [FoodItemViewModel]
+        meals: [MealItemViewModel]
     ) -> some View {
         
         SlidingTabView(isScrollable: false) {
@@ -82,8 +82,8 @@ struct AddDiaryEntryView: View {
             SlidingTabItem("Meals") {
                 ScrollView {
                     LazyVStack {
-                        ForEach(meals) { meal in
-                            FoodItemView(viewModel: meal)
+                        ForEach(meals) { viewModel in
+                            MealItemView(viewModel: viewModel)
                         }
                     }
                     .padding([.leading, .trailing])

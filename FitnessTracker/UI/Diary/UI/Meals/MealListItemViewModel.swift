@@ -101,10 +101,9 @@ class MealListItemViewModel: Identifiable {
             isShowingSaveMealAlert = true
             return
         }
-        let foodItems = entries.map { $0.foodItem }
+        let foodItems = entries.map { MealFoodItem(servings: $0.servings, foodItem:$0.foodItem) }
         let meal = Meal(name: mealName, foodItems: foodItems)
         mealsRepository.saveMeal(meal)
-        print("MealTesting - MealListItemViewModel - saveMealTapped: \(meal.foodItems.count)")
         isShowingSaveMealAlert = false
     }
     
