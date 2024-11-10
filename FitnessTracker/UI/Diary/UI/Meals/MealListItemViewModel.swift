@@ -10,6 +10,7 @@ import FitnessPersistence
 import Foundation
 
 @Observable
+@MainActor
 class MealListItemViewModel: Identifiable {
 
     struct EventHandler {
@@ -82,8 +83,8 @@ class MealListItemViewModel: Identifiable {
         eventHandler?.openAddDiaryEntryTapped(mealType)
     }
     
-    func removeEntry(diaryEntry: DiaryEntry) {
-        diaryRepository.removeDiaryEntry(diaryEntry: diaryEntry)
+    func removeEntry(diaryEntry: DiaryEntry) async {
+        await diaryRepository.removeDiaryEntry(diaryEntry: diaryEntry)
         eventHandler?.diaryEntryRemoved(diaryEntry)
         entries.removeAll(where: { $0.id == diaryEntry.id })
         populateUI()
@@ -95,7 +96,7 @@ class MealListItemViewModel: Identifiable {
         populateUI()
     }
     
-    func saveMealTapped() {
+    func saveMealTapped() async {
         
         guard isShowingSaveMealAlert else {
             isShowingSaveMealAlert = true
@@ -103,7 +104,7 @@ class MealListItemViewModel: Identifiable {
         }
         let foodItems = entries.map { MealFoodItem(servings: $0.servings, foodItem:$0.foodItem) }
         let meal = Meal(name: mealName, foodItems: foodItems)
-        mealsRepository.saveMeal(meal)
+        await mealsRepository.saveMeal(meal)
         isShowingSaveMealAlert = false
     }
     
@@ -124,8 +125,8 @@ class MealListItemViewModel: Identifiable {
         }
         
         let mealEntryViewModels: [MealEntryViewModel] = entries.map {
-            let eventHandler = MealEntryViewModel.EventHandler { [weak self] entry in
-                self?.removeEntry(diaryEntry: entry)
+            let eventHandler = MealEntryViewModel.EventHandler { [weak self] entry async in
+                await self?.removeEntry(diaryEntry: entry)
             } updateEntry: { [weak self] entry, servings in
                 self?.updateEntry(diaryEntry: entry, servings: servings)
             }

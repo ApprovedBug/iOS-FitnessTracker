@@ -130,7 +130,7 @@ struct MealEntryView: View {
             
             Spacer()
             
-            Button(action: { viewModel.removeDiaryEntryTapped() }) {
+            Button(action: { Task { await viewModel.removeDiaryEntryTapped() }}) {
                 Image(systemName: "trash")
                     .tint(.red)
             }

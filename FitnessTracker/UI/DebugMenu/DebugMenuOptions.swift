@@ -34,11 +34,11 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
             case .resetOnboardingStatus:
                 .button { resetOnboardingStatus() }
             case .resetGoals:
-                .button { resetGoals() }
+                .button { Task { await resetGoals() } }
             case .purgeAllData:
                 .button { purgeAllData() }
             case .populateTestData:
-                .button { populateTestData() }
+                .button { Task { await populateTestData() } }
         }
     }
     
@@ -47,9 +47,9 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
         appConfigurationManager?.setValue(value: false, key: Keys.onboardingCompleted)
     }
     
-    func resetGoals() {
+    func resetGoals() async {
         let goalsRepository = DependencyContainer.resolve(GoalsRepository.self)
-        goalsRepository?.deleteGoals(for: "current")
+        await goalsRepository?.deleteGoals(for: "current")
     }
     
     func purgeAllData() {
@@ -59,7 +59,8 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
         try? contextProvider?.sharedModelContainer.erase()
     }
     
-    func populateTestData() {
+    @MainActor
+    func populateTestData() async {
         
         let appConfigurationManager = DependencyContainer.resolve(AppConfigurationManaging.self)
         appConfigurationManager?.setValue(value: true, key: Keys.onboardingCompleted)
@@ -75,7 +76,7 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
             fats: 64
         )
         
-        goalsRepository?.saveGoals(goals: goals, for: "current")
+        await goalsRepository?.saveGoals(goals: goals, for: "current")
         
         // test food items
         
@@ -131,11 +132,11 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
             servingSize: 1
         )
         
-        foodItemRepository?.saveFoodItem(foodItem1)
-        foodItemRepository?.saveFoodItem(foodItem2)
-        foodItemRepository?.saveFoodItem(foodItem3)
-        foodItemRepository?.saveFoodItem(foodItem4)
-        foodItemRepository?.saveFoodItem(foodItem5)
+        await foodItemRepository?.saveFoodItem(foodItem1)
+        await foodItemRepository?.saveFoodItem(foodItem2)
+        await foodItemRepository?.saveFoodItem(foodItem3)
+        await foodItemRepository?.saveFoodItem(foodItem4)
+        await foodItemRepository?.saveFoodItem(foodItem5)
         
         // test diary entries items
         
@@ -169,9 +170,9 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
             servings: 0.5
         )
         
-        diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry1)
-        diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry2)
-        diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry3)
-        diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry4)
+        await diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry1)
+        await diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry2)
+        await diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry3)
+        await diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry4)
     }
 }

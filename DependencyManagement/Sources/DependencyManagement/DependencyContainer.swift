@@ -33,7 +33,7 @@ public class DependencyContainer {
 }
 
 @propertyWrapper
-public struct Inject<T> {
+public struct Inject<T : Sendable> : Sendable {
     private var container: DependencyContainer = DependencyContainer.shared
     private let value: T
 

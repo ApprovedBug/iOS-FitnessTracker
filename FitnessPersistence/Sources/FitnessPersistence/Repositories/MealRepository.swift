@@ -14,18 +14,19 @@ public enum MealError: Error {
     case fetchError
 }
 
-public protocol MealsRepository {
-    func saveMeal(_ meal: Meal)
-    func meals() -> AnyPublisher<[Meal], MealError>
+public protocol MealsRepository: Sendable {
+    @MainActor func saveMeal(_ meal: Meal) async
+    @MainActor func meals() async -> AnyPublisher<[Meal], MealError>
 }
 
-public struct LocalMealsRepository: @preconcurrency MealsRepository {
+@MainActor
+public struct LocalMealsRepository: MealsRepository {
     
     @Inject var contextProvider: ContextProviding
     
     public init() {}
     
-    @MainActor public func meals() -> AnyPublisher<[Meal], MealError> {
+    public func meals() async -> AnyPublisher<[Meal], MealError> {
         
         do {
             let fetchDescriptor = FetchDescriptor<Meal>(sortBy: [SortDescriptor(\.name)])
@@ -36,7 +37,7 @@ public struct LocalMealsRepository: @preconcurrency MealsRepository {
         }
     }
     
-    @MainActor public func saveMeal(_ meal: Meal) {
+    public func saveMeal(_ meal: Meal) {
         contextProvider.sharedModelContainer.mainContext.insert(meal)
         try? contextProvider.sharedModelContainer.mainContext.save()
     }

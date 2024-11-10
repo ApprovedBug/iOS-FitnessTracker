@@ -5,12 +5,13 @@
 //  Created by Jack Moseley on 22/10/2023.
 //
 
-import Combine
+@preconcurrency import Combine
 import DependencyManagement
 import FitnessPersistence
 import Foundation
     
 @Observable
+@MainActor
 class SummaryViewModel {
     
     struct Data {
@@ -46,16 +47,17 @@ class SummaryViewModel {
     @ObservationIgnored
     private var goals: Goals?
     
+    @ObservationIgnored
+    private var entries: [DiaryEntry]?
+    
     // MARK: Initialisers
     
-    init() {
-        loadGoals()
-    }
-
-    // MARK: - Private functions
-
-    private func loadGoals() {
-        goalsRepository.goalsForUser(userId: "something")
+    init() {}
+    
+    // MARK: - Public functions
+    
+    func loadGoals() async {
+        await goalsRepository.goalsForUser(userId: "something")
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -67,14 +69,19 @@ class SummaryViewModel {
             } receiveValue: { [weak self] goals in
                 guard let self else { return }
                 self.goals = goals
+                if let entries = entries {
+                    updateEntries(with: entries)
+                }
             }
             .store(in: &cancellables)
     }
     
-    // MARK: - Public functions
-    
     func updateEntries(with entries: [DiaryEntry]) {
-        guard let goals else { return }
+        
+        guard let goals else {
+            self.entries = entries
+            return
+        }
         process(goals: goals, entries: entries)
     }
 

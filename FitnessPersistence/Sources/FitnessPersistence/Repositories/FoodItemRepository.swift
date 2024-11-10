@@ -14,20 +14,21 @@ public enum FoodItemError: Error {
     case fetchError
 }
 
-public protocol FoodItemRepository {
+public protocol FoodItemRepository: Sendable {
     
-    func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError>
-    func recentFoodItems() -> AnyPublisher<Set<FoodItem>, FoodItemError>
-    func saveFoodItem(_ foodItem: FoodItem)
+    @MainActor func foodItems(name: String) async -> AnyPublisher<[FoodItem], FoodItemError>
+    @MainActor func recentFoodItems() async -> AnyPublisher<Set<FoodItem>, FoodItemError>
+    @MainActor func saveFoodItem(_ foodItem: FoodItem) async
 }
 
-public struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
+@MainActor
+public final class LocalFoodItemRepository: FoodItemRepository {
     
     @Inject var contextProvider: ContextProviding
     
     public init() {}
     
-    @MainActor public func foodItems(name: String) -> AnyPublisher<[FoodItem], FoodItemError> {
+    public func foodItems(name: String) async -> AnyPublisher<[FoodItem], FoodItemError> {
         
         do {
             let namePredicate = #Predicate<FoodItem> { item in
@@ -41,7 +42,7 @@ public struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
         }
     }
     
-    @MainActor public func recentFoodItems() -> AnyPublisher<Set<FoodItem>, FoodItemError> {
+    public func recentFoodItems() async -> AnyPublisher<Set<FoodItem>, FoodItemError> {
         
         do {
             var descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp)])
@@ -57,7 +58,7 @@ public struct LocalFoodItemRepository: @preconcurrency FoodItemRepository {
         }
     }
     
-    @MainActor public func saveFoodItem(_ foodItem: FoodItem) {
+    public func saveFoodItem(_ foodItem: FoodItem) async {
         contextProvider.sharedModelContainer.mainContext.insert(foodItem)
         try? contextProvider.sharedModelContainer.mainContext.save()
     }

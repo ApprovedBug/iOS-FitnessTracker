@@ -12,7 +12,7 @@ import Foundation
 class MealItemViewModel: Identifiable {
     
     struct EventHandler {
-        let addMealTapped: (Meal) -> Void
+        let addMealTapped: @MainActor (Meal) async -> Void
     }
     
     let meal: Meal
@@ -47,7 +47,8 @@ class MealItemViewModel: Identifiable {
         self.eventHandler = eventHandler
     }
     
-    func addItemTapped() {
-        eventHandler.addMealTapped(meal)
+    @MainActor
+    func addItemTapped() async {
+        await eventHandler.addMealTapped(meal)
     }
 }

@@ -62,6 +62,7 @@ enum WeightGoal: CaseIterable {
 }
 
 @Observable
+@MainActor
 class OnboardingViewModel {
     
     var targetKcal: Int?
@@ -83,8 +84,8 @@ class OnboardingViewModel {
     @Inject
     var appConfigurationManager: AppConfigurationManaging
     
-    func continueTapped() {
-        calculate()
+    func continueTapped() async {
+        await calculate()
     }
     
     func skipTapped() {
@@ -92,7 +93,7 @@ class OnboardingViewModel {
         appConfigurationManager.setValue(value: true, key: Keys.onboardingCompleted)
     }
     
-    func calculate() {
+    func calculate() async {
         guard let age = Double(age),
               let weight = Double(weight),
               let height = Double(height) else {
@@ -124,7 +125,7 @@ class OnboardingViewModel {
             protein: macronutrients.protein,
             fats: macronutrients.fat
         )
-        goalsRepository.saveGoals(goals: goals, for: "something")
+        await goalsRepository.saveGoals(goals: goals, for: "something")
         appConfigurationManager.setValue(value: true, key: Keys.onboardingCompleted)
         showDiaryView = true
     }

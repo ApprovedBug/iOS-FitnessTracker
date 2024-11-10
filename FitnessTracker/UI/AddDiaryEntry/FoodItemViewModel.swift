@@ -12,7 +12,7 @@ import SwiftUI
 class FoodItemViewModel: Identifiable {
     
     struct EventHandler {
-        let addItemTapped: (FoodItem) -> Void
+        let addItemTapped: @MainActor (FoodItem) async -> Void
     }
     
     let foodItem: FoodItem
@@ -71,8 +71,9 @@ class FoodItemViewModel: Identifiable {
         self.init(foodItem: foodItem, eventHandler: eventHandler, meal: meal)
     }
     
-    func addItemTapped() {
-        eventHandler.addItemTapped(foodItem)
+    @MainActor
+    func addItemTapped() async {
+        await eventHandler.addItemTapped(foodItem)
     }
 }
 

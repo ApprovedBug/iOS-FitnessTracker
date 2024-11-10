@@ -53,7 +53,9 @@ struct OnboardingView: View {
                 Spacer()
                 
                 Button("Continue") {
-                    viewModel.continueTapped()
+                    Task {
+                        await viewModel.continueTapped()
+                    }
                 }
                 .onChange(of: viewModel.showDiaryView, {
                     appRootManaging.switchRoot(to: .dashboard)

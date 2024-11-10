@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  BarcodeScanning.swift
 //  Utilities
 //
 //  Created by Jack Moseley on 09/11/2024.
@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import OSLog
 import SwiftUI
 import VisionKit
 
@@ -49,6 +50,8 @@ public protocol BarcodeScanning: Sendable {
         dataScannerView?.stopScanning()
     }
 }
+
+let logger = Logger(subsystem: "om.approvedbug.FitnessTracker", category: "BarcodeScanning")
 
 private struct BarcodeScannerRepresentable: UIViewControllerRepresentable {
     
@@ -168,6 +171,7 @@ private struct BarcodeScannerRepresentable: UIViewControllerRepresentable {
             if let firstItem = addedItems.first,
                case let .barcode(barcode) = firstItem,
                let stringValue = barcode.payloadStringValue {
+                logger.log(level: .info, "barcode received: \(stringValue)")
                 barcodes.send(stringValue) // Publish the barcode string
             }
         }
