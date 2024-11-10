@@ -22,6 +22,7 @@
 		042152B72CD4299F0089231D /* MealEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042152B62CD4299F0089231D /* MealEntryViewModel.swift */; };
 		0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECA2B22591D00B9B03B /* WelcomeView.swift */; };
 		0424CECD2B2259A600B9B03B /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424CECC2B2259A600B9B03B /* WelcomeViewModel.swift */; };
+		0444980E2CE120B500A77792 /* FitnessServices in Frameworks */ = {isa = PBXBuildFile; productRef = 0444980D2CE120B500A77792 /* FitnessServices */; };
 		045864162BC1B1B80067B9B0 /* MacrosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864152BC1B1B80067B9B0 /* MacrosView.swift */; };
 		045864182BC1B1CB0067B9B0 /* MacrosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045864172BC1B1CB0067B9B0 /* MacrosViewModel.swift */; };
 		045F9DCB2BBDD56F007FECDA /* AppConfigurationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F9DCA2BBDD56F007FECDA /* AppConfigurationKeys.swift */; };
@@ -162,6 +163,7 @@
 			files = (
 				04A1E4222CCFFF4F00EC7D4A /* ConfigurationManagement in Frameworks */,
 				049888112CDFB49B004D6A5D /* Utilities in Frameworks */,
+				0444980E2CE120B500A77792 /* FitnessServices in Frameworks */,
 				040D88CC2CCD323700FDD4D6 /* DebugTools in Frameworks */,
 				040D88CF2CCD324700FDD4D6 /* DependencyManagement in Frameworks */,
 				040D88D52CCD326000FDD4D6 /* FitnessUI in Frameworks */,
@@ -502,6 +504,7 @@
 				040D88D42CCD326000FDD4D6 /* FitnessUI */,
 				040D88D72CCD349000FDD4D6 /* ConfigurationManagement */,
 				049888102CDFB49B004D6A5D /* Utilities */,
+				0444980D2CE120B500A77792 /* FitnessServices */,
 			);
 			productName = FitnessTracker;
 			productReference = 0404E2122AE59C240013CF1F /* FitnessTracker.app */;
@@ -579,11 +582,11 @@
 			mainGroup = 0404E2092AE59C240013CF1F;
 			packageReferences = (
 				040D88CA2CCD323700FDD4D6 /* XCLocalSwiftPackageReference "DebugTools" */,
-				040D88D02CCD325200FDD4D6 /* XCLocalSwiftPackageReference "FitnessPersistence" */,
 				040D88D32CCD326000FDD4D6 /* XCLocalSwiftPackageReference "FitnessUI" */,
 				049577AC2CCD3532001C0CEC /* XCLocalSwiftPackageReference "ConfigurationManagement" */,
 				0412A1352CD56B05002F27C1 /* XCLocalSwiftPackageReference "DependencyManagement" */,
 				049888122CDFB4AD004D6A5D /* XCLocalSwiftPackageReference "Utilities" */,
+				0444980C2CE120B500A77792 /* XCLocalSwiftPackageReference "FitnessServices" */,
 			);
 			productRefGroup = 0404E2132AE59C240013CF1F /* Products */;
 			projectDirPath = "";
@@ -1041,10 +1044,6 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = DebugTools;
 		};
-		040D88D02CCD325200FDD4D6 /* XCLocalSwiftPackageReference "FitnessPersistence" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = FitnessPersistence;
-		};
 		040D88D32CCD326000FDD4D6 /* XCLocalSwiftPackageReference "FitnessUI" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = FitnessUI;
@@ -1052,6 +1051,10 @@
 		0412A1352CD56B05002F27C1 /* XCLocalSwiftPackageReference "DependencyManagement" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = DependencyManagement;
+		};
+		0444980C2CE120B500A77792 /* XCLocalSwiftPackageReference "FitnessServices" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = FitnessServices;
 		};
 		049577AC2CCD3532001C0CEC /* XCLocalSwiftPackageReference "ConfigurationManagement" */ = {
 			isa = XCLocalSwiftPackageReference;
@@ -1083,6 +1086,10 @@
 		040D88D72CCD349000FDD4D6 /* ConfigurationManagement */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ConfigurationManagement;
+		};
+		0444980D2CE120B500A77792 /* FitnessServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FitnessServices;
 		};
 		049888102CDFB49B004D6A5D /* Utilities */ = {
 			isa = XCSwiftPackageProductDependency;

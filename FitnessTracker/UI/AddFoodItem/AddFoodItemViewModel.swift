@@ -11,11 +11,12 @@ import Foundation
 import FitnessPersistence
 
 @Observable
+@MainActor
 class AddFoodItemViewModel: Identifiable {
     
     struct EventHandler {
-        var didCreateFoodItem: (FoodItem) -> Void
-        var saveEntry: (FoodItem, Double) -> Void
+        var didCreateFoodItem: @MainActor (FoodItem) async -> Void
+        var saveEntry: @MainActor (FoodItem, Double) async -> Void
     }
     
     enum State {
@@ -81,7 +82,7 @@ class AddFoodItemViewModel: Identifiable {
         self.selectedUnit = foodItem.measurementUnit
     }
     
-    func createFoodItem() {
+    func createFoodItem() async {
         guard isValid,
               let kcal = Int(kcal),
               let carbs = Double(carbs),
@@ -100,17 +101,17 @@ class AddFoodItemViewModel: Identifiable {
             measurementUnit: selectedUnit,
             servingSize: servingSize
         )
-        foodItemRepository.saveFoodItem(foodItem)
-        eventHandler.didCreateFoodItem(foodItem)
+        await foodItemRepository.saveFoodItem(foodItem)
+        await eventHandler.didCreateFoodItem(foodItem)
     }
     
-    func saveEntry() {
+    func saveEntry() async {
         guard isValid,
                 let foodItem,
                 let servings = Double(servings) else {
             return
         }
-        eventHandler.saveEntry(foodItem, servings)
+        await eventHandler.saveEntry(foodItem, servings)
     }
     
     func updateBasedOnServings(_ servings: String) {

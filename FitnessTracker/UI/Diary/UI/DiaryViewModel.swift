@@ -12,7 +12,8 @@ import Foundation
 import SwiftData
 
 @Observable
-@MainActor class DiaryViewModel {
+@MainActor
+class DiaryViewModel {
     
     // MARK: Page state
     enum State: Equatable {
@@ -51,10 +52,9 @@ import SwiftData
     }
     
     // MARK: Internal functions
-    func loadData() {
+    func loadData() async {
         
-        diaryFetching.allDiaryEntries()
-            .receive(on: DispatchQueue.main)
+        await diaryFetching.allDiaryEntries()
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
                 switch completion {
@@ -97,11 +97,11 @@ import SwiftData
     
     private func processEntries(entries: [DiaryEntry], date: Date) {
         let entries = entries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: date) }
-
-        state = .ready
         
         summaryViewModel.updateEntries(with: entries)
         mealListViewModel.updateEntries(entries: entries)
+        
+        state = .ready
     }
     
     private func subscribeDateUpdates() {

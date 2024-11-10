@@ -8,6 +8,7 @@
 import Combine
 import DependencyManagement
 import FitnessPersistence
+import FitnessServices
 import FitnessUI
 import Foundation
 import SwiftUI
@@ -31,11 +32,13 @@ class AddDiaryEntryViewModel {
     
     var isShowingCreateNewFoodItem: Bool = false
     var isShowingAddExistingItem: Bool = false
+    var isShowingError: Bool = false
     var shouldDismiss: Bool = false
     var searchText: String = ""
     var state: State = .idle
     var addFoodItemViewModel: AddFoodItemViewModel?
     var barcodeScannerView: IdentifiableView?
+    var errorMessage: String?
     
     let date: Date
     let mealType: MealType
@@ -54,6 +57,9 @@ class AddDiaryEntryViewModel {
     @Inject private var barcodeScanner: BarcodeScanning
     
     @ObservationIgnored
+    @Inject private var foodItemService: FoodInfoNetworking
+    
+    @ObservationIgnored
     private var cancellables = [AnyCancellable]()
     
     @ObservationIgnored
@@ -61,15 +67,15 @@ class AddDiaryEntryViewModel {
     
     @ObservationIgnored
     private lazy var itemEventHandler: FoodItemViewModel.EventHandler = {
-        FoodItemViewModel.EventHandler { [weak self] foodItem in
-            self?.addDiaryEntry(foodItem)
+        FoodItemViewModel.EventHandler { [weak self] foodItem async in
+            await self?.addDiaryEntry(foodItem)
         }
     }()
     
     @ObservationIgnored
     private lazy var mealItemEventHandler: MealItemViewModel.EventHandler = {
-        MealItemViewModel.EventHandler { [weak self] meal in
-            self?.addMeal(meal)
+        MealItemViewModel.EventHandler { [weak self] meal async in
+            await self?.addMeal(meal)
         }
     }()
     
@@ -78,10 +84,10 @@ class AddDiaryEntryViewModel {
         AddFoodItemViewModel.EventHandler(
             didCreateFoodItem: { [weak self] item in
                 guard let self else { return }
-                addDiaryEntry(item)
+                await addDiaryEntry(item)
                 shouldDismiss = true
             }) { [weak self] foodItem, servings in
-                self?.addDiaryEntry(foodItem, servings: servings)
+                await self?.addDiaryEntry(foodItem, servings: servings)
             }
     }()
     
@@ -89,16 +95,16 @@ class AddDiaryEntryViewModel {
         self.date = date
         self.mealType = mealType
         self.eventHandler = eventHandler
-        
-        loadInitialState()
     }
     
+    @MainActor
     func createFoodItemTapped() {
         let viewModel = AddFoodItemViewModel(eventHandler: createItemEventHandler)
         addFoodItemViewModel = viewModel
         isShowingCreateNewFoodItem = true
     }
     
+    @MainActor
     func addFoodItemTapped(_ foodItem: FoodItem) {
         let viewModel = AddFoodItemViewModel(eventHandler: createItemEventHandler, foodItem: foodItem)
         addFoodItemViewModel = viewModel
@@ -106,20 +112,23 @@ class AddDiaryEntryViewModel {
     }
     
     @MainActor
-    @Sendable func scanItemTapped() async {
+    func scanItemTapped() async {
         do {
             
             let scanner = try await barcodeScanner.scanner()
             
             barcodeScanner.barcodes
-                .sink { barcode in
-                    print("Barcode received: \(barcode)")
+                .sink { [weak self] barcode in
+                    Task {
+                        await self?.dismissScannerAndSearch(barcode: barcode)
+                    }
                 }
                 .store(in: &cancellables)
             
             barcodeScannerView = IdentifiableView(view: scanner)
         } catch {
-            print("Error opening scanner: \(error)")
+            errorMessage = "Error loading scanner view."
+            isShowingError = true
         }
     }
     
@@ -128,14 +137,62 @@ class AddDiaryEntryViewModel {
         do {
             try await barcodeScanner.startScanning()
         } catch {
-            print("Error beggining scanning: \(error)")
+            errorMessage = "Error starting scanning."
+            isShowingError = true
         }
     }
     
-    func loadInitialState() {
+    @MainActor
+    func dismissScannerAndSearch(barcode: String) async {
+        await barcodeScanner.stopScanning()
+        barcodeScannerView = nil
         
-        loadRecentItems()
-            .zip(loadMeals())
+        Task.detached(priority: .background) { [weak self] in
+            guard let self = self else { return }
+            
+            do {
+                let foodInfo = try await foodItemService.search(for: barcode)
+    
+                await self.openFoodProduct(foodInfo)
+            } catch {
+                await MainActor.run {
+                    self.errorMessage = "Product not found."
+                    isShowingError = true
+                }
+            }
+        }
+    }
+    
+    @MainActor
+    func openFoodProduct(_ foodProduct: FoodProduct) async {
+        
+        guard let kcal = foodProduct.nutriments.energyKcal100g,
+              let carbs = foodProduct.nutriments.carbohydrates100g,
+              let protein = foodProduct.nutriments.proteins100g,
+              let fats = foodProduct.nutriments.fat100g else {
+            errorMessage = "Missing required nutrients."
+            isShowingError = true
+            return
+        }
+
+        let foodItem = FoodItem(
+            name: foodProduct.productName,
+            kcal: kcal,
+            carbs: carbs,
+            protein: protein,
+            fats: fats,
+            measurementUnit: .grams,
+            servingSize: 100
+        )
+        
+        addFoodItemTapped(foodItem)
+    }
+    
+    @MainActor
+    func loadInitialState() async {
+        
+        await loadRecentItems()
+            .zip(await loadMeals())
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
             switch completion {
@@ -153,18 +210,21 @@ class AddDiaryEntryViewModel {
         .store(in: &cancellables)
     }
     
-    func loadRecentItems() -> AnyPublisher<Set<FoodItem>, Never> {
-        foodItemRepository.recentFoodItems().replaceError(with: []).eraseToAnyPublisher()
+    @MainActor
+    func loadRecentItems() async -> AnyPublisher<Set<FoodItem>, Never> {
+        await foodItemRepository.recentFoodItems().replaceError(with: []).eraseToAnyPublisher()
     }
     
-    func loadMeals() -> AnyPublisher<[Meal], Never>{
-        mealsRepository.meals().replaceError(with: []).eraseToAnyPublisher()
+    @MainActor
+    func loadMeals() async -> AnyPublisher<[Meal], Never> {
+        await mealsRepository.meals().replaceError(with: []).eraseToAnyPublisher()
     }
     
-    func search() {
+    @MainActor
+    func search() async {
         state = .loading
         
-        foodItemRepository.foodItems(name: searchText)
+        await foodItemRepository.foodItems(name: searchText)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
@@ -185,17 +245,19 @@ class AddDiaryEntryViewModel {
             .store(in: &cancellables)
     }
     
-    func clearSearch() {
-        loadInitialState()
+    func clearSearch() async {
+        await loadInitialState()
     }
     
-    func addDiaryEntry(_ foodItem: FoodItem, servings: Double = 1) {
+    @MainActor
+    func addDiaryEntry(_ foodItem: FoodItem, servings: Double = 1) async {
         let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, mealType: mealType, servings: servings)
-        diaryRepository.addDiaryEntry(diaryEntry: diaryEntry)
+        await diaryRepository.addDiaryEntry(diaryEntry: diaryEntry)
         eventHandler?.diaryEntryAdded(diaryEntry)
     }
     
-    func addMeal(_ meal: Meal?) {
+    @MainActor
+    func addMeal(_ meal: Meal?) async {
         guard let meal else { return }
         
         let diaryEntries = meal.foodItems.map { mealFoodItem in
@@ -206,7 +268,7 @@ class AddDiaryEntryViewModel {
                 servings: mealFoodItem.servings
             )
         }
-        diaryRepository.addDiaryEntries(diaryEntries: diaryEntries)
+        await diaryRepository.addDiaryEntries(diaryEntries: diaryEntries)
         eventHandler?.diaryEntriesAdded(diaryEntries)
     }
 }

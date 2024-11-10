@@ -11,7 +11,7 @@ import SwiftUI
 
 struct SummaryView: View {
     
-    var viewModel: SummaryViewModel
+    @Bindable var viewModel: SummaryViewModel
     
     var body: some View {
         
@@ -19,7 +19,11 @@ struct SummaryView: View {
             case .ready(let data):
                 ContentView(data: data)
             default:
-                EmptyView()
+                ProgressView().onAppear(perform: {
+                    Task {
+                        await viewModel.loadGoals()
+                    }
+                })
         }
     }
 }

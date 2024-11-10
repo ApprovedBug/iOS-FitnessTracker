@@ -18,7 +18,9 @@ struct DiaryView: View {
         switch viewModel.state {
         case .idle, .loading:
             ProgressView().onAppear(perform: {
-                viewModel.loadData()
+                Task {
+                    await viewModel.loadData()
+                }
             })
         case .error:
             Text("There was an error loading your diary")

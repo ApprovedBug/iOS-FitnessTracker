@@ -9,11 +9,12 @@ import FitnessPersistence
 import Foundation
 
 @Observable
+@MainActor
 class MealEntryViewModel: Identifiable {
     
     struct EventHandler {
-        let removeEntryTapped: (DiaryEntry) -> Void
-        let updateEntry: (DiaryEntry, Double) -> Void
+        let removeEntryTapped: @MainActor (DiaryEntry) async -> Void
+        let updateEntry: @MainActor (DiaryEntry, Double) async -> Void
     }
     
     private let diaryEntry: DiaryEntry
@@ -55,9 +56,9 @@ class MealEntryViewModel: Identifiable {
     private lazy var createItemEventHandler: AddFoodItemViewModel.EventHandler = {
         AddFoodItemViewModel.EventHandler { _ in
             // TODO: this is unused, move edit to separate veiw
-        } saveEntry: { [weak self] foodItem, servings in
+        } saveEntry: { [weak self] foodItem, servings async in
             guard let self else { return }
-            eventHandler.updateEntry(diaryEntry, servings)
+            await eventHandler.updateEntry(diaryEntry, servings)
         }
     }()
     
@@ -80,7 +81,7 @@ class MealEntryViewModel: Identifiable {
         isShowingEditItem = true
     }
     
-    func removeDiaryEntryTapped() {
-        eventHandler.removeEntryTapped(diaryEntry)
+    func removeDiaryEntryTapped() async {
+        await eventHandler.removeEntryTapped(diaryEntry)
     }
 }

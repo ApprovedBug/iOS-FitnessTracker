@@ -20,7 +20,12 @@ struct AddDiaryEntryView: View {
         NavigationStack {
             switch viewModel.state {
             case .idle:
-                EmptyView()
+                ProgressView()
+                    .onAppear {
+                        Task {
+                            await viewModel.loadInitialState()
+                        }
+                    }
             case .loading:
                 ProgressView()
             case .searchResults(let items, let meals):
@@ -34,7 +39,9 @@ struct AddDiaryEntryView: View {
                 )
                 .searchable(text: $viewModel.searchText)
                 .onSubmit(of: .search) {
-                    viewModel.search()
+                    Task {
+                        await viewModel.search()
+                    }
                 }
             case .empty:
                 EmptyResultsView(
@@ -43,7 +50,9 @@ struct AddDiaryEntryView: View {
                 )
                 .searchable(text: $viewModel.searchText)
                 .onSubmit(of: .search) {
-                    viewModel.search()
+                    Task {
+                        await viewModel.search()
+                    }
                 }
             }
         }
@@ -58,6 +67,11 @@ struct AddDiaryEntryView: View {
                 AddFoodItemView(viewModel: addFoodItemViewModel)
                     .presentationDetents([.small])
             }
+        })
+        .alert("Error", isPresented: $viewModel.isShowingError, presenting: viewModel.errorMessage, actions: { details in
+            
+        }, message: { details in
+            Text(details)
         })
         .fullScreenCover(item: $viewModel.barcodeScannerView, content: { barcodeScanner in
             barcodeScanner
@@ -89,7 +103,7 @@ struct AddDiaryEntryView: View {
         let addFoodItemTapped: (FoodItem) -> Void
         let createFoodItemTapped: () -> Void
         let scanItemTapped: @MainActor () async -> Void
-        let cancelSearch: () -> Void
+        let cancelSearch: @MainActor () async -> Void
         
         var body: some View {
             SlidingTabView(isScrollable: false) {
@@ -138,7 +152,9 @@ struct AddDiaryEntryView: View {
             }
             .onChange(of: isSearching) { oldValue, newValue in
                 if !newValue {
-                    cancelSearch()
+                    Task {
+                        await cancelSearch()
+                    }
                 }
             }
         }
@@ -148,7 +164,7 @@ struct AddDiaryEntryView: View {
         @Environment(\.isSearching) var isSearching
         
         let createFoodItemTapped: () -> Void
-        let cancelSearch: () -> Void
+        let cancelSearch: @MainActor () async -> Void
         
         var body: some View {
             VStack(alignment: .center, spacing: 10) {
@@ -165,7 +181,9 @@ struct AddDiaryEntryView: View {
             }
             .onChange(of: isSearching) { oldValue, newValue in
                 if !newValue {
-                    cancelSearch()
+                    Task {
+                        await cancelSearch()
+                    }
                 }
             }
         }

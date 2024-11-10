@@ -8,7 +8,7 @@
 import DependencyManagement
 import Foundation
 
-public protocol UserDefaultsProtocol {
+public protocol UserDefaultsProtocol: Sendable {
     func bool(forKey defaultName: String) -> Bool
     func set(_ value: Bool, forKey defaultName: String)
 }
@@ -20,13 +20,13 @@ public protocol AppConfigurationKey {
     var name: String { get }
 }
 
-public protocol AppConfigurationManaging {
+public protocol AppConfigurationManaging: Sendable {
     
     func getValue(for key: AppConfigurationKey) -> Bool
     func setValue(value: Bool, key: AppConfigurationKey)
 }
 
-public class AppConfigurationManager: AppConfigurationManaging {
+public final class AppConfigurationManager: AppConfigurationManaging {
     
     @Inject
     private var userDefaults: UserDefaultsProtocol

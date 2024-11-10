@@ -95,7 +95,9 @@ struct MealListItemView: View {
     
     func saveMealView() -> some View {
         Button("Save Meal") {
-            viewModel.saveMealTapped()
+            Task {
+                await viewModel.saveMealTapped()
+            }
         }
         .buttonStyle(TertiaryButtonStyle())
         .frame(height: 32)
@@ -110,7 +112,9 @@ struct MealListItemView: View {
                     .multilineTextAlignment(.leading)
                 Spacer()
                 Button("Save Meal") {
-                    viewModel.saveMealTapped()
+                    Task {
+                        await viewModel.saveMealTapped()
+                    }
                 }
                 .buttonStyle(RoundedButtonStyle())
                 .disabled(!viewModel.mealNameValid)

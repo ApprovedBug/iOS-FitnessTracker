@@ -10,6 +10,7 @@ import ConfigurationManagement
 import DebugTools
 import DependencyManagement
 import FitnessPersistence
+import FitnessServices
 import SwiftUI
 import SwiftData
 import UIKit
@@ -57,6 +58,16 @@ struct FitnessTrackerApp: App {
         let barcodeScanner = BarcodeScanner()
         DependencyContainer.register(BarcodeScanning.self) {
             barcodeScanner
+        }
+        
+        let apiClient = ApiClient()
+        DependencyContainer.register(ApiProtocol.self) {
+            apiClient
+        }
+        
+        let foodInfoServices = FoodInfoNetworkService()
+        DependencyContainer.register(FoodInfoNetworking.self) {
+            foodInfoServices
         }
         
         DependencyContainer.register(AppConfigurationManaging.self) {

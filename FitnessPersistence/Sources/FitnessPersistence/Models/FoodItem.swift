@@ -19,7 +19,15 @@ public class FoodItem {
     public private(set) var measurementUnit: MeasurementUnit
     public private(set) var servingSize: Int
     
-    public init(name: String, kcal: Int, carbs: Double, protein: Double, fats: Double, measurementUnit: MeasurementUnit, servingSize: Int) {
+    public init(
+        name: String,
+        kcal: Int,
+        carbs: Double,
+        protein: Double,
+        fats: Double,
+        measurementUnit: MeasurementUnit,
+        servingSize: Int
+    ) {
         self.name = name
         self.kcal = kcal
         self.carbs = carbs

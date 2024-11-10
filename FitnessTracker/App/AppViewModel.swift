@@ -19,7 +19,6 @@ class AppViewModel: ObservableObject, AppRootManaging {
     
     @Inject
     var appConfigurationManager: AppConfigurationManaging
-
     
     init() {
         setInitialRoot()

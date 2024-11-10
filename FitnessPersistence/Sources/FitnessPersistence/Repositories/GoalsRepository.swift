@@ -14,20 +14,21 @@ public enum GoalsError: Error {
     case fetchError
 }
 
-public protocol GoalsRepository {
+public protocol GoalsRepository: Sendable {
     
-    func goalsForUser(userId: String) -> AnyPublisher<Goals, GoalsError>
-    func saveGoals(goals: Goals, for user: String)
-    func deleteGoals(for user: String)
+    func goalsForUser(userId: String) async -> AnyPublisher<Goals, GoalsError>
+    func saveGoals(goals: Goals, for user: String) async
+    func deleteGoals(for user: String) async
 }
 
-public struct LocalGoalsRepository: @preconcurrency GoalsRepository {
+@MainActor
+public struct LocalGoalsRepository: GoalsRepository {
     
     @Inject var contextProvider: ContextProviding
     
     public init() {}
     
-    @MainActor public func goalsForUser(userId: String) -> AnyPublisher<Goals, GoalsError> {
+    public func goalsForUser(userId: String) async -> AnyPublisher<Goals, GoalsError> {
         do {
             let descriptor = FetchDescriptor<Goals>()
             guard let entry = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor).first else {
@@ -39,12 +40,12 @@ public struct LocalGoalsRepository: @preconcurrency GoalsRepository {
         }
     }
     
-    @MainActor public func saveGoals(goals: Goals, for user: String) {
+    public func saveGoals(goals: Goals, for user: String) async {
         contextProvider.sharedModelContainer.mainContext.insert(goals)
         try? contextProvider.sharedModelContainer.mainContext.save()
     }
     
-    @MainActor public func deleteGoals(for user: String) {
+    public func deleteGoals(for user: String) async {
         try? contextProvider.sharedModelContainer.mainContext.delete(model: Goals.self)
     }
 }

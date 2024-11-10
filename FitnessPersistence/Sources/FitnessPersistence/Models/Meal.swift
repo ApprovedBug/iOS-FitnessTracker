@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Meal.swift
 //  FitnessPersistence
 //
 //  Created by Jack Moseley on 04/11/2024.

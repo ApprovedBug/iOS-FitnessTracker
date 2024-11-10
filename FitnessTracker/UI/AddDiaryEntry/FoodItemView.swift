@@ -49,7 +49,9 @@ struct FoodItemView: View {
                 }
                 
                 Button {
-                    viewModel.addItemTapped()
+                    Task {
+                        await viewModel.addItemTapped()
+                    }
                 } label: {
                     Image(systemName: "plus.circle")
                         .font(.headline)

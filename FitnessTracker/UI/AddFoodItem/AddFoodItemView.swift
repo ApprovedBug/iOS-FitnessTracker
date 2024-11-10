@@ -58,8 +58,10 @@ struct AddFoodItemView: View {
             }
             .navigationBarTitle("Create Food Item", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
-                viewModel.createFoodItem()
-                presentationMode.wrappedValue.dismiss()
+                Task {
+                    await viewModel.createFoodItem()
+                    presentationMode.wrappedValue.dismiss()
+                }
             }.disabled(!viewModel.isValid))
         }
     }
@@ -127,8 +129,10 @@ struct AddFoodItemView: View {
             }
             .navigationBarTitle("Add Item", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
-                viewModel.saveEntry()
-                presentationMode.wrappedValue.dismiss()
+                Task {
+                    await viewModel.saveEntry()
+                    presentationMode.wrappedValue.dismiss()
+                }
             }.disabled(!viewModel.isValid))
             .padding()
         }
