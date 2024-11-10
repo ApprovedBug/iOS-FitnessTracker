@@ -28,6 +28,8 @@ struct AddDiaryEntryView: View {
                     recentItems: items,
                     meals: meals,
                     addFoodItemTapped: viewModel.addFoodItemTapped,
+                    createFoodItemTapped: viewModel.createFoodItemTapped,
+                    scanItemTapped: viewModel.scanItemTapped,
                     cancelSearch: viewModel.clearSearch
                 )
                 .searchable(text: $viewModel.searchText)
@@ -57,6 +59,15 @@ struct AddDiaryEntryView: View {
                     .presentationDetents([.small])
             }
         })
+        .fullScreenCover(item: $viewModel.barcodeScannerView, content: { barcodeScanner in
+            barcodeScanner
+                .ignoresSafeArea(.all)
+                .onAppear {
+                    Task {
+                        await viewModel.scannerPresented()
+                    }
+                }
+        })
         .onChange(of: viewModel.shouldDismiss, {
             presentationMode.wrappedValue.dismiss()
         })
@@ -76,22 +87,41 @@ struct AddDiaryEntryView: View {
         let recentItems: [FoodItemViewModel]
         let meals: [MealItemViewModel]
         let addFoodItemTapped: (FoodItem) -> Void
+        let createFoodItemTapped: () -> Void
+        let scanItemTapped: @MainActor () async -> Void
         let cancelSearch: () -> Void
         
         var body: some View {
             SlidingTabView(isScrollable: false) {
                 
                 SlidingTabItem("All") {
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(recentItems) { item in
-                                FoodItemView(viewModel: item)
-                                    .onTapGesture {
-                                        addFoodItemTapped(item.foodItem)
-                                    }
+                    
+                    VStack(spacing: 12) {
+                        HStack(spacing: 12) {
+                            Button("Create new food item") {
+                                createFoodItemTapped()
                             }
+                            .buttonStyle(RoundedButtonStyle())
+                            
+                            Button("Scan item") {
+                                Task {
+                                    await scanItemTapped()
+                                }
+                            }
+                            .buttonStyle(RoundedButtonStyle())
                         }
-                        .padding([.leading, .trailing])
+                        .padding(.horizontal)
+                        ScrollView {
+                            LazyVStack {
+                                ForEach(recentItems) { item in
+                                    FoodItemView(viewModel: item)
+                                        .onTapGesture {
+                                            addFoodItemTapped(item.foodItem)
+                                        }
+                                }
+                            }
+                            .padding([.leading, .trailing])
+                        }
                     }
                 }
                 

@@ -13,6 +13,7 @@ import FitnessPersistence
 import SwiftUI
 import SwiftData
 import UIKit
+import Utilities
 
 @main
 struct FitnessTrackerApp: App {
@@ -51,6 +52,11 @@ struct FitnessTrackerApp: App {
         let mealsRepository = LocalMealsRepository()
         DependencyContainer.register(MealsRepository.self) {
             mealsRepository
+        }
+        
+        let barcodeScanner = BarcodeScanner()
+        DependencyContainer.register(BarcodeScanning.self) {
+            barcodeScanner
         }
         
         DependencyContainer.register(AppConfigurationManaging.self) {

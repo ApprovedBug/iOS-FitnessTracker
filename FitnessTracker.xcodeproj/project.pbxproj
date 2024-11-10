@@ -33,6 +33,7 @@
 		0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6762AE5B14C0036FC9E /* ExerciseViewModel.swift */; };
 		0474A6792AE5B1550036FC9E /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6782AE5B1550036FC9E /* WeightView.swift */; };
 		0474A67B2AE5B1620036FC9E /* WeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A67A2AE5B1620036FC9E /* WeightViewModel.swift */; };
+		049888112CDFB49B004D6A5D /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = 049888102CDFB49B004D6A5D /* Utilities */; };
 		049CD88A2AE5BB9300812BAE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8892AE5BB9300812BAE /* SummaryView.swift */; };
 		049CD88C2AE5BBB700812BAE /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD88B2AE5BBB700812BAE /* SummaryViewModel.swift */; };
 		049CD88E2AE5BBEE00812BAE /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD88D2AE5BBEE00812BAE /* DatePickerView.swift */; };
@@ -117,6 +118,7 @@
 		0474A6762AE5B14C0036FC9E /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
 		0474A6782AE5B1550036FC9E /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		0474A67A2AE5B1620036FC9E /* WeightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewModel.swift; sourceTree = "<group>"; };
+		0498880F2CDFB366004D6A5D /* Utilities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utilities; sourceTree = "<group>"; };
 		049C70322BA420010006287F /* FitnessUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FitnessUI; sourceTree = "<group>"; };
 		049C70362BA4214C0006287F /* DebugTools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DebugTools; sourceTree = "<group>"; };
 		049CD8892AE5BB9300812BAE /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A1E4222CCFFF4F00EC7D4A /* ConfigurationManagement in Frameworks */,
+				049888112CDFB49B004D6A5D /* Utilities in Frameworks */,
 				040D88CC2CCD323700FDD4D6 /* DebugTools in Frameworks */,
 				040D88CF2CCD324700FDD4D6 /* DependencyManagement in Frameworks */,
 				040D88D52CCD326000FDD4D6 /* FitnessUI in Frameworks */,
@@ -186,6 +189,7 @@
 		0404E2092AE59C240013CF1F = {
 			isa = PBXGroup;
 			children = (
+				0498880F2CDFB366004D6A5D /* Utilities */,
 				04D786C02BB34FE600EC68BC /* ConfigurationManagement */,
 				04D786BC2BB34D7700EC68BC /* DependencyManagement */,
 				04D786B62BB34C6D00EC68BC /* FitnessPersistence */,
@@ -497,6 +501,7 @@
 				040D88D12CCD325200FDD4D6 /* FitnessPersistence */,
 				040D88D42CCD326000FDD4D6 /* FitnessUI */,
 				040D88D72CCD349000FDD4D6 /* ConfigurationManagement */,
+				049888102CDFB49B004D6A5D /* Utilities */,
 			);
 			productName = FitnessTracker;
 			productReference = 0404E2122AE59C240013CF1F /* FitnessTracker.app */;
@@ -578,6 +583,7 @@
 				040D88D32CCD326000FDD4D6 /* XCLocalSwiftPackageReference "FitnessUI" */,
 				049577AC2CCD3532001C0CEC /* XCLocalSwiftPackageReference "ConfigurationManagement" */,
 				0412A1352CD56B05002F27C1 /* XCLocalSwiftPackageReference "DependencyManagement" */,
+				049888122CDFB4AD004D6A5D /* XCLocalSwiftPackageReference "Utilities" */,
 			);
 			productRefGroup = 0404E2132AE59C240013CF1F /* Products */;
 			projectDirPath = "";
@@ -830,6 +836,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Your camera is used to scan barcodes";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -869,6 +876,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Your camera is used to scan barcodes";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -1049,6 +1057,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ConfigurationManagement;
 		};
+		049888122CDFB4AD004D6A5D /* XCLocalSwiftPackageReference "Utilities" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Utilities;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1071,6 +1083,10 @@
 		040D88D72CCD349000FDD4D6 /* ConfigurationManagement */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ConfigurationManagement;
+		};
+		049888102CDFB49B004D6A5D /* Utilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Utilities;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
