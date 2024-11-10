@@ -8,10 +8,13 @@
 import Combine
 import DependencyManagement
 import FitnessPersistence
+import FitnessUI
 import Foundation
 import SwiftUI
+import Utilities
 
 @Observable
+@MainActor
 class AddDiaryEntryViewModel {
     
     struct EventHandler {
@@ -32,6 +35,7 @@ class AddDiaryEntryViewModel {
     var searchText: String = ""
     var state: State = .idle
     var addFoodItemViewModel: AddFoodItemViewModel?
+    var barcodeScannerView: IdentifiableView?
     
     let date: Date
     let mealType: MealType
@@ -45,6 +49,9 @@ class AddDiaryEntryViewModel {
     
     @ObservationIgnored
     @Inject private var mealsRepository: MealsRepository
+    
+    @ObservationIgnored
+    @Inject private var barcodeScanner: BarcodeScanning
     
     @ObservationIgnored
     private var cancellables = [AnyCancellable]()
@@ -96,6 +103,33 @@ class AddDiaryEntryViewModel {
         let viewModel = AddFoodItemViewModel(eventHandler: createItemEventHandler, foodItem: foodItem)
         addFoodItemViewModel = viewModel
         isShowingAddExistingItem = true
+    }
+    
+    @MainActor
+    @Sendable func scanItemTapped() async {
+        do {
+            
+            let scanner = try await barcodeScanner.scanner()
+            
+            barcodeScanner.barcodes
+                .sink { barcode in
+                    print("Barcode received: \(barcode)")
+                }
+                .store(in: &cancellables)
+            
+            barcodeScannerView = IdentifiableView(view: scanner)
+        } catch {
+            print("Error opening scanner: \(error)")
+        }
+    }
+    
+    @MainActor
+    func scannerPresented() async {
+        do {
+            try await barcodeScanner.startScanning()
+        } catch {
+            print("Error beggining scanning: \(error)")
+        }
     }
     
     func loadInitialState() {

@@ -12,7 +12,7 @@ import Foundation
 import SwiftData
 
 @Observable
-class DiaryViewModel {
+@MainActor class DiaryViewModel {
     
     // MARK: Page state
     enum State: Equatable {

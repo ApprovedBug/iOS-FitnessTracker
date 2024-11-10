@@ -42,7 +42,7 @@ class MealListViewModel {
     
     // MARK: Public functions
     
-    func updateEntries(entries: [DiaryEntry]) {
+    @MainActor func updateEntries(entries: [DiaryEntry]) {
         
         let addDiaryEntryEventHandler = AddDiaryEntryViewModel.EventHandler(
             diaryEntryAdded: { [weak self] entry in
