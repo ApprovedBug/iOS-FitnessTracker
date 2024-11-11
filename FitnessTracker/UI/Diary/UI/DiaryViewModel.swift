@@ -60,10 +60,10 @@ class DiaryViewModel {
         let entries = diaryFetching.allDiaryEntries()
         
         if let goals {
-            summaryViewModel = SummaryViewModel(goals: goals, entries: entries ?? [])
+            summaryViewModel = SummaryViewModel(goals: goals, entries: entries)
         }
-        mealListViewModel = MealListViewModel(currentlySelectedDate: Date.now, entries: entries ?? [])
-        
+        mealListViewModel = MealListViewModel(currentlySelectedDate: Date.now, entries: entries)
+        allEntries = entries
         state = .ready
     }
     

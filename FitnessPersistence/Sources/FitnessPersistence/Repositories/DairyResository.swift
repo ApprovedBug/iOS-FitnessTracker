@@ -15,7 +15,7 @@ public enum DiaryError: Error {
 
 public protocol DiaryRepository {
     
-    @MainActor func allDiaryEntries() -> [DiaryEntry]?
+    @MainActor func allDiaryEntries() -> [DiaryEntry]
     @MainActor func addDiaryEntry(diaryEntry: DiaryEntry) async
     @MainActor func addDiaryEntries(diaryEntries: [DiaryEntry]) async
     @MainActor func removeDiaryEntry(diaryEntry: DiaryEntry) async
@@ -27,14 +27,14 @@ public struct LocalDiaryRepository: DiaryRepository {
     
     public init() {}
     
-    public func allDiaryEntries() -> [DiaryEntry]? {
+    public func allDiaryEntries() -> [DiaryEntry] {
         
         do {
             let descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp)])
             let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
             return entries
         } catch {
-            return nil
+            return []
         }
     }
     

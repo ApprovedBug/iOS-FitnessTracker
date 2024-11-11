@@ -5,15 +5,12 @@
 //  Created by Jack Moseley on 22/10/2023.
 //
 
-import Combine
 import ConfigurationManagement
 import DebugTools
 import DependencyManagement
 import FitnessPersistence
 import FitnessServices
 import SwiftUI
-import SwiftData
-import UIKit
 import Utilities
 
 @main
