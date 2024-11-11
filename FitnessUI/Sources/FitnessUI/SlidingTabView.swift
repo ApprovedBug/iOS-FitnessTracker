@@ -68,7 +68,6 @@ public struct SlidingTabView<TabContent: SlidingTab>: View {
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .ignoresSafeArea(.all, edges: .bottom)
         }
     }
 }
