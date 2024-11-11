@@ -51,7 +51,7 @@ public protocol BarcodeScanning: Sendable {
     }
 }
 
-let logger = Logger(subsystem: "om.approvedbug.FitnessTracker", category: "BarcodeScanning")
+let logger = Logger(subsystem: "com.approvedbug.FitnessTracker", category: "BarcodeScanning")
 
 private struct BarcodeScannerRepresentable: UIViewControllerRepresentable {
     

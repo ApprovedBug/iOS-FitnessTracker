@@ -16,12 +16,23 @@ public struct RoundedButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         ZStack {
-            Color.blue
-                .frame(height: 40)
             
-            configuration.label
-                .padding([.top, .bottom], 8) // Add padding
-                .foregroundColor(.white) // Text color
+            if configuration.isPressed {
+                Color("ButtonPrimaryPressedBackground", bundle: .module)
+                    .frame(height: 40)
+                
+                configuration.label
+                    .padding([.top, .bottom], 8)
+                    .foregroundColor(Color("ButtonPrimaryPressedTint", bundle: .module))
+            } else {
+                Color("ButtonPrimaryBackground", bundle: .module)
+                    .frame(height: 40)
+                
+                configuration.label
+                    .padding([.top, .bottom], 8)
+                    .foregroundColor(.white)
+            }
+            
         }
         .cornerRadius(10)
     }
