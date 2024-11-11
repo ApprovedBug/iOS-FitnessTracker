@@ -82,6 +82,7 @@ struct AddDiaryEntryView: View {
                     }
                 }
         })
+        .toast(isPresented: $viewModel.showToast, message: "Item added!")
         .onChange(of: viewModel.shouldDismiss, {
             presentationMode.wrappedValue.dismiss()
         })

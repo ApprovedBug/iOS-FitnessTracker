@@ -33,6 +33,7 @@ class AddDiaryEntryViewModel {
     var isShowingCreateNewFoodItem: Bool = false
     var isShowingAddExistingItem: Bool = false
     var isShowingError: Bool = false
+    var showToast: Bool = false
     var shouldDismiss: Bool = false
     var searchText: String = ""
     var state: State = .idle
@@ -254,6 +255,7 @@ class AddDiaryEntryViewModel {
         let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, mealType: mealType, servings: servings)
         await diaryRepository.addDiaryEntry(diaryEntry: diaryEntry)
         eventHandler?.diaryEntryAdded(diaryEntry)
+        showToast = true
     }
     
     @MainActor
@@ -270,5 +272,6 @@ class AddDiaryEntryViewModel {
         }
         await diaryRepository.addDiaryEntries(diaryEntries: diaryEntries)
         eventHandler?.diaryEntriesAdded(diaryEntries)
+        showToast = true
     }
 }
