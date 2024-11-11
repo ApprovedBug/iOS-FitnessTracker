@@ -25,7 +25,7 @@ public struct RoundedButtonStyle: ButtonStyle {
                     .padding([.top, .bottom], 8)
                     .foregroundColor(Color("ButtonPrimaryPressedTint", bundle: .module))
             } else {
-                Color("ButtonPrimaryBackground", bundle: .module)
+                Color.accentColor
                     .frame(height: 40)
                 
                 configuration.label

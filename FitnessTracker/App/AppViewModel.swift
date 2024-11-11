@@ -20,7 +20,14 @@ class AppViewModel: ObservableObject, AppRootManaging {
     @Inject
     var appConfigurationManager: AppConfigurationManaging
     
+    let welcomeViewModel: WelcomeViewModel
+    let appTabViewModel: AppTabViewModel
+    
+    @MainActor
     init() {
+        welcomeViewModel = WelcomeViewModel()
+        appTabViewModel = AppTabViewModel()
+        
         setInitialRoot()
     }
     

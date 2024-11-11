@@ -11,7 +11,6 @@ import FitnessPersistence
 import Foundation
     
 @Observable
-@MainActor
 class SummaryViewModel {
     
     struct Data {
@@ -24,20 +23,9 @@ class SummaryViewModel {
         let fatsViewModel: MacrosViewModel
     }
     
-    enum State {
-        case idle
-        case ready(Data)
-    }
-    
-    // MARK: Injected properties
-    
-    @ObservationIgnored
-    @Inject
-    private var goalsRepository: GoalsRepository
-    
     // MARK: Published properties
     
-    var state: State = .idle
+    var data: Data?
     
     // MARK: Private properties
     
@@ -45,43 +33,17 @@ class SummaryViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     @ObservationIgnored
-    private var goals: Goals?
-    
-    @ObservationIgnored
-    private var entries: [DiaryEntry]?
+    private let goals: Goals
     
     // MARK: Initialisers
     
-    init() {}
-    
-    // MARK: - Public functions
-    
-    func loadGoals() async {
-        await goalsRepository.goalsForUser(userId: "something")
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    print("SummaryViewModel: \(error)")
-                case .finished:
-                    break
-                }
-            } receiveValue: { [weak self] goals in
-                guard let self else { return }
-                self.goals = goals
-                if let entries = entries {
-                    updateEntries(with: entries)
-                }
-            }
-            .store(in: &cancellables)
+    init(goals: Goals, entries: [DiaryEntry] = []) {
+        self.goals = goals
+        
+        process(goals: goals, entries: entries)
     }
     
     func updateEntries(with entries: [DiaryEntry]) {
-        
-        guard let goals else {
-            self.entries = entries
-            return
-        }
         process(goals: goals, entries: entries)
     }
 
@@ -90,24 +52,21 @@ class SummaryViewModel {
     private func process(goals: Goals, entries: [DiaryEntry]) {
         
         // Calculate consumed values based on entries
-        let (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed) = self.calculateConsumedValues(from: entries)
+        let (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed) = calculateConsumedValues(from: entries)
         
         // Create the view models
         let carbsViewModel = createMacrosViewModel(consumed: carbsConsumed, target: goals.carbs, title: "Carbs")
         let proteinsViewModel = createMacrosViewModel(consumed: proteinsConsumed, target: goals.protein, title: "Protein")
         let fatsViewModel = createMacrosViewModel(consumed: fatsConsumed, target: goals.fats, title: "Fat")
         
-        // Update the state
-        self.state = .ready(
-            .init(
-                kcalConsumed: String(kcalConsumed),
-                kcalBurned: "0",
-                kcalProgress: Double(kcalConsumed) / Double(goals.kcal),
-                kcalRemaining: String(format: "%.0f", Double(goals.kcal) - Double(kcalConsumed)),
-                carbsViewModel: carbsViewModel,
-                proteinViewModel: proteinsViewModel,
-                fatsViewModel: fatsViewModel
-            )
+        self.data = .init(
+            kcalConsumed: String(kcalConsumed),
+            kcalBurned: "0",
+            kcalProgress: Double(kcalConsumed) / Double(goals.kcal),
+            kcalRemaining: String(format: "%.0f", Double(goals.kcal) - Double(kcalConsumed)),
+            carbsViewModel: carbsViewModel,
+            proteinViewModel: proteinsViewModel,
+            fatsViewModel: fatsViewModel
         )
     }
 

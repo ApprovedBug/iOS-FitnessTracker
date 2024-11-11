@@ -55,6 +55,7 @@
 		04BCDFE02B0BED8D00346AD6 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFDF2B0BED8D00346AD6 /* MockUserDefaults.swift */; };
 		04BCDFE42B0BF48000346AD6 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFE32B0BF48000346AD6 /* DependencyContainer.swift */; };
 		04BCDFE92B0D6A0100346AD6 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BCDFE82B0D6A0100346AD6 /* AppTabView.swift */; };
+		04D36D112CE2BB9500BD0520 /* AppTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D36D102CE2BB9500BD0520 /* AppTabViewModel.swift */; };
 		04F0955C2C5D34A400EA3D94 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 04F0955B2C5D34A400EA3D94 /* Localizable.xcstrings */; };
 		04F0955F2C5D377900EA3D94 /* AddDiaryEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0955E2C5D377900EA3D94 /* AddDiaryEntryView.swift */; };
 		04F095612C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F095602C5D378F00EA3D94 /* AddDiaryEntryViewModel.swift */; };
@@ -141,6 +142,7 @@
 		04BCDFDF2B0BED8D00346AD6 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		04BCDFE32B0BF48000346AD6 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		04BCDFE82B0D6A0100346AD6 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
+		04D36D102CE2BB9500BD0520 /* AppTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabViewModel.swift; sourceTree = "<group>"; };
 		04D786B62BB34C6D00EC68BC /* FitnessPersistence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FitnessPersistence; sourceTree = "<group>"; };
 		04D786BC2BB34D7700EC68BC /* DependencyManagement */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DependencyManagement; sourceTree = "<group>"; };
 		04D786C02BB34FE600EC68BC /* ConfigurationManagement */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ConfigurationManagement; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				04BCDFE82B0D6A0100346AD6 /* AppTabView.swift */,
+				04D36D102CE2BB9500BD0520 /* AppTabViewModel.swift */,
 			);
 			path = AppTab;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				049CD88C2AE5BBB700812BAE /* SummaryViewModel.swift in Sources */,
 				049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */,
 				0474A6752AE5B13D0036FC9E /* ExerciseView.swift in Sources */,
+				04D36D112CE2BB9500BD0520 /* AppTabViewModel.swift in Sources */,
 				042152B32CD41A800089231D /* FoodItemViewModel.swift in Sources */,
 				04BCDFD52B0BE26800346AD6 /* OnboardingViewModel.swift in Sources */,
 				04BCDFCE2B08140F00346AD6 /* MealListItemViewModel.swift in Sources */,

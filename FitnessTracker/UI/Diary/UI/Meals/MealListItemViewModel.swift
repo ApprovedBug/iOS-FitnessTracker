@@ -6,7 +6,7 @@
 //
 
 import DependencyManagement
-import FitnessPersistence
+@preconcurrency import FitnessPersistence
 import Foundation
 
 @Observable

@@ -93,9 +93,9 @@ struct FitnessTrackerApp: App {
             case .splash:
                 SplashView()
             case .welcome:
-                WelcomeView(viewModel: WelcomeViewModel(), appRootManaging: viewModel)
+                WelcomeView(viewModel: viewModel.welcomeViewModel, appRootManaging: viewModel)
             case .dashboard:
-                AppTabView()
+                AppTabView(viewModel: viewModel.appTabViewModel)
         }
     }
 }

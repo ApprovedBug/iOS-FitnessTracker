@@ -7,7 +7,7 @@
 
 import Combine
 import DependencyManagement
-import FitnessPersistence
+@preconcurrency import FitnessPersistence
 import FitnessServices
 import FitnessUI
 import Foundation

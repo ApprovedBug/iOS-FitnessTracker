@@ -16,7 +16,7 @@ struct ToastView: View {
         HStack(alignment: .center, spacing: 12) {
             Text(message)
                 .font(Font.callout)
-                .foregroundColor(Color(UIColor.systemBackground))
+                .foregroundColor(Color(UIColor.white))
         
             Spacer(minLength: 10)
         
@@ -24,12 +24,12 @@ struct ToastView: View {
                 onCancelTapped()
             } label: {
                 Image(systemName: "xmark")
-                    .foregroundColor(Color(UIColor.systemBackground))
+                    .foregroundColor(Color(UIColor.white))
             }
         }
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity)
-        .background(Color("ToastBackground", bundle: .module))
+        .background(Color.accentColor)
         .cornerRadius(8)
         .padding(.horizontal, 16)
     }

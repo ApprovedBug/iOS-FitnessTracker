@@ -10,27 +10,29 @@ import SwiftUI
 
 struct AppTabView: View {
     
+    let viewModel: AppTabViewModel
+    
     var body: some View {
         
         TabView {
             
-            Tab("Diary", systemImage: "list.bullet.clipboard") {
-                NavigationStack {
-                    DiaryView(viewModel: DiaryViewModel())
-                        .navigationTitle("Diary")
+            ForEach(viewModel.tabs) { tab in
+                Tab(tab.title, systemImage: tab.image) {
+                    
+                    switch tab.tabType {
+                        case .diary:
+                            NavigationStack {
+                                DiaryView(viewModel: viewModel.diaryViewModel)
+                                    .navigationTitle("Diary")
+                            }
+                        case .exercise:
+                            ExerciseView()
+                        case .weight:
+                            WeightView()
+                        case .account:
+                            AccountView()
+                    }
                 }
-            }
-            
-            Tab("Exercise", systemImage: "dumbbell") {
-                ExerciseView()
-            }
-            
-            Tab("Weight", systemImage: "chart.xyaxis.line") {
-                WeightView()
-            }
-            
-            Tab("Account", systemImage: "person.crop.circle") {
-                AccountView()
             }
         }
     }

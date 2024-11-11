@@ -34,16 +34,9 @@ class MealListViewModel {
     private(set) var currentlySelectedDate: Date
     private var currentMeals: [MealListItemViewModel] = []
     
-    // MARK: Initialisers
-    
-    init(currentlySelectedDate: Date) {
-        self.currentlySelectedDate = currentlySelectedDate
-    }
-    
-    // MARK: Public functions
-    
-    @MainActor func updateEntries(entries: [DiaryEntry]) {
-        
+    @ObservationIgnored
+    @MainActor
+    private lazy var addDiaryEntryEventHandler: AddDiaryEntryViewModel.EventHandler = {
         let addDiaryEntryEventHandler = AddDiaryEntryViewModel.EventHandler(
             diaryEntryAdded: { [weak self] entry in
             // new entry added
@@ -59,26 +52,47 @@ class MealListViewModel {
                     eventHandler?.diaryEntryAdded(entry)
                 }
             }
+        return addDiaryEntryEventHandler
+    }()
+    
+    @ObservationIgnored
+    @MainActor
+    private lazy var itemEventHandler: MealListItemViewModel.EventHandler = {
         
         let itemEventHandler = MealListItemViewModel.EventHandler(
             openAddDiaryEntryTapped: { [weak self] mealType in
-            // add new entry opened
-            guard let self else { return }
-            addDiaryEntryViewModel = AddDiaryEntryViewModel(
-                date: currentlySelectedDate,
-                mealType: mealType,
-                eventHandler: addDiaryEntryEventHandler
-            )
-            isAddDiaryEntryOpen = true
-        }, diaryEntryRemoved: { [weak self] entry in
-            // entry removed
-            guard let self else { return }
-            eventHandler?.diaryEntryRemoved(entry)
-        }, diaryEntryUpdated: { [weak self] entry in
-            // entry updated
-            guard let self else { return }
-            eventHandler?.diaryEntryUpdated(entry)
-        })
+                // add new entry opened
+                guard let self else { return }
+                addDiaryEntryViewModel = AddDiaryEntryViewModel(
+                    date: currentlySelectedDate,
+                    mealType: mealType,
+                    eventHandler: addDiaryEntryEventHandler
+                )
+                isAddDiaryEntryOpen = true
+            }, diaryEntryRemoved: { [weak self] entry in
+                // entry removed
+                guard let self else { return }
+                eventHandler?.diaryEntryRemoved(entry)
+            }, diaryEntryUpdated: { [weak self] entry in
+                // entry updated
+                guard let self else { return }
+                eventHandler?.diaryEntryUpdated(entry)
+            })
+        return itemEventHandler
+    }()
+    
+    // MARK: Initialisers
+    
+    @MainActor
+    init(currentlySelectedDate: Date, entries: [DiaryEntry]) {
+        self.currentlySelectedDate = currentlySelectedDate
+        updateEntries(entries: entries)
+    }
+    
+    // MARK: Public functions
+    
+    @MainActor
+    func updateEntries(entries: [DiaryEntry]) {
         
         let meals: [MealListItemViewModel] = MealType.allCases.map {
             MealListItemViewModel(
@@ -89,7 +103,6 @@ class MealListViewModel {
         }
         
         for entry in entries {
-            
             if let meal = meals.first(where: { vm in
                 vm.mealType == entry.mealType
             }) {

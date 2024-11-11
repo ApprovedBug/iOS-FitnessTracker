@@ -7,7 +7,7 @@
 
 import ConfigurationManagement
 import DependencyManagement
-import FitnessPersistence
+@preconcurrency import FitnessPersistence
 import Foundation
 import SwiftUI
 

@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 22/10/2023.
 //
 
+import FitnessPersistence
 import FitnessUI
 import Foundation
 import SwiftUI
@@ -15,52 +16,40 @@ struct SummaryView: View {
     
     var body: some View {
         
-        switch viewModel.state {
-            case .ready(let data):
-                ContentView(data: data)
-            default:
-                ProgressView().onAppear(perform: {
-                    Task {
-                        await viewModel.loadGoals()
-                    }
-                })
-        }
+        contentView(data: viewModel.data)
     }
-}
-
-private struct ContentView: View {
     
-    let data: SummaryViewModel.Data
-    
-    var body: some View {
-        VStack {
-            
-            HStack {
-                
-                VStack(alignment: .leading) {
-                    KcalSummaryItemView(
-                        title: "Consumed",
-                        icon: Image(systemName: "apple.logo"),
-                        value: data.kcalConsumed
-                    )
+    @ViewBuilder
+    func contentView(data: SummaryViewModel.Data?) -> some View {
+        
+        if let data {
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        KcalSummaryItemView(
+                            title: "Consumed",
+                            icon: Image(systemName: "apple.logo"),
+                            value: data.kcalConsumed
+                        )
+                        Spacer()
+                        KcalSummaryItemView(
+                            title: "Burned",
+                            icon: Image(systemName: "flame.fill"),
+                            value: data.kcalBurned
+                        )
+                    }
+                    
                     Spacer()
-                    KcalSummaryItemView(
-                        title: "Burned",
-                        icon: Image(systemName: "flame.fill"),
-                        value: data.kcalBurned
-                    )
+                    
+                    KcalRemainingView(progress: data.kcalProgress, kcalRemaining: data.kcalRemaining)
                 }
+                .padding([.bottom], 32)
                 
-                Spacer()
-                
-                KcalRemainingView(progress: data.kcalProgress, kcalRemaining: data.kcalRemaining)
-            }
-            .padding([.bottom], 32)
-            
-            HStack {
-                MacrosView(viewModel: data.carbsViewModel)
-                MacrosView(viewModel: data.proteinViewModel)
-                MacrosView(viewModel: data.fatsViewModel)
+                HStack {
+                    MacrosView(viewModel: data.carbsViewModel)
+                    MacrosView(viewModel: data.proteinViewModel)
+                    MacrosView(viewModel: data.fatsViewModel)
+                }
             }
         }
     }
@@ -107,7 +96,9 @@ private struct KcalRemainingView: View {
 
 #Preview {
     
-    let viewModel = SummaryViewModel()
+    let goals = Goals(kcal: 200, carbs: 200, protein: 200, fats: 50)
+    
+    let viewModel = SummaryViewModel(goals: goals)
     
     SummaryView(viewModel: viewModel)
 }

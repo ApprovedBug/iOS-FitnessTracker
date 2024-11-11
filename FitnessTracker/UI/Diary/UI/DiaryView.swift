@@ -18,9 +18,7 @@ struct DiaryView: View {
         switch viewModel.state {
         case .idle, .loading:
             ProgressView().onAppear(perform: {
-                Task {
-                    await viewModel.loadData()
-                }
+                viewModel.loadData()
             })
         case .error:
             Text("There was an error loading your diary")
@@ -33,14 +31,18 @@ struct DiaryView: View {
         
         ScrollView {
             VStack {
-                SummaryView(viewModel: viewModel.summaryViewModel)
-                    .padding()
+                if let summaryViewModel = viewModel.summaryViewModel {
+                    SummaryView(viewModel: summaryViewModel)
+                        .padding()
+                }
                 
                 DatePickerView(viewModel: viewModel.dateViewModel)
                     .padding()
                 
-                MealListView(viewModel: viewModel.mealListViewModel)
-                    .padding([.leading, .trailing])
+                if let mealListViewModel = viewModel.mealListViewModel {
+                    MealListView(viewModel: mealListViewModel)
+                        .padding([.leading, .trailing])
+                }
                 
     //                WaterView()
             }

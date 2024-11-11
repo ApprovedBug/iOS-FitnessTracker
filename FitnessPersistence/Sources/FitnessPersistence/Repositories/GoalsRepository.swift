@@ -5,7 +5,6 @@
 //  Created by Jack Moseley on 06/04/2024.
 //
 
-import Combine
 import DependencyManagement
 import Foundation
 import SwiftData
@@ -14,29 +13,28 @@ public enum GoalsError: Error {
     case fetchError
 }
 
-public protocol GoalsRepository: Sendable {
+public protocol GoalsRepository {
     
-    func goalsForUser(userId: String) async -> AnyPublisher<Goals, GoalsError>
-    func saveGoals(goals: Goals, for user: String) async
-    func deleteGoals(for user: String) async
+    @MainActor func goalsForUser(userId: String) -> Goals?
+    @MainActor func saveGoals(goals: Goals, for user: String) async
+    @MainActor func deleteGoals(for user: String) async
 }
 
-@MainActor
 public struct LocalGoalsRepository: GoalsRepository {
     
     @Inject var contextProvider: ContextProviding
     
     public init() {}
     
-    public func goalsForUser(userId: String) async -> AnyPublisher<Goals, GoalsError> {
+    public func goalsForUser(userId: String) -> Goals? {
         do {
             let descriptor = FetchDescriptor<Goals>()
             guard let entry = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor).first else {
-                return Fail(error: .fetchError).eraseToAnyPublisher()
+                return nil  // Return nil if no entry is found
             }
-            return Just(entry).setFailureType(to: GoalsError.self).eraseToAnyPublisher()
+            return entry
         } catch {
-            return Fail(error: .fetchError).eraseToAnyPublisher()
+            return nil  // Return nil if there's an error
         }
     }
     
