@@ -122,19 +122,24 @@ private struct TabBarItem: View {
         Button(action: {
             self.currentTab = tab
         }) {
-            VStack {
+            ZStack {
                 Color.clear
                     .contentShape(Rectangle())
-                Spacer()
-                Text(tabBarItemName)
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(currentTab == tab ? .primary : .secondary)
-                if currentTab == tab {
-                    Color.primary
-                        .frame(height: 2)
-                        .matchedGeometryEffect(id: "underline", in: namespace, properties: .frame)
-                } else {
-                    Color.clear.frame(height: 2)
+                
+                VStack {
+                    Spacer()
+                    Text(tabBarItemName)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(currentTab == tab ? .primary : .secondary)
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.center)
+                    if currentTab == tab {
+                        Color.primary
+                            .frame(height: 2)
+                            .matchedGeometryEffect(id: "underline", in: namespace, properties: .frame)
+                    } else {
+                        Color.clear.frame(height: 2)
+                    }
                 }
             }
             .animation(.bouncy(duration: 0.3), value: self.currentTab)
