@@ -69,8 +69,21 @@ struct AddDiaryEntryView: View {
                     .presentationDetents([.small])
             }
         })
-        .alert("Error", isPresented: $viewModel.isShowingError, presenting: viewModel.errorMessage, actions: { details in
-            
+        .alert("Error",
+               isPresented: $viewModel.isShowingError,
+               presenting: viewModel.errorMessage,
+               actions: { details in
+            Button("Create new item") {
+                viewModel.createFoodItemTapped()
+            }
+            Button("Retry") {
+                Task {
+                    await viewModel.scanItemTapped()
+                }
+            }
+            Button("Cancel") {
+                
+            }
         }, message: { details in
             Text(details)
         })
@@ -83,7 +96,7 @@ struct AddDiaryEntryView: View {
                     }
                 }
         })
-        .toast(isPresented: $viewModel.showToast, message: "Item added!")
+        .toast(isPresented: $viewModel.showToast, message: "Food item added!")
         .onChange(of: viewModel.shouldDismiss, {
             presentationMode.wrappedValue.dismiss()
         })

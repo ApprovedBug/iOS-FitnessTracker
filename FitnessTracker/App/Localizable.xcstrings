@@ -53,6 +53,9 @@
     "Calories" : {
 
     },
+    "Cancel" : {
+
+    },
     "Carbs" : {
 
     },
@@ -63,6 +66,9 @@
 
     },
     "Create new food item" : {
+
+    },
+    "Create new item" : {
 
     },
     "Diary" : {
@@ -185,6 +191,9 @@
 
     },
     "Remaining" : {
+
+    },
+    "Retry" : {
 
     },
     "Save" : {
