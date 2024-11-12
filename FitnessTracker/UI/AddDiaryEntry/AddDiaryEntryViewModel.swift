@@ -40,6 +40,8 @@ class AddDiaryEntryViewModel {
     var addFoodItemViewModel: AddFoodItemViewModel?
     var barcodeScannerView: IdentifiableView?
     var errorMessage: String?
+    var recentItems: [FoodItemViewModel]?
+    var mealFoodItems: [MealItemViewModel]?
     
     let date: Date
     let mealType: MealType
@@ -204,9 +206,9 @@ class AddDiaryEntryViewModel {
             }
         }, receiveValue: { [weak self] results in
             guard let self else { return }
-            let recentItems = results.0.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
-            let mealsFoodItems = results.1.map { MealItemViewModel(meal: $0, eventHandler: mealItemEventHandler) }
-            state = .searchResults(items: recentItems, meals: mealsFoodItems)
+            recentItems = results.0.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
+            mealFoodItems = results.1.map { MealItemViewModel(meal: $0, eventHandler: mealItemEventHandler) }
+            showResults(items: recentItems, meals: mealFoodItems)
         })
         .store(in: &cancellables)
     }
@@ -244,6 +246,29 @@ class AddDiaryEntryViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func filter() {
+    
+        guard !searchText.isEmpty else {
+            showResults(items: recentItems, meals: mealFoodItems)
+            return
+        }
+        
+        let items = recentItems?.filter { item in
+            item.name.localizedCaseInsensitiveContains(searchText)
+        }
+        
+        let meals = mealFoodItems?.filter { item in
+            item.name.localizedCaseInsensitiveContains(searchText)
+        }
+        
+        showResults(items: items, meals: meals)
+    }
+    
+    func showResults(items: [FoodItemViewModel]? = [], meals: [MealItemViewModel]? = []) {
+        
+        state = .searchResults(items: items ?? [], meals: meals ?? [])
     }
     
     func clearSearch() async {

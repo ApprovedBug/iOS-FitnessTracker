@@ -43,6 +43,9 @@ struct AddDiaryEntryView: View {
                         await viewModel.search()
                     }
                 }
+                .onChange(of: viewModel.searchText) { oldValue, newValue in
+                    viewModel.filter()
+                }
             case .empty:
                 EmptyResultsView(
                     createFoodItemTapped: viewModel.createFoodItemTapped,
