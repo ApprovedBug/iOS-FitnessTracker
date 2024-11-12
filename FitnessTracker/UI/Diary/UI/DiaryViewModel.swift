@@ -57,13 +57,14 @@ class DiaryViewModel {
     func loadData() {
         
         let goals = goalsRepository.goalsForUser(userId: "something")
-        let entries = diaryFetching.allDiaryEntries()
+        allEntries = diaryFetching.allDiaryEntries()
+        
+        let entries = allEntries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: Date.now) }
         
         if let goals {
             summaryViewModel = SummaryViewModel(goals: goals, entries: entries)
         }
         mealListViewModel = MealListViewModel(currentlySelectedDate: Date.now, entries: entries)
-        allEntries = entries
         state = .ready
     }
     
