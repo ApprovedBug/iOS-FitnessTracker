@@ -87,6 +87,7 @@ private struct BarcodeScannerRepresentable: UIViewControllerRepresentable {
         // Add gradient and close button
         addGradientView(to: dataScannerViewController)
         addCloseButton(to: dataScannerViewController, context: context)
+        addScannerView(to: dataScannerViewController)
         
         return dataScannerViewController
     }
@@ -138,6 +139,24 @@ private struct BarcodeScannerRepresentable: UIViewControllerRepresentable {
             closeButton.trailingAnchor.constraint(equalTo: dataScannerViewController.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             closeButton.heightAnchor.constraint(equalToConstant: 44),
             closeButton.widthAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+    
+    private func addScannerView(to dataScannerViewController: DataScannerViewController) {
+        // Create and add the corner overlay
+        let overlayView = ScannerOverlayView()
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.backgroundColor = .clear
+        dataScannerViewController.view.addSubview(overlayView)
+        
+        let overlaySize: CGFloat = 200.0
+        
+        // Center the overlay view and set its size using Auto Layout constraints
+        NSLayoutConstraint.activate([
+            overlayView.centerXAnchor.constraint(equalTo: dataScannerViewController.view.centerXAnchor),
+            overlayView.centerYAnchor.constraint(equalTo: dataScannerViewController.view.centerYAnchor),
+            overlayView.widthAnchor.constraint(equalToConstant: overlaySize),
+            overlayView.heightAnchor.constraint(equalToConstant: overlaySize)
         ])
     }
     
