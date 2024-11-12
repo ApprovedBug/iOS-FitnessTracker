@@ -26,8 +26,6 @@ struct AddDiaryEntryView: View {
                             await viewModel.loadInitialState()
                         }
                     }
-            case .loading:
-                ProgressView()
             case .searchResults(let items, let meals):
                 FoodItemList(
                     recentItems: items,
@@ -37,13 +35,13 @@ struct AddDiaryEntryView: View {
                     scanItemTapped: viewModel.scanItemTapped,
                     cancelSearch: viewModel.clearSearch
                 )
-                .searchable(text: $viewModel.searchText)
+                .searchable(text: $viewModel.searchTerm)
                 .onSubmit(of: .search) {
                     Task {
                         await viewModel.search()
                     }
                 }
-                .onChange(of: viewModel.searchText) { oldValue, newValue in
+                .onChange(of: viewModel.searchTerm) { oldValue, newValue in
                     viewModel.filter()
                 }
             case .empty:
@@ -51,7 +49,7 @@ struct AddDiaryEntryView: View {
                     createFoodItemTapped: viewModel.createFoodItemTapped,
                     cancelSearch: viewModel.clearSearch
                 )
-                .searchable(text: $viewModel.searchText)
+                .searchable(text: $viewModel.searchTerm)
                 .onSubmit(of: .search) {
                     Task {
                         await viewModel.search()

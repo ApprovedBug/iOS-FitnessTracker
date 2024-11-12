@@ -16,7 +16,6 @@ public enum FoodItemError: Error {
 
 public protocol FoodItemRepository: Sendable {
     
-    @MainActor func foodItems(name: String) async -> AnyPublisher<[FoodItem], FoodItemError>
     @MainActor func recentFoodItems() async -> AnyPublisher<Set<FoodItem>, FoodItemError>
     @MainActor func saveFoodItem(_ foodItem: FoodItem) async
 }
@@ -27,20 +26,6 @@ public final class LocalFoodItemRepository: FoodItemRepository {
     @Inject var contextProvider: ContextProviding
     
     public init() {}
-    
-    public func foodItems(name: String) async -> AnyPublisher<[FoodItem], FoodItemError> {
-        
-        do {
-            let namePredicate = #Predicate<FoodItem> { item in
-                item.name.localizedStandardContains(name)
-            }
-            let descriptor = FetchDescriptor<FoodItem>(predicate: namePredicate, sortBy: [SortDescriptor(\.name)])
-            let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
-            return Just(entries).setFailureType(to: FoodItemError.self).eraseToAnyPublisher()
-        } catch {
-            return Fail(error: .fetchError).eraseToAnyPublisher()
-        }
-    }
     
     public func recentFoodItems() async -> AnyPublisher<Set<FoodItem>, FoodItemError> {
         

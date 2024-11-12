@@ -8,13 +8,29 @@
 import Foundation
 
 // Top-level struct for both success and error responses
-public struct FoodInfoResponse: Sendable, Codable {
+public struct FoodInfoDetailResponse: Sendable, Codable {
     let code: String
     let errors: [ErrorDetail]?
     let product: FoodProduct?
     let result: Result
     let status: String
     let warnings: [String]?
+}
+
+public struct FoodInfoSearchResponse: Sendable, Codable {
+    let count: Int
+    let page: Int
+    let pageCount: Int
+    let pageSize: Int
+    let products: [FoodProduct]?
+    
+    enum CodingKeys: String, CodingKey {
+        case count
+        case page
+        case products
+        case pageCount = "page_count"
+        case pageSize = "page_size"
+    }
 }
 
 // Product struct
@@ -38,18 +54,18 @@ public struct Nutrients: Sendable, Codable {
     public let carbohydratesUnit: String?
     public let carbohydratesValue: Double?
     
-    public let energy: Int?
-    public let energyKcal: Int?
-    public let energyKcal100g: Int?
-    public let energyKcalServing: Int?
+    public let energy: Double?
+    public let energyKcal: Double?
+    public let energyKcal100g: Double?
+    public let energyKcalServing: Double?
     public let energyKcalUnit: String?
-    public let energyKcalValue: Int?
+    public let energyKcalValue: Double?
     public let energyKcalValueComputed: Double?
     
-    public let energy100g: Int?
-    public let energyServing: Int?
+    public let energy100g: Double?
+    public let energyServing: Double?
     public let energyUnit: String?
-    public let energyValue: Int?
+    public let energyValue: Double?
     
     public let fat: Double?
     public let fat100g: Double?

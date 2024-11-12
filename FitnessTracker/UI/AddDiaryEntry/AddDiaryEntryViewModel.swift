@@ -25,7 +25,6 @@ class AddDiaryEntryViewModel {
     
     enum State {
         case idle
-        case loading
         case searchResults(items: [FoodItemViewModel], meals: [MealItemViewModel])
         case empty
     }
@@ -35,7 +34,7 @@ class AddDiaryEntryViewModel {
     var isShowingError: Bool = false
     var showToast: Bool = false
     var shouldDismiss: Bool = false
-    var searchText: String = ""
+    var searchTerm: String = ""
     var state: State = .idle
     var addFoodItemViewModel: AddFoodItemViewModel?
     var barcodeScannerView: IdentifiableView?
@@ -154,7 +153,7 @@ class AddDiaryEntryViewModel {
             guard let self = self else { return }
             
             do {
-                let foodInfo = try await foodItemService.search(for: barcode)
+                let foodInfo = try await foodItemService.search(barcode: barcode)
     
                 await self.openFoodProduct(foodInfo)
             } catch {
@@ -169,24 +168,11 @@ class AddDiaryEntryViewModel {
     @MainActor
     func openFoodProduct(_ foodProduct: FoodProduct) async {
         
-        guard let kcal = foodProduct.nutriments.energyKcal100g,
-              let carbs = foodProduct.nutriments.carbohydrates100g,
-              let protein = foodProduct.nutriments.proteins100g,
-              let fats = foodProduct.nutriments.fat100g else {
+        guard let foodItem = FoodItem(from: foodProduct) else {
             errorMessage = "Missing required nutrients."
             isShowingError = true
             return
         }
-
-        let foodItem = FoodItem(
-            name: foodProduct.productName,
-            kcal: kcal,
-            carbs: carbs,
-            protein: protein,
-            fats: fats,
-            measurementUnit: .grams,
-            servingSize: 100
-        )
         
         addFoodItemTapped(foodItem)
     }
@@ -225,42 +211,54 @@ class AddDiaryEntryViewModel {
     
     @MainActor
     func search() async {
-        state = .loading
-        
-        await foodItemRepository.foodItems(name: searchText)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                switch completion {
-                    case .finished:
-                        break
-                    case .failure:
-                        self?.state = .empty
+        Task.detached(priority: .background) { [weak self] in
+            guard let self = self else { return }
+            
+            do {
+                let foodProducts = try await foodItemService.search(searchTerm: searchTerm)
+    
+                guard !foodProducts.isEmpty else {
+                    await MainActor.run {
+                        state = .empty
+                    }
+                    return
                 }
-            } receiveValue: { [weak self] items in
-                guard let self else { return }
-                if items.isEmpty {
-                    state = .empty
-                } else {
-                    let viewModels = items.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
-                    state = .searchResults(items: viewModels, meals: [])
+                
+                let foodItems = foodProducts.map({ FoodItem(from: $0) }).compactMap({$0})
+                
+                guard !foodItems.isEmpty else {
+                    await MainActor.run {
+                        state = .empty
+                    }
+                    return
+                }
+                await MainActor.run {
+                    let items = foodItems.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
+                    showResults(items: items, meals: mealFoodItems)
+                }
+                
+            } catch {
+                await MainActor.run {
+                    self.errorMessage = "Product not found."
+                    isShowingError = true
                 }
             }
-            .store(in: &cancellables)
+        }
     }
     
     func filter() {
     
-        guard !searchText.isEmpty else {
+        guard !searchTerm.isEmpty else {
             showResults(items: recentItems, meals: mealFoodItems)
             return
         }
         
         let items = recentItems?.filter { item in
-            item.name.localizedCaseInsensitiveContains(searchText)
+            item.name.localizedCaseInsensitiveContains(searchTerm)
         }
         
         let meals = mealFoodItems?.filter { item in
-            item.name.localizedCaseInsensitiveContains(searchText)
+            item.name.localizedCaseInsensitiveContains(searchTerm)
         }
         
         showResults(items: items, meals: meals)
@@ -298,5 +296,28 @@ class AddDiaryEntryViewModel {
         await diaryRepository.addDiaryEntries(diaryEntries: diaryEntries)
         eventHandler?.diaryEntriesAdded(diaryEntries)
         showToast = true
+    }
+}
+
+extension FoodItem {
+    
+    convenience init?(from foodProduct: FoodProduct) {
+        
+        guard let kcal = foodProduct.nutriments.energyKcal100g,
+              let carbs = foodProduct.nutriments.carbohydrates100g,
+              let protein = foodProduct.nutriments.proteins100g,
+              let fats = foodProduct.nutriments.fat100g else {
+            return nil
+        }
+
+        self.init(
+            name: foodProduct.productName,
+            kcal: Int(kcal),
+            carbs: carbs,
+            protein: protein,
+            fats: fats,
+            measurementUnit: .grams,
+            servingSize: 100
+        )
     }
 }

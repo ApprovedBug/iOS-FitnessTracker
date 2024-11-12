@@ -10,7 +10,8 @@ import Foundation
 
 public protocol FoodInfoNetworking: Sendable {
     
-    @Sendable func search(for barcode: String) async throws -> FoodProduct
+    @Sendable func search(barcode: String) async throws -> FoodProduct
+    @Sendable func search(searchTerm: String) async throws -> [FoodProduct]
 }
 
 public struct FoodInfoNetworkService: FoodInfoNetworking {
@@ -20,16 +21,29 @@ public struct FoodInfoNetworkService: FoodInfoNetworking {
     @Inject
     private var apiClient: ApiProtocol
     
-    public func search(for barcode: String) async throws -> FoodProduct {
+    public func search(barcode: String) async throws -> FoodProduct {
         
         let endpoint = FoodInfoEndpoints.getFoodInfo(barcode: barcode)
         
-        let response = try await apiClient.asyncRequest(endpoint: endpoint, responseModel: FoodInfoResponse.self)
+        let response = try await apiClient.asyncRequest(endpoint: endpoint, responseModel: FoodInfoDetailResponse.self)
         
         guard let product = response.product else {
             throw ApiError.init(errorCode: "404", message: "Item not found")
         }
         
         return product
+    }
+    
+    public func search(searchTerm: String) async throws -> [FoodProduct] {
+        
+        let endpoint = FoodInfoEndpoints.search(searchTerm: searchTerm)
+        
+        let response = try await apiClient.asyncRequest(endpoint: endpoint, responseModel: FoodInfoSearchResponse.self)
+        
+        guard let products = response.products else {
+            throw ApiError.init(errorCode: "404", message: "Item not found")
+        }
+        
+        return products
     }
 }

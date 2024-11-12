@@ -49,6 +49,7 @@ public final class ApiClient: ApiProtocol {
                 )
             }
         default:
+            print(String(describing: response))
             guard let decodedError = try? JSONDecoder().decode(ApiError.self, from: data) else {
                 throw ApiError(
                     statusCode: response.statusCode,

@@ -52,9 +52,6 @@ extension EndpointProvider {
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("true", forHTTPHeaderField: "X-Use-Cache")
 
-        if !token.isEmpty {
-            urlRequest.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
         if let body = body {
             do {
                 urlRequest.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
@@ -62,6 +59,7 @@ extension EndpointProvider {
                 throw ApiError(errorCode: "ERROR-0", message: "Error encoding http body")
             }
         }
+        print(String(describing: urlRequest))
         return urlRequest
     }
 }

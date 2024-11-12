@@ -10,6 +10,7 @@ import Foundation
 enum FoodInfoEndpoints: EndpointProvider {
 
     case getFoodInfo(barcode: String)
+    case search(searchTerm: String)
     
     var baseURL: String {
         return "world.openfoodfacts.org"
@@ -19,12 +20,14 @@ enum FoodInfoEndpoints: EndpointProvider {
         switch self {
         case .getFoodInfo(let barcode):
             return "/api/v3/product/\(barcode).json"
+        case .search:
+            return "/cgi/search.pl"
         }
     }
 
     var method: RequestMethod {
         switch self {
-        case .getFoodInfo:
+        case .getFoodInfo, .search:
             return .get
         }
     }
@@ -32,7 +35,15 @@ enum FoodInfoEndpoints: EndpointProvider {
     var queryItems: [URLQueryItem]? {
         switch self {
         case .getFoodInfo:
-            return [URLQueryItem(name: "getFoodInfo", value: "code,product_name,nutriments")]
+            return [URLQueryItem(name: "fields", value: "code,product_name,nutriments")]
+        case .search(let searchTerm):
+            return [
+                URLQueryItem(name: "fields", value: "code,product_name,nutriments"),
+                URLQueryItem(name: "json", value: "1"),
+                URLQueryItem(name: "page_size", value: "20"),
+                URLQueryItem(name: "sort_by", value: "popularity_key"),
+                URLQueryItem(name: "search_terms", value: searchTerm)
+            ]
         }
     }
 
@@ -47,6 +58,8 @@ enum FoodInfoEndpoints: EndpointProvider {
         switch self {
         case .getFoodInfo:
             return "_getFoodInfoMockResponse"
+        case .search:
+            return "_searchResponse"
         }
     }
 }
