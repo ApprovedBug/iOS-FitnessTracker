@@ -48,7 +48,6 @@ class DiaryViewModel {
     init() {
         dateViewModel = DatePickerViewModel(date: Date.now)
         
-        subscribeToEntryUpdates()
         subscribeDateUpdates()
     }
     
@@ -65,6 +64,8 @@ class DiaryViewModel {
             summaryViewModel = SummaryViewModel(goals: goals, entries: entries)
         }
         mealListViewModel = MealListViewModel(currentlySelectedDate: Date.now, entries: entries)
+        subscribeToEntryUpdates()
+        
         state = .ready
     }
     
