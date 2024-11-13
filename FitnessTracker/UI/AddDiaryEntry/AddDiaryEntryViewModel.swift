@@ -23,28 +23,24 @@ class AddDiaryEntryViewModel {
         var diaryEntriesAdded: ([DiaryEntry]) -> Void
     }
     
-    enum State {
-        case idle
-        case searchResults(items: [FoodItemViewModel], meals: [MealItemViewModel])
-        case empty
-    }
-    
     var isShowingCreateNewFoodItem: Bool = false
     var isShowingAddExistingItem: Bool = false
     var isShowingError: Bool = false
     var showToast: Bool = false
     var shouldDismiss: Bool = false
     var searchTerm: String = ""
-    var state: State = .idle
     var addFoodItemViewModel: AddFoodItemViewModel?
     var barcodeScannerView: IdentifiableView?
     var errorMessage: String?
-    var recentItems: [FoodItemViewModel]?
-    var mealFoodItems: [MealItemViewModel]?
+    var foodItemViewModels: [FoodItemViewModel] = []
+    var mealItemViewModels: [MealItemViewModel] = []
     
     let date: Date
     let mealType: MealType
     let eventHandler: EventHandler?
+    
+    private var recentItems: [FoodItem] = []
+    private var meals: [Meal] = []
     
     @ObservationIgnored
     @Inject private var foodItemRepository: FoodItemRepository
@@ -63,9 +59,6 @@ class AddDiaryEntryViewModel {
     
     @ObservationIgnored
     private var cancellables = [AnyCancellable]()
-    
-    @ObservationIgnored
-    private var meals: [Meal] = []
     
     @ObservationIgnored
     private lazy var itemEventHandler: FoodItemViewModel.EventHandler = {
@@ -97,6 +90,8 @@ class AddDiaryEntryViewModel {
         self.date = date
         self.mealType = mealType
         self.eventHandler = eventHandler
+        
+        loadInitialState()
     }
     
     @MainActor
@@ -178,35 +173,11 @@ class AddDiaryEntryViewModel {
     }
     
     @MainActor
-    func loadInitialState() async {
+    func loadInitialState() {
+        recentItems = Array(foodItemRepository.recentFoodItems())
+        meals = mealsRepository.meals()
         
-        await loadRecentItems()
-            .zip(await loadMeals())
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-            switch completion {
-                case .finished:
-                    break
-                case .failure:
-                    self?.state = .empty
-            }
-        }, receiveValue: { [weak self] results in
-            guard let self else { return }
-            recentItems = results.0.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
-            mealFoodItems = results.1.map { MealItemViewModel(meal: $0, eventHandler: mealItemEventHandler) }
-            showResults(items: recentItems, meals: mealFoodItems)
-        })
-        .store(in: &cancellables)
-    }
-    
-    @MainActor
-    func loadRecentItems() async -> AnyPublisher<Set<FoodItem>, Never> {
-        await foodItemRepository.recentFoodItems().replaceError(with: []).eraseToAnyPublisher()
-    }
-    
-    @MainActor
-    func loadMeals() async -> AnyPublisher<[Meal], Never> {
-        await mealsRepository.meals().replaceError(with: []).eraseToAnyPublisher()
+        showResults(items: recentItems, meals: meals)
     }
     
     @MainActor
@@ -216,25 +187,11 @@ class AddDiaryEntryViewModel {
             
             do {
                 let foodProducts = try await foodItemService.search(searchTerm: searchTerm)
-    
-                guard !foodProducts.isEmpty else {
-                    await MainActor.run {
-                        state = .empty
-                    }
-                    return
-                }
                 
                 let foodItems = foodProducts.map({ FoodItem(from: $0) }).compactMap({$0})
                 
-                guard !foodItems.isEmpty else {
-                    await MainActor.run {
-                        state = .empty
-                    }
-                    return
-                }
                 await MainActor.run {
-                    let items = foodItems.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
-                    showResults(items: items, meals: mealFoodItems)
+                    showResults(items: foodItems, meals: meals)
                 }
                 
             } catch {
@@ -249,28 +206,28 @@ class AddDiaryEntryViewModel {
     func filter() {
     
         guard !searchTerm.isEmpty else {
-            showResults(items: recentItems, meals: mealFoodItems)
+            showResults(items: recentItems, meals: meals)
             return
         }
         
-        let items = recentItems?.filter { item in
+        let items = recentItems.filter { item in
             item.name.localizedCaseInsensitiveContains(searchTerm)
         }
         
-        let meals = mealFoodItems?.filter { item in
+        let meals = meals.filter { item in
             item.name.localizedCaseInsensitiveContains(searchTerm)
         }
         
         showResults(items: items, meals: meals)
     }
     
-    func showResults(items: [FoodItemViewModel]? = [], meals: [MealItemViewModel]? = []) {
-        
-        state = .searchResults(items: items ?? [], meals: meals ?? [])
+    func showResults(items: [FoodItem], meals: [Meal]) {
+        foodItemViewModels = items.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
+        mealItemViewModels = meals.map { MealItemViewModel(meal: $0, eventHandler: mealItemEventHandler) }
     }
     
     func clearSearch() async {
-        await loadInitialState()
+        showResults(items: recentItems, meals: meals)
     }
     
     @MainActor

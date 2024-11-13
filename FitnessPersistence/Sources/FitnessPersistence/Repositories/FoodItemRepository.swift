@@ -5,10 +5,9 @@
 //  Created by Jack Moseley on 12/09/2024.
 //
 
-import Combine
-import SwiftData
 import DependencyManagement
 import Foundation
+import SwiftData
 
 public enum FoodItemError: Error {
     case fetchError
@@ -16,7 +15,7 @@ public enum FoodItemError: Error {
 
 public protocol FoodItemRepository: Sendable {
     
-    @MainActor func recentFoodItems() async -> AnyPublisher<Set<FoodItem>, FoodItemError>
+    @MainActor func recentFoodItems() -> [FoodItem]
     @MainActor func saveFoodItem(_ foodItem: FoodItem) async
 }
 
@@ -27,24 +26,27 @@ public final class LocalFoodItemRepository: FoodItemRepository {
     
     public init() {}
     
-    public func recentFoodItems() async -> AnyPublisher<Set<FoodItem>, FoodItemError> {
+    public func recentFoodItems() -> [FoodItem] {
         
         do {
-            var descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp)])
+            var descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp, order: .reverse)])
             descriptor.fetchLimit = 30
             let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
-            var items: Set<FoodItem> = []
-            for entry in entries {
-                items.insert(entry.foodItem)
-            }
-            return Just(items).setFailureType(to: FoodItemError.self).eraseToAnyPublisher()
+            return entries.map(\.foodItem).uniqued()
         } catch {
-            return Fail(error: .fetchError).eraseToAnyPublisher()
+            return []
         }
     }
     
     public func saveFoodItem(_ foodItem: FoodItem) async {
         contextProvider.sharedModelContainer.mainContext.insert(foodItem)
         try? contextProvider.sharedModelContainer.mainContext.save()
+    }
+}
+
+extension Sequence where Element: Hashable {
+    func uniqued() -> [Element] {
+        var set = Set<Element>()
+        return filter { set.insert($0).inserted }
     }
 }

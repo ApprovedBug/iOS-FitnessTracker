@@ -18,43 +18,22 @@ struct AddDiaryEntryView: View {
     var body: some View {
         
         NavigationStack {
-            switch viewModel.state {
-            case .idle:
-                ProgressView()
-                    .onAppear {
-                        Task {
-                            await viewModel.loadInitialState()
-                        }
-                    }
-            case .searchResults(let items, let meals):
-                FoodItemList(
-                    recentItems: items,
-                    meals: meals,
-                    addFoodItemTapped: viewModel.addFoodItemTapped,
-                    createFoodItemTapped: viewModel.createFoodItemTapped,
-                    scanItemTapped: viewModel.scanItemTapped,
-                    cancelSearch: viewModel.clearSearch
-                )
-                .searchable(text: $viewModel.searchTerm)
-                .onSubmit(of: .search) {
-                    Task {
-                        await viewModel.search()
-                    }
+            FoodItemList(
+                items: viewModel.foodItemViewModels,
+                meals: viewModel.mealItemViewModels,
+                addFoodItemTapped: viewModel.addFoodItemTapped,
+                createFoodItemTapped: viewModel.createFoodItemTapped,
+                scanItemTapped: viewModel.scanItemTapped,
+                cancelSearch: viewModel.clearSearch
+            )
+            .searchable(text: $viewModel.searchTerm)
+            .onSubmit(of: .search) {
+                Task {
+                    await viewModel.search()
                 }
-                .onChange(of: viewModel.searchTerm) { oldValue, newValue in
-                    viewModel.filter()
-                }
-            case .empty:
-                EmptyResultsView(
-                    createFoodItemTapped: viewModel.createFoodItemTapped,
-                    cancelSearch: viewModel.clearSearch
-                )
-                .searchable(text: $viewModel.searchTerm)
-                .onSubmit(of: .search) {
-                    Task {
-                        await viewModel.search()
-                    }
-                }
+            }
+            .onChange(of: viewModel.searchTerm) { oldValue, newValue in
+                viewModel.filter()
             }
         }
         .sheet(isPresented: $viewModel.isShowingCreateNewFoodItem, content: {
@@ -113,7 +92,7 @@ struct AddDiaryEntryView: View {
     struct FoodItemList: View {
         @Environment(\.isSearching) var isSearching
         
-        let recentItems: [FoodItemViewModel]
+        let items: [FoodItemViewModel]
         let meals: [MealItemViewModel]
         let addFoodItemTapped: (FoodItem) -> Void
         let createFoodItemTapped: () -> Void
@@ -142,7 +121,7 @@ struct AddDiaryEntryView: View {
                         .padding(.horizontal)
                         ScrollView {
                             LazyVStack {
-                                ForEach(recentItems) { item in
+                                ForEach(items) { item in
                                     FoodItemView(viewModel: item)
                                         .onTapGesture {
                                             addFoodItemTapped(item.foodItem)

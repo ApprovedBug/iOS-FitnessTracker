@@ -10,13 +10,9 @@ import DependencyManagement
 import Foundation
 import SwiftData
 
-public enum MealError: Error {
-    case fetchError
-}
-
 public protocol MealsRepository: Sendable {
-    @MainActor func saveMeal(_ meal: Meal) async
-    @MainActor func meals() async -> AnyPublisher<[Meal], MealError>
+    @MainActor func saveMeal(_ meal: Meal)
+    @MainActor func meals() -> [Meal]
 }
 
 @MainActor
@@ -26,14 +22,14 @@ public struct LocalMealsRepository: MealsRepository {
     
     public init() {}
     
-    public func meals() async -> AnyPublisher<[Meal], MealError> {
+    public func meals() -> [Meal] {
         
         do {
             let fetchDescriptor = FetchDescriptor<Meal>(sortBy: [SortDescriptor(\.name)])
             let meals = try contextProvider.sharedModelContainer.mainContext.fetch(fetchDescriptor)
-            return Just(meals).setFailureType(to: MealError.self).eraseToAnyPublisher()
+            return meals
         } catch {
-            return Fail(error: .fetchError).eraseToAnyPublisher()
+            return []
         }
     }
     
