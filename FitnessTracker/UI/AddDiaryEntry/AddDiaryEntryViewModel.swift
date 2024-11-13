@@ -265,25 +265,66 @@ class AddDiaryEntryViewModel {
     }
 }
 
-extension FoodItem {
+private extension FoodItem {
     
     convenience init?(from foodProduct: FoodProduct) {
-        
-        guard let kcal = foodProduct.nutriments.energyKcal100g,
-              let carbs = foodProduct.nutriments.carbohydrates100g,
-              let protein = foodProduct.nutriments.proteins100g,
-              let fats = foodProduct.nutriments.fat100g else {
+        if let nutriments = foodProduct.nutrimentsForServing() {
+            let (servingQuantity, measurementUnit) = foodProduct.servingSizeAndUnit()
+            
+            self.init(
+                name: foodProduct.productName,
+                kcal: Int(nutriments.kcal),
+                carbs: nutriments.carbs,
+                protein: nutriments.protein,
+                fats: nutriments.fats,
+                measurementUnit: measurementUnit,
+                servingSize: Int(servingQuantity)
+            )
+        } else if let nutriments = foodProduct.nutrimentsPer100g() {
+            self.init(
+                name: foodProduct.productName,
+                kcal: Int(nutriments.kcal),
+                carbs: nutriments.carbs,
+                protein: nutriments.protein,
+                fats: nutriments.fats,
+                measurementUnit: .grams,
+                servingSize: 100
+            )
+        } else {
             return nil
         }
+    }
+}
 
-        self.init(
-            name: foodProduct.productName,
-            kcal: Int(kcal),
-            carbs: carbs,
-            protein: protein,
-            fats: fats,
-            measurementUnit: .grams,
-            servingSize: 100
-        )
+// MARK: - Helper Functions
+private extension FoodProduct {
+    
+    /// Extracts serving size and measurement unit
+    func servingSizeAndUnit() -> (Double, MeasurementUnit) {
+        let measurementUnit = MeasurementUnit(rawValue: servingQuantityUnit ?? "") ?? .item
+        let servingQuantity = servingQuantity ?? 1
+        return (servingQuantity, measurementUnit)
+    }
+    
+    /// Extracts nutriments for serving size, if available
+    func nutrimentsForServing() -> (kcal: Double, carbs: Double, protein: Double, fats: Double)? {
+        guard let kcal = nutriments.energyKcalServing,
+              let carbs = nutriments.carbohydratesServing,
+              let protein = nutriments.proteinsServing,
+              let fats = nutriments.fatServing else {
+            return nil
+        }
+        return (kcal, carbs, protein, fats)
+    }
+    
+    /// Extracts nutriments per 100g, if available
+    func nutrimentsPer100g() -> (kcal: Double, carbs: Double, protein: Double, fats: Double)? {
+        guard let kcal = nutriments.energyKcal100g,
+              let carbs = nutriments.carbohydrates100g,
+              let protein = nutriments.proteins100g,
+              let fats = nutriments.fat100g else {
+            return nil
+        }
+        return (kcal, carbs, protein, fats)
     }
 }

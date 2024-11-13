@@ -35,14 +35,15 @@ enum FoodInfoEndpoints: EndpointProvider {
     var queryItems: [URLQueryItem]? {
         switch self {
         case .getFoodInfo:
-            return [URLQueryItem(name: "fields", value: "code,product_name,nutriments")]
+            return [URLQueryItem(name: "fields", value: "code,product_name,nutriments,serving_quantity,serving_quantity_unit")]
         case .search(let searchTerm):
             return [
-                URLQueryItem(name: "fields", value: "code,product_name,nutriments"),
+                URLQueryItem(name: "fields", value: "code,product_name,nutriments,serving_quantity,serving_quantity_unit"),
                 URLQueryItem(name: "json", value: "1"),
                 URLQueryItem(name: "page_size", value: "20"),
                 URLQueryItem(name: "sort_by", value: "popularity_key"),
-                URLQueryItem(name: "search_terms", value: searchTerm)
+                URLQueryItem(name: "search_terms", value: searchTerm),
+                URLQueryItem(name: "no_cache", value: "1")
             ]
         }
     }

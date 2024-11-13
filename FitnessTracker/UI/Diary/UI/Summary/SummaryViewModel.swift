@@ -59,7 +59,7 @@ class SummaryViewModel {
         let proteinsViewModel = createMacrosViewModel(consumed: proteinsConsumed, target: goals.protein, title: "Protein")
         let fatsViewModel = createMacrosViewModel(consumed: fatsConsumed, target: goals.fats, title: "Fat")
         
-        self.data = .init(
+        data = .init(
             kcalConsumed: String(kcalConsumed),
             kcalBurned: "0",
             kcalProgress: Double(kcalConsumed) / Double(goals.kcal),

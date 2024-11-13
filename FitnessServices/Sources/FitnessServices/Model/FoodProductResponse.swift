@@ -18,10 +18,10 @@ public struct FoodInfoDetailResponse: Sendable, Codable {
 }
 
 public struct FoodInfoSearchResponse: Sendable, Codable {
-    let count: Int
-    let page: Int
-    let pageCount: Int
-    let pageSize: Int
+    let count: Int?
+    let page: Int?
+    let pageCount: Int?
+    let pageSize: Int?
     let products: [FoodProduct]?
     
     enum CodingKeys: String, CodingKey {
@@ -31,6 +31,16 @@ public struct FoodInfoSearchResponse: Sendable, Codable {
         case pageCount = "page_count"
         case pageSize = "page_size"
     }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        count = try container.decodeToInt(forKey: .count)
+        page = try container.decodeToInt(forKey: .page)
+        pageCount = try container.decodeToInt(forKey: .pageCount)
+        pageSize = try container.decodeToInt(forKey: .pageSize)
+        products = try container.decodeIfPresent([FoodProduct].self, forKey: .products)
+    }
 }
 
 // Product struct
@@ -38,11 +48,25 @@ public struct FoodProduct: Sendable, Codable {
     public let code: String
     public let nutriments: Nutrients
     public let productName: String
+    public let servingQuantity: Double?
+    public let servingQuantityUnit: String?
     
     enum CodingKeys: String, CodingKey {
         case code
         case nutriments
         case productName = "product_name"
+        case servingQuantity = "serving_quantity"
+        case servingQuantityUnit = "serving_quantity_unit"
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        code = try container.decode(String.self, forKey: .code)
+        nutriments = try container.decode(Nutrients.self, forKey: .nutriments)
+        productName = try container.decode(String.self, forKey: .productName)
+        servingQuantity = try container.decodeToDouble(forKey: .servingQuantity)
+        servingQuantityUnit = try container.decodeIfPresent(String.self, forKey: .servingQuantityUnit)
     }
 }
 
