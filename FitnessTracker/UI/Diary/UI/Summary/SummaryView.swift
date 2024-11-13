@@ -32,11 +32,6 @@ struct SummaryView: View {
                             value: data.kcalConsumed
                         )
                         Spacer()
-                        KcalSummaryItemView(
-                            title: "Burned",
-                            icon: Image(systemName: "flame.fill"),
-                            value: data.kcalBurned
-                        )
                     }
                     
                     Spacer()

@@ -25,8 +25,6 @@ struct AppTabView: View {
                                 DiaryView(viewModel: viewModel.diaryViewModel)
                                     .navigationTitle("Diary")
                             }
-                        case .exercise:
-                            ExerciseView()
                         case .weight:
                             WeightView()
                         case .account:

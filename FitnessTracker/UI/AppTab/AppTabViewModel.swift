@@ -12,7 +12,6 @@ class AppTabViewModel {
     
     enum TabType {
         case diary
-        case exercise
         case weight
         case account
     }
@@ -32,7 +31,6 @@ class AppTabViewModel {
     init() {
         tabs = [
             .init(title: "Diary", image: "list.bullet.clipboard", tabType: .diary),
-            .init(title: "Exercise", image: "dumbbell", tabType: .exercise),
             .init(title: "Weight", image: "chart.xyaxis.line", tabType: .weight),
             .init(title: "Account", image: "person.crop.circle", tabType: .account)
         ]

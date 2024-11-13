@@ -15,7 +15,6 @@ class SummaryViewModel {
     
     struct Data {
         let kcalConsumed: String
-        let kcalBurned: String
         let kcalProgress: Double
         let kcalRemaining: String
         let carbsViewModel: MacrosViewModel
@@ -61,7 +60,6 @@ class SummaryViewModel {
         
         data = .init(
             kcalConsumed: String(kcalConsumed),
-            kcalBurned: "0",
             kcalProgress: Double(kcalConsumed) / Double(goals.kcal),
             kcalRemaining: String(format: "%.0f", Double(goals.kcal) - Double(kcalConsumed)),
             carbsViewModel: carbsViewModel,
