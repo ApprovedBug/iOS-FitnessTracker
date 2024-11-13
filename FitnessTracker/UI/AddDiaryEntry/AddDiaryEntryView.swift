@@ -19,13 +19,14 @@ struct AddDiaryEntryView: View {
         
         NavigationStack {
             FoodItemList(
-                items: viewModel.foodItemViewModels,
+                items: viewModel.itemListViewModel,
                 meals: viewModel.mealItemViewModels,
                 addFoodItemTapped: viewModel.addFoodItemTapped,
                 createFoodItemTapped: viewModel.createFoodItemTapped,
                 scanItemTapped: viewModel.scanItemTapped,
                 cancelSearch: viewModel.clearSearch
             )
+            .ignoresSafeArea(.keyboard, edges: .bottom)
             .searchable(text: $viewModel.searchTerm)
             .onSubmit(of: .search) {
                 Task {
@@ -81,18 +82,10 @@ struct AddDiaryEntryView: View {
         })
     }
     
-    func headerView() -> some View {
-        Button("Create new food item") {
-            viewModel.createFoodItemTapped()
-        }
-        .padding()
-        .buttonStyle(RoundedButtonStyle())
-    }
-    
     struct FoodItemList: View {
         @Environment(\.isSearching) var isSearching
         
-        let items: [FoodItemViewModel]
+        let items: AddDiaryEntryViewModel.ItemListViewModel
         let meals: [MealItemViewModel]
         let addFoodItemTapped: (FoodItem) -> Void
         let createFoodItemTapped: () -> Void
@@ -119,16 +112,22 @@ struct AddDiaryEntryView: View {
                             .buttonStyle(RoundedButtonStyle())
                         }
                         .padding(.horizontal)
-                        ScrollView {
-                            LazyVStack {
-                                ForEach(items) { item in
-                                    FoodItemView(viewModel: item)
-                                        .onTapGesture {
-                                            addFoodItemTapped(item.foodItem)
-                                        }
+                        if items.isLoading {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        } else {
+                            ScrollView {
+                                LazyVStack {
+                                    ForEach(items.foodItemViewModels) { item in
+                                        FoodItemView(viewModel: item)
+                                            .onTapGesture {
+                                                addFoodItemTapped(item.foodItem)
+                                            }
+                                    }
                                 }
+                                .padding([.leading, .trailing])
                             }
-                            .padding([.leading, .trailing])
                         }
                     }
                 }
@@ -143,35 +142,6 @@ struct AddDiaryEntryView: View {
                         .padding([.leading, .trailing])
                     }
                 }
-            }
-            .onChange(of: isSearching) { oldValue, newValue in
-                if !newValue {
-                    Task {
-                        await cancelSearch()
-                    }
-                }
-            }
-        }
-    }
-    
-    struct EmptyResultsView: View {
-        @Environment(\.isSearching) var isSearching
-        
-        let createFoodItemTapped: () -> Void
-        let cancelSearch: @MainActor () async -> Void
-        
-        var body: some View {
-            VStack(alignment: .center, spacing: 10) {
-                Spacer()
-                
-                Text("No results found")
-                
-                Button("Tap to create a new food item") {
-                    createFoodItemTapped()
-                }
-                .buttonStyle(TertiaryButtonStyle())
-                
-                Spacer()
             }
             .onChange(of: isSearching) { oldValue, newValue in
                 if !newValue {

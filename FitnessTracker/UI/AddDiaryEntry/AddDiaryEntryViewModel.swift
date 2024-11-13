@@ -23,6 +23,11 @@ class AddDiaryEntryViewModel {
         var diaryEntriesAdded: ([DiaryEntry]) -> Void
     }
     
+    struct ItemListViewModel {
+        var isLoading: Bool = false
+        var foodItemViewModels: [FoodItemViewModel] = []
+    }
+    
     var isShowingCreateNewFoodItem: Bool = false
     var isShowingAddExistingItem: Bool = false
     var isShowingError: Bool = false
@@ -32,7 +37,7 @@ class AddDiaryEntryViewModel {
     var addFoodItemViewModel: AddFoodItemViewModel?
     var barcodeScannerView: IdentifiableView?
     var errorMessage: String?
-    var foodItemViewModels: [FoodItemViewModel] = []
+    var itemListViewModel = ItemListViewModel()
     var mealItemViewModels: [MealItemViewModel] = []
     
     let date: Date
@@ -111,7 +116,6 @@ class AddDiaryEntryViewModel {
     @MainActor
     func scanItemTapped() async {
         do {
-            
             let scanner = try await barcodeScanner.scanner()
             
             barcodeScanner.barcodes
@@ -182,6 +186,9 @@ class AddDiaryEntryViewModel {
     
     @MainActor
     func search() async {
+        
+        itemListViewModel = ItemListViewModel(isLoading: true, foodItemViewModels: [])
+        
         Task.detached(priority: .background) { [weak self] in
             guard let self = self else { return }
             
@@ -222,7 +229,9 @@ class AddDiaryEntryViewModel {
     }
     
     func showResults(items: [FoodItem], meals: [Meal]) {
-        foodItemViewModels = items.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
+        let foodItemViewModels = items.map { FoodItemViewModel(foodItem: $0, eventHandler: itemEventHandler) }
+        
+        itemListViewModel = ItemListViewModel(isLoading: false, foodItemViewModels: foodItemViewModels)
         mealItemViewModels = meals.map { MealItemViewModel(meal: $0, eventHandler: mealItemEventHandler) }
     }
     
