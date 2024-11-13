@@ -5,6 +5,7 @@
 //  Created by Jack Moseley on 07/11/2024.
 //
 
+import FitnessPersistence
 import FitnessUI
 import Foundation
 import SwiftUI
@@ -44,42 +45,39 @@ struct MealItemView: View {
                     }
                 }
                 
-                Button {
-                    Task {
-                        await viewModel.addItemTapped()
-                    }
-                } label: {
-                    Image(systemName: "plus.circle")
-                        .font(.headline)
-                        .foregroundColor(.blue)
-                }
+                AnimatedCheckmarkButton {
+                     await viewModel.addItemTapped()
+                 }
             }
         }
     }
 }
 
-//#Preview {
-//    let foodItem = FoodItem(
-//        name: "Frozen Raspberries",
-//        kcal: 8,
-//        carbs: 1.1,
-//        protein: 0,
-//        fats: 0.1,
-//        measurementUnit: .grams,
-//        servingSize: 25
-//    )
-//    
-//    let eventHandler = MealItemViewModel.EventHandler { item in
-//        print(item)
-//    }
-//    
-//    let viewModel = MealItemViewModel(
-//        foodItem: foodItem,
-//        eventHandler: eventHandler
-//    )
-//    
-//    ScrollView {
-//        FoodItemView(viewModel: viewModel)
-//    }
-//}
-
+#Preview {
+    let raspberries = FoodItem(
+        name: "Frozen Raspberries",
+        kcal: 8,
+        carbs: 1.1,
+        protein: 0,
+        fats: 0.1,
+        measurementUnit: .grams,
+        servingSize: 25
+    )
+    
+    let mealFoodItem = MealFoodItem(servings: 4, foodItem: raspberries)
+    
+    let meal = Meal(name: "Yoghurt Bowl", foodItems: [mealFoodItem])
+    
+    let eventHandler = MealItemViewModel.EventHandler { item in
+        print(item)
+    }
+    
+    let viewModel = MealItemViewModel(
+        meal: meal,
+        eventHandler: eventHandler
+    )
+    
+    ScrollView {
+        MealItemView(viewModel: viewModel)
+    }
+}

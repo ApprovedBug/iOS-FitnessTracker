@@ -48,14 +48,8 @@ struct FoodItemView: View {
                     }
                 }
                 
-                Button {
-                    Task {
-                        await viewModel.addItemTapped()
-                    }
-                } label: {
-                    Image(systemName: "plus.circle")
-                        .font(.headline)
-                        .foregroundColor(.blue)
+                AnimatedCheckmarkButton {
+                    await viewModel.addItemTapped()
                 }
             }
         }
