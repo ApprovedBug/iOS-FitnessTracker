@@ -13,10 +13,12 @@ class MealItemViewModel: Identifiable {
     
     struct EventHandler {
         let addMealTapped: @MainActor (Meal) async -> Void
+        let deleteMealTapped: @MainActor (Meal) -> Void
     }
     
     let meal: Meal
     let eventHandler: EventHandler
+    var isExpanded = false
     
     var kcal: String {
         String(format: "%.0f", meal.foodItems.reduce(0) { $0 + Double($1.foodItem.kcal) * $1.servings })
@@ -50,5 +52,14 @@ class MealItemViewModel: Identifiable {
     @MainActor
     func addItemTapped() async {
         await eventHandler.addMealTapped(meal)
+    }
+    
+    @MainActor
+    func deleteMealTapped() {
+        eventHandler.deleteMealTapped(meal)
+    }
+    
+    func toggleExpanded() {
+        isExpanded.toggle()
     }
 }

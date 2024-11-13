@@ -74,9 +74,12 @@ class AddDiaryEntryViewModel {
     
     @ObservationIgnored
     private lazy var mealItemEventHandler: MealItemViewModel.EventHandler = {
-        MealItemViewModel.EventHandler { [weak self] meal async in
-            await self?.addMeal(meal)
-        }
+        MealItemViewModel.EventHandler(
+            addMealTapped: { [weak self] meal async in
+                await self?.addMeal(meal)
+        }, deleteMealTapped: { [weak self] meal in
+            self?.deleteMeal(meal)
+        })
     }()
     
     @ObservationIgnored
@@ -248,8 +251,7 @@ class AddDiaryEntryViewModel {
     }
     
     @MainActor
-    func addMeal(_ meal: Meal?) async {
-        guard let meal else { return }
+    func addMeal(_ meal: Meal) async {
         
         let diaryEntries = meal.foodItems.map { mealFoodItem in
             DiaryEntry(
@@ -262,6 +264,13 @@ class AddDiaryEntryViewModel {
         await diaryRepository.addDiaryEntries(diaryEntries: diaryEntries)
         eventHandler?.diaryEntriesAdded(diaryEntries)
         showToast = true
+    }
+    
+    @MainActor
+    func deleteMeal(_ meal: Meal) {
+        mealsRepository.deleteMeal(meal)
+        meals.removeAll { $0.id == meal.id }
+        mealItemViewModels = meals.map { MealItemViewModel(meal: $0, eventHandler: mealItemEventHandler) }
     }
 }
 

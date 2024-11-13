@@ -17,38 +17,76 @@ struct MealItemView: View {
     var body: some View {
         
         CardView {
-            HStack {
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack(alignment: .bottom) {
-                        Text(viewModel.name)
-                            .font(.headline)
+            VStack {
+                HStack {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack(alignment: .bottom) {
+                            Text(viewModel.name)
+                                .font(.headline)
+                            
+                            Spacer()
+                        }
                         
-                        Spacer()
+                        HStack(alignment: .bottom) {
+                            Text("\(viewModel.kcal)kcal")
+                                .font(.footnote)
+                                .padding([.trailing], 12)
+                            
+                            Text("\(viewModel.carbs)g carbs")
+                                .font(.footnote)
+                                .padding([.trailing], 12)
+                            
+                            Text("\(viewModel.proteins)g protein")
+                                .font(.footnote)
+                                .padding([.trailing], 12)
+                            
+                            Text("\(viewModel.fats)g fat")
+                                .font(.footnote)
+                                .padding([.trailing], 12)
+                        }
                     }
                     
-                    HStack(alignment: .bottom) {
-                        Text("\(viewModel.kcal)kcal")
-                            .font(.footnote)
-                            .padding([.trailing], 12)
-                        
-                        Text("\(viewModel.carbs)g carbs")
-                            .font(.footnote)
-                            .padding([.trailing], 12)
-                        
-                        Text("\(viewModel.proteins)g protein")
-                            .font(.footnote)
-                            .padding([.trailing], 12)
-                        
-                        Text("\(viewModel.fats)g fat")
-                            .font(.footnote)
-                            .padding([.trailing], 12)
+                    AnimatedCheckmarkButton {
+                        await viewModel.addItemTapped()
                     }
                 }
                 
-                AnimatedCheckmarkButton {
-                     await viewModel.addItemTapped()
-                 }
+                if viewModel.isExpanded {
+                    Divider()
+                        .padding([.top], 12)
+                    
+                    actionsView()
+                        .padding([.top], 12)
+                }
             }
+        }
+        .animation(.easeOut(duration: 0.15), value: viewModel.isExpanded)
+        .onTapGesture {
+            viewModel.toggleExpanded()
+        }
+    }
+    
+    func actionsView() -> some View {
+        HStack {
+            Spacer()
+            
+            Button(action: { print("edit meal tapped") }) {
+                Image(systemName: "pencil")
+                    .tint(.blue)
+            }
+            
+            Spacer()
+            
+            Divider()
+            
+            Spacer()
+            
+            Button(action: { viewModel.deleteMealTapped() }) {
+                Image(systemName: "trash")
+                    .tint(.red)
+            }
+            
+            Spacer()
         }
     }
 }
@@ -68,9 +106,12 @@ struct MealItemView: View {
     
     let meal = Meal(name: "Yoghurt Bowl", foodItems: [mealFoodItem])
     
-    let eventHandler = MealItemViewModel.EventHandler { item in
-        print(item)
-    }
+    let eventHandler = MealItemViewModel.EventHandler(
+        addMealTapped: { item in
+        print("Add Meal: \(meal)")
+    }, deleteMealTapped: { item in
+        print("Delete Meal: \(meal)")
+    })
     
     let viewModel = MealItemViewModel(
         meal: meal,
