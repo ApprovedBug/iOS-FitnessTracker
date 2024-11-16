@@ -45,11 +45,11 @@ class MealEntryViewModel: Identifiable {
     }
     
     var protein: String {
-        String(format: "%.1f", diaryEntry.totalProteins)
+        String(format: "%.1f", diaryEntry.totalProtein)
     }
     
     var fat: String {
-        String(format: "%.1f", diaryEntry.totalFats)
+        String(format: "%.1f", diaryEntry.totalFat)
     }
     
     @ObservationIgnored

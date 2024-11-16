@@ -60,12 +60,12 @@ struct MealListItemView: View {
                 
                 Divider()
                 
-                mealItemMacrosView(amount: data.proteinsConsumed, macro: "Proteins")
+                mealItemMacrosView(amount: data.proteinsConsumed, macro: "Protein")
                     .frame(maxWidth: .infinity)
                 
                 Divider()
                 
-                mealItemMacrosView(amount: data.fatsConsumed, macro: "Fats")
+                mealItemMacrosView(amount: data.fatsConsumed, macro: "Fat")
                     .frame(maxWidth: .infinity)
             }
             

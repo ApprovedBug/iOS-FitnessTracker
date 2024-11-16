@@ -98,7 +98,7 @@ struct MealEntryView: View {
             VStack(alignment: .center) {
                 Text(viewModel.protein)
                     .font(.body)
-                Text("Proteins")
+                Text("Protein")
                     .font(.footnote)
             }
             .frame(maxWidth: .infinity)
@@ -108,7 +108,7 @@ struct MealEntryView: View {
             VStack(alignment: .center) {
                 Text(viewModel.fat)
                     .font(.body)
-                Text("Fats")
+                Text("Fat")
                     .font(.footnote)
             }
             .frame(maxWidth: .infinity)

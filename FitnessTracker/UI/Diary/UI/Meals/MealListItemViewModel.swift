@@ -119,8 +119,8 @@ class MealListItemViewModel: Identifiable {
         
         for entry in entries {
             kcalConsumed += entry.totalCalories
-            proteinsConsumed += entry.totalProteins
-            fatsConsumed += entry.totalFats
+            proteinsConsumed += entry.totalProtein
+            fatsConsumed += entry.totalFat
             carbsConsumed += entry.totalCarbs
         }
         

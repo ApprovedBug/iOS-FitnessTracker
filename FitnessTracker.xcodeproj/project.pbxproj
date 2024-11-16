@@ -41,8 +41,6 @@
 		049CD8902AE5BC1400812BAE /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD88F2AE5BC1400812BAE /* DatePickerViewModel.swift */; };
 		049CD8922AE5BC3A00812BAE /* MealListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8912AE5BC3A00812BAE /* MealListView.swift */; };
 		049CD8942AE5BC5600812BAE /* MealListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8932AE5BC5600812BAE /* MealListViewModel.swift */; };
-		049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8952AE5BC7900812BAE /* WaterView.swift */; };
-		049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049CD8972AE5BC8200812BAE /* WaterViewModel.swift */; };
 		049F83B62CDD6A820055C6E1 /* MealItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F83B52CDD6A820055C6E1 /* MealItemView.swift */; };
 		049F83B82CDD6A8B0055C6E1 /* MealItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F83B72CDD6A8B0055C6E1 /* MealItemViewModel.swift */; };
 		04A1E4222CCFFF4F00EC7D4A /* ConfigurationManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 040D88D72CCD349000FDD4D6 /* ConfigurationManagement */; };
@@ -129,8 +127,6 @@
 		049CD88F2AE5BC1400812BAE /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		049CD8912AE5BC3A00812BAE /* MealListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListView.swift; sourceTree = "<group>"; };
 		049CD8932AE5BC5600812BAE /* MealListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListViewModel.swift; sourceTree = "<group>"; };
-		049CD8952AE5BC7900812BAE /* WaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
-		049CD8972AE5BC8200812BAE /* WaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewModel.swift; sourceTree = "<group>"; };
 		049F83B52CDD6A820055C6E1 /* MealItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemView.swift; sourceTree = "<group>"; };
 		049F83B72CDD6A8B0055C6E1 /* MealItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealItemViewModel.swift; sourceTree = "<group>"; };
 		04A1E4232CD0083900EC7D4A /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
@@ -291,7 +287,6 @@
 		046B1F742AF0241200F15EAB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				04BCDFC92B0813C100346AD6 /* Water */,
 				04BCDFC82B0813B500346AD6 /* Meals */,
 				04BCDFC72B0813A900346AD6 /* DatePicker */,
 				04BCDFC62B08139A00346AD6 /* Summary */,
@@ -387,15 +382,6 @@
 				042152B62CD4299F0089231D /* MealEntryViewModel.swift */,
 			);
 			path = Meals;
-			sourceTree = "<group>";
-		};
-		04BCDFC92B0813C100346AD6 /* Water */ = {
-			isa = PBXGroup;
-			children = (
-				049CD8952AE5BC7900812BAE /* WaterView.swift */,
-				049CD8972AE5BC8200812BAE /* WaterViewModel.swift */,
-			);
-			path = Water;
 			sourceTree = "<group>";
 		};
 		04BCDFD12B0BE24B00346AD6 /* Onboarding */ = {
@@ -636,7 +622,6 @@
 			files = (
 				042152B72CD4299F0089231D /* MealEntryViewModel.swift in Sources */,
 				049CD88C2AE5BBB700812BAE /* SummaryViewModel.swift in Sources */,
-				049CD8982AE5BC8200812BAE /* WaterViewModel.swift in Sources */,
 				0474A6752AE5B13D0036FC9E /* ExerciseView.swift in Sources */,
 				04D36D112CE2BB9500BD0520 /* AppTabViewModel.swift in Sources */,
 				042152B32CD41A800089231D /* FoodItemViewModel.swift in Sources */,
@@ -657,7 +642,6 @@
 				04BCDFCC2B08140400346AD6 /* MealListItemView.swift in Sources */,
 				042152B52CD4298F0089231D /* MealEntryView.swift in Sources */,
 				0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */,
-				049CD8962AE5BC7900812BAE /* WaterView.swift in Sources */,
 				049CD8942AE5BC5600812BAE /* MealListViewModel.swift in Sources */,
 				0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */,
 				049F83B62CDD6A820055C6E1 /* MealItemView.swift in Sources */,

@@ -77,8 +77,8 @@ class SummaryViewModel {
         entries.forEach { entry in
             kcalConsumed += entry.totalCalories
             carbsConsumed += entry.totalCarbs
-            proteinsConsumed += entry.totalProteins
-            fatsConsumed += entry.totalFats
+            proteinsConsumed += entry.totalProtein
+            fatsConsumed += entry.totalFat
         }
         
         return (kcalConsumed, carbsConsumed, proteinsConsumed, fatsConsumed)

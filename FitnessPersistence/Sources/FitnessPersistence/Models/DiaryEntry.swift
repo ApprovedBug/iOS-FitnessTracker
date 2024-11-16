@@ -34,11 +34,11 @@ extension DiaryEntry {
         Double(foodItem.carbs) * servings
     }
     
-    public var totalProteins: Double {
+    public var totalProtein: Double {
         Double(foodItem.protein) * servings
     }
     
-    public var totalFats: Double {
+    public var totalFat: Double {
         Double(foodItem.fats) * servings
     }
 }

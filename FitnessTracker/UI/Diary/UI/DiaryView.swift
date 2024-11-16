@@ -43,9 +43,8 @@ struct DiaryView: View {
                     MealListView(viewModel: mealListViewModel)
                         .padding([.leading, .trailing])
                 }
-                
-    //                WaterView()
             }
+            .padding([.bottom], 12)
         }
     }
 }

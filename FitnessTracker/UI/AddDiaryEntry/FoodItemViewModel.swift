@@ -56,15 +56,15 @@ class FoodItemViewModel: Identifiable {
         
         let totalCalories = meal.foodItems.reduce(0) { $0 + $1.foodItem.kcal }
         let totalCarbs = meal.foodItems.reduce(0) { $0 + $1.foodItem.carbs }
-        let totalProteins = meal.foodItems.reduce(0) { $0 + $1.foodItem.protein }
-        let totalFats = meal.foodItems.reduce(0) { $0 + $1.foodItem.fats }
+        let totalProtein = meal.foodItems.reduce(0) { $0 + $1.foodItem.protein }
+        let totalFat = meal.foodItems.reduce(0) { $0 + $1.foodItem.fats }
         
         let foodItem = FoodItem(
             name: meal.name,
             kcal: totalCalories,
             carbs: totalCarbs,
-            protein: totalProteins,
-            fats: totalFats,
+            protein: totalProtein,
+            fats: totalFat,
             measurementUnit: .item,
             servingSize: 1)
         
