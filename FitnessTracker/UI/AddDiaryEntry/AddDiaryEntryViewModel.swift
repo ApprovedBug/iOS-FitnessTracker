@@ -198,16 +198,25 @@ class AddDiaryEntryViewModel {
             do {
                 let foodProducts = try await foodItemService.search(searchTerm: searchTerm)
                 
-                let foodItems = foodProducts.map({ FoodItem(from: $0) }).compactMap({$0})
-                
-                await MainActor.run {
-                    showResults(items: foodItems, meals: meals)
+                if !foodProducts.isEmpty {
+                    let foodItems = foodProducts.map({ FoodItem(from: $0) }).compactMap({$0})
+                    
+                    await MainActor.run {
+                        showResults(items: foodItems, meals: meals)
+                    }
+                } else {
+                    await MainActor.run {
+                        self.errorMessage = "Product not found."
+                        isShowingError = true
+                        showResults(items: recentItems, meals: meals)
+                    }
                 }
                 
             } catch {
                 await MainActor.run {
                     self.errorMessage = "Product not found."
                     isShowingError = true
+                    showResults(items: recentItems, meals: meals)
                 }
             }
         }

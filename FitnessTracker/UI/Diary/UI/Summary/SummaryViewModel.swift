@@ -5,7 +5,6 @@
 //  Created by Jack Moseley on 22/10/2023.
 //
 
-@preconcurrency import Combine
 import DependencyManagement
 import FitnessPersistence
 import Foundation
@@ -27,9 +26,6 @@ class SummaryViewModel {
     var data: Data?
     
     // MARK: Private properties
-    
-    @ObservationIgnored
-    private var cancellables = Set<AnyCancellable>()
     
     @ObservationIgnored
     private let goals: Goals
