@@ -14,12 +14,10 @@ struct MacrosView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
-            Text(viewModel.summary)
+        VStack(alignment: .leading, spacing: 4) {
+            Text("\(viewModel.summary) \(viewModel.title)")
             
             ProgressView(value: viewModel.progress)
-            
-            Text(viewModel.title)
         }
     }
 }

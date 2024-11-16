@@ -23,49 +23,17 @@ struct SummaryView: View {
     func contentView(data: SummaryViewModel.Data?) -> some View {
         
         if let data {
-            VStack {
-                HStack {
-                    VStack(alignment: .leading) {
-                        KcalSummaryItemView(
-                            title: "Consumed",
-                            icon: Image(systemName: "apple.logo"),
-                            value: data.kcalConsumed
-                        )
-                        Spacer()
-                    }
-                    
-                    Spacer()
-                    
-                    KcalRemainingView(progress: data.kcalProgress, kcalRemaining: data.kcalRemaining)
-                }
-                .padding([.bottom], 32)
+            HStack {
+                KcalRemainingView(progress: data.kcalProgress, kcalRemaining: data.kcalRemaining)
                 
-                HStack {
+                VStack {
                     MacrosView(viewModel: data.carbsViewModel)
+                    Spacer()
                     MacrosView(viewModel: data.proteinViewModel)
+                    Spacer()
                     MacrosView(viewModel: data.fatsViewModel)
                 }
-            }
-        }
-    }
-}
-
-private struct KcalSummaryItemView: View {
-    
-    let title: String
-    let icon: Image
-    let value: String
-    
-    var body: some View {
-        
-        VStack(alignment: .leading) {
-            
-            Text(title)
-            
-            HStack {
-                icon
-                
-                Text("\(value)Kcal")
+                .padding([.leading], 16)
             }
         }
     }
