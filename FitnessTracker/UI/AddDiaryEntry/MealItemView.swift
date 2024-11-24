@@ -64,13 +64,16 @@ struct MealItemView: View {
         .onTapGesture {
             viewModel.toggleExpanded()
         }
+        .fullScreenCover(isPresented: $viewModel.isShowingEditMeal) {
+            MealDetailsView(viewModel: MealDetailsViewModel(meal: viewModel.meal))
+        }
     }
     
     func actionsView() -> some View {
         HStack {
             Spacer()
             
-            Button(action: { print("edit meal tapped") }) {
+            Button(action: { viewModel.editMealTapped() }) {
                 Image(systemName: "pencil")
                     .tint(.blue)
             }

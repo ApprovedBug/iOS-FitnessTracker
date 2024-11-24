@@ -75,7 +75,7 @@ private struct BarcodeScannerRepresentable: UIViewControllerRepresentable {
         // open barcode scanner and publish data to public passthrough subject
         let dataScannerViewController = DataScannerViewController(
             recognizedDataTypes: [.barcode()],
-            qualityLevel: .fast,
+            qualityLevel: .balanced,
             recognizesMultipleItems: false,
             isHighFrameRateTrackingEnabled: true,
             isHighlightingEnabled: true
