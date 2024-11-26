@@ -108,6 +108,9 @@
     "Enter Weight" : {
 
     },
+    "Enter weight for %@" : {
+
+    },
     "Error" : {
 
     },
@@ -201,9 +204,6 @@
 
     },
     "Nutritional Information" : {
-
-    },
-    "Please enter your current weight" : {
 
     },
     "Protein" : {

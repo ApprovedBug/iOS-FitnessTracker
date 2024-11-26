@@ -84,12 +84,25 @@ class WeightViewModel {
         isShowingAddWeightSheet = true
     }
     
-    @MainActor func saveWeight(weight: Double) {
-        let weightEntry = WeightEntry(date: Date(), weight: weight)
-        weightRepository.save(entry: weightEntry)
+    @MainActor
+    func saveWeight(weight: Double, date: Date) {
+        // Check if an entry already exists for the same date
+        if let existingEntryIndex = allWeightEntries.firstIndex(where: { Calendar.current.isDate($0.date, inSameDayAs: date) }) {
+            // If an entry exists for the same date, update its weight
+            allWeightEntries[existingEntryIndex].weight = weight
+        } else {
+            // Otherwise, create a new entry and insert it
+            let weightEntry = WeightEntry(date: date, weight: weight)
+            allWeightEntries.append(weightEntry)
+        }
+
+        // Sort entries by date in descending order (most recent first)
+        allWeightEntries.sort { $0.date > $1.date }
         
-        allWeightEntries.insert(weightEntry, at: 0)
+        // Prepare chart data with the updated list
         prepareChartData(from: allWeightEntries)
+        
+        // Update the current weight (if needed, based on your logic)
         updateCurrentWeight()
     }
     

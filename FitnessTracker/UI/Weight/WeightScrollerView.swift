@@ -9,20 +9,23 @@ struct WeightScrollerView: View {
     @State private var scrollId: Double?
     @State private var selectedWeight: String = ""
     @State var currentWeight: Double
+    @State private var selectedDate: Date = Date()
     
     let itemWidth: CGFloat = 4
     let weights = stride(from: 30.0, to: 150.1, by: 0.1).map { $0 }
-    var onWeightSelected: (Double) -> Void
+    var onWeightSelected: (Double, Date) -> Void
     
-    init(currentWeight: Double = 75, onWeightSelected: @escaping (Double) -> Void) {
+    init(currentWeight: Double = 75, onWeightSelected: @escaping (Double, Date) -> Void) {
         self.currentWeight = currentWeight
         self.onWeightSelected = onWeightSelected
     }
     
     var body: some View {
         VStack {
-            Text("Please enter your current weight")
-                .font(.headline)
+            
+            // Date Picker
+            DatePicker("Enter weight for", selection: $selectedDate, displayedComponents: .date)
+                .datePickerStyle(.compact)
                 .padding()
 
             Text("\(selectedWeight)kg")
@@ -74,8 +77,9 @@ struct WeightScrollerView: View {
                     }
                 }
             }
+            
             Button("Enter Weight") {
-                onWeightSelected(currentWeight)
+                onWeightSelected(currentWeight, selectedDate)
                 dismiss()
             }
             .buttonStyle(RoundedButtonStyle())

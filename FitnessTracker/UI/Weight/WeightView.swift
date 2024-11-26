@@ -41,8 +41,8 @@ struct WeightView: View {
         .sheet(isPresented: $viewModel.isShowingAddWeightSheet, content: {
             WeightScrollerView(
                 currentWeight: viewModel.currentWeight,
-                onWeightSelected: { weight in
-                    viewModel.saveWeight(weight: weight)
+                onWeightSelected: { weight, date in
+                    viewModel.saveWeight(weight: weight, date: date)
             })
             .presentationDetents([.small])
         })
