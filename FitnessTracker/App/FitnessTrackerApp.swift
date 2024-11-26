@@ -21,8 +21,8 @@ struct FitnessTrackerApp: App {
     }
     
     func registerDependencies() {
-        // Register your dependencies here
         
+        // Register your dependencies here
         let persistenceManager = PersistenceManager()
         DependencyContainer.register(ContextProviding.self) {
             persistenceManager
@@ -50,6 +50,11 @@ struct FitnessTrackerApp: App {
         let mealsRepository = LocalMealsRepository()
         DependencyContainer.register(MealsRepository.self) {
             mealsRepository
+        }
+        
+        let weightRepository = LocalWeightRepository()
+        DependencyContainer.register(WeightRepository.self) {
+            weightRepository
         }
         
         let barcodeScanner = BarcodeScanner()

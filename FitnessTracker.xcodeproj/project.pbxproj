@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0403590C2CF5389C00EAD317 /* WeightScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403590B2CF5389C00EAD317 /* WeightScrollerView.swift */; };
 		0404E2162AE59C240013CF1F /* FitnessTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404E2152AE59C240013CF1F /* FitnessTrackerApp.swift */; };
 		0404E21C2AE59C250013CF1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0404E21B2AE59C250013CF1F /* Assets.xcassets */; };
 		0404E2202AE59C250013CF1F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0404E21F2AE59C250013CF1F /* Preview Assets.xcassets */; };
@@ -30,8 +31,6 @@
 		0474A66F2AE5B1130036FC9E /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */; };
 		0474A6712AE5B1240036FC9E /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6702AE5B1240036FC9E /* DiaryView.swift */; };
 		0474A6732AE5B1300036FC9E /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6722AE5B1300036FC9E /* DiaryViewModel.swift */; };
-		0474A6752AE5B13D0036FC9E /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6742AE5B13D0036FC9E /* ExerciseView.swift */; };
-		0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6762AE5B14C0036FC9E /* ExerciseViewModel.swift */; };
 		0474A6792AE5B1550036FC9E /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A6782AE5B1550036FC9E /* WeightView.swift */; };
 		0474A67B2AE5B1620036FC9E /* WeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474A67A2AE5B1620036FC9E /* WeightViewModel.swift */; };
 		049888112CDFB49B004D6A5D /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = 049888102CDFB49B004D6A5D /* Utilities */; };
@@ -92,6 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0403590B2CF5389C00EAD317 /* WeightScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightScrollerView.swift; sourceTree = "<group>"; };
 		0404E2122AE59C240013CF1F /* FitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0404E2152AE59C240013CF1F /* FitnessTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerApp.swift; sourceTree = "<group>"; };
 		0404E21B2AE59C250013CF1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,8 +114,6 @@
 		0474A66E2AE5B1130036FC9E /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		0474A6702AE5B1240036FC9E /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		0474A6722AE5B1300036FC9E /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
-		0474A6742AE5B13D0036FC9E /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
-		0474A6762AE5B14C0036FC9E /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
 		0474A6782AE5B1550036FC9E /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		0474A67A2AE5B1620036FC9E /* WeightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewModel.swift; sourceTree = "<group>"; };
 		0498880F2CDFB366004D6A5D /* Utilities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utilities; sourceTree = "<group>"; };
@@ -250,16 +248,6 @@
 			path = FitnessTrackerUITests;
 			sourceTree = "<group>";
 		};
-		04118FE82BBDF4A300DBDC59 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				045864142BC1AD780067B9B0 /* Confirmation */,
-				045864132BC1ABAD0067B9B0 /* Onboarding */,
-				045864122BC1ABA60067B9B0 /* Welcome */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 		045864122BC1ABA60067B9B0 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,25 +266,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		045864142BC1AD780067B9B0 /* Confirmation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Confirmation;
-			sourceTree = "<group>";
-		};
-		046B1F742AF0241200F15EAB /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				04BCDFC82B0813B500346AD6 /* Meals */,
-				04BCDFC72B0813A900346AD6 /* DatePicker */,
-				04BCDFC62B08139A00346AD6 /* Summary */,
-				0474A6702AE5B1240036FC9E /* DiaryView.swift */,
-				0474A6722AE5B1300036FC9E /* DiaryViewModel.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 		0474A6672AE5AFE30036FC9E /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,18 +282,13 @@
 		0474A6682AE5B09E0036FC9E /* Diary */ = {
 			isa = PBXGroup;
 			children = (
-				046B1F742AF0241200F15EAB /* UI */,
+				04BCDFC82B0813B500346AD6 /* Meals */,
+				04BCDFC72B0813A900346AD6 /* DatePicker */,
+				04BCDFC62B08139A00346AD6 /* Summary */,
+				0474A6702AE5B1240036FC9E /* DiaryView.swift */,
+				0474A6722AE5B1300036FC9E /* DiaryViewModel.swift */,
 			);
 			path = Diary;
-			sourceTree = "<group>";
-		};
-		0474A6692AE5B0A50036FC9E /* Exercise */ = {
-			isa = PBXGroup;
-			children = (
-				0474A6742AE5B13D0036FC9E /* ExerciseView.swift */,
-				0474A6762AE5B14C0036FC9E /* ExerciseViewModel.swift */,
-			);
-			path = Exercise;
 			sourceTree = "<group>";
 		};
 		0474A66A2AE5B0B00036FC9E /* Weight */ = {
@@ -332,6 +296,7 @@
 			children = (
 				0474A6782AE5B1550036FC9E /* WeightView.swift */,
 				0474A67A2AE5B1620036FC9E /* WeightViewModel.swift */,
+				0403590B2CF5389C00EAD317 /* WeightScrollerView.swift */,
 			);
 			path = Weight;
 			sourceTree = "<group>";
@@ -388,7 +353,8 @@
 		04BCDFD12B0BE24B00346AD6 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				04118FE82BBDF4A300DBDC59 /* UI */,
+				045864132BC1ABAD0067B9B0 /* Onboarding */,
+				045864122BC1ABA60067B9B0 /* Welcome */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -413,7 +379,6 @@
 				04BCDFD12B0BE24B00346AD6 /* Onboarding */,
 				0474A66B2AE5B0B80036FC9E /* Account */,
 				0474A6682AE5B09E0036FC9E /* Diary */,
-				0474A6692AE5B0A50036FC9E /* Exercise */,
 				0474A66A2AE5B0B00036FC9E /* Weight */,
 			);
 			path = UI;
@@ -625,7 +590,6 @@
 			files = (
 				042152B72CD4299F0089231D /* MealEntryViewModel.swift in Sources */,
 				049CD88C2AE5BBB700812BAE /* SummaryViewModel.swift in Sources */,
-				0474A6752AE5B13D0036FC9E /* ExerciseView.swift in Sources */,
 				04D36D112CE2BB9500BD0520 /* AppTabViewModel.swift in Sources */,
 				042152B32CD41A800089231D /* FoodItemViewModel.swift in Sources */,
 				04BCDFD52B0BE26800346AD6 /* OnboardingViewModel.swift in Sources */,
@@ -640,13 +604,13 @@
 				04F095642C5D3D6600EA3D94 /* AddFoodItemView.swift in Sources */,
 				049CD88E2AE5BBEE00812BAE /* DatePickerView.swift in Sources */,
 				0474A6732AE5B1300036FC9E /* DiaryViewModel.swift in Sources */,
+				0403590C2CF5389C00EAD317 /* WeightScrollerView.swift in Sources */,
 				04BCDFD32B0BE25D00346AD6 /* OnboardingView.swift in Sources */,
 				042152B12CD41A6C0089231D /* FoodItemView.swift in Sources */,
 				04BCDFCC2B08140400346AD6 /* MealListItemView.swift in Sources */,
 				042152B52CD4298F0089231D /* MealEntryView.swift in Sources */,
 				0424CECB2B22591D00B9B03B /* WelcomeView.swift in Sources */,
 				049CD8942AE5BC5600812BAE /* MealListViewModel.swift in Sources */,
-				0474A6772AE5B14C0036FC9E /* ExerciseViewModel.swift in Sources */,
 				049F83B62CDD6A820055C6E1 /* MealItemView.swift in Sources */,
 				049F83B82CDD6A8B0055C6E1 /* MealItemViewModel.swift in Sources */,
 				049CD88A2AE5BB9300812BAE /* SummaryView.swift in Sources */,

@@ -30,7 +30,7 @@ public final class LocalFoodItemRepository: FoodItemRepository {
         
         do {
             var descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp, order: .reverse)])
-            descriptor.fetchLimit = 30
+            descriptor.fetchLimit = 75
             let entries = try contextProvider.sharedModelContainer.mainContext.fetch(descriptor)
             return entries.map(\.foodItem).uniqued()
         } catch {

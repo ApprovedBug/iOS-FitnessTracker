@@ -39,6 +39,15 @@
     "%@kcal" : {
 
     },
+    "%@kcal consumed" : {
+
+    },
+    "%@kg" : {
+
+    },
+    "%lld" : {
+
+    },
     "Account" : {
 
     },
@@ -78,6 +87,9 @@
     "Create new item" : {
 
     },
+    "Day" : {
+
+    },
     "Delete" : {
 
     },
@@ -91,9 +103,6 @@
 
     },
     "Error" : {
-
-    },
-    "Exercise View" : {
 
     },
     "Fat" : {
@@ -248,10 +257,10 @@
     "Weight Goal" : {
 
     },
-    "Weight View" : {
+    "Welcome" : {
 
     },
-    "Welcome" : {
+    "What is your current weight?" : {
 
     }
   },

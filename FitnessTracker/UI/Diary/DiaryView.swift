@@ -31,20 +31,21 @@ struct DiaryView: View {
         
         ScrollView {
             VStack {
+                
+                DatePickerView(viewModel: viewModel.dateViewModel)
+                    .padding()
+                
                 if let summaryViewModel = viewModel.summaryViewModel {
                     SummaryView(viewModel: summaryViewModel)
                         .padding()
                 }
                 
-                DatePickerView(viewModel: viewModel.dateViewModel)
-                    .padding()
-                
                 if let mealListViewModel = viewModel.mealListViewModel {
                     MealListView(viewModel: mealListViewModel)
-                        .padding([.leading, .trailing])
+                        .padding()
                 }
             }
-            .padding([.bottom], 12)
+            .padding([.bottom], 24)
         }
     }
 }

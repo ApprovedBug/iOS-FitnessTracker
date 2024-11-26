@@ -22,7 +22,8 @@ public struct PersistenceManager: ContextProviding {
             DiaryEntry.self,
             FoodItem.self,
             Goals.self,
-            Meal.self
+            Meal.self,
+            WeightEntry.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

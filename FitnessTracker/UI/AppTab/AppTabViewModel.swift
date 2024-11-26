@@ -26,6 +26,7 @@ class AppTabViewModel {
     var tabs: [TabItem]
     
     let diaryViewModel: DiaryViewModel
+    let weightViewModel: WeightViewModel
     
     @MainActor
     init() {
@@ -35,5 +36,6 @@ class AppTabViewModel {
             .init(title: "Account", image: "person.crop.circle", tabType: .account)
         ]
         diaryViewModel = DiaryViewModel()
+        weightViewModel = WeightViewModel()
     }
 }

@@ -15,10 +15,8 @@ struct AppTabView: View {
     var body: some View {
         
         TabView {
-            
             ForEach(viewModel.tabs) { tab in
                 Tab(tab.title, systemImage: tab.image) {
-                    
                     switch tab.tabType {
                         case .diary:
                             NavigationStack {
@@ -26,7 +24,10 @@ struct AppTabView: View {
                                     .navigationTitle("Diary")
                             }
                         case .weight:
-                            WeightView()
+                            NavigationStack {
+                                WeightView(viewModel: viewModel.weightViewModel)
+                                    .navigationTitle("Weight")
+                            }
                         case .account:
                             AccountView()
                     }

@@ -26,7 +26,9 @@ struct SummaryView: View {
             HStack {
                 KcalRemainingView(progress: data.kcalProgress, kcalRemaining: data.kcalRemaining)
                 
-                VStack {
+                VStack(alignment: .leading) {
+                    Text("\(data.kcalConsumed)kcal consumed")
+                    Spacer()
                     MacrosView(viewModel: data.carbsViewModel)
                     Spacer()
                     MacrosView(viewModel: data.proteinViewModel)
