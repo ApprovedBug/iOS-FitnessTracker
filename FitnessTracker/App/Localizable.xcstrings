@@ -60,6 +60,9 @@
     "Add Item" : {
 
     },
+    "Add weight entry" : {
+
+    },
     "Age" : {
 
     },
@@ -100,6 +103,9 @@
 
     },
     "Enter Meal Name i.e. Scrambled eggs on toast" : {
+
+    },
+    "Enter Weight" : {
 
     },
     "Error" : {
@@ -197,6 +203,9 @@
     "Nutritional Information" : {
 
     },
+    "Please enter your current weight" : {
+
+    },
     "Protein" : {
 
     },
@@ -258,9 +267,6 @@
 
     },
     "Welcome" : {
-
-    },
-    "What is your current weight?" : {
 
     }
   },

@@ -12,9 +12,12 @@ import Foundation
 @Observable
 class WeightViewModel {
     
+    var allWeightEntries: [WeightEntry] = []
     var lineMarkData: [WeightEntry] = []
     var weeklyMarkers: [Date] = []
-    var yAxisRange: ClosedRange<Double> = 0...100
+    var yAxisRange: ClosedRange<Double> = 30...150
+    var isShowingAddWeightSheet: Bool = false
+    var currentWeight: Double = 75
     
     @ObservationIgnored
     @Inject var weightRepository: WeightRepository
@@ -26,10 +29,14 @@ class WeightViewModel {
     @MainActor
     func loadData() async {
         // Fetch the weight entries from the repository
-        let fetchedWeightData = weightRepository.allEntries()
+        allWeightEntries = weightRepository.allEntries()
         
         // Generate the complete weight data for the last 30 days
-        prepareChartData(from: fetchedWeightData)
+        prepareChartData(from: allWeightEntries)
+        
+        if let mostRecentEntry = allWeightEntries.last {
+            self.currentWeight = mostRecentEntry.weight
+        }
     }
 
     private func prepareChartData(from fetchedData: [WeightEntry]) {
@@ -69,8 +76,15 @@ class WeightViewModel {
         yAxisRange = (minWeight - padding)...(maxWeight + padding)
     }
     
-    @MainActor func saveWeight() {
-        let weightEntry = WeightEntry(date: Date(), weight: 75)
+    func addWeightTapped() {
+        isShowingAddWeightSheet = true
+    }
+    
+    @MainActor func saveWeight(weight: Double) {
+        let weightEntry = WeightEntry(date: Date(), weight: weight)
         weightRepository.save(entry: weightEntry)
+        
+        allWeightEntries.append(weightEntry)
+        prepareChartData(from: allWeightEntries)
     }
 }
