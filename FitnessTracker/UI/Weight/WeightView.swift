@@ -81,9 +81,10 @@ struct WeightView: View {
     @ViewBuilder
     func weightEntryList() -> some View {
         List {
-            ForEach(viewModel.allWeightEntries.reversed()) { entry in
+            ForEach(viewModel.allWeightEntries) { entry in
                 WeightEntryRow(entry: entry)
             }
+            .onDelete(perform: viewModel.removeEntry(at:))
         }
         .listStyle(.plain)
     }
@@ -139,11 +140,17 @@ private class MockWeightRepository: WeightRepository {
         ]
     }
     
+    @MainActor func remove(entry: WeightEntry) {
+        entries.removeAll(where: {
+            $0.id == entry.id
+        })
+    }
+    
     @MainActor func save(entry: WeightEntry) {
         entries.append(entry)
     }
     
-    @MainActor func allEntries() -> [WeightEntry] {
+    @MainActor func all() -> [WeightEntry] {
         entries
     }
 }

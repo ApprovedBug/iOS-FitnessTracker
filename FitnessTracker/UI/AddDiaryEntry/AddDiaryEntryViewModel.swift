@@ -254,7 +254,7 @@ class AddDiaryEntryViewModel {
     @MainActor
     func addDiaryEntry(_ foodItem: FoodItem, servings: Double = 1) async {
         let diaryEntry = DiaryEntry(timestamp: date, foodItem: foodItem, mealType: mealType, servings: servings)
-        await diaryRepository.addDiaryEntry(diaryEntry: diaryEntry)
+        diaryRepository.add(diaryEntry: diaryEntry)
         eventHandler?.diaryEntryAdded(diaryEntry)
         showToast = true
     }
@@ -270,7 +270,7 @@ class AddDiaryEntryViewModel {
                 servings: mealFoodItem.servings
             )
         }
-        await diaryRepository.addDiaryEntries(diaryEntries: diaryEntries)
+        diaryRepository.add(diaryEntries: diaryEntries)
         eventHandler?.diaryEntriesAdded(diaryEntries)
         showToast = true
     }

@@ -56,7 +56,7 @@ class DiaryViewModel {
     func loadData() {
         
         let goals = goalsRepository.goalsForUser(userId: "something")
-        allEntries = diaryFetching.allDiaryEntries()
+        allEntries = diaryFetching.all()
         
         let entries = allEntries.filter { Calendar.current.isDate($0.timestamp, inSameDayAs: Date.now) }
         

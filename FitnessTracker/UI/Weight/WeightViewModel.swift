@@ -29,7 +29,7 @@ class WeightViewModel {
     @MainActor
     func loadData() async {
         // Fetch the weight entries from the repository
-        allWeightEntries = weightRepository.allEntries()
+        allWeightEntries = weightRepository.all().reversed()
         
         // Generate the complete weight data for the last 30 days
         prepareChartData(from: allWeightEntries)
@@ -85,6 +85,19 @@ class WeightViewModel {
         weightRepository.save(entry: weightEntry)
         
         allWeightEntries.append(weightEntry)
+        prepareChartData(from: allWeightEntries)
+    }
+    
+    @MainActor func removeEntry(at offsets: IndexSet) {
+        
+        for index in offsets {
+            let entryToDelete = allWeightEntries[index]
+            
+            weightRepository.remove(entry: entryToDelete)
+        }
+        
+        allWeightEntries.remove(atOffsets: offsets)
+        
         prepareChartData(from: allWeightEntries)
     }
 }

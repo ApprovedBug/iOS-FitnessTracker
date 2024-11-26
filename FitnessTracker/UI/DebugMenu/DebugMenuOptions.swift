@@ -170,9 +170,9 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
             servings: 0.5
         )
         
-        await diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry1)
-        await diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry2)
-        await diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry3)
-        await diaryRepository?.addDiaryEntry(diaryEntry: diaryEntry4)
+        diaryRepository?.add(diaryEntry: diaryEntry1)
+        diaryRepository?.add(diaryEntry: diaryEntry2)
+        diaryRepository?.add(diaryEntry: diaryEntry3)
+        diaryRepository?.add(diaryEntry: diaryEntry4)
     }
 }

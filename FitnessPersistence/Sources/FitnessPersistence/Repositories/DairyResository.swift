@@ -15,10 +15,10 @@ public enum DiaryError: Error {
 
 public protocol DiaryRepository {
     
-    @MainActor func allDiaryEntries() -> [DiaryEntry]
-    @MainActor func addDiaryEntry(diaryEntry: DiaryEntry) async
-    @MainActor func addDiaryEntries(diaryEntries: [DiaryEntry]) async
-    @MainActor func removeDiaryEntry(diaryEntry: DiaryEntry) async
+    @MainActor func all() -> [DiaryEntry]
+    @MainActor func add(diaryEntry: DiaryEntry)
+    @MainActor func add(diaryEntries: [DiaryEntry])
+    @MainActor func remove(diaryEntry: DiaryEntry)
 }
 
 public struct LocalDiaryRepository: DiaryRepository {
@@ -27,7 +27,7 @@ public struct LocalDiaryRepository: DiaryRepository {
     
     public init() {}
     
-    public func allDiaryEntries() -> [DiaryEntry] {
+    public func all() -> [DiaryEntry] {
         
         do {
             let descriptor = FetchDescriptor<DiaryEntry>(sortBy: [SortDescriptor(\.timestamp)])
@@ -38,19 +38,19 @@ public struct LocalDiaryRepository: DiaryRepository {
         }
     }
     
-    public func addDiaryEntry(diaryEntry: DiaryEntry) async {
+    public func add(diaryEntry: DiaryEntry) {
         contextProvider.sharedModelContainer.mainContext.insert(diaryEntry)
         try? contextProvider.sharedModelContainer.mainContext.save()
     }
     
-    public func addDiaryEntries(diaryEntries: [DiaryEntry]) async {
+    public func add(diaryEntries: [DiaryEntry]) {
         diaryEntries.forEach { entry in
             contextProvider.sharedModelContainer.mainContext.insert(entry)
         }
         try? contextProvider.sharedModelContainer.mainContext.save()
     }
     
-    public func removeDiaryEntry(diaryEntry: DiaryEntry) async {
+    public func remove(diaryEntry: DiaryEntry) {
         contextProvider.sharedModelContainer.mainContext.delete(diaryEntry)
         try? contextProvider.sharedModelContainer.mainContext.save()
     }

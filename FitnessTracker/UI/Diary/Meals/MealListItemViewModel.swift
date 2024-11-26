@@ -84,7 +84,7 @@ class MealListItemViewModel: Identifiable {
     }
     
     func removeEntry(diaryEntry: DiaryEntry) async {
-        await diaryRepository.removeDiaryEntry(diaryEntry: diaryEntry)
+        diaryRepository.remove(diaryEntry: diaryEntry)
         eventHandler?.diaryEntryRemoved(diaryEntry)
         entries.removeAll(where: { $0.id == diaryEntry.id })
         populateUI()
@@ -104,7 +104,7 @@ class MealListItemViewModel: Identifiable {
         }
         let foodItems = entries.map { MealFoodItem(servings: $0.servings, foodItem:$0.foodItem) }
         let meal = Meal(name: mealName, foodItems: foodItems)
-        await mealsRepository.saveMeal(meal)
+        mealsRepository.saveMeal(meal)
         isShowingSaveMealAlert = false
     }
     
