@@ -96,7 +96,7 @@ struct WeightEntryRow: View {
     
     var body: some View {
         HStack {
-            Text(entry.date.formatted(.dateTime))
+            Text(entry.date.formatted(.dateTime.year().month().day()))
                 .font(.caption)
             Spacer()
             Text(entry.weight.formatted(.number))

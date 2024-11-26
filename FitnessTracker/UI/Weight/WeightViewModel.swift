@@ -34,9 +34,7 @@ class WeightViewModel {
         // Generate the complete weight data for the last 30 days
         prepareChartData(from: allWeightEntries)
         
-        if let mostRecentEntry = allWeightEntries.last {
-            self.currentWeight = mostRecentEntry.weight
-        }
+        updateCurrentWeight()
     }
 
     private func prepareChartData(from fetchedData: [WeightEntry]) {
@@ -76,6 +74,12 @@ class WeightViewModel {
         yAxisRange = (minWeight - padding)...(maxWeight + padding)
     }
     
+    private func updateCurrentWeight() {
+        if let mostRecentEntry = allWeightEntries.first {
+            self.currentWeight = mostRecentEntry.weight
+        }
+    }
+    
     func addWeightTapped() {
         isShowingAddWeightSheet = true
     }
@@ -84,20 +88,20 @@ class WeightViewModel {
         let weightEntry = WeightEntry(date: Date(), weight: weight)
         weightRepository.save(entry: weightEntry)
         
-        allWeightEntries.append(weightEntry)
+        allWeightEntries.insert(weightEntry, at: 0)
         prepareChartData(from: allWeightEntries)
+        updateCurrentWeight()
     }
     
     @MainActor func removeEntry(at offsets: IndexSet) {
         
         for index in offsets {
             let entryToDelete = allWeightEntries[index]
-            
             weightRepository.remove(entry: entryToDelete)
         }
         
         allWeightEntries.remove(atOffsets: offsets)
-        
         prepareChartData(from: allWeightEntries)
+        updateCurrentWeight()
     }
 }
