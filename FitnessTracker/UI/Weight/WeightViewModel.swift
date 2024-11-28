@@ -94,6 +94,7 @@ class WeightViewModel {
             // Otherwise, create a new entry and insert it
             let weightEntry = WeightEntry(date: date, weight: weight)
             allWeightEntries.append(weightEntry)
+            weightRepository.save(entry: weightEntry)
         }
 
         // Sort entries by date in descending order (most recent first)
