@@ -17,21 +17,31 @@ struct WelcomeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 32) {
+            VStack(alignment: .center, spacing: 32) {
+                Spacer()
                 
-                Text("We are here to help you keep track of your diet and achieve your goals")
-                    .font(.subheadline)
-                    .multilineTextAlignment(.leading)
+                Text("We are here to help you keep a record of the food you've eaten and track your weight")
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
                     .opacity(animationStarted ? 1 : 0)
-                    .offset(x: animationStarted ? 0 : 10, y: 0)
+                    .offset(x: 0, y: animationStarted ? 0 : 10)
+                    .animation(Animation.easeInOut(duration: 0.5).delay(0.1), value: animationStarted)
+                
+                Text("We can help you set daily goals in order to achieve your fitness goals")
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                    .opacity(animationStarted ? 1 : 0)
+                    .offset(x: 0, y: animationStarted ? 0 : 10)
                     .animation(Animation.easeInOut(duration: 0.5).delay(0.1), value: animationStarted)
                 
                 Text("To get started we'd love to know a little bit about you so we can help you as best we can")
-                    .font(.subheadline)
-                    .multilineTextAlignment(.leading)
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
                     .opacity(animationStarted ? 1 : 0)
-                    .offset(x: animationStarted ? 0 : 10, y: 0)
+                    .offset(x: 0, y: animationStarted ? 0 : 10)
                     .animation(Animation.easeInOut(duration: 0.5).delay(0.2), value: animationStarted)
+                
+                Spacer()
                 
                 Button("Continue") {
                     viewModel.continueTapped()
@@ -48,7 +58,7 @@ struct WelcomeView: View {
                     animationStarted = true
                 }
             }
-            .navigationTitle("Welcome")
+            .navigationTitle("Welcome to NutrifyAI")
             .padding()
         }
     }

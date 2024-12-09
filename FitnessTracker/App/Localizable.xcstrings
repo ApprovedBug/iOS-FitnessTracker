@@ -273,7 +273,10 @@
     "Unit" : {
 
     },
-    "We are here to help you keep track of your diet and achieve your goals" : {
+    "We are here to help you keep a record of the food you've eaten and track your weight" : {
+
+    },
+    "We can help you set daily goals in order to achieve your fitness goals" : {
 
     },
     "Weight" : {
@@ -285,7 +288,7 @@
     "Weight Goal" : {
 
     },
-    "Welcome" : {
+    "Welcome to NutrifyAI" : {
 
     }
   },
