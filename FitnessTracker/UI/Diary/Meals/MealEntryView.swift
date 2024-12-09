@@ -128,6 +128,7 @@ struct MealEntryView: View {
 #Preview {
     let foodItem = FoodItem(
         name: "Fat Free Greek Yoghurt",
+        brand: "Morrisons",
         kcal: 66,
         carbs: 6,
         protein: 9.8,

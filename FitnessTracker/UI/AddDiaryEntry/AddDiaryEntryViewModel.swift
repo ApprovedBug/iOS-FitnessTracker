@@ -291,6 +291,7 @@ private extension FoodItem {
             
             self.init(
                 name: foodProduct.productName,
+                brand: foodProduct.brand,
                 kcal: Int(nutriments.kcal),
                 carbs: nutriments.carbs,
                 protein: nutriments.protein,
@@ -301,6 +302,7 @@ private extension FoodItem {
         } else if let nutriments = foodProduct.nutrimentsPer100g() {
             self.init(
                 name: foodProduct.productName,
+                brand: foodProduct.brand,
                 kcal: Int(nutriments.kcal),
                 carbs: nutriments.carbs,
                 protein: nutriments.protein,

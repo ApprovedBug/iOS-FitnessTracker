@@ -17,7 +17,11 @@ struct FoodItemView: View {
         
         CardView {
             HStack {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 8) {
+                    
+                    Text("\(viewModel.brand)")
+                        .font(.footnote)
+                    
                     HStack(alignment: .bottom) {
                         Text(viewModel.name)
                             .font(.headline)
@@ -59,6 +63,7 @@ struct FoodItemView: View {
 #Preview {
     let foodItem = FoodItem(
         name: "Frozen Raspberries",
+        brand: "Morrisons",
         kcal: 8,
         carbs: 1.1,
         protein: 0,

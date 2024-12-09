@@ -31,6 +31,8 @@ struct AddFoodItemView: View {
             Form {
                 Section(header: Text("Food Description")) {
                     TextField("Name", text: $viewModel.name)
+                    
+                    TextField("Brand", text: $viewModel.brand)
                 }
                 
                 Section(header: Text("Serving Info")) {
@@ -70,7 +72,7 @@ struct AddFoodItemView: View {
         
         NavigationView {
             VStack(alignment: .leading, spacing: 12) {
-                Text(viewModel.name)
+                Text("\(viewModel.name) from \(viewModel.brand)")
                 
                 Divider()
                 
@@ -174,6 +176,7 @@ struct AddFoodItemView: View {
     
     let foodItem = FoodItem(
         name: "Fat Free Greek Yoghurt",
+        brand: "Morrisons",
         kcal: 66,
         carbs: 6,
         protein: 9.8,

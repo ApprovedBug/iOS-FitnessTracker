@@ -12,6 +12,7 @@ import SwiftData
 public class FoodItem {
     
     public private(set) var name: String
+    public private(set) var brand: String
     public private(set) var kcal: Int
     public private(set) var carbs: Double
     public private(set) var protein: Double
@@ -21,6 +22,7 @@ public class FoodItem {
     
     public init(
         name: String,
+        brand: String,
         kcal: Int,
         carbs: Double,
         protein: Double,
@@ -29,6 +31,7 @@ public class FoodItem {
         servingSize: Int
     ) {
         self.name = name
+        self.brand = brand
         self.kcal = kcal
         self.carbs = carbs
         self.protein = protein

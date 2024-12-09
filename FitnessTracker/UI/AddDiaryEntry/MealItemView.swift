@@ -97,6 +97,7 @@ struct MealItemView: View {
 #Preview {
     let raspberries = FoodItem(
         name: "Frozen Raspberries",
+        brand: "Morrisons",
         kcal: 8,
         carbs: 1.1,
         protein: 0,

@@ -27,6 +27,7 @@ class AddFoodItemViewModel: Identifiable {
     var selectedUnit: MeasurementUnit = .grams
     var servingSize: String = ""
     var name: String = ""
+    var brand: String = ""
     var kcal: String = ""
     var carbs: String = ""
     var protein: String = ""
@@ -36,6 +37,7 @@ class AddFoodItemViewModel: Identifiable {
     
     var isValid: Bool {
         !name.isEmpty &&
+        !brand.isEmpty &&
         Double(kcal) != nil &&
         Double(carbs) != nil &&
         Double(protein) != nil &&
@@ -66,7 +68,12 @@ class AddFoodItemViewModel: Identifiable {
         
         if let foodItem {
             let defaultServings = servings ?? 1
-            self.servings = String(format: "%.1f", defaultServings)
+            if floor(defaultServings) == defaultServings {
+                self.servings = String(format: "%.0f", defaultServings)
+            } else {
+                self.servings = String(format: "%.1f", defaultServings)
+            }
+
             populate(with: foodItem, servings: defaultServings)
             state = .edit
         }
@@ -74,6 +81,7 @@ class AddFoodItemViewModel: Identifiable {
     
     func populate(with foodItem: FoodItem, servings: Double) {
         self.name = foodItem.name
+        self.brand = foodItem.brand
         self.kcal = String(Int(Double(foodItem.kcal) * servings))
         self.carbs = String(format: "%.1f", foodItem.carbs * servings)
         self.protein = String(format: "%.1f", foodItem.protein * servings)
@@ -94,6 +102,7 @@ class AddFoodItemViewModel: Identifiable {
         
         let foodItem = FoodItem(
             name: name,
+            brand: brand,
             kcal: kcal,
             carbs: carbs,
             protein: protein,

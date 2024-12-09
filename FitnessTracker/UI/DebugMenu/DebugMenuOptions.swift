@@ -84,6 +84,7 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
         
         let foodItem1 = FoodItem(
             name: "Fat Free Greek Yoghurt",
+            brand: "Morrisons",
             kcal: 66,
             carbs: 6,
             protein: 9.8,
@@ -93,7 +94,8 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
         )
         
         let foodItem2 = FoodItem(
-            name: "Quaker Oats Golden Crunch",
+            name: "Golden Crunch",
+            brand: "Quaker Oats ",
             kcal: 214,
             carbs: 32.2,
             protein: 4.3,
@@ -103,7 +105,8 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
         )
         
         let foodItem3 = FoodItem(
-            name: "Lindt Dark Chocolate (70%)",
+            name: "Dark Chocolate (70%)",
+            brand: "Lindt",
             kcal: 11,
             carbs: 6.8,
             protein: 1.9,
@@ -113,7 +116,8 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
         )
         
         let foodItem4 = FoodItem(
-            name: "Morrisons Orange Juice (smooth)",
+            name: "Orange Juice (smooth)",
+            brand: "Morrisons",
             kcal: 41,
             carbs: 9,
             protein: 0.7,
@@ -124,6 +128,7 @@ enum DebugMenuOptions: String, DebugMenuOption, CaseIterable {
         
         let foodItem5 = FoodItem(
             name: "Nduja and Ventricina Salami Pizza",
+            brand: "Morrisons",
             kcal: 545,
             carbs: 63.6,
             protein: 20.9,

@@ -17,6 +17,16 @@
         }
       }
     },
+    "%@ from %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ from %2$@"
+          }
+        }
+      }
+    },
     "%@%@" : {
       "localizations" : {
         "en" : {
@@ -67,6 +77,9 @@
 
     },
     "Age" : {
+
+    },
+    "Brand" : {
 
     },
     "Calorie Calculator" : {

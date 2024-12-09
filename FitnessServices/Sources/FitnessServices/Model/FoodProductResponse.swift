@@ -48,6 +48,7 @@ public struct FoodProduct: Sendable, Codable {
     public let code: String
     public let nutriments: Nutrients
     public let productName: String
+    public let brand: String
     public let servingQuantity: Double?
     public let servingQuantityUnit: String?
     
@@ -55,6 +56,7 @@ public struct FoodProduct: Sendable, Codable {
         case code
         case nutriments
         case productName = "product_name"
+        case brand = "brands"
         case servingQuantity = "serving_quantity"
         case servingQuantityUnit = "serving_quantity_unit"
     }
@@ -65,6 +67,7 @@ public struct FoodProduct: Sendable, Codable {
         code = try container.decode(String.self, forKey: .code)
         nutriments = try container.decode(Nutrients.self, forKey: .nutriments)
         productName = try container.decode(String.self, forKey: .productName)
+        brand = try container.decode(String.self, forKey: .brand)
         servingQuantity = try container.decodeToDouble(forKey: .servingQuantity)
         servingQuantityUnit = try container.decodeIfPresent(String.self, forKey: .servingQuantityUnit)
     }

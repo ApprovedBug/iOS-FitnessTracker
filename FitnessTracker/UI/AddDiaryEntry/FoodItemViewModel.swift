@@ -21,6 +21,10 @@ class FoodItemViewModel: Identifiable {
     
     var name: String
     
+    var brand: String {
+        foodItem.brand
+    }
+    
     var kcal: String {
         String(foodItem.kcal)
     }
@@ -61,6 +65,7 @@ class FoodItemViewModel: Identifiable {
         
         let foodItem = FoodItem(
             name: meal.name,
+            brand: "homemade",
             kcal: totalCalories,
             carbs: totalCarbs,
             protein: totalProtein,
