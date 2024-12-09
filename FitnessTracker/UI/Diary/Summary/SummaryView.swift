@@ -15,7 +15,6 @@ struct SummaryView: View {
     @Bindable var viewModel: SummaryViewModel
     
     var body: some View {
-        
         contentView(data: viewModel.data)
     }
     

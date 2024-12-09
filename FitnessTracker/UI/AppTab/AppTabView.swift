@@ -21,7 +21,6 @@ struct AppTabView: View {
                         case .diary:
                             NavigationStack {
                                 DiaryView(viewModel: viewModel.diaryViewModel)
-                                    .navigationTitle("Diary")
                             }
                         case .weight:
                             NavigationStack {

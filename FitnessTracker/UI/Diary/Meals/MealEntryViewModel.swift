@@ -12,17 +12,10 @@ import Foundation
 @MainActor
 class MealEntryViewModel: Identifiable {
     
-    struct EventHandler {
-        let removeEntryTapped: @MainActor (DiaryEntry) async -> Void
-        let updateEntry: @MainActor (DiaryEntry, Double) async -> Void
-    }
-    
-    private let diaryEntry: DiaryEntry
-    private let eventHandler: EventHandler
+    let diaryEntry: DiaryEntry
     
     var isExpanded: Bool = false
     var isShowingEditItem: Bool = false
-    var addFoodItemViewModel: AddFoodItemViewModel?
     
     var name: String {
         diaryEntry.foodItem.name
@@ -52,36 +45,11 @@ class MealEntryViewModel: Identifiable {
         String(format: "%.1f", diaryEntry.totalFat)
     }
     
-    @ObservationIgnored
-    private lazy var createItemEventHandler: AddFoodItemViewModel.EventHandler = {
-        AddFoodItemViewModel.EventHandler { _ in
-            // TODO: this is unused, move edit to separate veiw
-        } saveEntry: { [weak self] foodItem, servings async in
-            guard let self else { return }
-            await eventHandler.updateEntry(diaryEntry, servings)
-        }
-    }()
-    
-    init(diaryEntry: DiaryEntry, eventHandler: EventHandler) {
+    init(diaryEntry: DiaryEntry) {
         self.diaryEntry = diaryEntry
-        self.eventHandler = eventHandler
     }
     
     func toggleExpanded() {
         isExpanded.toggle()
-    }
-    
-    func editDiaryEntryTapped() {
-        let viewModel = AddFoodItemViewModel(
-            eventHandler: createItemEventHandler,
-            foodItem: diaryEntry.foodItem,
-            servings: diaryEntry.servings
-        )
-        addFoodItemViewModel = viewModel
-        isShowingEditItem = true
-    }
-    
-    func removeDiaryEntryTapped() async {
-        await eventHandler.removeEntryTapped(diaryEntry)
     }
 }
