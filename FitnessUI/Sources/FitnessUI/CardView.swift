@@ -26,7 +26,6 @@ public struct CardView<Content: View>: View {
             
             viewBuilder()
                 .padding()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }

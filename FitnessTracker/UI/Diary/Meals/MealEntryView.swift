@@ -19,8 +19,6 @@ struct MealEntryView: View {
                 .contentShape(Rectangle())
             
             VStack(alignment: .leading, spacing: 0) {
-            
-                Divider()
                 
                 VStack(alignment: .leading) {
                     HStack(alignment: .bottom, spacing: 0) {
@@ -33,27 +31,28 @@ struct MealEntryView: View {
                             Spacer()
                             
                             Text("\(viewModel.kcal)")
-                                .font(.body)
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
                             Text("Kcal")
                                 .font(.footnote)
+                                .foregroundColor(.secondary)
                                 .padding([.trailing], 12)
-                                .padding([.bottom], 1)
                         }
                         
                         Image(systemName: viewModel.isExpanded ? "chevron.up" : "chevron.down")
+                            .foregroundColor(.secondary)
                             .padding([.bottom], 4)
                     }
+                    .padding([.vertical], 12)
+                    
                     if viewModel.isExpanded {
                         detailsView()
-                            .padding([.top], 12)
-                        
-                        Divider()
-                    
-                        actionsView()
-                            .padding([.top], 12)
+                            .padding([.bottom], 12)
+                            .animation(.default, value: viewModel.isExpanded)
                     }
+                    
                 }
-                .padding([.top], 12)
+                .padding([.horizontal], 12)
             }
             .frame(maxWidth: .infinity)
         }
@@ -67,9 +66,11 @@ struct MealEntryView: View {
         HStack {
             VStack(alignment: .center) {
                 Text(viewModel.servingSize)
-                    .font(.body)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
                 Text(viewModel.measurement)
                     .font(.footnote)
+                    .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity)
             
@@ -77,9 +78,11 @@ struct MealEntryView: View {
             
             VStack(alignment: .center) {
                 Text(viewModel.kcal)
-                    .font(.body)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
                 Text("Kcal")
                     .font(.footnote)
+                    .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity)
             
@@ -87,9 +90,11 @@ struct MealEntryView: View {
             
             VStack(alignment: .center) {
                 Text(viewModel.carbs)
-                    .font(.body)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
                 Text("Carbs")
                     .font(.footnote)
+                    .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity)
             
@@ -97,9 +102,11 @@ struct MealEntryView: View {
             
             VStack(alignment: .center) {
                 Text(viewModel.protein)
-                    .font(.body)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
                 Text("Protein")
                     .font(.footnote)
+                    .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity)
             
@@ -107,42 +114,14 @@ struct MealEntryView: View {
             
             VStack(alignment: .center) {
                 Text(viewModel.fat)
-                    .font(.body)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
                 Text("Fat")
                     .font(.footnote)
+                    .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity)
         }
-    }
-    
-    func actionsView() -> some View {
-        HStack {
-            Spacer()
-            
-            Button(action: { viewModel.editDiaryEntryTapped() }) {
-                Image(systemName: "pencil")
-                    .tint(.blue)
-            }
-            
-            Spacer()
-            
-            Divider()
-            
-            Spacer()
-            
-            Button(action: { Task { await viewModel.removeDiaryEntryTapped() }}) {
-                Image(systemName: "trash")
-                    .tint(.red)
-            }
-            
-            Spacer()
-        }
-        .sheet(isPresented: $viewModel.isShowingEditItem, content: {
-            if let addFoodItemViewModel = viewModel.addFoodItemViewModel {
-                AddFoodItemView(viewModel: addFoodItemViewModel)
-                    .presentationDetents([.small])
-            }
-        })
     }
 }
 
@@ -165,9 +144,7 @@ struct MealEntryView: View {
     )
     
     let viewModel = MealEntryViewModel(
-        diaryEntry: diaryEntry,
-        eventHandler: MealEntryViewModel.EventHandler(
-            removeEntryTapped: { _ in }, updateEntry: { _, _ in })
+        diaryEntry: diaryEntry
     )
     
     ScrollView {

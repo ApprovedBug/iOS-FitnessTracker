@@ -99,7 +99,7 @@ struct WeightEntryRow: View {
             Text(entry.date.formatted(.dateTime.year().month().day()))
                 .font(.caption)
             Spacer()
-            Text(entry.weight.formatted(.number))
+            Text("\(entry.weight.formatted(.number))kg")
                 .font(.headline)
         }
     }
