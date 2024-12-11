@@ -23,7 +23,7 @@ struct AddDiaryEntryView: View {
                 meals: viewModel.mealItemViewModels,
                 addFoodItemTapped: viewModel.addFoodItemTapped,
                 createFoodItemTapped: viewModel.createFoodItemTapped,
-                scanItemTapped: viewModel.scanItemTapped,
+                scanBarcodeTapped: viewModel.scanBarcodeTapped,
                 cancelSearch: viewModel.clearSearch
             )
             .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -57,11 +57,6 @@ struct AddDiaryEntryView: View {
                 viewModel.createFoodItemTapped()
             }
             Button("Retry") {
-                Task {
-                    await viewModel.scanItemTapped()
-                }
-            }
-            Button("Cancel") {
                 
             }
         }, message: { details in
@@ -89,7 +84,7 @@ struct AddDiaryEntryView: View {
         let meals: [MealItemViewModel]
         let addFoodItemTapped: (FoodItem) -> Void
         let createFoodItemTapped: () -> Void
-        let scanItemTapped: @MainActor () async -> Void
+        let scanBarcodeTapped: @MainActor () async -> Void
         let cancelSearch: @MainActor () async -> Void
         
         var body: some View {
@@ -104,9 +99,9 @@ struct AddDiaryEntryView: View {
                             }
                             .buttonStyle(RoundedButtonStyle())
                             
-                            Button("Scan item") {
+                            Button("Scan barcode") {
                                 Task {
-                                    await scanItemTapped()
+                                    await scanBarcodeTapped()
                                 }
                             }
                             .buttonStyle(RoundedButtonStyle())

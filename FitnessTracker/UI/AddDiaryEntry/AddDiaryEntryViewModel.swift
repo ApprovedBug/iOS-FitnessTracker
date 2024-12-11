@@ -117,7 +117,7 @@ class AddDiaryEntryViewModel {
     }
     
     @MainActor
-    func scanItemTapped() async {
+    func scanBarcodeTapped() async {
         do {
             let scanner = try await barcodeScanner.scanner()
             
@@ -150,6 +150,8 @@ class AddDiaryEntryViewModel {
     func dismissScannerAndSearch(barcode: String) async {
         await barcodeScanner.stopScanning()
         barcodeScannerView = nil
+        
+        itemListViewModel = ItemListViewModel(isLoading: true, foodItemViewModels: [])
         
         Task.detached(priority: .background) { [weak self] in
             guard let self = self else { return }
@@ -291,7 +293,7 @@ private extension FoodItem {
             
             self.init(
                 name: foodProduct.productName,
-                brand: foodProduct.brand,
+                brand: foodProduct.brand ?? "",
                 kcal: Int(nutriments.kcal),
                 carbs: nutriments.carbs,
                 protein: nutriments.protein,
@@ -302,7 +304,7 @@ private extension FoodItem {
         } else if let nutriments = foodProduct.nutrimentsPer100g() {
             self.init(
                 name: foodProduct.productName,
-                brand: foodProduct.brand,
+                brand: foodProduct.brand ?? "",
                 kcal: Int(nutriments.kcal),
                 carbs: nutriments.carbs,
                 protein: nutriments.protein,
